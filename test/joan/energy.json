@@ -1,0 +1,47 @@
+{
+"0":[
+	"[mc_name]?",
+	"Hello",
+	"Please check the kitchen storage, if you need something to eat.",
+	"",
+	"You can heat some, or re-stock it for us.",
+	"Gez! I almost forget about those part.",
+	"Oh, [mc_name]...",
+	"",
+	"I hope you doing fine."
+	],
+"1":[
+	"Hello",
+	"Yes, Joan.",
+	"If you're hungry please check and buy something from Mart-O",
+	"Thanks for the breaking-news! Just the information I need",
+	"Always sacrastic, huh?",
+	"Me? Nah!",
+	"Just, eat something!{w} I don't want to find your dead bodies when I got home.",
+	"Spooky isn't it?",
+	"Bye, [mc_name]."
+	],
+"2": [
+	"",
+	"What's up Joan?",
+	"Just checking.",
+	"I got a news for you.",
+	"What is it?",
+	"I'm hungry!",
+	"Then, eat some. If your shorts, you can buy it from the vending machine in the first floor.",
+	"Thanks for the reminder, darling.",
+	"And please eat well. I don't want to see you in the hospital just like...",
+	"Yeah! Yeah. I been good.",
+	"Ok, Bye!",
+	"Bye!"
+	],	
+"9":[
+	"[mc_name]?",
+	"Speaking.",
+	"How's home?",
+	"Fun and Static!",
+	"[mc_name], Please eat well. I don't want to see you in the hospital just like...",
+	"Thanks for your kind attentions.",
+	"Ok, Bye!"
+	]
+}

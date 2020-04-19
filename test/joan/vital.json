@@ -1,0 +1,31 @@
+{
+"0":[
+	"Hi [mc_name]!",
+	"What's up Joan?",
+	"I calling because I worried about you.",
+	"I been good.",
+	"Yeah, Take care yourself. Darling.",
+	"",
+	"Bye!"
+],
+"1": [
+	"Hello [mc_name].",
+	"What is it?",
+	"If you were tired...", 
+	"Yeah, yeah I know it.",
+	"Don't push it. Rest a while.",
+	"Ok. I will.",
+	"Bye!",
+	"Bye!"
+	],
+"9": [
+	"[mc_name]?",
+	"Yes?",
+	"Don't work to hard. You should rest too.", 
+	"I need money.",
+	"See your stats! Dumb ass!",
+	"Yeah! Yeah. I been good.",
+	"Ok, Bye!",
+	"Bye!"
+	]
+}
