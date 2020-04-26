@@ -117,8 +117,16 @@ init -300 python in ramen:
             try:
                 self.daytime_word = kwargs['daytime']
             except BaseException:
-                self.daytime_word = ['midnight', 'dusk',
-                                     'morning', 'noon', 'evening', 'night']
+                self.daytime_word = [
+                    'midnight', 
+                    'dusk',
+                    'morning', 
+                    'morning', 
+                    'noon', 
+                    'noon', 
+                    'evening', 
+                    'night',
+                    'night']
 
             try:
                 self.suntime_word = kwargs['suntime']

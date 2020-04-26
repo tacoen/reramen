@@ -29,6 +29,72 @@ init -301 python:
                         styleprop.append(s)
             return sorted(styleprop)
 
+        def prop2style(self,obj):
+        
+            id = obj.id
+            prop = obj.prop
+
+            style[id]=Style('empty')
+            style[id+'_icon_text']=Style('ramen_icon')
+            
+            L = len(prop.bgcolor)
+            
+            for i in range(0,L):
+                style[id+'_nav'+str(i)]=Style('pad8')
+                style[id+'_nav'+str(i)].background=Color(prop.bgcolor[i])
+                style[id+'_nav'+str(i)].color=Color(prop.bgcolor[i])
+                style[id+'_nav'+str(i)+'_text'].color=style[id+'_nav'+str(i)].color
+
+                style[id+'_icon'+str(i)]=Style('button')
+                style[id+'_icon'+str(i)+'_text']=Style('ramen_icon')
+                style[id+'_icon'+str(i)+'_text'].size=24
+                style[id+'_icon'+str(i)+'_text'].color=Color(prop.fgcolor[i]).opacity(.8)
+                style[id+'_icon'+str(i)+'_text'].add_properties({str('hover_color'):Color(prop.fgcolor[i]).opacity(1)})
+                style[id+'_icon'+str(i)+'_text'].add_properties({str('mute_color'):Color(prop.fgcolor[i]).opacity(.3)})
+
+                style[id+'_win'+str(i)]=Style('pad2')
+                style[id+'_win'+str(i)].background=Color(prop.wbcolor[i]).opacity(.9)
+                style[id+'_win'+str(i)].xsize = (config.screen_width/2)-16 
+                style[id+'_win'+str(i)].ysize = config.screen_height/2
+                style[id+'_win'+str(i)].ypos = 72
+                style[id+'_win'+str(i)].xpos = config.screen_width/2
+
+                style[id+'_tbar'+str(i)]=Style('pad4')
+                style[id+'_tbar'+str(i)].background=Color(prop.wbcolor[i]).tint(.9)
+                style[id+'_tbar'+str(i)].xsize = style[id+'_win'+str(i)].xmaximum-2
+                style[id+'_tbar'+str(i)].ysize = 36
+                
+                style['quick'+str(i)+'_button']=Style(id+'_icon'+str(i))
+                style['quick'+str(i)+'_button'].padding=(16,8,16,8)
+                style['quick'+str(i)+'_button'].background=Color(prop.bgcolor[i]).opacity(.5)
+                style['quick'+str(i)+'_button'].hover_background=Color(prop.bgcolor[i]).opacity(.9)
+                style['quick'+str(i)+'_button_text']=Style(id+'_icon'+str(i)+'_text')
+                style['quick'+str(i)+'_button_text'].size=18
+
+                style[id+'_win'+str(i)+'_button']=Style(id+'_icon'+str(i))
+                style[id+'_win'+str(i)+'_button'].padding=(8,4,8,4)
+                style[id+'_win'+str(i)+'_button'].xalign=0.5
+                style[id+'_win'+str(i)+'_button'].xsize=100
+                style[id+'_win'+str(i)+'_button'].background=Color(prop.wbcolor[i]).tint(.5)
+                style[id+'_win'+str(i)+'_button'].hover_background=Color(prop.bgcolor[i]).tint(.7)
+                
+                style[id+'_win'+str(i)+'_button_text']=Style('ramen_gui')
+                style[id+'_win'+str(i)+'_button_text'].color=Color(prop.fgcolor[i]).shade(.1)
+                style[id+'_win'+str(i)+'_button_text'].hover_color=Color(prop.fgcolor[i])
+                style[id+'_win'+str(i)+'_button_text'].size=20
+                style[id+'_win'+str(i)+'_button_text'].xalign=0.5
+            
+        def img_hover(self, img, hover_color=None, size=(100,100)):
+
+            if hover_color is None:
+                hover_color = gui.hover_color;
+                
+            return Composite(
+                size,
+                (0, 0), Solid(Color(hover_color).opacity(.5)),
+                (0, 0), img
+                )
+                
         def style(self, id, key=None, val=None, **kwargs):
 
             if val is None:
@@ -233,7 +299,36 @@ init -301 python:
 
             if not name.startswith('ramen_'):
                 ramen.last_label = name
-
+                
+        def nicenaming(self,name,prefix='',suffix=''):
+            pre=[]
+            suf=[]
+            
+            ori = name
+            
+            if not isinstance(prefix,tuple): 
+                pre.append(prefix)
+            else:
+                pre = prefix
+            # if not isinstance(suffix,tuple): 
+                # suf[0] = suffix
+            # else:
+                # suf = suffix
+                
+            for p in pre: 
+                name = name.replace(p,'')
+            for s in suf: 
+                name = name.replace(s,'')
+            
+            return name.replace('_', ' ').strip().title()
+            
+            return ori
+            
+        class dict2obj:
+            def __init__(self, entries):
+                self.__dict__.update(entries.__dict__)
+        
+        
     ramu = ramen_util()
 
     config.label_callback = ramu.labelcallback

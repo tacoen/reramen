@@ -44,9 +44,15 @@ init -200 python:
             else:
                 return self.__dict__['inventory'][item_id]
 
+        def has(self,item_id):
+            if item_id in  self.__dict__['inventory']:
+                return True
+            else:
+                return False
+                
         def add(self, item):
 
-            if not isinstance(item, store.item):
+            if not isinstance(item, store.itemobject):
                 return False
 
             try:
@@ -54,6 +60,7 @@ init -200 python:
                 append = True
             except BaseException:
                 self.__dict__['inventory'][item.id] = item.copy()
+                self.__dict__['inventory'][item.id].icon = item.icon()
                 append = False
 
             if append:

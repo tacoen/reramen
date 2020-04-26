@@ -26,8 +26,6 @@ init python:
         money = 100,
     )
 
-
-
     res = "a="
     res += repr( a())
     res += repr( a.prop())
@@ -44,19 +42,18 @@ init python:
 
     print res
 
-    coke = item('coke')
-    cake = item('cake')
+    define_item('coke')
+    define_item('cake',
+        effect={'energy':1,'vital':1},
+        require='microwave',
+        persist=True
+    )
 
-    pocket = inventory('pocket')
+    pocket.add(item('coke'))
+    pocket.add(item('coke'))
+    pocket.add(item('cake'))
 
-    pocket.add(cake)
-    pocket.add(coke)
-    pocket.add(coke)
-
-    pocket.use('cake')
     pocket.use('coke')
-
-    print pocket()
 
     print ramen.time()
 
@@ -68,13 +65,10 @@ init python:
 
 label ramen_test:
     
+    scene white
+    
     mc "I'am [mc.name]!"
     
     show joan 
     joan "Boo!"
     
-    $ ramu.test_image(coke.icon())
-    "now the other"
-    $ ramu.test_image(cake.icon())
-    "hide it"
-    hide screen test_image

@@ -6,6 +6,8 @@ init -302 python:
     RAMEN_IMG_SND = ['.ogg', '.mp3', '.wav']
     RAMEN_INTMIN = 0
     RAMEN_INTMAX = 100
+    
+    RAMEN_GUIDIR = "theme/gui/"
 
     RAMEN_DEV = True
 

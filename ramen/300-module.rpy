@@ -8,5 +8,8 @@ init -399 python:
     import random
     import string
     import os
+    
+    import math
+    
 #    import uuid
 #    import ntpath

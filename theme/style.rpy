@@ -16,24 +16,47 @@ init -199 python:
 
 # layers
 define config.layers = ['master', 'transient', 'ambient', 'screens', 'overlay','console', 'dialog_layer']
-    
-style ramen_gui is default:
-    font font.ui_text
-    antialias True
-    size 24
 
-style ramen_gui_text is ramen_gui
-    
-style ramen_icon:
-    font font.ui_ico
-    antialias True
-    size 32
+init -199:
 
-style ramen_icon_text is ramen_icon
+    style ramen_gui is default:
+        font font.ui_text
+        antialias True
+        size 24
+
+    style ramen_gui_text is ramen_gui
+    
+    style ramen_icon:
+        font font.ui_ico
+        antialias True
+        size 32
+
+    style ramen_icon_text is ramen_icon
+
+    style pad16 is empty:
+        padding (16,16,16,16)
+    
+    style pad8 is empty:
+        padding (8,8,8,8)
+
+    style pad4 is empty:
+        padding (4,4,4,4)
+        
+    style pad2 is empty:
+        padding (2,2,2,2)
+
 
 ##############    
 
-screen inventory_ui():
-    text 'dump'
+style scrollbar:
+    ysize gui.scrollbar_size
+    base_bar Color("#fff").opacity(.3)
+    thumb Color("#fff").opacity(.6)
+
+style vscrollbar:
+    xsize gui.scrollbar_size
+    base_bar Color("#fff").opacity(.3)
+    thumb Color("#fff").opacity(.6)
+
     
     
