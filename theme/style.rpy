@@ -18,17 +18,24 @@ init -199 python:
 define config.layers = ['master', 'transient', 'ambient', 'screens', 'overlay','console', 'dialog_layer']
 
 init -199:
-
-    style ramen_gui is default:
-        font font.ui_text
+    
+    image white = Solid('#fff')
+    image black = Solid('#000')
+    
+    style antialias is default:
         antialias True
+
+    style ramen_label is antialias:
+        font font.ui_label
+        
+    style ramen_gui is antialias:
+        font font.ui_text
         size 24
 
     style ramen_gui_text is ramen_gui
     
-    style ramen_icon:
+    style ramen_icon is antialias:
         font font.ui_ico
-        antialias True
         size 32
 
     style ramen_icon_text is ramen_icon

@@ -2,12 +2,28 @@ init -200 python:
 
     class inventory(ramen_object):
 
-        def load(self):
+        def load(self,*agrs,**kwargs):
+            self.dict(None, **kwargs)
             self.__dict__['inventory'] = {}
-            pass
+            if self.name is None:
+                self.name = self.id.title()
 
         def __call__(self):
             return self.__dict__['inventory']
+            
+        def cart(self,item,add=True):
+
+            try: ramen.cart
+            except: ramen.cart={}
+            
+            try: ramen.cart[self.id]
+            except: ramen.cart[str(self.id)]=[]
+            
+            if not add:
+                return ramen.cart[self.id]
+            else:
+                ramen.cart[self.id].append(item)
+                
 
         def use(self, item_id):
             """

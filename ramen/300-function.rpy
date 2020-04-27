@@ -29,6 +29,9 @@ init -301 python:
                         styleprop.append(s)
             return sorted(styleprop)
 
+        def hline(self,(size),color='#fff'):
+            return Composite((size), (0,0),Solid(color))
+
         def prop2style(self,obj):
         
             id = obj.id
@@ -55,9 +58,11 @@ init -301 python:
                 style[id+'_win'+str(i)]=Style('pad2')
                 style[id+'_win'+str(i)].background=Color(prop.wbcolor[i]).opacity(.9)
                 style[id+'_win'+str(i)].xsize = (config.screen_width/2)-16 
-                style[id+'_win'+str(i)].ysize = config.screen_height/2
+                style[id+'_win'+str(i)].ysize = config.screen_height/5*3
                 style[id+'_win'+str(i)].ypos = 72
                 style[id+'_win'+str(i)].xpos = config.screen_width/2
+                
+                style[id+'_win'+str(i)+'_text'].color=Color(prop.fgcolor[i])
 
                 style[id+'_tbar'+str(i)]=Style('pad4')
                 style[id+'_tbar'+str(i)].background=Color(prop.wbcolor[i]).tint(.9)
@@ -74,14 +79,14 @@ init -301 python:
                 style[id+'_win'+str(i)+'_button']=Style(id+'_icon'+str(i))
                 style[id+'_win'+str(i)+'_button'].padding=(8,4,8,4)
                 style[id+'_win'+str(i)+'_button'].xalign=0.5
-                style[id+'_win'+str(i)+'_button'].xsize=100
+                style[id+'_win'+str(i)+'_button'].xsize=120
                 style[id+'_win'+str(i)+'_button'].background=Color(prop.wbcolor[i]).tint(.5)
                 style[id+'_win'+str(i)+'_button'].hover_background=Color(prop.bgcolor[i]).tint(.7)
                 
                 style[id+'_win'+str(i)+'_button_text']=Style('ramen_gui')
                 style[id+'_win'+str(i)+'_button_text'].color=Color(prop.fgcolor[i]).shade(.1)
                 style[id+'_win'+str(i)+'_button_text'].hover_color=Color(prop.fgcolor[i])
-                style[id+'_win'+str(i)+'_button_text'].size=20
+                style[id+'_win'+str(i)+'_button_text'].size=18
                 style[id+'_win'+str(i)+'_button_text'].xalign=0.5
             
         def img_hover(self, img, hover_color=None, size=(100,100)):
@@ -186,18 +191,6 @@ init -301 python:
             else:
                 return None
 
-        def old_file_info(self, file):
-            r = {}
-            r[str('path')] = os.path.dirname(file)
-            r[str('file')] = os.path.basename(file)
-            a = r['file'].split('.')
-            r[str('name')] = str(a[0])
-            r[str('ext')] = str(a[1])
-            r[str('dir')] = str(r['path'])
-            r[str('path')] = r['path'].replace(
-                os.path.dirname(r['path']) + "/", '')
-            return r
-
         def file_info(self, file):
             """
             Get and extract the file information of the file as dict.
@@ -296,8 +289,7 @@ init -301 python:
             )
 
         def labelcallback(self, name, abnormal):
-
-            if not name.startswith('ramen_'):
+            if not name.startswith('ramen_') or not name.startswith("_"): 
                 ramen.last_label = name
                 
         def nicenaming(self,name,prefix='',suffix=''):

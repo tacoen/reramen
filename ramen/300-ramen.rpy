@@ -67,6 +67,8 @@ init -300 python in ramen:
     dayplay = 0
     timecond = []
 
+    cart ={}
+    
     def Mouse():
         """Get Mouse pos, return (x,y)"""
         return pygame.mouse.get_pos()

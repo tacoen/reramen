@@ -42,11 +42,16 @@ init python:
 
     print res
 
+    ramen.storage = 'rt2'
+    ramen.trade = {
+        'res':None,
+        'labels':['rt3']
+    }
+    
     define_item('coke')
     define_item('cake',
         effect={'energy':1,'vital':1},
         require='microwave',
-        persist=True
     )
 
     pocket.add(item('coke'))
@@ -68,7 +73,15 @@ label ramen_test:
     scene white
     
     mc "I'am [mc.name]!"
+
+label rt2:
+    mc "We are on label: [ramen.last_label]"
+
+label rt1:
+    show screen catalog_ui(vending) with dissolve
     
+    
+label rt3:    
     show joan 
     joan "Boo!"
     
