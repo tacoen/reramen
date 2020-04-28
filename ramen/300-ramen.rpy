@@ -67,8 +67,137 @@ init -300 python in ramen:
     dayplay = 0
     timecond = []
 
-    cart ={}
-    
+    cart = {}
+    default = {}
+    tp = {}
+    tp['bar'] = [
+        'bar_vertical',
+        'bar_invert',
+        'bar_resizing',
+        'left_gutter',
+        'right_gutter',
+        'top_gutter',
+        'bottom_gutter',
+        'left_bar',
+        'right_bar',
+        'top_bar',
+        'bottom_bar',
+        'base_bar',
+        'thumb',
+        'thumb_shadow',
+        'thumb_offset',
+        'mouse',
+        'keyboard_focus']
+
+    tp['box'] = [
+        'spacing',
+        'first_spacing',
+        'box_reverse',
+        'box_wrap',
+        'box_wrap_spacing']
+
+    tp['grid'] = ['spacing', 'xspacing', 'yspacing']
+
+    tp['button'] = [
+        'child',
+        'hover_sound',
+        'mouse',
+        'focus_mask',
+        'keyboard_focus',
+        'key_events']
+
+    tp['window'] = [
+        'size_group',
+        'background',
+        'foreground',
+        'left_margin',
+        'right_margin',
+        'top_margin',
+        'bottom_margin',
+        'xmargin',
+        'ymargin',
+        'margin',
+        'left_padding',
+        'right_padding',
+        'top_padding',
+        'bottom_padding',
+        'xpadding',
+        'ypadding',
+        'padding']
+
+    tp['text'] = [
+        'color',
+        'antialias',
+        'adjust_spacing',
+        'altruby_style',
+        'black_color',
+        'bold',
+        'caret',
+        'first_indent',
+        'font',
+        'size',
+        'italic',
+        'justify',
+        'kerning',
+        'language',
+        'layout',
+        'line_leading',
+        'line_overlap_split',
+        'line_spacing',
+        'min_width',
+        'newline_indent',
+        'outlines',
+        'rest_indent',
+        'ruby_style',
+        'slow_abortable',
+        'slow_cps',
+        'slow_cps_multiplier',
+        'strikethrough',
+        'text_align',
+        'underline',
+        'hyperlink_functions',
+        'vertical',
+        'hinting']
+
+    tp['fixed'] = ['fit_first', 'xfit', 'yfit', 'order_reverse']
+
+    tp['button_text']=[
+        'color',
+        'hover_color',
+        'selected_color',
+        'insensitive_color',
+        'muted_color',
+        'hover_muted_color']
+
+    tp['pos'] = [
+        'alt',
+        'xpos',
+        'ypos',
+        'pos',
+        'xanchor',
+        'yanchor',
+        'anchor',
+        'xalign',
+        'yalign',
+        'align',
+        'xcenter',
+        'ycenter',
+        'xoffset',
+        'yoffset',
+        'offset',
+        'xmaximum',
+        'ymaximum',
+        'maximum',
+        'xminimum',
+        'yminimum',
+        'minimum',
+        'xsize',
+        'ysize',
+        'xysize',
+        'xfill',
+        'yfill',
+        'area']
+
     def Mouse():
         """Get Mouse pos, return (x,y)"""
         return pygame.mouse.get_pos()
@@ -120,13 +249,13 @@ init -300 python in ramen:
                 self.daytime_word = kwargs['daytime']
             except BaseException:
                 self.daytime_word = [
-                    'midnight', 
+                    'midnight',
                     'dusk',
-                    'morning', 
-                    'morning', 
-                    'noon', 
-                    'noon', 
-                    'evening', 
+                    'morning',
+                    'morning',
+                    'noon',
+                    'noon',
+                    'evening',
                     'night',
                     'night']
 

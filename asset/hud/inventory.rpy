@@ -35,20 +35,25 @@ screen inventory_detail(item):
         xsm = style['hud_win' + str(hud.pref)].xminimum - 120 - 70
             
     hbox xsize xs:
-        textbutton ico('arrow-left') style 'hud_icon' text_size 24 text_line_leading 4:
+        
+        textbutton ico('arrow-left') style 'hud_icon'+str(hud.pref) text_size 24 text_line_leading 6:
             action SetScreenVariable('item', None)
             
         vbox xoffset 8 yoffset 12:
-            xsize xsm
+            style 'hud_content'+str(hud.pref)
+            style_prefix 'hud_content'+str(hud.pref)
             spacing 8
+            
             text str(i.name) size 24 bold True
+            
             if not i.desc == '':
                 text str(i.desc) size 20
             if len(opt) > 0:
                 hbox:
                     for o in opt:
                         text o style 'ramen_label' size 16
-            null height 16
+            
+            null height 8
 
             if i.count > 1:
                 use hud_field('Contain', str(i.count), 16)
@@ -64,6 +69,7 @@ screen inventory_detail(item):
                         else:
                             pre = "-"
                 use hud_field(k.title(), "(" + pre + str(i.effect[k]) + ")", 16)
+                
         vbox xoffset 24 yfill True:
             xsize 120
             vbox:

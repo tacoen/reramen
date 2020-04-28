@@ -10,7 +10,7 @@ define e = Character("Eileen")
 
 label start:
 
-    $ renpy.call('ramen_init')
+    #$ renpy.call('ramen_init')
     
     # Show a background. This uses a placeholder by default, but you can
     # add a file (named either "bg room.png" or "bg room.jpg") to the

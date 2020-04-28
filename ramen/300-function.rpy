@@ -32,6 +32,14 @@ init -301 python:
         def hline(self,(size),color='#fff'):
             return Composite((size), (0,0),Solid(color))
 
+        def arrayize(self,kw):
+            res = []
+            if isinstance(kw,(int,str,unicode)):
+                res.append(kw)
+            else:
+                res = kw
+            return res
+
         def prop2style(self,obj):
         
             id = obj.id
@@ -61,8 +69,15 @@ init -301 python:
                 style[id+'_win'+str(i)].ysize = config.screen_height/5*3
                 style[id+'_win'+str(i)].ypos = 72
                 style[id+'_win'+str(i)].xpos = config.screen_width/2
-                
+
                 style[id+'_win'+str(i)+'_text'].color=Color(prop.fgcolor[i])
+                
+                style[id+'_content'+str(i)]=Style('default')
+                style[id+'_content'+str(i)].color = Color(prop.fgcolor[i]).opacity(.8)
+                style[id+'_content'+str(i)].xsize = style['hud_win' + str(hud.pref)].xminimum - 120 - 70
+                style[id+'_content'+str(i)+'_text'].size = 18
+                style[id+'_content'+str(i)+'_text'].color = Color(prop.fgcolor[i]).opacity(.8)
+                
 
                 style[id+'_tbar'+str(i)]=Style('pad4')
                 style[id+'_tbar'+str(i)].background=Color(prop.wbcolor[i]).tint(.9)

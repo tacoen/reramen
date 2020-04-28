@@ -68,7 +68,7 @@ init python:
     
     joan = npc('joan',who_color='#C00')
 
-label ramen_test:
+label aaaramen_test:
     
     scene white
     
@@ -78,7 +78,7 @@ label rt2:
     mc "We are on label: [ramen.last_label]"
 
 label rt1:
-    show screen catalog_ui(vending) with dissolve
+    #show screen catalog_ui(vending) with dissolve
     
     
 label rt3:    
