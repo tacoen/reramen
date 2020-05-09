@@ -1,10 +1,7 @@
 ﻿init -1 python:
-
-    config.name = _("ramen-gui")
     config.version = "1.0"
     build.name = ramu.safestr(config.name+"_"+config.version)
-
-
+        
 init offset=-1
 
 define gui.about = _p("""

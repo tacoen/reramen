@@ -1,4 +1,6 @@
-init python:
+# need for seperated sub-repo creations
 
-    if renpy.has_screen('ramen_dev_screen'):    
-        config.overlay_screens.append("ramen_dev_screen")
+init -2 python:
+
+    config.name = _("ramen-core")
+
