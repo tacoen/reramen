@@ -1,9 +1,9 @@
-## Preferences screen ##########################################################
+## Preferences screen ####################################################
 ##
-## The preferences screen allows the player to configure the game to better suit
-## themselves.
+# The preferences screen allows the player to configure the game to better suit
+# themselves.
 ##
-## https://www.renpy.org/doc/html/screen_special.html#preferences
+# https://www.renpy.org/doc/html/screen_special.html#preferences
 
 screen preferences():
 
@@ -15,7 +15,7 @@ screen preferences():
 
             vbox:
                 xsize 300
-                #box_wrap True
+                # box_wrap True
 
                 if renpy.variant("pc") or renpy.variant("web"):
 
@@ -39,8 +39,8 @@ screen preferences():
                     textbutton _("After Choices") action Preference("after choices", "toggle")
                     textbutton _("Transitions") action InvertSelected(Preference("transitions", "toggle"))
 
-                ## Additional vboxes of type "radio_pref" or "check_pref" can be
-                ## added here, to add additional creator-defined preferences.
+                # Additional vboxes of type "radio_pref" or "check_pref" can be
+                # added here, to add additional creator-defined preferences.
 
             vbox:
                 style_prefix "slider"
@@ -51,7 +51,6 @@ screen preferences():
 
                 label _("Text Speed")
                 bar value Preference("text speed")
-
 
                 if config.has_music:
                     label _("Music Volume")
@@ -71,7 +70,6 @@ screen preferences():
                             if config.sample_voice:
                                 textbutton ico('volume-on') style 'sound_test' action Play("voice", config.sample_voice)
 
-                    
                         bar value Preference("voice volume")
 
                     if config.has_music or config.has_sound or config.has_voice:
@@ -81,7 +79,7 @@ screen preferences():
                             style "mute_all_button"
 
 style sound_test is button:
-    padding (8,24,8,2)
+    padding(8, 24, 8, 2)
     xalign 1.0
 
 style pref_label is ramen_label:

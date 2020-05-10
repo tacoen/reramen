@@ -1,20 +1,19 @@
-## The width and height of thumbnails used by the save slots.
+# The width and height of thumbnails used by the save slots.
 
-define config.thumbnail_width=256
-define config.thumbnail_height=144
+define config.thumbnail_width = 256
+define config.thumbnail_height = 144
 
-## The number of columns and rows in the grid of save slots.
+# The number of columns and rows in the grid of save slots.
 
 
-
-## Load and Save screens #######################################################
+## Load and Save screens #################################################
 ##
-## These screens are responsible for letting the player save the game and load
-## it again. Since they share nearly everything in common, both are implemented
-## in terms of a third screen, file_slots.
+# These screens are responsible for letting the player save the game and load
+# it again. Since they share nearly everything in common, both are implemented
+# in terms of a third screen, file_slots.
 ##
-## https://www.renpy.org/doc/html/screen_special.html#save https://
-## www.renpy.org/doc/html/screen_special.html#load
+# https://www.renpy.org/doc/html/screen_special.html#save https://
+# www.renpy.org/doc/html/screen_special.html#load
 
 screen save():
 
@@ -32,17 +31,17 @@ screen load():
 
 screen file_slots(title):
 
-    default page_name_value=FilePageNameInputValue(pattern=_("Page {}"), auto=_("Automatic saves"), quick=_("Quick saves"))
+    default page_name_value = FilePageNameInputValue(pattern=_("Page {}"), auto=_("Automatic saves"), quick=_("Quick saves"))
 
     use game_menu(title):
 
         fixed:
 
-            ## This ensures the input will get the enter event before any of the
-            ## buttons do.
+            # This ensures the input will get the enter event before any of the
+            # buttons do.
             order_reverse True
 
-            ## The page name, which can be edited by clicking on a button.
+            # The page name, which can be edited by clicking on a button.
             button:
                 style "page_label"
 
@@ -54,7 +53,7 @@ screen file_slots(title):
                     style "page_label_text"
                     value page_name_value
 
-            ## The grid of file slots.
+            # The grid of file slots.
             grid pt.file_slot_cols pt.file_slot_rows:
                 style_prefix "slot"
 
@@ -65,18 +64,18 @@ screen file_slots(title):
 
                 for i in range(pt.file_slot_cols * pt.file_slot_rows):
 
-                    $ slot=i + 1
+                    $ slot = i + 1
 
                     button:
                         action FileAction(slot)
 
                         has vbox
 
-                        frame background "#000" padding(0,0,0,0):
+                        frame background "#000" padding(0, 0, 0, 0):
                             add FileScreenshot(slot) xalign 0.5
-                        
+
                         null height 4
-                        
+
                         text FileTime(slot, format=_("{#file_time}%A, %B %d %Y, %H:%M"), empty=_("empty slot")):
                             style "slot_time_text"
 
@@ -85,7 +84,7 @@ screen file_slots(title):
 
                         key "save_delete" action FileDelete(slot)
 
-            ## Buttons to access other pages.
+            # Buttons to access other pages.
             hbox:
                 style_prefix "page"
 
@@ -102,7 +101,7 @@ screen file_slots(title):
                 if config.has_quicksave:
                     textbutton _("{#quick_page}Q") action FilePage("quick")
 
-                ## range(1, 10) gives the numbers from 1 to 9.
+                # range(1, 10) gives the numbers from 1 to 9.
                 for page in range(1, 10):
                     textbutton "[page]" action FilePage(page)
 
@@ -123,7 +122,7 @@ style page_label_text:
     hover_color pt.hover_color
 
 style page_button:
-    padding (8,8,8,8)
+    padding(8, 8, 8, 8)
     hover_background "#0002"
 
 style page_button_text is ramen_gui:
@@ -135,17 +134,17 @@ style page_button_text is ramen_gui:
 
 style page_arrow is ramen_icon:
     take page_button
-    
+
 style page_arrow_text is ramen_icon_text:
     take page_button_text
     line_leading 4
     size 22
-    
+
 style slot_button:
     xsize 276
     ysize 206
     xalign 0.5
-    padding (10, 10, 10, 10)
+    padding(10, 10, 10, 10)
     hover_background "#0002"
 
 style slot_button_text is ramen_gui:
@@ -155,5 +154,3 @@ style slot_button_text is ramen_gui:
 
 style slot_time_text is slot_button_text
 style slot_name_text is slot_button_text
-
-

@@ -1,9 +1,9 @@
 
-## NVL screen ##################################################################
+## NVL screen ############################################################
 ##
-## This screen is used for NVL-mode dialogue and menus.
+# This screen is used for NVL-mode dialogue and menus.
 ##
-## https://www.renpy.org/doc/html/screen_special.html#nvl
+# https://www.renpy.org/doc/html/screen_special.html#nvl
 
 
 screen nvl(dialogue, items=None):
@@ -14,7 +14,7 @@ screen nvl(dialogue, items=None):
         has vbox:
             spacing gui.nvl_spacing
 
-        ## Displays dialogue in either a vpgrid or the vbox.
+        # Displays dialogue in either a vpgrid or the vbox.
         if gui.nvl_height:
 
             vpgrid:
@@ -27,8 +27,8 @@ screen nvl(dialogue, items=None):
 
             use nvl_dialogue(dialogue)
 
-        ## Displays the menu, if given. The menu may be displayed incorrectly if
-        ## config.narrator_menu is set to True, as it is above.
+        # Displays the menu, if given. The menu may be displayed incorrectly if
+        # config.narrator_menu is set to True, as it is above.
         for i in items:
 
             textbutton i.caption:
@@ -57,9 +57,9 @@ screen nvl_dialogue(dialogue):
                     id d.what_id
 
 
-## This controls the maximum number of NVL-mode entries that can be displayed at
-## once.
-define config.nvl_list_length=gui.nvl_list_length
+# This controls the maximum number of NVL-mode entries that can be displayed at
+# once.
+define config.nvl_list_length = gui.nvl_list_length
 
 style nvl_window is default
 style nvl_entry is default
@@ -97,7 +97,7 @@ style nvl_dialogue:
     xsize gui.nvl_text_width
     min_width gui.nvl_text_width
     text_align gui.nvl_text_xalign
-    layout ("subtitle" if gui.nvl_text_xalign else "tex")
+    layout("subtitle" if gui.nvl_text_xalign else "tex")
 
 style nvl_thought:
     xpos gui.nvl_thought_xpos
@@ -106,7 +106,7 @@ style nvl_thought:
     xsize gui.nvl_thought_width
     min_width gui.nvl_thought_width
     text_align gui.nvl_thought_xalign
-    layout ("subtitle" if gui.nvl_text_xalign else "tex")
+    layout("subtitle" if gui.nvl_text_xalign else "tex")
 
 style nvl_button:
     properties gui.button_properties("nvl_button")
@@ -115,5 +115,3 @@ style nvl_button:
 
 style nvl_button_text:
     properties gui.button_text_properties("nvl_button")
-
-

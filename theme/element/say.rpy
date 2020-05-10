@@ -1,4 +1,4 @@
-## Say screen ##################################################################
+## Say screen ############################################################
 
 screen say(who, what):
     style_prefix "say"
@@ -15,14 +15,13 @@ screen say(who, what):
 
         text what id "what"
 
-
-    ## If there's a side image, display it above the text. Do not display on the
-    ## phone variant - there's no room.
+    # If there's a side image, display it above the text. Do not display on the
+    # phone variant - there's no room.
     if not renpy.variant("small"):
         add SideImage() xalign 0.0 yalign 1.0
 
 
-## Make the namebox available for styling through the Character object.
+# Make the namebox available for styling through the Character object.
 init python:
     config.character_id_prefixes.append('namebox')
 
@@ -61,5 +60,3 @@ style say_dialogue:
 
 style say_thought is say_dialogue:
     xalign 0.5
-    
-    

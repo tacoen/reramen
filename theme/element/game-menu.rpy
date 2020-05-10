@@ -1,11 +1,11 @@
-## Game Menu screen ############################################################
+## Game Menu screen ######################################################
 ##
-## This lays out the basic common structure of a game menu screen. It's called
-## with the screen title, and displays the background, title, and navigation.
+# This lays out the basic common structure of a game menu screen. It's called
+# with the screen title, and displays the background, title, and navigation.
 ##
-## The scroll parameter can be None, or one of "viewport" or "vpgrid". When
-## this screen is intended to be used with one or more children, which are
-## transcluded (placed) inside it.
+# The scroll parameter can be None, or one of "viewport" or "vpgrid". When
+# this screen is intended to be used with one or more children, which are
+# transcluded (placed) inside it.
 
 screen game_menu(title, scroll=None, yinitial=0.0):
 
@@ -14,9 +14,9 @@ screen game_menu(title, scroll=None, yinitial=0.0):
     if main_menu:
         add ramu.ezfile2(pt.main_menu_background)
     else:
-        
-        $ sf=ramu.ezfile(pe.theme_path+"gui/"+ ramu.safestr(title))
-        
+
+        $ sf = ramu.ezfile(pe.theme_path + "gui/" + ramu.safestr(title))
+
         if sf:
             add sf
         else:
@@ -29,7 +29,7 @@ screen game_menu(title, scroll=None, yinitial=0.0):
             frame:
                 style "game_menu_content_frame"
 
-                if scroll== "viewport":
+                if scroll == "viewport":
 
                     viewport:
                         yinitial yinitial
@@ -43,7 +43,7 @@ screen game_menu(title, scroll=None, yinitial=0.0):
                         vbox:
                             transclude
 
-                elif scroll== "vpgrid":
+                elif scroll == "vpgrid":
 
                     vpgrid:
                         cols 1
@@ -66,16 +66,16 @@ screen game_menu(title, scroll=None, yinitial=0.0):
 
     vbox:
         yalign 1.0
-        xoffset 24 
-        yoffset -32    
+        xoffset 24
+        yoffset - 32
         style_prefix "navigation"
-        use navigation_hbox("Return",Return(),"log-in")
-    
+        use navigation_hbox("Return", Return(), "log-in")
+
     textbutton ico('close') action Return():
-        style 'big_close_button'
+        style 'menu_close_button'
         xalign 1.0
         yalign 0.0
-    
+
     label title
 
     if main_menu:

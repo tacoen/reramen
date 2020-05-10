@@ -1,13 +1,13 @@
-################################################################################
-## Mobile Variants
-################################################################################
+##########################################################################
+# Mobile Variants
+##########################################################################
 
 style pref_vbox:
     variant "medium"
     xsize 450
 
-## Since a mouse may not be present, we replace the quick menu with a version
-## that uses fewer and bigger buttons that are easier to touch.
+# Since a mouse may not be present, we replace the quick menu with a version
+# that uses fewer and bigger buttons that are easier to touch.
 screen quick_menu():
     variant "touch"
 

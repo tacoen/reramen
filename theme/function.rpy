@@ -1,19 +1,9 @@
-init -10:
-
-    define character.sysd=Character( "sysd", dynamic=True)
-        
 init -299 python:
 
     ramen.phone_ui=False
     
     def ramen_notify(message,icon='alert'):
         renpy.show_screen('ramen_notify',message=message,icon=icon)
-        
-    def dialog_input(prompt,default_value=None,size=(380,150)):
-        res=False
-        res=renpy.call_screen('input_dialog',prompt=prompt,default_value=default_value,size=size)
-        return res
-        #renpy.say("sysd",str(res))
         
     class ramen_ui_tool():
     

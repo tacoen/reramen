@@ -2,9 +2,7 @@
 
 define build.name = ramu.safestr(config.name+"_"+config.version)
 
-define gui.about = _p("""
-
-""")
+define gui.about = _p("a game made using ramen renpy framework.")
 
 define gui.show_name = True
 

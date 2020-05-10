@@ -1,14 +1,14 @@
-## Help screen #################################################################
+## Help screen ###########################################################
 ##
-## A screen that gives information about key and mouse bindings. It uses other
-## screens (keyboard_help, mouse_help, and gamepad_help) to display the actual
-## help.
+# A screen that gives information about key and mouse bindings. It uses other
+# screens (keyboard_help, mouse_help, and gamepad_help) to display the actual
+# help.
 
 screen help():
 
     tag menu
 
-    default device="keyboard"
+    default device = "keyboard"
 
     use game_menu(_("Help"), scroll="viewport"):
 
@@ -25,11 +25,11 @@ screen help():
                 if GamepadExists():
                     textbutton _("Gamepad") action SetScreenVariable("device", "gamepad")
 
-            if device== "keyboard":
+            if device == "keyboard":
                 use keyboard_help
-            elif device== "mouse":
+            elif device == "mouse":
                 use mouse_help
-            elif device== "gamepad":
+            elif device == "gamepad":
                 use gamepad_help
 
 
@@ -117,7 +117,6 @@ screen gamepad_help():
         label _("Right Shoulder")
         text _("Rolls forward to later dialogue.")
 
-
     hbox:
         label _("D-Pad, Sticks")
         text _("Navigate the interface.")
@@ -134,10 +133,10 @@ screen gamepad_help():
 
 style help_button is button:
     xmargin 8
-    padding (16,4,16,4)
+    padding(16, 4, 16, 4)
     background rui.button_underline(pt.idle_color)
     hover_background rui.button_underline(pt.accent_color)
-    
+
 style help_button_text is button_text:
     color pt.idle_color
     hover_color pt.hover_color

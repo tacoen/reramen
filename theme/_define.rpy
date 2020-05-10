@@ -70,7 +70,7 @@ init -200 python:
     style['frame'].background=Color('#0000')
     style['frame'].padding=(0,0,0,0)
 
-    style['input'].color="#ff0"
+    style['input'].color="#129"
     style['input'].adjust_spacing=False
 
     style['hyperlink_text'].color="#9AB"
@@ -117,7 +117,8 @@ init -199 python:
     style['ramen_label']=Style('ramen_gui')
     style['ramen_label_text'].color=pt.accent_color
     style['ramen_label_text'].size=24
-
+    style['ramen_label_text'].font=pt.font_ui_label
+    
     style['ramen_tex']=Style('default')
     style['ramen_tex'].font=pt.font_text
     style['ramen_tex'].antialias=True
@@ -139,55 +140,19 @@ init -199 python:
     style['choice_button_text'].text_align=0.5
     style['choice_button_text'].xalign=0.5
 
-    style['dialog_frame']=Style('empty')
-    style['dialog_frame'].background=Color('#fff').opacity(.9)
-    style['dialog_frame'].padding=(32,48,32,32)
-    style['dialog_frame'].xalign=.5
-    style['dialog_frame'].yalign=.75
+    style['menu_start_button']=Style('button')
+    style['menu_start_button'].padding=(32,12,32,12)
+    style['menu_start_button'].background=Color(pt.nav_background)
+    style['menu_start_button'].hover_background=Color(pt.nav_background).tint(.9)
+    style['menu_start_button_text']=Style('ramen_gui')
+    style['menu_start_button_text'].size=32
 
-    style['dialog_prompt_text']=Style('ramen_gui')
-    style['dialog_prompt_text'].color="#111"
-    style['dialog_prompt_text'].layout="subtitle"
-    style['dialog_prompt_text'].text_align=0.0
-
-    style['dialog_button']=Style('button')
-    style['dialog_button'].background="#0000"
-    style['dialog_button'].padding=(8,4,8,4)
-
-    style['dialog_button_text']=Style('ramen_tex')
-    style['dialog_button_text'].size=24
-    style['dialog_button_text'].color='#26C'
-    style['dialog_button_text'].hover_color=Color(style['dialog_button_text'].color).tint(.7)
-    style['dialog_button_text'].selected_color=Color(style['dialog_button_text'].color).shade(.7)
-
-    style ['big_start_button']=Style('button')
-    style ['big_start_button'].padding=(32,12,32,12)
-    style ['big_start_button'].background=Color(pt.nav_background)
-    style ['big_start_button'].hover_background=Color(pt.nav_background).tint(.9)
-    style ['big_start_button_text']=Style('ramen_gui')
-    style ['big_start_button_text'].size=32
-
-    style ['big_close_button']=Style('button')
-    style ['big_close_button'].padding=(12,12,12,12)
-    style ['big_close_button_text']=Style('ramen_icon_text')
-    style ['big_close_button_text'].size=24
-    style ['big_close_button_text'].color=pt.idle_color
-    style ['big_close_button_text'].hover_color='#fff'
-
-    style['dialog_closebutton']=Style('ramen_icon')
-    style['dialog_closebutton'].padding=(8,8,8,8)
-    style['dialog_closebutton'].background=Color('#900')
-    style['dialog_closebutton'].hover_background=Color('#c00')
-    style['dialog_closebutton'].xalign=1.0
-    style['dialog_closebutton'].yalign=0.0
-    style['dialog_closebutton'].yoffset=-style['dialog_frame'].top_padding
-    style['dialog_closebutton'].xoffset=style['dialog_frame'].right_padding
-
-    style['dialog_closebutton_text']=Style('ramen_icon_text')
-    style['dialog_closebutton_text'].size=16
-    style['dialog_closebutton_text'].color=Color('#ccc')
-    style['dialog_closebutton_text'].hover_color=Color('#fff')
-    style['dialog_closebutton_text'].insensitive_color=Color('#ddd')
+    style['menu_close_button']=Style('button')
+    style['menu_close_button'].padding=(12,12,12,12)
+    style['menu_close_button_text']=Style('ramen_icon_text')
+    style['menu_close_button_text'].size=24
+    style['menu_close_button_text'].color=pt.idle_color
+    style['menu_close_button_text'].hover_color='#fff'
 
     style['ramen_button']=Style('button')
     style['ramen_button'].color='#666'

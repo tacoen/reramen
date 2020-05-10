@@ -71,7 +71,7 @@ init -301 python:
 
     class ramen_util():
 
-        def mouse():
+        def mouse(self):
             """Get Mouse pos, return (x,y)"""
             return pygame.mouse.get_pos()
         

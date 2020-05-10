@@ -1,20 +1,20 @@
-init offset=-1
+init offset = -1
 
-screen tooltip(msg,adjust=(0,0)):
+screen tooltip(msg, adjust=(0, 0)):
     python:
-        x,y=ramu.mouse()
+        x, y = ramu.mouse()
 
     frame background "#ffe5":
-        xpos int(x+adjust[0])+40
-        ypos int(y+adjust[1])
-        padding (4,4,4,4)
+        xpos int(x + adjust[0]) + 40
+        ypos int(y + adjust[1])
+        padding(4, 4, 4, 4)
         text msg size 12 color '#fff9'
 
 
-## Additional screens
-## https://www.renpy.org/doc/html/screen_special.html
+# Additional screens
+# https://www.renpy.org/doc/html/screen_special.html
 
-## https://www.renpy.org/doc/html/screen_special.html#skip-indicator
+# https://www.renpy.org/doc/html/screen_special.html#skip-indicator
 
 screen skip_indicator():
 
@@ -36,25 +36,24 @@ screen skip_indicator():
 style skip_frame is empty:
     ypos 0
     background "#0006"
-    padding (4,4,4,4)
+    padding(4, 4, 4, 4)
 
 style skip_text is ramen_gui:
     size 16
 
 style skip_triangle is ramen_icon_text:
     size 20
-    
 
 
-## Notify screen ###############################################################
+## Notify screen #########################################################
 ##
-## The notify screen is used to show the player a message. (For example, when
-## the game is quicksaved or a screenshot has been taken.)
+# The notify screen is used to show the player a message. (For example, when
+# the game is quicksaved or a screenshot has been taken.)
 ##
-## https://www.renpy.org/doc/html/screen_special.html#notify-screen
+# https://www.renpy.org/doc/html/screen_special.html#notify-screen
 
-screen ramen_notify(message,icon='alert'):
-    
+screen ramen_notify(message, icon='alert'):
+
     zorder 100
     style_prefix "notify"
     frame at notify_appear:
@@ -66,11 +65,11 @@ screen ramen_notify(message,icon='alert'):
     timer 3 action Hide('ramen_notify')
 
 screen notify(message):
-    
+
     zorder 100
     style_prefix "notify"
     frame at notify_appear:
-            text "[message!tq]"
+        text "[message!tq]"
 
     timer 3 action Hide('notify')
 
@@ -84,11 +83,11 @@ transform notify_appear:
 
 
 style notify_frame is frame:
-    xalign 1.0 
-    xoffset -58
-    ypos 58
-    background rui.button("#000C",Borders(2,2,2,2))
-    padding (16,8,16,8)
+    xalign 1.0
+    xoffset - 72
+    ypos 72
+    background rui.button("#000C", Borders(2, 2, 2, 2))
+    padding(16, 8, 16, 8)
 
 style notify_text is ramen_gui:
     size 20
