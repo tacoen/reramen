@@ -43,7 +43,7 @@ label start:
             "Notify":
                 $ renpy.notify("You see gui.about")
                 "[gui.about]"
-                $ ramen_notify("renpy license")
+                $ notify_ico("renpy license")
                 "[renpy.license]"
             
             "Next":
@@ -58,7 +58,7 @@ label start:
         scene test black
         e "We are doing it in black scene, aren't we?"
         scene test white
-        $ ramen_notify("White scene. and how well the notification deal with long text like this.",'logo-ramen')
+        $ notify_ico("White scene. and how well the notification deal with long text like this.",'logo-ramen')
         e "We also doing it in white scene."
         scene test
         e 'Lets test the dialogue with a long text.'

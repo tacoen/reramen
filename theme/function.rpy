@@ -1,10 +1,5 @@
 init -299 python:
 
-    ramen.phone_ui=False
-    
-    def ramen_notify(message,icon='alert'):
-        renpy.show_screen('ramen_notify',message=message,icon=icon)
-        
     class ramen_ui_tool():
     
         def button(self,color,border=Borders(3,1,1,3),black=False):
