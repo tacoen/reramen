@@ -47,6 +47,23 @@ screen quick_menubar():
     if not qmtt.value== "":
         use tooltip(qmtt.value)
 
+style quickmenu is default
+
+style quickmenu_button is button:
+    padding (8,8,8,8)
+    
+
+style quickmenu_button_text is ramen_icon_text:
+    font pt.font_ui_ico
+    size 20
+    color pt.idle_color
+    hover_color Color(pt.idle_color).tint(.7)
+    selected_color Color(pt.idle_color).shade(.7)
+    insensitive_color Color(pt.idle_color).opacity(.3)
+    outlines pt.idle_outlines
+    hover_outlines pt.hover_outlines
+    insensitive_outlines pt.insensitive_outlines
+
 
 ## This code ensures that the quick_menu screen is displayed in-game, whenever
 ## the player has not explicitly hidden the interface.
@@ -55,4 +72,3 @@ init python:
 
     quick_menu=True
     config.overlay_screens.append("quick_menu")
-

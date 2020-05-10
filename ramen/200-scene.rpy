@@ -47,11 +47,11 @@ init -200 python:
                                 except: res[fn.path][fnn[0]]['cond']=()
                                 
                                 if c in ramen.time_ico:
-                                    res[fn.path][fnn[0]]['cond'] +=("ramen.time.ico()=='" + c + "'", f)                
+                                    res[fn.path][fnn[0]]['cond'] +=("ramentime.ico()=='" + c + "'", f)                
                                 elif c in ramen.time_word:
-                                    res[fn.path][fnn[0]]['cond'] +=("ramen.time.word()=='" + c + "'", f)                
+                                    res[fn.path][fnn[0]]['cond'] +=("ramentime.word()=='" + c + "'", f)                
                                 elif c in ramen.time_cond:
-                                    res[fn.path][fnn[0]]['cond'] +=("ramen.time.cond()=='" + c + "'", f)                     
+                                    res[fn.path][fnn[0]]['cond'] +=("ramentime.cond()=='" + c + "'", f)                     
                     else:
                     
                         est(fn.path,fn.name)

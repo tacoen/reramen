@@ -84,6 +84,8 @@ init -200 python:
 
 ## ramen-theme #########################################################
 
+init -199 python:
+
     style['bar'].ysize=24
     style['bar'].right_bar=Color("#666")
     style['bar'].left_bar=Color("#666").tint(0.5)
@@ -187,19 +189,6 @@ init -200 python:
     style['dialog_closebutton_text'].hover_color=Color('#fff')
     style['dialog_closebutton_text'].insensitive_color=Color('#ddd')
 
-    style['quickmenu_button']=Style('button')
-    style['quickmenu_button'].padding=(8,8,8,8)
-
-    style['quickmenu_button_text']=Style('ramen_icon_text')
-    style['quickmenu_button_text'].size=20
-    style['quickmenu_button_text'].color=pt.idle_color
-    style['quickmenu_button_text'].hover_color=Color(style['quickmenu_button_text'].color).tint(.7)
-    style['quickmenu_button_text'].selected_color=Color(style['quickmenu_button_text'].color).shade(.7)
-    style['quickmenu_button_text'].insensitive_color=Color(style['quickmenu_button_text'].color).opacity(.3)
-    style['quickmenu_button_text'].outlines= pt.idle_outlines
-    style['quickmenu_button_text'].hover_outlines= pt.hover_outlines
-    style['quickmenu_button_text'].insensitive_outlines= pt.insensitive_outlines
-
     style['ramen_button']=Style('button')
     style['ramen_button'].color='#666'
     style['ramen_button'].padding=(8,4,8,4)
@@ -259,6 +248,19 @@ init -200 python:
     style['navigation_button_text'].hover_color=pt.hover_color
     style['navigation_button_text'].insensitive_color= pt.insensitive_color
 
+    style['quickmenu_button']=Style('button')
+    style['quickmenu_button'].padding=(8,8,8,8)
+
+    style['quickmenu_button_text']=Style('ramen_icon_text')
+    style['quickmenu_button_text'].font=pt.font_ui_ico
+    style['quickmenu_button_text'].size=20
+    style['quickmenu_button_text'].color=pt.idle_color
+    style['quickmenu_button_text'].hover_color=Color(style['quickmenu_button_text'].color).tint(.7)
+    style['quickmenu_button_text'].selected_color=Color(style['quickmenu_button_text'].color).shade(.7)
+    style['quickmenu_button_text'].insensitive_color=Color(style['quickmenu_button_text'].color).opacity(.3)
+    style['quickmenu_button_text'].outlines= pt.idle_outlines
+    style['quickmenu_button_text'].hover_outlines= pt.hover_outlines
+    style['quickmenu_button_text'].insensitive_outlines= pt.insensitive_outlines
 
 ## etc ####################################################################
 
@@ -268,4 +270,3 @@ init -200 python:
     
     preferences.text_cps = 0
     preferences.afm_time = 15
-

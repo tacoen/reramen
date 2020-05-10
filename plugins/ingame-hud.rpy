@@ -153,9 +153,9 @@ screen hud_time():
         vbox:
             spacing 0
             yalign 0.5
-            text ramen.time.clock() xalign 1.0
-            text ramen.time.strftime('%A') xalign 1.0
-        text ico(ramen.time.sun()) style 'hud_icontext'+str(hud.pref) size 40 yalign 0.5
+            text ramentime.clock() xalign 1.0
+            text ramentime.strftime('%A') xalign 1.0
+        text ico(ramentime.sun()) style 'hud_icontext'+str(hud.pref) size 40 yalign 0.5
         null width 16
         
 screen hud_bar():

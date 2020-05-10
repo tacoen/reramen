@@ -4,11 +4,15 @@ init -301 python in character:
 
 init -301 python in ramen:
 
-    import datetime
-    import re
     import pygame
 
     uidnumber=0
+
+    def Mouse():
+        """Get Mouse pos, return (x,y)"""
+        return pygame.mouse.get_pos()
+
+init -301 python:
 
     class time_class():
         """
@@ -54,37 +58,29 @@ init -301 python in ramen:
             return self.time.strftime('%H:%M')
 
         def ico(self,word=True):
-            global time_ico
-            sun = int( float(self.time.hour)/24*len(time_ico) )
+            sun = int( float(self.time.hour)/24*len(ramen.time_ico) )
             if word:
-                return time_ico[int(sun)]
+                return ramen.time_ico[int(sun)]
             else:
                 return sun
 
         def cond(self,word=True):
-            global time_cond
-            sun = int( float(self.time.hour)/24*len(time_cond))
+            sun = int( float(self.time.hour)/24*len(ramen.time_cond))
             if word:
-                return time_cond[int(sun)]
+                return ramen.time_cond[int(sun)]
             else:
                 return sun
 
         def word(self,word=True):
-            global time_word
-            sun = int( float(self.time.hour)/24*len(time_word) )
+            sun = int( float(self.time.hour)/24*len(ramen.time_word) )
             if word:
-                return time_word[int(sun)]
+                return ramen.time_word[int(sun)]
             else:
                 return sun
 
-    seed = datetime.timedelta(0, 0)
-    time = time_class()
-
-    def Mouse():
-        """Get Mouse pos, return (x,y)"""
-        return pygame.mouse.get_pos()
-
-init -301 python:
+    ramen.seed = datetime.timedelta(0, 0)
+    
+    ramentime = time_class()
 
     class ramen_util():
 
