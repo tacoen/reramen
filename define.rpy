@@ -1,6 +1,9 @@
 # need for seperated sub-repo creations
 
-init -2 python:
+init -300 python:
+    config.version = "1.0"
+    config.name = _("ramen")
 
-    config.name = _("ramen-core")
+
+
 

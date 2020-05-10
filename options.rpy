@@ -1,8 +1,6 @@
-﻿init -1 python:
-    config.version = "1.0"
-    build.name = ramu.safestr(config.name+"_"+config.version)
-        
-init offset=-1
+﻿init offset=-1
+
+define build.name = ramu.safestr(config.name+"_"+config.version)
 
 define gui.about = _p("""
 
@@ -17,8 +15,7 @@ define gui.show_name = True
 ## This generally should not be changed, and if it is, should always be a
 ## literal string, not an expression.
 
-define config.save_directory = "ramenclean-1588048679"
-
+define config.save_directory = "ramen"
 
 ## Icon ########################################################################
 ##

@@ -1,12 +1,10 @@
 init -302 python:
 
-    RAMEN_DEV = True
     RAMEN_IMG_EXT = ('.webp', '.png', '.jpg')
     RAMEN_TXT_EXT = ('.json', '.txt')
     RAMEN_IMG_SND = ['.ogg', '.mp3', '.wav']
     RAMEN_INTMIN = 0
     RAMEN_INTMAX = 100
-    RAMEN_GUIDIR = "theme/gui/"
 
     multipersistent = MultiPersistent('tacoen.itch.io')
     
@@ -15,12 +13,12 @@ init -302 python:
 
 init -299 python:
 
-    ramu = ramen_util()
     config.label_callback = ramu.labelcallback
 
     pe = ramen_persistent('env')
 
     pe.theme_path = 'theme/'
+    pe.plugins_path = 'plugins/'
     
     pe.itemd = {
         'name': None,

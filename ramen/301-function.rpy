@@ -328,3 +328,5 @@ init -301 python:
             )
 
             return p
+
+    ramu = ramen_util()
