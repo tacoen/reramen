@@ -2,7 +2,7 @@ init offset=-1
 
 screen tooltip(msg,adjust=(0,0)):
     python:
-        x,y=ramen.Mouse()
+        x,y=ramu.mouse()
 
     frame background "#ffe5":
         xpos int(x+adjust[0])+40

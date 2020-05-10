@@ -13,13 +13,31 @@ init -302 python:
 
 init -299 python:
 
+    ramentime = time_class()
+    ramu = ramen_util()
+
     config.label_callback = ramu.labelcallback
+
+    mc = ramen_multipersistent('mc',a=1)
 
     pe = ramen_persistent('env')
 
     pe.theme_path = 'theme/'
     pe.plugins_path = 'plugins/'
     
+    ramen.uidnumber=0
+
+    ramen.objects = {}    
+    ramen.items=object()
+
+    ramen.seed = datetime.timedelta(0, 0)
+    
+    ramen.time_ico = ['moon2','moon3','sun1','sun2','sun2','sun3','moon1','moon2']
+    ramen.time_cond = ['dark','dark','sun1','sun2','sun2','sun3','dark','dark']
+    ramen.time_word = ['Midnight','Morning','Morning','Noon','Noon','Evening','Evening','Night']
+
+    config.layers = ['master', 'transient', 'ambient', 'screens', 'overlay', 'overlay2','console', 'dialog_layer']
+
     pe.itemd = {
         'name': None,
         'price': int(0),
@@ -31,16 +49,3 @@ init -299 python:
         'persist': False,
         'tradable': True,
     }
-
-    ramen.objects = {}    
-    ramen.items=object()
-    
-    ramen.time_ico = ['moon2','moon3','sun1','sun2','sun2','sun3','moon1','moon2']
-    ramen.time_cond = ['dark','dark','sun1','sun2','sun2','sun3','dark','dark']
-    ramen.time_word = ['Midnight','Morning','Morning','Noon','Noon','Evening','Evening','Night']
-
-    mc = ramen_multipersistent('mc',a=1)
-    
-    config.layers = ['master', 'transient', 'ambient', 'screens', 'overlay', 'overlay2','console', 'dialog_layer']
-
-

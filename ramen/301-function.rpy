@@ -1,19 +1,10 @@
-init -301 python in character:
-
+init -302 python in character:
     pass
 
-init -301 python in ramen:
-
-    import pygame
-
-    uidnumber=0
-
-    def Mouse():
-        """Get Mouse pos, return (x,y)"""
-        return pygame.mouse.get_pos()
+init -302 python in ramen:
+    pass
 
 init -301 python:
-
     class time_class():
         """
         See: https://docs.python.org/2/library/datetime.html
@@ -78,12 +69,12 @@ init -301 python:
             else:
                 return sun
 
-    ramen.seed = datetime.timedelta(0, 0)
-    
-    ramentime = time_class()
-
     class ramen_util():
 
+        def mouse():
+            """Get Mouse pos, return (x,y)"""
+            return pygame.mouse.get_pos()
+        
         def uid(self):
             """Return Next Unique id for object creations."""
             ramen.uidnumber += 1
@@ -144,7 +135,6 @@ init -301 python:
                 name = name.replace(s,'')
 
             return name.replace('_', ' ').strip().title()
-
 
         def random_color(self, lo=0, hi=255):
             """Return random hex Color"""
@@ -298,8 +288,7 @@ init -301 python:
             file.writelines(sts.strip())
             file.close()
             return file
-        
-        
+
         def character(self, id, name=None, **kwargs):
             """Define character"""
 
@@ -324,5 +313,3 @@ init -301 python:
             )
 
             return p
-
-    ramu = ramen_util()

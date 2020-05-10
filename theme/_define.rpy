@@ -23,7 +23,7 @@ init -200 python:
     pt.hover_color=Color("#ffe")
     pt.selected_color='#fff'
     pt.text_color = '#ddd'
-    
+
     pt.small_color=pt.idle_color
     pt.small_hover_color=Color(pt.small_color).tint(0.1)
     pt.small_selected_color=Color(pt.small_color).tint(0.7)
@@ -173,7 +173,7 @@ init -199 python:
     style ['big_close_button_text'].size=24
     style ['big_close_button_text'].color=pt.idle_color
     style ['big_close_button_text'].hover_color='#fff'
-    
+
     style['dialog_closebutton']=Style('ramen_icon')
     style['dialog_closebutton'].padding=(8,8,8,8)
     style['dialog_closebutton'].background=Color('#900')
@@ -226,47 +226,11 @@ init -199 python:
     style['ramen_slider'].base_bar=Composite((450,16), (0,7), Composite((450,abs(3)),(0,0), Solid('#fff3')))
     style['ramen_slider'].thumb=Text(ico('circle'),font=pt.font_ui_ico,size=16)
 
-    style['navigation_frame']=Style('frame')
-    style['navigation_frame'].background="#000c"
-    style['navigation_frame'].xsize=280
-    style['navigation_frame'].ysize=config.screen_height
-    style['navigation_frame'].xpos=0
-    style['navigation_frame'].ypos=0
-    style['navigation_frame'].padding=(24,110)
-
-    style['navigation_icon']=Style('ramen_icon_text')
-    style['navigation_icon'].size=20
-    style['navigation_icon'].min_width=32
-    style['navigation_icon'].text_align=0.5
-    style['navigation_icon'].line_leading=8
-    style['navigation_icon'].color=Color(pt.idle_color).opacity(.9)
-
-    style['navigation_button']=Style('button')
-    style['navigation_button_text']=Style('ramen_gui')
-    style['navigation_button_text'].size=24
-    style['navigation_button_text'].color=pt.idle_color
-    style['navigation_button_text'].hover_color=pt.hover_color
-    style['navigation_button_text'].insensitive_color= pt.insensitive_color
-
-    style['quickmenu_button']=Style('button')
-    style['quickmenu_button'].padding=(8,8,8,8)
-
-    style['quickmenu_button_text']=Style('ramen_icon_text')
-    style['quickmenu_button_text'].font=pt.font_ui_ico
-    style['quickmenu_button_text'].size=20
-    style['quickmenu_button_text'].color=pt.idle_color
-    style['quickmenu_button_text'].hover_color=Color(style['quickmenu_button_text'].color).tint(.7)
-    style['quickmenu_button_text'].selected_color=Color(style['quickmenu_button_text'].color).shade(.7)
-    style['quickmenu_button_text'].insensitive_color=Color(style['quickmenu_button_text'].color).opacity(.3)
-    style['quickmenu_button_text'].outlines= pt.idle_outlines
-    style['quickmenu_button_text'].hover_outlines= pt.hover_outlines
-    style['quickmenu_button_text'].insensitive_outlines= pt.insensitive_outlines
-
 ## etc ####################################################################
 
     config.narrator_menu=True
     config.history_length=250
     config.window = "auto"
-    
+
     preferences.text_cps = 0
     preferences.afm_time = 15
