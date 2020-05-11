@@ -5,11 +5,12 @@ screen ramen_dev_screen():
     default obj = None
     default show = False
 
+    layer 'overlay2'
+
     if show:
 
         modal True
-        zorder 100
-        layer 'overlay2'
+        zorder 105
 
         frame style 'rds_panel':
             style_prefix 'rds'
@@ -19,7 +20,6 @@ screen ramen_dev_screen():
                 use rds_win(obj,obj_type)
     else:
         modal False
-        layer 'overlay'
         textbutton ':rds:' action ToggleScreenVariable('show')
 
 screen rds_win(obj,obj_type):

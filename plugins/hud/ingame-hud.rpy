@@ -66,7 +66,8 @@ screen hud():
         else:
             icon = 'menu-small'
 
-    zorder 100
+    zorder 99
+    layer 'hud'
 
     hbox xalign 1.0 yalign 0.0:
         

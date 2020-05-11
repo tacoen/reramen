@@ -26,7 +26,7 @@ screen navigation():
             spacing 16
 
             if main_menu:
-                use navigation_hbox("New Game", Start())
+                use navigation_hbox("New Game", Start('ramen_newgame'))
 
             else:
                 use navigation_hbox("History", ShowMenu("history"))

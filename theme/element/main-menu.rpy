@@ -18,7 +18,7 @@ screen main_menu():
 
     use navigation
 
-    textbutton _("Start") action Start():
+    textbutton _("Start") action Start('ramen_newgame'):
         style 'menu_start_button'
         yalign 0.9
         xalign 0.95

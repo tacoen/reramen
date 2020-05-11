@@ -36,7 +36,7 @@ init -299 python:
     ramen.time_cond = ['dark','dark','sun1','sun2','sun2','sun3','dark','dark']
     ramen.time_word = ['Midnight','Morning','Morning','Noon','Noon','Evening','Evening','Night']
 
-    config.layers = ['master', 'transient', 'ambient', 'screens', 'overlay', 'overlay2','console', 'dialog_layer']
+    config.layers = ['master', 'transient', 'ambient', 'hud', 'screens', 'overlay', 'overlay2', 'console', 'dialog_layer']
 
     pe.itemd = {
         'name': None,
