@@ -20,7 +20,7 @@ init -200 python:
  
         def define_byfile(self):
 
-            files = ramu.files(self.dir,self.id,RAMEN_IMG_EXT+RAMEN_TXT_EXT)
+            files = ramu.files(self.dir,self.id,pe.ext_img+pe.ext_txt)
             pose = {}
             
             for f in files:
@@ -32,7 +32,7 @@ init -200 python:
                     
                     self.__dict__[str('json')][fn.name]=f                   
 
-                if "."+fn.ext in RAMEN_IMG_EXT:
+                if "."+fn.ext in pe.ext_img:
                 
                     if fn.name.lower() == 'profile':
                         self.__dict__[str('profile_pic')] = f

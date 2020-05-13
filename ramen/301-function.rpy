@@ -1,10 +1,5 @@
-init -302 python in character:
-    pass
-
-init -302 python in ramen:
-    pass
-
 init -301 python:
+
     class time_class():
         """
         See: https://docs.python.org/2/library/datetime.html
@@ -49,28 +44,35 @@ init -301 python:
             return self.time.strftime('%H:%M')
 
         def ico(self,word=True):
-            sun = int( float(self.time.hour)/24*len(ramen.time_ico) )
+            sun = int( float(self.time.hour)/24*len(pe.time_ico) )
             if word:
-                return ramen.time_ico[int(sun)]
+                return pe.time_ico[int(sun)]
             else:
                 return sun
 
         def cond(self,word=True):
-            sun = int( float(self.time.hour)/24*len(ramen.time_cond))
+            sun = int( float(self.time.hour)/24*len(pe.time_cond))
             if word:
-                return ramen.time_cond[int(sun)]
+                return pe.time_cond[int(sun)]
             else:
                 return sun
 
         def word(self,word=True):
-            sun = int( float(self.time.hour)/24*len(ramen.time_word) )
+            sun = int( float(self.time.hour)/24*len(pe.time_word) )
             if word:
-                return ramen.time_word[int(sun)]
+                return pe.time_word[int(sun)]
             else:
                 return sun
 
     class ramen_util():
 
+        def limits(self, value):
+            if value < pe.limit[0]:
+                value = pe.limit[0]
+            if value > pe.limit[1]:
+                value = pe.limit[1]
+            return value
+            
         def mouse(self):
             """Get Mouse pos, return (x,y)"""
             return pygame.mouse.get_pos()
@@ -125,9 +127,9 @@ init -301 python:
                 pre = prefix
 
             if not isinstance(suffix,tuple):
-                pre.append(suffix)
+                suf.append(suffix)
             else:
-                pre = suffix
+                suf = suffix
 
             for p in pre:
                 name = name.replace(p,'')
@@ -237,7 +239,7 @@ init -301 python:
 
             return  list(dict.fromkeys(F))
 
-        def ezfile2(self, file, default=Color("#0019"), ext=RAMEN_IMG_EXT):
+        def ezfile2(self, file, default=Color("#0019"), ext=pe.ext_img):
 
             for e in ext:
                 if renpy.loadable(file + e):
@@ -245,7 +247,7 @@ init -301 python:
             else:
                 return default
 
-        def ezfile(self, file, ext=RAMEN_IMG_EXT):
+        def ezfile(self, file, ext=pe.ext_img):
 
             for e in ext:
                 if renpy.loadable(file + e):

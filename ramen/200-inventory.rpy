@@ -25,24 +25,56 @@ init -200 python:
             else:
                 ramen.cart[self.id].append(item)
                 
+        def drop(self, item_id):
+            del self.__dict__['inventory'][item_id]
 
-        def use(self, item_id):
+        def sell(self, item_id,use_ramen=False):
+            i = self.__dict__['inventory'][item_id]
+            mc.money += i.price
+            del self.__dict__['inventory'][item_id]
+            res= [False, False, False, None, i.name+" sold for "+str(i.price)+ " $"]
+            if use_ramen:
+                ramen.res = res
+            else:
+                return res
+                
+        def use(self, item_id, use_ramen=False):
             """
-            Use will return 3 state in array
-
-            - effect
-            - deduced
-            - depleted
+            Will return array:
+            
+            | index | type | what |
+            | --- | --- | --- |
+            | 0 | boolean | effect |
+            | 1 | boolean | deduced |
+            | 2 | boolean | depleted |
+            | 3 | tuple | (stat,newvalue) |  
+            | 4 | name | item.name |
+            
+            ``` python
+            res = pocket.use('coke', True)
+            
+            > ramen.res
+            > [ True, True, False, ('energy',3), 'fakecola' ]
+            ```
 
             """
-            res = [False, False, False]
+
+            res = [False, False, False, None,""]
 
             item = self.__dict__['inventory'][item_id]
 
+            res[4] = item.name
+            
             if item.effect is not None:
-                what = item.effect[0]
-                value = item.effect[1]
-                mc.stat[what] = ramu.limits(self, mc.stat[what] + value)
+            
+                for what in item.effect.keys():
+                    value = item.effect[what]
+                    mc.stat[what] = ramu.limits(mc.stat[what] + value)
+                    if res[3] is None:
+                        res[3] = (what,mc.stat[what])
+                    else:
+                        res[3] = res[3] + (what,mc.stat[what])
+                    
                 res[0] = True
 
             if not item.persist:
@@ -53,7 +85,10 @@ init -200 python:
                 del self.__dict__['inventory'][item_id]
                 res[2] = True
 
-            return res
+            if use_ramen:
+                ramen.res = res
+            else:
+                return res
 
         def item(self, item_id, dict=False):
             
@@ -85,7 +120,7 @@ init -200 python:
                 self.__dict__['inventory'][item.id]
                 self.__dict__['inventory'][item.id].count += item.count
             except:
-                self.__dict__['inventory'][item.id]=object()
+                self.__dict__['inventory'][item.id]=item.copy()
                 self.__dict__['inventory'][item.id].count = item.count
 
 

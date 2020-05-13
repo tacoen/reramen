@@ -1,7 +1,8 @@
 init -200 python:
 
     class itemobject(object):
-    
+        """itemobject handler class"""
+        
         def __init__(self,id,**kwargs):
         
             for k in kwargs: 
@@ -16,6 +17,7 @@ init -200 python:
             except: self.__dict__['name'] = id.title()
             
             try: ramen.objects[self.__class__.__name__]
+            
             except: ramen.objects[self.__class__.__name__]=[]
             ramen.objects[self.__class__.__name__].append(self.id)
 
@@ -56,7 +58,12 @@ init -200 python:
             return copies
 
         def icon(self, size=(100, 100), color=None):
-
+            """
+            Return or generate the icon of your item.
+            Put your icon_img.png within the directory where the item being define or set the `dir`.
+            """
+            
+            
             icon = self.get('img')
 
             if icon is None:
@@ -79,16 +86,29 @@ init -200 python:
                 icon = Composite(
                     size,
                     (0, 0), Solid(color),
-                    (8, 8), Text(icon_text, font=font.ui_text,
+                    (8, 8), Text(icon_text, font=pt.font_ui_text,
                                  color='#fff', size=24, kerning=-1)
                 )
-
+                
             return icon
 
     def item(id):
+        """Return item from `ramen.items` by their id."""
         return ramen.items.__dict__[id]
     
     class define_item(object):
+        """ 
+        Define new item 
+
+        ``` python
+        define_item('coke',name='fake cola',price=10,count=1)    
+        item('coke')
+        ```
+
+        * The default arguments where set in `pe.itemd`
+        * Item will store in `ramen.items`
+
+        """
         def __new__(cls, id=None, *args, **kwargs):
             
             if id is None:

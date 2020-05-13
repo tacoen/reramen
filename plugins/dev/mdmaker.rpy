@@ -186,7 +186,7 @@ init -80 python:
                     if "game/" in file:
                     
                         if inspect.isfunction(o):
-                            ndx_st += "\n#### " + i + "\n"
+                            ndx_st += "\n## " + i + "\n"
                             file = file.replace('game/','')
                             ndx_st += "File: `"+ file+"`\n"
                         
@@ -195,9 +195,11 @@ init -80 python:
                             except BaseException:
                                 pass
 
-
+                            ndx_st += "\n---\n"
+                
                 except BaseException:
                     pass
+
 
             self.write('function', ndx_st)
 

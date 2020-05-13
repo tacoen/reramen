@@ -31,7 +31,7 @@ screen main_menu():
         vbox style "version":
 
             python:
-                if RAMEN_DEV:
+                if ramen.dev:
                     vt = 'DEVELOPER - [config.version]'
                 else:
                     vt = '[config.version]'

@@ -11,7 +11,6 @@ define e = Character("Eileen")
 define d = Character("Demi",who_color="#39C")
 define s = Character("Semi",who_color="#090")
 
-
 # The game starts here.
 
 label start:

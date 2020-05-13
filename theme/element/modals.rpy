@@ -51,6 +51,14 @@ init python:
     style['modal_label_text'] = Style('ramen_label_text')
     style['modal_label_text'].color = ramu.invertColor(pt.modal_background)
 
+
+    style['modal_vscrollbar'].xsize=8
+    style['modal_vscrollbar'].thumb=Color('#999').opacity(.2)
+    style['modal_vscrollbar'].base_bar=Color('#ccc').opacity(.9)
+
+    style['modal_vbar']=Style('modal_vscrollbar')
+    style['modal_vbar'].xsize=3
+    
     def modal_display(**kwargs):
         """
         show `modal_display` screen with keyword arguments.
@@ -125,7 +133,7 @@ screen modal(screenname, **kwargs):
     layer "dialog_layer"
     style_prefix "modal"
     modal True
-    zorder 111
+    
 
     frame:
         if padding:
@@ -141,14 +149,10 @@ screen modal(screenname, **kwargs):
 
         if showtitle:
             label title.title()
-
-        if showtitle:
-
-            vbox yoffset 40:
+            
+            hbox yoffset 32:
                 transclude
-
         else:
-
             transclude
 
 

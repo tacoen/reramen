@@ -1,4 +1,7 @@
-init -199 python:
+init -10 python:
+
+    pocket = inventory('pocket')
+    
     hud =  ramen_object(
         pref = 0,
         enable = False,
@@ -12,7 +15,7 @@ init -199 python:
         pocket = { 
             'icon': 'ico-wallet', 
             'key': "K_F8", 
-            'action': Null,
+            'action': ToggleScreen('inventory_ui',inventory=pocket),
             'enable': True
         },
         phone = { 
@@ -74,10 +77,7 @@ screen hud():
         spacing 8
         style_prefix 'hud'
         
-        if hud.enable:    
-            $ shade = True
-
-        if shade:
+        if hud.enable or shade:    
             use hud_time()
             use hud_cash()
  

@@ -12,9 +12,9 @@ init -200 python:
             for d in self.dir:
                 tdir.append(d+'scene')
 
-            condition = sorted(list(dict.fromkeys( ramen.time_cond + ramen.time_word  +  ramen.time_ico)))
+            condition = sorted(list(dict.fromkeys( pe.time_cond + pe.time_word  +  pe.time_ico)))
             cond=()
-            files = ramu.files(tdir,False,RAMEN_IMG_EXT+RAMEN_TXT_EXT)
+            files = ramu.files(tdir,False,pe.ext_img+pe.ext_txt)
             
             res = {}
             
@@ -46,11 +46,11 @@ init -200 python:
                                 try: res[fn.path][fnn[0]]['cond']
                                 except: res[fn.path][fnn[0]]['cond']=()
                                 
-                                if c in ramen.time_ico:
+                                if c in pe.time_ico:
                                     res[fn.path][fnn[0]]['cond'] +=("ramentime.ico()=='" + c + "'", f)                
-                                elif c in ramen.time_word:
+                                elif c in pe.time_word:
                                     res[fn.path][fnn[0]]['cond'] +=("ramentime.word()=='" + c + "'", f)                
-                                elif c in ramen.time_cond:
+                                elif c in pe.time_cond:
                                     res[fn.path][fnn[0]]['cond'] +=("ramentime.cond()=='" + c + "'", f)                     
                     else:
                     

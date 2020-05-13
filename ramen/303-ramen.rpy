@@ -1,4 +1,10 @@
-init -300 python:
+init -303 python in character:
+    pass
+
+init -303 python in ramen:
+    pass
+    
+init -303 python:
 
     class ramen_object(object):
 
@@ -90,12 +96,12 @@ init -300 python:
             except: return False
 
         def set(self,key,value):
-            """Only Set if RAMEN_DEV is True"""
+            """Only Set if ramen.dev is True"""
             
             try: 
                 persistent.ramen[self.id][key]
                 
-                if RAMEN_DEV:
+                if ramen.dev:
                     persistent.ramen[self.id][str(key)]=value
                 else:
                     pass
@@ -109,9 +115,6 @@ init -300 python:
 
         def __delattr__(self,key):
             del persistent.ramen[self.id][key]
-
-
-init -300 python:
 
     class ramen_multipersistent(ramen_object):
         """
@@ -166,7 +169,6 @@ init -300 python:
             self.init(id, *args, **kwargs)
 
         def register(self):
-
             try: ramen.objects[self.__class__.__name__]
             except: ramen.objects[self.__class__.__name__]=[]
             ramen.objects[self.__class__.__name__].append(self.id)

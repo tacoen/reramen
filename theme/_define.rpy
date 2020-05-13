@@ -86,11 +86,11 @@ init -200 python:
 
 init -199 python:
 
-    style['bar'].ysize=24
+    style['bar'].ysize=8
     style['bar'].right_bar=Color("#666")
     style['bar'].left_bar=Color("#666").tint(0.5)
 
-    style['vbar'].ysize=24
+    style['vbar'].xsize=8
     style['vbar'].top_bar=Color("#666")
     style['vbar'].bottom_bar=Color("#666").tint(0.5)
 
