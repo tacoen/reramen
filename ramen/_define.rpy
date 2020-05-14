@@ -30,7 +30,7 @@ init -302 python:
 
 init -300 python:
 
-    ramentime = time_class()
+    ramentime = ramen_time()
     ramu = ramen_util()
     ramen.uidnumber=0
     ramen.dev = True

@@ -1,6 +1,6 @@
 init -301 python:
 
-    class time_class():
+    class ramen_time():
         """
         See: https://docs.python.org/2/library/datetime.html
         See: https://www.w3schools.com/python/python_datetime.asp
