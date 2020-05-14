@@ -1,7 +1,5 @@
 init -10 python:
 
-    pocket = inventory('pocket')
-    
     hud =  ramen_object(
         pref = 0,
         enable = False,
@@ -12,21 +10,24 @@ init -10 python:
     hud.maxpref = len(hud.bgcolor)
     
     hud.kdict('icons',
+    
         pocket = { 
             'icon': 'ico-wallet', 
             'key': "K_F8", 
-            'action': ToggleScreen('inventory_ui',inventory=pocket),
+            'action': ToggleScreen('inventory_ui',inv=pocket,size=(440,480),align=(0.9,0.4)),
             'enable': True
         },
+        
         phone = { 
             'icon': 'ico-phone', 
             'key': "K_F9", 
             'action': Null,
             'enable': True
         },
+        
         map = { 
             'icon': 'ico-map', 
-            'key': "K_F9", 
+            'key': "shift_K_F9", 
             'action': Null,
             'enable': False
         }
@@ -88,7 +89,23 @@ screen hud():
             text_size 32
             hovered [ SetScreenVariable('shade',True) ]
             unhovered [ SetScreenVariable('shade',False) ]
+
+    
+    for m in hud.icons.keys():
         
+        python:
+            try:
+                if hud.icons[m]['enable']:
+                    k = hud.icons[m]['key']
+                    a = hud.icons[m]['action']
+            except:
+                k = False
+                
+        if k:
+            key k action a
+            
+    key "K_F10" action ToggleVariable('hud.enable')
+            
     if shade:
         timer 0.2 action Show('hud_shade')
     else:
@@ -101,7 +118,7 @@ screen hud():
         
 screen hud_shade():
     
-    zorder 90
+    zorder 33
     add (pe.theme_path+'gui/top-shade.png') xalign 1.0 yalign 0.0 at FadeInterval(0.5)
 
 screen hud_cash():

@@ -51,11 +51,11 @@ transform notify_appear:
 
 
 style notify_frame is frame:
-    xalign 1.0
-    xoffset - 72
-    ypos 72
-    background rui.button("#000C", Borders(2, 2, 2, 2))
-    padding(16, 8, 16, 8)
+    xpos pt.dialogue_xpos
+    yalign 0.7
+    xsize pt.dialogue_width
+    background rui.button(pt.notify_background, Borders(2, 2, 2, 2))
+    padding(24, 12, 24, 12)
 
 style notify_text is ramen_gui:
     size 20

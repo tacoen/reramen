@@ -44,29 +44,35 @@ init -200 python:
             
             | index | type | what |
             | --- | --- | --- |
-            | 0 | boolean | effect |
+            | 0 | string | item.name/text, None if empty |
             | 1 | boolean | deduced |
             | 2 | boolean | depleted |
-            | 3 | tuple | (stat,newvalue) |  
-            | 4 | name | item.name |
+            | 3 | tuple | (what,value), False is no effect |
             
             ``` python
             res = pocket.use('coke', True)
             
             > ramen.res
-            > [ True, True, False, ('energy',3), 'fakecola' ]
+            > [ 'fakecola consumed', True, False, ('energy',3) ]
             ```
 
             """
 
-            res = [False, False, False, None,""]
+            res = [None, False, False, False ]
 
             item = self.__dict__['inventory'][item_id]
 
-            res[4] = item.name
+            if item.eatable:
+                act = "consumed"
+            else:
+                act = "used"
+                
+            res[0] = item.name + " "+act
             
             if item.effect is not None:
-            
+                
+                res[3] = tuple()
+                
                 for what in item.effect.keys():
                     value = item.effect[what]
                     mc.stat[what] = ramu.limits(mc.stat[what] + value)
@@ -74,8 +80,6 @@ init -200 python:
                         res[3] = (what,mc.stat[what])
                     else:
                         res[3] = res[3] + (what,mc.stat[what])
-                    
-                res[0] = True
 
             if not item.persist:
                 item.count -= 1
@@ -116,6 +120,9 @@ init -200 python:
             if not isinstance(item, store.itemobject):
                 return False
 
+            if len(self.inventory.keys()) >= self.max:
+                return False
+
             try:
                 self.__dict__['inventory'][item.id]
                 self.__dict__['inventory'][item.id].count += item.count
@@ -123,5 +130,14 @@ init -200 python:
                 self.__dict__['inventory'][item.id]=item.copy()
                 self.__dict__['inventory'][item.id].count = item.count
 
-
             return True
+
+        def transfer(self,item_id,dst_id):
+        
+            item = self.item(item_id)
+            print item
+            
+            dst=globals()[dst_id]
+            dst.inventory[item_id] = item
+            self.drop(item_id)
+            

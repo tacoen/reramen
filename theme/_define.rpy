@@ -9,6 +9,7 @@ init -290 python:
 init -200 python:
 
     pt.nav_background="#112"
+    pt.notify_background="#111D"
 
     pt.font_text=pe.theme_path+'fonts/WorkSans-Regular.ttf'
     pt.font_label=pe.theme_path+'fonts/WorkSans-SemiBold.ttf'

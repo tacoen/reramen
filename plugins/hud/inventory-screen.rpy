@@ -1,34 +1,33 @@
-init -10 python:
+init -11 python:
 
-    inventory_ui =  ramen_object(
-        enable = False,
-        size=(464,480),
-        align=(0.9,0.5)
-    )
-    
-    ramen.res =[False,False,False,None,""]
+    pocket = inventory('pocket',max=16)
+    storage = inventory('storage',max=96)
+
+    ramen.res = [None, False, False, False ]
+
     
     ramen.labeloc={}
     ramen.labeloc['storage']=['ramen_test']
     ramen.labeloc['microwave']=['mc_kitchen']
     ramen.labeloc['pawn'] = ['pawn_shop']
 
-    def inventory_resnotify():
+    def inv_resnotify():
         msg = []
         res= ramen.res
         
-        if res[0]:
-            msg.append( str(res[3][0]) +" = "+ str(res[3][1]) )
+        if res[0] is not None:
+            msg.append( str(res[0]) )
         
         if res[1]:
-            msg.append( "- "+ res[4] )
-        else:
-            msg.append( res[4] )
-
-#        if res[2]:
-#            msg.append( res[4] + " depleted" )
+            icon = 'square-minus'
             
-        notify_ico("\n".join(msg),'logo-python')
+        if res[2]:
+            icon = 'square-x'
+
+        if res[3]:
+            msg.append( res[3][0] +" = "+ str(res[3][1]) )
+            
+        notify_ico("\n".join(msg),icon)
     
     def labeloc(what):
         try:
@@ -39,21 +38,18 @@ init -10 python:
         except:
             return False
     
-screen inventory_ui(inventory,size=(464,480),align=(0.9,0.3)):
+screen inventory_ui(inv, size=(880,480),align=(0.5,0.5)):
 
-    $ size = inventory_ui.size
-    $ align = inventory_ui.align
-    
     default item = None
-    
+    $ cnt = "("+ str(len(inv.inventory.keys())) +"/"+ str(inv.max) + ")"
     use modal('inventory_ui', \
-        Showtitle=True, title = inventory.id, closebutton=True,size=size,align=align ):
+        Showtitle=True, title = inv.id +cnt, closebutton=True,size=(size[0]+24,size[1]),align=align ):
         style_prefix "modal"
 
         if item is None:
-            use inventory_grid(inventory, size, align)
+            use inventory_grid(inv, size, align)
         else:
-            use inventory_detail( inventory, item, size, align)
+            use inventory_detail( inv, item, size, align)
 
 screen inventory_hbox(what,value):
     
@@ -62,14 +58,13 @@ screen inventory_hbox(what,value):
         text str(what) color "#666" min_width 120
         text str(value) xalign 1.0
         
-screen inventory_detail(inventory,item,size,align):
+screen inventory_detail(inv, item, size, align):
 
     python:
-        i = inventory.item(item)
-        ramen.inventory_pid = [inventory, i.id]
+        i = inv.item(item)
  
     hbox:
-        vbox xsize size[0]-148 :
+        vbox xsize size[0]-118 :
             
             hbox:
                 textbutton ico('arrow-left') style 'ramen_icon':
@@ -101,23 +96,20 @@ screen inventory_detail(inventory,item,size,align):
                         for e in effect:
                             use inventory_hbox(e.title(),i.effect[e])
             
-        vbox xsize 140 yfill True ysize size[1]-64:
+        vbox xsize 120 yfill True ysize size[1]-64:
             style_prefix "inventory_action"            
         
             add i.icon xalign 0.5
             
             vbox yalign 1.0 xalign 0.5:
-                spacing 8
+                spacing 10
                 $ action_text = i.require 
-            
-                if labeloc('store'):
-                    textbutton "Store"  action Null
             
                 if i.tradable and labeloc('pawn'):
 
                     textbutton "Sell" action [ 
-                        Function(inventory.sell,item_id=i.id,use_ramen=True),
-                        Function(inventory_resnotify),
+                        Function(inv.sell,item_id=i.id,use_ramen=True),
+                        Function(inv_resnotify),
                         SetScreenVariable('item',None)
                     ]
 
@@ -135,49 +127,71 @@ screen inventory_detail(inventory,item,size,align):
                 if action_text:
                     
                     textbutton action_text action [ 
-                        Function(inventory.use,item_id=i.id,use_ramen=True),
-                        Function(inventory_resnotify),
+                        Function(inv.use,item_id=i.id,use_ramen=True),
+                        Function(inv_resnotify),
                         SetScreenVariable('item',None)
                     ]
                 
+
+                if labeloc('storage') and inv.id == "pocket":
+                    
+                    null height 8
+                    
+                    textbutton "Store" action [ 
+                        Function(inv.transfer,item_id=i.id,dst_id='storage'),
+                        SetScreenVariable('item',None)
+                    ]                    
+
                 null height 8
                 
                 textbutton "Drop" action [ 
-                    Confirm("Drop "+i.name+" ?", [ Function(inventory.drop,item_id=i.id) ], None, True),
+                    Confirm("Drop "+i.name+" ?", [ Function(inv.drop,item_id=i.id) ], None, True),
                     SetScreenVariable('item',None)
                     ]
 
-
-
-   
-screen inventory_grid(inventory,size,align):
+screen inventory_grid(inv,size,align):
 
     python:
-        max = 16
         vp_height = size[1]-40
-        vp_width = size[0]-24
+        vp_width = size[0]
         cols = int( math.floor(vp_width/110) )
-        rows = int(max/cols)
+        rows = int(inv.max/cols)
+
+    if len(inv.inventory.keys()) <1:
+    
+        vbox:
+            ysize vp_height
+            xsize vp_width
             
-    vpgrid id "inventory_vp":
-        cols cols
-        rows rows
-        spacing 5
-        draggable True
-        mousewheel True
-        ysize vp_height
-        xsize vp_width
+            text "Empty" color "#333" xalign 0.5 yalign 0.5
+    
+    else:
+    
+        vpgrid id "inventory_vp":
+            cols cols
+            rows rows
+            spacing 5
+            draggable True
+            mousewheel True
+            ysize vp_height
+            xsize vp_width
        
-        for item in sorted(inventory()):
+            for item in sorted(inv()):
 
-            $ i = inventory.item(item)
+                python:
+                    i = inv.item(item)
+                    if i.count > 1:
+                        icon_count = Composite((100,100),(0,0),i.icon,\
+                            (75,75),Text(str(i.count),size=16,color='#111',min_width=25,xalign=0.5,yalign=0.5) )
+                    else:
+                        icon_count = i.icon
             
-            imagebutton action SetScreenVariable('item',item):
-                idle i.icon
-                hover Composite ((100,100),(0,0),Solid(pt.accent_color),(0,0),i.icon)
+                imagebutton action SetScreenVariable('item',item):
+                    idle icon_count
+                    hover Composite ((100,100),(0,0),Solid(pt.accent_color),(0,0),icon_count)
 
-    vbar value YScrollValue("inventory_vp"):
-        ysize vp_width-8
+        vbar value YScrollValue("inventory_vp"):
+            ysize vp_height-8
 
 
 style inventory_detail_text:
