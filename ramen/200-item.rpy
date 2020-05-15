@@ -112,7 +112,7 @@ init -200 python:
         def __new__(cls, id=None, *args, **kwargs):
             
             if id is None:
-                id = item+ "_" + str(ramen.uid())        
+                id = item+ "_" + str(ramu.uid())        
 
             id = ramu.safestr(id)
             

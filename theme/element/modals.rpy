@@ -212,10 +212,12 @@ screen modal_test():
 
 # Confirm
 
-screen confirm(message, yes_action, no_action):
+screen confirm(message, yes_action, no_action, timeout=None):
 
     # Ensure other screens do not get input while this screen is displayed.
-
+    layer 'dialog_layer'
+    zorder 200
+    
     use modal('confirm',
               closebutton=False, showtitle=False, size=(560, 200), padding=(24, 24, 24, 24), align=(0.5, 0.75)):
 
@@ -237,3 +239,7 @@ screen confirm(message, yes_action, no_action):
 
     # Right-click and escape answer "no".
     key "game_menu" action no_action
+    
+    if timeout is not None:
+    
+        timer timeout action[Hide('confirm'), no_action]

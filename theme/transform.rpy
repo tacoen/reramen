@@ -34,7 +34,7 @@ define config.window_show_transition = Dissolve(.2)
 define config.window_hide_transition = Dissolve(.2)
 
 
-init -11:
+init -200:
 
     transform FadeInterval(ms=1.0):
         on show:
@@ -54,3 +54,7 @@ init -11:
             pause (cycle - .4)
             repeat        
         
+    transform ramen_lb:
+        xalign 0.0
+        yalign 1.0
+        yoffset 24

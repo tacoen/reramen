@@ -5,9 +5,13 @@ init -10 python:
 
 screen action_shortcut(shortcuts):
 
-    layer 'screens'
+    layer 'hud'
     zorder 100
-
+    default shade = False
+    
+    if shade:
+        add ramu.ezfile2(pt.overlays)
+        
     vbox:
         yalign 0.7
         xalign 0.025
@@ -15,6 +19,7 @@ screen action_shortcut(shortcuts):
         for i in shortcuts:
             $ s = shortcuts[i]
             use shortcut(s['text'],s['action'],s['icon'])
+
 
 screen shortcut(text,action,icon):
 
@@ -24,6 +29,8 @@ screen shortcut(text,action,icon):
             action action
         textbutton text:
             action action
+            hovered [ SetScreenVariable('shade',True) ]
+            unhovered [ SetScreenVariable('shade',False) ]
 
 
 style shortcut_icon is ramen_icon

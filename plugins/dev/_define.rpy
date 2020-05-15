@@ -1,4 +1,13 @@
-init -80 python:
+init -290 python:
+
+    register_plugins (
+        title="ramen develope",
+        version="1.0",
+        author="tacoen",
+        author_url='https://github.com/tacoen/reramen',
+        desc="Developer Screens",
+        build=True
+    )
 
     rds = ramen_object()
 
@@ -11,6 +20,7 @@ init -80 python:
     
     rds.menu = ramen.objects
     rds.menu['tools']=['md']
+    rds.menu['tools'].append('plugins')
 
     rds.md_path = "E:/pp-renpy/ramen/wiki/"
     rds.game_path = "E:/pp-renpy/ramen/game/"

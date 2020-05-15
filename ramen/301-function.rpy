@@ -239,6 +239,24 @@ init -301 python:
 
             return  list(dict.fromkeys(F))
 
+        def sfx(self, file, path=None, ext=pe.ext_snd):
+ 
+            res = False
+            if path is not None:
+                search_in = [ path, pe.theme_path, 'audio' ]
+            else:
+                search_in = [ path, pe.theme_path, 'audio' ]
+                
+            for e in ext:
+                if res:
+                    break
+                for p in search_in:
+                    if renpy.loadable(p+"/"+file+e):
+                        res = p+"/"+file+e
+                        break
+            if res:             
+                renpy.sound.play(res,channel='sound')
+        
         def ezfile2(self, file, default=Color("#0019"), ext=pe.ext_img):
 
             for e in ext:

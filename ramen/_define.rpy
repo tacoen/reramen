@@ -27,6 +27,8 @@ init -302 python:
         'persist': False,
         'tradable': False,
     }
+    
+    pl = ramen_persistent('plugins')
 
 init -300 python:
 
@@ -44,7 +46,7 @@ init -300 python:
         persistent.files = sorted(renpy.list_files(False))    
     
     config.label_callback = ramu.labelcallback
-    config.layers = ['master', 'transient', 'ambient', 'hud', 'screens', 'overlay', 'overlay2', 'console', 'dialog_layer']
+    config.layers = ['master', 'transient', 'ambient', 'hud', 'screens', 'above_screens','overlay','overlay2', 'console', 'dialog_layer']
 
     
     

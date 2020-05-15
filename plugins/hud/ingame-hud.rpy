@@ -1,38 +1,5 @@
 init -10 python:
 
-    hud =  ramen_object(
-        pref = 0,
-        enable = False,
-        bgcolor = "#000",
-        fgcolor = "#fff",
-    )
-    
-    hud.maxpref = len(hud.bgcolor)
-    
-    hud.kdict('icons',
-    
-        pocket = { 
-            'icon': 'ico-wallet', 
-            'key': "K_F8", 
-            'action': ToggleScreen('inventory_ui',inv=pocket,size=(440,480),align=(0.9,0.4)),
-            'enable': True
-        },
-        
-        phone = { 
-            'icon': 'ico-phone', 
-            'key': "K_F9", 
-            'action': Null,
-            'enable': True
-        },
-        
-        map = { 
-            'icon': 'ico-map', 
-            'key': "shift_K_F9", 
-            'action': Null,
-            'enable': False
-        }
-    )
-
     style['hud']=Style('empty')
     style['hud_text'].antialias=True
     style['hud_text'].font=pt.font_ui_text
@@ -73,12 +40,16 @@ screen hud():
     zorder 99
     layer 'hud'
 
+    if hud.enable or shade:
+        add (pe.theme_path+'gui/top-shade.png') xalign 1.0 yalign 0.0 at FadeInterval(0.5)        
+
     hbox xalign 1.0 yalign 0.0:
         
         spacing 8
         style_prefix 'hud'
         
-        if hud.enable or shade:    
+        if hud.enable or shade:
+            
             use hud_time()
             use hud_cash()
  
@@ -105,22 +76,15 @@ screen hud():
             key k action a
             
     key "K_F10" action ToggleVariable('hud.enable')
-            
-    if shade:
-        timer 0.2 action Show('hud_shade')
-    else:
-        timer 0.2 action Hide('hud_shade')
     
     if hud.enable:
-        timer 0.4 action Show('hud_bar')
+        key "game_menu" action SetVariable('hud.enable',False)
+            
+    if hud.enable:
+        timer 0.2 action Show('hud_bar')
     else:
-        timer 0.4 action Hide('hud_bar')
+        timer 0.2 action Hide('hud_bar')
         
-screen hud_shade():
-    
-    zorder 33
-    add (pe.theme_path+'gui/top-shade.png') xalign 1.0 yalign 0.0 at FadeInterval(0.5)
-
 screen hud_cash():
     hbox xalign 1.0 ysize 72 yfill True:
         text ico('ico-cash') style 'hud_icon_text' size 18 yalign 0.5 color "#fffc"

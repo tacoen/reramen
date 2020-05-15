@@ -1,6 +1,7 @@
-init -11 python:
+init -12 python:
 
     pocket = inventory('pocket',max=16)
+    
     storage = inventory('storage',max=96)
 
     ramen.res = [None, False, False, False ]
@@ -37,7 +38,10 @@ init -11 python:
                 return False
         except:
             return False
-    
+
+screen inventory_storage():
+        use inventory_ui(storage)
+        
 screen inventory_ui(inv, size=(880,480),align=(0.5,0.5)):
 
     default item = None
