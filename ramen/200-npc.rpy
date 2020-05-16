@@ -97,12 +97,9 @@ init -200 python:
                 renpy.image('joan profile_pic', f)
            
                 for i in ['phone-incall', 'phone-outcall', 'phone-oncall']:
-                    
-                    temp_img =ramu.ezfile(pe.theme_path+'gui/'+i)
-                    
+                    temp_img =ramu.ezfile(pe.image_path+'side/'+i)
                     if temp_img is not None:
                         self.create_sideimage(f, temp_img, i, cut='phone-')
-            
             
             for f in files:
                 fn = ramu.file_info(f)

@@ -19,7 +19,9 @@ init python:
         'energy': ramu.random_int(5,11),
         'vital': ramu.random_int(5,11)
     }
-
+    
+    mc_name = mc.name
+    
     # lastname
     
     pe.native_name = ['Hilla','Bona','Ilary','Rumvurt','Onaria','Kani','Delani','Yonee','Muhbil','Picsa','Shinga','Pizda','Cikano','Olio','Siknius','Kisa','Pidhi','Kef']

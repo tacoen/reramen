@@ -72,11 +72,11 @@ init -301 python:
             if value > pe.limit[1]:
                 value = pe.limit[1]
             return value
-            
+
         def mouse(self):
             """Get Mouse pos, return (x,y)"""
             return pygame.mouse.get_pos()
-        
+
         def uid(self):
             """Return Next Unique id for object creations."""
             ramen.uidnumber += 1
@@ -239,14 +239,14 @@ init -301 python:
 
             return  list(dict.fromkeys(F))
 
-        def sfx(self, file, path=None, ext=pe.ext_snd):
- 
+        def sfx(self, file, path=None, ext=pe.ext_snd, **kwargs):
+
             res = False
             if path is not None:
                 search_in = [ path, pe.theme_path, 'audio' ]
             else:
                 search_in = [ path, pe.theme_path, 'audio' ]
-                
+
             for e in ext:
                 if res:
                     break
@@ -254,9 +254,9 @@ init -301 python:
                     if renpy.loadable(p+"/"+file+e):
                         res = p+"/"+file+e
                         break
-            if res:             
-                renpy.sound.play(res,channel='sound')
-        
+            if res:
+                renpy.sound.play(res, channel='sound', **kwargs)
+
         def ezfile2(self, file, default=Color("#0019"), ext=pe.ext_img):
 
             for e in ext:
@@ -333,3 +333,140 @@ init -301 python:
             )
 
             return p
+
+
+        def talk(self, **kwargs):
+            """
+            Let npc and mc do a chat.
+            
+            ### Keyword arguments:
+            
+            | # | Key | Description |
+            | --- | --- | --- |
+            | 0 | npc_id | npc.id to talk with |
+            | 1 | what | json topic / label |
+            | 2 | type | json or label |
+            | 3 | prefix | topic id / label prefix |
+            
+            #### Using Label
+            
+            ``` python
+            $ ramu.talk('rita','chat','label','phone')
+            ```
+            
+            Make a phone talk using label (fallback):
+            
+            * `if exist` rita.phone_chat
+            * `if exist` rita_chat
+            * `if exist` chat
+            
+            ``` python
+            
+            label rita:
+                ...
+                label .onphone_chat:
+                    rita "Let's chat!"
+                    mc "Ok!"
+                    return
+                    
+            ```
+            
+            #### Using Json file
+
+            ``` python
+            $ ramu.talk('rita','chat','json')
+            ```
+            
+            * file chat.json must on rita npc's path, `rita.json`
+            * if no prefix suplied, the line will be randomize
+            * In pairing. First Sayer is NPC, followed by MC. '' are muted.
+            
+            ``` chat.json
+            
+            {
+                "1": ["[mc_name]? Hello", "Yes, [rita.name].",	"See ya!", "Ok." ],
+                "2": ["What?", "Uh Nothing!" ],
+                "3": ["Hello","", "Say something...","","No?" ],
+            }
+            """
+            
+            try: kwargs['npc_id']
+            except: kwargs['npc_id']=False
+
+            try: kwargs['what']
+            except: kwargs['what']=None
+
+            try: kwargs['type']
+            except: kwargs['type']='label'
+
+            try: kwargs['prefix']
+            except: kwargs['prefix']=False
+
+            if kwargs['type'] == 'label':
+
+                if kwargs['npc_id']:
+
+                    if kwargs['prefix']:
+                        label = kwargs['npc_id'] + '.'+kwargs['prefix']+'_' + kwargs['what']
+                        if renpy.has_label(label):
+                            renpy.call_in_new_context(label)
+                            return True
+
+                    label = kwargs['npc_id'] + '_' + kwargs['what']
+                    if renpy.has_label(label):
+                        renpy.call_in_new_context(label)
+                        return True
+
+                    label = kwargs['what']
+                    if renpy.has_label(label):
+                        renpy.call_in_new_context(label)
+                        return True
+
+                else:
+
+                    label = kwargs['what']
+                    if renpy.has_label(label):
+                        renpy.call_in_new_context(label)
+                        return True
+            else:
+
+                try: jfile = npc_get(kwargs['npc_id'],'json')[kwargs['what']]
+                except: jfile=None
+
+                if jfile:
+                    dialogue = ramu.json_file(jfile)
+
+                    if not kwargs['prefix']:
+                        d = ramu.random_of(dialogue.keys())
+                    else:
+                        d = kwargs['prefix']
+
+                    npc = True
+                    who = character.__dict__[ kwargs['npc_id'] ]
+
+                    for line in dialogue[d]:
+                        if not npc:
+                            if not line == "":
+                                character.mc(line)
+                            npc = True
+                        else:
+                            if not line == "":
+                                who(line)
+                            npc = False
+
+                    return True
+
+                else:
+                    return False
+
+            return False
+
+        # json
+
+        def json_file(self, file):
+            with open(renpy.loader.transfn(file), 'r') as json_file:
+                return json.load(json_file)
+
+        def json_write(self, file, data):
+            with open(renpy.loader.transfn(file), 'w') as outfile:
+                json.dump(data, outfile)

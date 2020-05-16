@@ -7,6 +7,7 @@ init -302 python:
     pe = ramen_persistent('env')
     pe.theme_path = 'theme/'
     pe.plugins_path = 'plugins/'
+    pe.image_path = 'image/'
     pe.time_ico = ['moon2','moon3','sun1','sun2','sun2','sun3','moon1','moon2']
     pe.time_cond = ['dark','dark','sun1','sun2','sun2','sun3','dark','dark']
     pe.time_word = ['Midnight','Morning','Morning','Noon','Noon','Evening','Evening','Night']
@@ -30,6 +31,10 @@ init -302 python:
     
     pl = ramen_persistent('plugins')
 
+    mc = ramen_multipersistent('mc')
+    mc_name = 'You'
+    character.mc = Character('mc_name',dynamic=True,who_color='#ff0')
+
 init -300 python:
 
     ramentime = ramen_time()
@@ -39,8 +44,6 @@ init -300 python:
     ramen.objects = {}    
     ramen.items=object()
     ramen.seed = datetime.timedelta(0, 0)
-
-    mc = ramen_multipersistent('mc')
 
     if persistent.files is None or ramen.dev:
         persistent.files = sorted(renpy.list_files(False))    
