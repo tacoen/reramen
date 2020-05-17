@@ -208,15 +208,16 @@ init -80 python:
             import sys
             import inspect
 
-            tag = ['container', 'ramen_time', 'event', 'itemobject']
+            tag = ['container', 'ramen_time', 'event']
             cm = inspect.getmembers(sys.modules[__name__], inspect.isclass)
             ndx = []
 
             for c in cm:
+            
                 t1 = repr(c[1]) + repr(c[1].__bases__)
 
                 if 'ramen' in t1 or c[0] in tag:
-
+                
                     mdfile = 'class_' + str(c[0]).lower()
                     sts = "# " + str(c[0]) + "\n"
 
@@ -225,8 +226,9 @@ init -80 python:
                     doc = inspect.getdoc(c[1])
 
                     try:
-                        if 'ramen_object' in str(c[1].__bases__):
-                            sts += "Base: [[ramen_object]]\n"
+                        if 'ramen_' in str(c[1].__bases__):
+                            gname = str(c[1].__bases__).replace("(<class 'store.",'').replace("'>,)",'')
+                            sts += "Base: [[class_"+gname+"]]\n"
                     except BaseException:
                         pass
 
@@ -235,7 +237,7 @@ init -80 python:
 
                     for m in inspect.getmembers(c[1]):
 
-                        if not m[0].startswith('_') or m[0] == "__init__":
+                        if not m[0].startswith('__') or m[0] == "__init__":
 
                             try:
                                 pr = inspect.getargspec(c[1].__dict__[m[0]])

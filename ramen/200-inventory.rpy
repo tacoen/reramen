@@ -117,7 +117,7 @@ init -200 python:
                 
         def add(self, item):
 
-            if not isinstance(item, store.itemobject):
+            if not isinstance(item, store.ramen_item):
                 return False
 
             if len(self.inventory.keys()) >= self.max:

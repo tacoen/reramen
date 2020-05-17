@@ -31,7 +31,7 @@ init -11 python:
         phone = { 
             'icon': 'ico-phone', 
             'key': "K_F9", 
-            'action': Null,
+            'action': ToggleScreen('smphone_ui'),
             'enable': True
         },
         

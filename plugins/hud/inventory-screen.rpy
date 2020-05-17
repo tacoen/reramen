@@ -40,13 +40,14 @@ init -12 python:
             return False
 
 screen inventory_storage():
-        use inventory_ui(storage)
+    use inventory_ui(storage,(880,480),(0.5,0.5), name='inventory_storage')
         
-screen inventory_ui(inv, size=(880,480),align=(0.5,0.5)):
+screen inventory_ui(inv, size=(880,480), align=(0.5,0.5), name='inventory_ui'):
 
     default item = None
     $ cnt = "("+ str(len(inv.inventory.keys())) +"/"+ str(inv.max) + ")"
-    use modal('inventory_ui', \
+    
+    use modal(name, \
         Showtitle=True, title = inv.id +cnt, closebutton=True,size=(size[0]+24,size[1]),align=align ):
         style_prefix "modal"
 

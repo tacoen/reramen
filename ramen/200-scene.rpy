@@ -1,6 +1,6 @@
 init -200 python:
 
-    class scene(ramen_extendable):
+    class ramen_scene(ramen_extendable):
 
         def init(self,id=None,*args,**kwargs):
             self.define_byfile()

@@ -43,7 +43,7 @@ screen rds_win(obj,obj_type):
 
 screen rds_getasset(obj_type,obj):
 
-    if obj_type == 'itemobject':
+    if obj_type == 'ramen_item':
         $ asset = item(obj)()
     else:
         $ asset = globals()[obj]()
@@ -78,25 +78,41 @@ screen rds_side(obj_type):
         
         vbox:
 
+            use rds_side_menuitem('tools',obj_type)
+
             for t in rds.menu:
+            
+                if not t == 'tools':
+                    use rds_side_menuitem(t,obj_type)
 
-                python:
-                    if obj_type == t:
-                        this_icon = 'square-minus'
-                        this_action = [ SetScreenVariable('obj_type',None),SetScreenVariable('obj',None) ]
-                    else:
-                        this_icon = 'square-plus'
-                        this_action =  [ SetScreenVariable('obj_type',t), SetScreenVariable('obj',None) ]
+screen rds_side_menuitem(t,obj_type):
 
-                hbox xfill True:
-                    style_prefix 'rds'
-                    textbutton t:
-                        action this_action
-                    textbutton ico(this_icon) style 'rds_icon' xalign 1.0:
-                        action this_action
+    python:
 
-                if obj_type == t:
-                    use rds_obj_child(t)
+        if t.startswith('ramen_'):
+            st = t.replace('ramen_','')
+        else:
+            if t == 'tools':
+                st = 'Ramen Dev Tools'
+            else:
+                st = t
+
+        if obj_type == t:
+            this_icon = 'square-minus'
+            this_action = [ SetScreenVariable('obj_type',None),SetScreenVariable('obj',None) ]
+        else:
+            this_icon = 'square-plus'
+            this_action =  [ SetScreenVariable('obj_type',t), SetScreenVariable('obj',None) ]
+
+    hbox xfill True:
+        style_prefix 'rds'
+        textbutton st:
+            action this_action
+        textbutton ico(this_icon) style 'rds_icon' xalign 1.0:
+            action this_action
+
+    if obj_type == t:
+        use rds_obj_child(t)
 
 
 screen rds_obj_child(obj_type):

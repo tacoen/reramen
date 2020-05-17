@@ -1,9 +1,6 @@
 init -200 python:
 
-    def npc_get(id,what):
-        return globals()[id].get(what)
-        
-    class npc(ramen_extendable):
+    class ramen_npc(ramen_extendable):
 
         def init(self,id=None,*args,**kwargs):
         

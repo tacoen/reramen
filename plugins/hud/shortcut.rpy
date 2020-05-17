@@ -5,8 +5,6 @@ init -10 python:
 
 screen action_shortcut(shortcuts):
 
-    layer 'hud'
-    zorder 100
     default shade = False
     
     if shade:

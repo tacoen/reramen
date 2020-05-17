@@ -13,25 +13,25 @@ init -303 python:
         def __init__(self,**kwargs):
             self.kdict(**kwargs)
 
-        def get(self,key):
+        def _get(self,key):
             try: return self.__dict__[key]
             except: return None
 
-        def set(self,key,value):
+        def _set(self,key,value):
             self.__dict__[str(key)]=value
 
         def kdict(self,key=None,**kwargs):
             if key is None:
                 for k in kwargs:
-                    self.set(str(k),kwargs[k])
+                    self._set(str(k),kwargs[k])
             else:
-                self.set(str(key),kwargs)
+                self._set(str(key),kwargs)
 
         def __getattr__(self,key):
-            return self.get(key)
+            return self._get(key)
 
         def __setattr__(self,key,value):
-            self.set(key,value)
+            self._set(key,value)
 
         def __repr__(self):
             return '<'+self.__module__+":"+self.__class__.__name__+'>'
@@ -91,11 +91,11 @@ init -303 python:
 
             self.kdict(**kwargs)
 
-        def get(self,key):
+        def _get(self,key):
             try: return persistent.ramen[self.id][key]
             except: return False
 
-        def set(self,key,value):
+        def _set(self,key,value):
             """Only Set if ramen.dev is True"""
             
             try: 
@@ -147,10 +147,10 @@ init -303 python:
 
             self.kdict(**kwargs)
 
-        def set(self,key,value):
+        def _set(self,key,value):
             multipersistent.__dict__[self.id][str(key)] = value
 
-        def get(self,key):
+        def _get(self,key):
             return multipersistent.__dict__[self.id][key]
 
         def __call__(self):
@@ -162,17 +162,21 @@ init -303 python:
     class ramen_extendable(ramen_object):
 
         def __init__(self, id=None, *args, **kwargs):
+            """ramen_object extended with `id` and `dir`, and can be chained with `init`"""
             self.makeid(id)
-            self.register()
-            self.kdict(**kwargs)
+            self.ro_register()
             self.setdir(ramu.getdir())
+
+            self.kdict(**kwargs)
             self.init(id, *args, **kwargs)
 
-        def register(self):
+        def ro_register(self):
+            """ all ramen_extendable object are registered on `ramen.object`"""
             try: ramen.objects[self.__class__.__name__]
             except: ramen.objects[self.__class__.__name__]=[]
             ramen.objects[self.__class__.__name__].append(self.id)
 
         def extend(self):
+            """extend the ramen_object to the directory"""
             self.setdir(ramu.getdir())
 

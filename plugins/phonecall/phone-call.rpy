@@ -1,5 +1,14 @@
-init -100 python:
+init -101 python:
 
+    register_plugins (
+        title="phone call",
+        version="1.0",
+        author="tacoen",
+        author_url='https://github.com/tacoen/reramen',
+        desc="telephone function",
+        build=True
+    )
+    
     # For phone calls
     
     class ramen_phonecall():
@@ -15,10 +24,10 @@ init -100 python:
             """
             
             ramen.backto = ramen.last_label
-            ramu.sfx('phone-ring', plugin('phone')['dir'],loop=3,fadeout=1,fadein=0)
+            ramu.sfx('phone-ring', plugin('phonecall')['dir'],loop=3,fadeout=1,fadein=0)
 
-            npc_name = npc_get(npc_id,'name')
-            npc_phonenum = npc_get(npc_id,'phonenum')
+            npc_name = ramu.npc(npc_id,'name')
+            npc_phonenum = ramu.npc(npc_id,'phonenum')
             color = "#113"
         
             prefix = "{icon=phone-incoming} Incoming call \n"+npc_name+" ("+npc_phonenum+")\n\n"
@@ -50,8 +59,8 @@ init -100 python:
     
             ramen.backto = ramen.last_label
 
-            npc_name = npc_get(npc_id,'name')
-            npc_phonenum = npc_get(npc_id,'phonenum')
+            npc_name = ramu.npc(npc_id,'name')
+            npc_phonenum = ramu.npc(npc_id,'phonenum')
 
             renpy.show(
                 "side "+npc_id+" outcall",
@@ -109,14 +118,14 @@ init -100 python:
         def cb_dialing(self, event, interact=False, **kwargs):
             """Provide callback function for `phone_dialing`."""
             if event == "show_done":
-                ramu.sfx('phone-dial',plugin('phone')['dir'])
+                ramu.sfx('phone-dial',plugin('phonecall')['dir'])
             elif event == "end":
                 renpy.sound.stop()
 
         def cb_hangup(self, event, interact=False, **kwargs):
             """Provide callback function for `phone_hangup`."""
             if event == "show_done":
-                ramu.sfx('phone-close',plugin('phone')['dir'])
+                ramu.sfx('phone-close',plugin('phonecall')['dir'])
             elif event == "end":
                 renpy.sound.stop()
              

@@ -1,7 +1,7 @@
 init -200 python:
 
-    class itemobject(object):
-        """itemobject handler class"""
+    class ramen_item(object):
+        """ramen_item handler class"""
         
         def __init__(self,id,**kwargs):
         
@@ -30,22 +30,22 @@ init -200 python:
                     res[k] = pe.itemd[k]
             return res
             
-        def set(self, key, value):
+        def _set(self, key, value):
             if key in pe.itemd.keys():
                 self.__dict__[key] = value
 
         def __setattr__(self, key, value):
-            self.set(key, value)
+            self._set(key, value)
 
-        def get(self, key):
+        def _get(self, key):
             try:
                 return self.__dict__[key]
             except BaseException:
                 return None
 
         def __getattr__(self, key):
-            if self.get(key) is not None:
-                return self.get(key)
+            if self._get(key) is not None:
+                return self._get(key)
             else:
                 try:
                     return pe.itemd[key]
@@ -63,8 +63,7 @@ init -200 python:
             Put your icon_img.png within the directory where the item being define or set the `dir`.
             """
             
-            
-            icon = self.get('img')
+            icon = self._get('img')
 
             if icon is None:
                 icon = ramu.ezfile(self.dir + self.id)
@@ -116,4 +115,4 @@ init -200 python:
 
             id = ramu.safestr(id)
             
-            ramen.items.__dict__[id] = itemobject(id,**kwargs)
+            ramen.items.__dict__[id] = ramen_item(id,**kwargs)

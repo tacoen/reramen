@@ -145,7 +145,7 @@ screen modal(screenname, **kwargs):
             ysize size[1]
 
         if closebutton:
-            textbutton ico('close') style 'modal_closebutton' action Hide(screenname)
+            textbutton ico('close') style 'modal_closebutton' action ToggleScreen(screenname)
 
         if showtitle:
             label title.title()
@@ -204,11 +204,6 @@ screen modal_input(**kwargs):
                 xminimum xin
 
             add ramu.hline((xin, 1), "#666")
-
-
-screen modal_test():
-    textbutton "modal" xalign 0.3 yalign 0.0 action ToggleScreen('modal_display', text=renpy.license, showtitle=True, title='modal display demo')
-
 
 # Confirm
 

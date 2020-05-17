@@ -66,6 +66,14 @@ init -301 python:
 
     class ramen_util():
 
+        def npc(self, npc_id, what):
+            if type(globals()[npc_id]) is not ramen_npc:
+                return False
+            
+            try: return globals()[npc_id]._get(what)
+            except: return None
+                
+                
         def limits(self, value):
             if value < pe.limit[0]:
                 value = pe.limit[0]
@@ -78,14 +86,16 @@ init -301 python:
             return pygame.mouse.get_pos()
 
         def uid(self):
+            
             """Return Next Unique id for object creations."""
+            
             ramen.uidnumber += 1
             return "{:03d}".format(ramen.uidnumber)
 
         def makeobj(self, args, **kwargs):
             obj = object()
             obj.__dict__= kwargs
-            if isinstance(args,type({})):
+            if isinstance(args,(type(self.__dict__),type({}))):
                 for a in args:
                     obj.__dict__[str(a)]=args[a]
             return obj
@@ -239,21 +249,25 @@ init -301 python:
 
             return  list(dict.fromkeys(F))
 
+        def random_files(self, dir=False, key=False, ext=pe.ext_img):
+            files = self.files(dir,key,ext)
+            return self.random_of(files)
+        
         def sfx(self, file, path=None, ext=pe.ext_snd, **kwargs):
 
             res = False
             if path is not None:
                 search_in = [ path, pe.theme_path, 'audio' ]
             else:
-                search_in = [ path, pe.theme_path, 'audio' ]
+                search_in = [ pe.theme_path, 'audio' ]
 
             for e in ext:
-                if res:
-                    break
                 for p in search_in:
                     if renpy.loadable(p+"/"+file+e):
                         res = p+"/"+file+e
                         break
+                if res:
+                    break
             if res:
                 renpy.sound.play(res, channel='sound', **kwargs)
 
@@ -377,7 +391,8 @@ init -301 python:
             $ ramu.talk('rita','chat','json')
             ```
             
-            * file chat.json must on rita npc's path, `rita.json`
+            * file chat.json must on rita npc's path, 
+            * `rita.json` must return that file
             * if no prefix suplied, the line will be randomize
             * In pairing. First Sayer is NPC, followed by MC. '' are muted.
             
@@ -388,6 +403,9 @@ init -301 python:
                 "2": ["What?", "Uh Nothing!" ],
                 "3": ["Hello","", "Say something...","","No?" ],
             }
+            
+            ```
+            
             """
             
             try: kwargs['npc_id']
@@ -430,7 +448,7 @@ init -301 python:
                         return True
             else:
 
-                try: jfile = npc_get(kwargs['npc_id'],'json')[kwargs['what']]
+                try: jfile = ramu.npc(kwargs['npc_id'],'json')[kwargs['what']]
                 except: jfile=None
 
                 if jfile:
