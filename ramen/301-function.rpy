@@ -66,6 +66,23 @@ init -301 python:
 
     class ramen_util():
 
+        def pay(self,m,src,ret=False):
+            if src > m:
+                src -= m
+                res= True
+            else:
+                res= False
+                
+            if ret:
+                return res
+
+        def gain(self,m,src,ret=False):
+            src += m
+            res = True
+            
+            if ret:
+                return res                
+                
         def npc(self, npc_id, what):
             if type(globals()[npc_id]) is not ramen_npc:
                 return False

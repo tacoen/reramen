@@ -7,6 +7,16 @@ init -20 python:
     )
 
 
+screen smphone_apps_relation():
+
+        use smphone_viewport('test','#600'):
+
+            vbox:
+                spacing 16
+                text renpy.license color "#000" size 20
+                text renpy.license color "#000"
+                text renpy.license color "#000" size 18
+
 # #init python:
 
 # #    mcph.update_app({

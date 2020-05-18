@@ -2,6 +2,8 @@ init -202 python:
 
     pt.about.append('Feather Icon (C) Cole Bemis. License MIT')
 
+    # Delete persistent if you made a change!
+    
     if persistent.icon is None:
 
         persistent.icon = {
@@ -49,6 +51,7 @@ init -202 python:
             'key-forward': u'\x50',
             'key-pause': u'\x41',
             'key-play': u'\x53',
+            'list': u'\x7c',
             'log-down': u'\x44',
             'log-in': u'\x29',
             'log-in2': u'\x46',
@@ -65,6 +68,8 @@ init -202 python:
             'moon3': u'\x56',
             'more-horizontal': u'\x42',
             'more-vertical': u'\x4e',
+            'msg-forward': u'\x3d',
+            'msg-reply': u'\x2b',
             'phone': u'\x4d',
             'phone-call': u'\x2c',
             'phone-incoming': u'\x2e',
@@ -84,9 +89,11 @@ init -202 python:
             'terminal': u'\xe901',
             'toggle-left': u'\x38',
             'toggle-right': u'\x39',
+            'trash-1': u'\x2d',
+            'trash-0': u'\x5f',
             'volume-off': u'\x30',
             'volume-on': u'\x60',
-            'volume-x': u'\x7e'
+            'volume-x': u'\x7e',
         }
     
     def ico(what=None, say=False):

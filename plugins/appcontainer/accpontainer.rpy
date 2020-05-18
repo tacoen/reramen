@@ -24,9 +24,17 @@ init -290 python:
                 what = os.path.basename(renpy.get_filename_line()[0]).replace('.rpy','')
                 
             what = what.lower().strip()
+
+            try: kwargs['dir']
+            except: kwargs['dir'] = ramu.getdir()
             
             try: kwargs['icon']
-            except: kwargs['icon'] = ramu.ezfile2(ramu.getdir()+"icon")
+            except: 
+                icon = ramu.ezfile(ramu.getdir()+what)
+                if icon is not None:
+                    kwargs['icon']=icon
+                else:
+                    kwargs['icon'] = ramu.ezfile2(ramu.getdir()+"icon")
 
             try: kwargs['order']="{:03d}".format(kwargs['order'])
             except: kwargs['order']=ramu.uid()
@@ -37,6 +45,10 @@ init -290 python:
                     ramen.active_apps[self.id] = list(ramen.active_apps[self.id])
             except:
                 kwargs['active'] = False
+
+            try: kwargs['title']
+            except:
+                kwargs['title'] = what.title()
                 
             try: kwargs['start']
             except:
@@ -58,4 +70,3 @@ init -290 python:
             else:
                 try: self.apps()[what][attr]
                 except: return None
-                

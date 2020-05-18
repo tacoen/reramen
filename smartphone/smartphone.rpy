@@ -41,7 +41,33 @@ init -190 python:
     smphone.rows = 5
     smphone.grid_height = (smphone.icon_size[0]+(2*smphone.spacing)) * smphone.rows
     smphone.init_pos = (67, 85)
-    
+
+    style['smphone_default_text']=Style('ramen_gui')
+    style['smphone_default_text'].color="#222"
+    style['smphone_default_text'].size=24
+
+    style['smphone_default_vbox']=Style('vbox')
+    style['smphone_default_vbox'].xsize=style['smphone_frame'].size[0]-32
+
+    style['smphone_default_hbox']=Style('hbox')
+    style['smphone_default_hbox'].xfill=True
+    style['smphone_default_hbox'].yalign=0.0
+
+    style['smphone_default_label_text']=Style('smphone_default_text')
+    style['smphone_default_label_text'].color="#666"
+    style['smphone_default_label_text'].size=20
+
+    style['smphone_default_button']=Style('ramen_button_large')
+    style['smphone_default_button'].background="#ccc"
+    style['smphone_default_button'].hover_background="#999"
+    style['smphone_default_button'].xalign=0.5
+    style['smphone_default_button'].yalign=0.5
+
+    style['smphone_default_button_text']=Style('ramen_gui')
+    style['smphone_default_button_text'].color="#333"
+    style['smphone_default_button_text'].hover_color="#fff"
+
+
 init -9:
 
     screen smphone_window():
@@ -53,7 +79,9 @@ init -9:
     screen smphone_ui():
 
         default apps = None
-        
+        default var = None
+        default page = None
+
         layer 'screens'
         zorder 102
         style_prefix 'smphone'
@@ -63,18 +91,17 @@ init -9:
             if apps is None:
                 use smphone_launcher()
             else:
-            
+
                 python:
                     scr = smphone.apps()[apps]['start']
                     if renpy.has_screen(scr):
-                        print scr
-                        renpy.use_screen(scr)
+                        renpy.use_screen(scr,var=var,page=page)
                     else:
                         scr = False
 
                 if not scr:
-                
-                    text 'not yet'
+
+                    text '404'
 
         key "game_menu" action ToggleScreen('smphone_ui')
 
@@ -93,7 +120,7 @@ init -9:
             spacing smphone.spacing
 
             for a in sorted(ramen.active_apps['smphone']):
-            
+
                 python:
                     a = re.sub(r'^\d+\:','',a)
                     app = ramu.makeobj(smphone.apps()[a])
@@ -106,16 +133,16 @@ init -9:
                         hover im.MatrixColor(app.icon, im.matrix.brightness(0.2))
                     textbutton a action SetScreenVariable('apps',a)
 
-    screen smphone_viewport():
-        
+    screen smphone_viewport(title,hcolor):
+
         frame xpos 0 ypos 0 style 'smphone_frame' background "#fff" padding(0,0,0,0):
             vbox:
-                frame background "#f00" xsize 1.0 ysize 32 padding (4,4,4,4):
+                frame background hcolor xsize 1.0 ysize 32 padding (4,4,4,4):
                     hbox ysize 32 xfill True:
-                        text 'title' bold True size 20
+                        text title size 16
                         textbutton ico('close') style 'ramen_icon' :
-                            xalign 1.0 
-                            text_size 20 
+                            xalign 1.0
+                            text_size 20
                             text_line_leading -2
                             action SetScreenVariable('apps',None)
 
@@ -126,19 +153,9 @@ init -9:
                 xsize style['smphone_frame'].size[0]-24
                 draggable True
                 mousewheel True
-                
+
                 transclude
 
             vbar value YScrollValue('smphone_viewport'):
                 ypos 32 xalign 1.0 ysize style['smphone_frame'].size[1]-48
 
-
-    screen smphone_apps_relation():
-    
-        use smphone_viewport():
-            
-            vbox:
-                spacing 16
-                text renpy.license color "#000" size 20
-                text renpy.license color "#000"
-                text renpy.license color "#000" size 18            

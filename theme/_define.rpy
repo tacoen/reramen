@@ -104,6 +104,9 @@ init -199 python:
     style['vscrollbar'].base_bar=Color('#eee').opacity(.3)
 
     style['ramen_icon']=Style('button')
+    
+    style['hbox']=Style('default')
+    style['vbox']=Style('default')
 
     style['ramen_icon_text']=Style('default')
     style['ramen_icon_text'].font=pt.font_ui_ico
