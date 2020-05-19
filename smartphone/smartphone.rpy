@@ -15,7 +15,7 @@ init -190 python:
 
     style['smphone_frame'].background ="#678"
     style['smphone_frame'].pos = (67,85)
-    style['smphone_frame'].size = (327,551)
+    style['smphone_frame'].size = (327,550)
     style['smphone_frame'].padding=(8,8,8,8)
 
     style['smphone_ico_button']=Style('button')
@@ -73,7 +73,7 @@ init -9:
     screen smphone_window():
 
         window:
-            frame pos smphone.init_pos xsize 327 ysize 551 background smphone.wallpaper:
+            frame pos smphone.init_pos xsize 327 ysize 550 background smphone.wallpaper:
                 transclude
 
     screen smphone_ui():
@@ -87,7 +87,6 @@ init -9:
         style_prefix 'smphone'
 
         use smphone_window():
-
             if apps is None:
                 use smphone_launcher()
             else:
@@ -112,13 +111,15 @@ init -9:
     screen smphone_launcher():
 
         text ramentime.clock() style  'smphone_clock'
+        
 
+        
         vpgrid id "smphone_launcher":
-            ypos style['smphone_frame'].size[1] - smphone.grid_height
+            ypos style['smphone_frame'].size[1] - smphone.grid_height - 32
             cols smphone.cols
             rows smphone.rows
             spacing smphone.spacing
-
+            
             for a in sorted(ramen.active_apps['smphone']):
 
                 python:

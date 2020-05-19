@@ -4,34 +4,60 @@ init -20 python:
         dir = ramu.getdir(),
         active=True,
         order=9,
+        stat = {
+            'relation':'#c22',
+            'trust':'#fc3',
+            'like':'#93C',
+            }
     )
 
+    style['smphone_bar']=Style('bar')
+    style['smphone_bar'].ysize= 10
+        
+    for s in smphone.apps()['relation']['stat'].keys(): 
+        color = smphone.apps()['relation']['stat'][s]
+        style['smphone_bar_'+s]=Style('smphone_bar')
+        style['smphone_bar_'+s].thumb = color
+        style['smphone_bar_'+s].base_bar = Color(color).tint(0.4)
+        style['smphone_bar_'+s].left_bar = color
+        
+        
+screen smphone_apps_relation(var,page):
 
-screen smphone_apps_relation():
+    python:
+        app = ramu.makeobj( smphone.apps()['relation'] )
+        app.width = style['smphone_default_vbox'].xmaximum
+        app.bar_width = style['smphone_default_vbox'].xmaximum -(2*8)-96-8
+        app.minibar_width = style['smphone_default_vbox'].xmaximum -(2*8)-96-8
+    
+    
+    use smphone_viewport(app.title,app.hcolor):
 
-        use smphone_viewport('test','#600'):
+        vbox:
+            spacing 16
+            style_prefix "smphone_default"
+            for p in mc.rel:
+                
+                hbox:
+                    spacing 8
+                    add im.Scale( ramu.npc(p,'profile_pic'),96,96 )
+                    
+                    vbox:
+                        spacing 8
+                        
+                        text ramu.npc(p,'name')+ " " + ramu.npc(p,'lastname')
+                        
+                        for s in sorted(app.stat.keys()):
+                            python:
+                                try: val = mc.rel[p][s]
+                                except: val = 0
+                                
+                            vbox:
+                                text s.title() size 14
+                                bar range 20 value val style 'smphone_bar_'+s xsize app.minibar_width
+                            
 
-            vbox:
-                spacing 16
-                text renpy.license color "#000" size 20
-                text renpy.license color "#000"
-                text renpy.license color "#000" size 18
 
-# #init python:
-
-# #    mcph.update_app({
- # #       'title': 'Relations',
-  # #      'hcolor': '#222',
-   # # })
-
-# init -1 python:
-
-    # smp.index_update(
-        # title='Relations',
-        # hcolor='#92A',
-        # order=1,
-        # bgr="#ffd"
-    # )
 
 # screen smp_app_relationme():
 

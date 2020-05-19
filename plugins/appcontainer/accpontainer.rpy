@@ -39,6 +39,9 @@ init -290 python:
             try: kwargs['order']="{:03d}".format(kwargs['order'])
             except: kwargs['order']=ramu.uid()
             
+            try: kwargs['hcolor']
+            except: kwargs['hcolor'] = ramu.random_color(0,168)
+            
             try: 
                 if kwargs['active']:
                     ramen.active_apps[self.id].append(kwargs['order']+":"+what)
