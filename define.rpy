@@ -1,7 +1,7 @@
 init -300 python:
 
     # Set True to enable developer options
-    ramen.dev = False
+    ramen.dev = True
     
     # Game Title
     config.name = _("ramen")
