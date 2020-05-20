@@ -4,8 +4,8 @@ screen rdsa_tools_plugins():
 
     vbox:
         spacing 16
-        for p in ramen.plugins.__dict__.keys():
-            $ pl = ramen.plugins.__dict__[p]
+        for p in pp.plugins.keys():
+            $ pl = plugin(p)
 
             vbox:
                 spacing 2

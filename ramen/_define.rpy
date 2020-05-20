@@ -56,8 +56,7 @@ init -302 python:
     pl = ramen_persistent('plugins')
 
     mc = ramen_multipersistent('mc')
-    mc_name = 'You'
-    character.mc = Character('mc_name', dynamic=True, who_color='#ff0')
+
 
 init -300 python:
 
@@ -68,8 +67,9 @@ init -300 python:
     ramen.items = object()
     ramen.seed = datetime.timedelta(0, 0)
 
-    ramen.smphone = False 
-    
+    ramen.smphone = False
+    ramen.episode_menu = False
+
     if persistent.files is None or ramen.dev:
         persistent.files = sorted(renpy.list_files(False))
 
@@ -82,3 +82,45 @@ init -300 python:
         'overlay2',
         'console',
         'dialog_layer']
+
+
+init -100 python:
+
+    mc_name = 'You'
+    character.mc = Character('mc_name', dynamic=True, who_color='#ff0')
+
+    narrator = Character(None, window_background="#0000",
+                         what_xalign=0.5, what_color="#ddf", what_outlines=pt.bold_outlines
+                         )
+
+    chapter = Character(None,
+                        window_xalign=0.9,
+                        window_yalign=0.9,
+                        window_xsize=0.9,
+                        window_ysize=None,
+                        window_padding=(0, 0, 0, 0),
+                        window_background="#0000",
+                        what_xalign=1.0,
+                        what_yalign=1.0,
+                        what_color="#fff",
+                        what_size=48,
+                        what_font=pt.font_ui_title,
+                        what_prefix="{cps=80}",
+                        what_suffix="{/cps}",
+                        )
+
+    caption = Character(None,
+                        window_xalign=0.05,
+                        window_yalign=0.85,
+                        window_xsize=config.screen_width / 2,
+                        window_ysize=None,
+                        window_padding=(0, 0, 0, 0),
+                        window_background="#FFCC33DD",
+                        what_xalign=0.0,
+                        what_yalign=1.0,
+                        what_xpos=24,
+                        what_xsize=(config.screen_width / 2) - 48,
+                        what_color="#000",
+                        what_prefix="{vspace=24}{size=-1}{cps=80}",
+                        what_suffix="{/cps}{/size}{vspace=0}",
+                        )

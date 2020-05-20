@@ -1,15 +1,31 @@
 init -299 python:
 
-    ramen.plugins = object()
+    pp = ramen_persistent('extend')
+    
+    pp.plugins = {}
+    pp.episodes = {}
+    pp.asset = {}
 
-    def plugin(what):
+    def plugin(what,type='plugins'):
+        """Load plugins-information"""
         try:
-            return ramen.plugins.__dict__[what]()
+            obj = object()
+            if type == 'episodes':
+                obj.__dict__ = pp.episodes[what]
+            elif type == 'asset':
+                obj.__dict__ = pp.asset[what]
+            else:
+                obj.__dict__ = pp.plugins[what]
+            return obj
         except BaseException:
             return False
 
     class register_plugins(object):
         """
+        Ramen plugins can be screen, function, class, or assets.
+        Registered plugins can be included into your distributions as archive `.rpa`
+        
+        **If you not registered the plugin, it will works just like a normal ren'py scripts.**
         
         ``` python
         register_plugins(
@@ -24,7 +40,8 @@ init -299 python:
         ```
         """
         
-        def __new__(self, id=None, *args, **kwargs):
+        def __new__(self, id=None, type='plugins', *args, **kwargs):
+
 
             try:
                 kwargs['dir']
@@ -50,9 +67,9 @@ init -299 python:
                 kwargs['author'] = None
 
             try:
-                kwargs['author_url']
+                kwargs['url']
             except BaseException:
-                kwargs['author_url'] = None
+                kwargs['url'] = None
 
             try:
                 kwargs['title']
@@ -69,19 +86,41 @@ init -299 python:
             except BaseException:
                 kwargs['build'] = False
 
+            if not type in ['plugins','episodes','asset']:
+                type = 'plugins'
+
             try:
-                ramen.plugins.__dict__[id]
+                persistent.ramen['extend'][type]
             except BaseException:
-                ramen.plugins.__dict__[id] = ramen_object()
+                persistent.ramen['extend'][type]={}
+
+            try:
+                persistent.ramen['extend'][type][id]
+            except BaseException:
+                persistent.ramen['extend'][type][id]={}
 
             for k in kwargs:
-                ramen.plugins.__dict__[id]._set(k,kwargs[k])
+                persistent.ramen['extend'][type][id][k]=kwargs[k]
                 
 
     def ramen_plugins_build():
     
-        for p in ramen.plugins.__dict__:
-            if plugin(p)['build']:
+        for p in pp.plugins.keys():
+            if plugin(p).build:
             
                 build.archive('plugin_'+ramu.safestr(p), "all")
-                build.classify('game/'+plugin(p)['dir']+'**', 'plugin_'+ramu.safestr(p) )
+                build.classify('game/'+plugin(p).dir+'**', 'plugin_'+ramu.safestr(p) )
+
+init -1 python:
+
+    if not pp.episodes.keys() != []:
+        ramen.episode_menu = True
+    else:
+        ramen.episode_menu = False
+
+
+screen ramen_episodes_menu():
+
+    tag menu
+
+    use file_slots(_("Load"))

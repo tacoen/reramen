@@ -513,8 +513,11 @@ init -301 python:
         # json
 
         def json_file(self, file):
-            with open(renpy.loader.transfn(file), 'r') as json_file:
-                return json.load(json_file)
+            try:
+                with open(renpy.loader.transfn(file), 'r') as json_file:
+                    return json.load(json_file)
+            except: 
+                return {'0':['Hi, please tell the developer, that his JSON file was invalid.']}
 
         def json_write(self, file, data):
             with open(renpy.loader.transfn(file), 'w') as outfile:

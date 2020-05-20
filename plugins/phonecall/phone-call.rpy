@@ -29,7 +29,7 @@ init -101 python:
             ramen.backto = ramen.last_label
             ramu.sfx(
                 'phone-ring',
-                plugin('phonecall')['dir'],
+                plugin('phonecall').dir,
                 loop=3,
                 fadeout=1,
                 fadein=0)
@@ -141,14 +141,14 @@ init -101 python:
         def cb_dialing(self, event, interact=False, **kwargs):
             """Provide callback function for `phone_dialing`."""
             if event == "show_done":
-                ramu.sfx('phone-dial', plugin('phonecall')['dir'])
+                ramu.sfx('phone-dial', plugin('phonecall').dir)
             elif event == "end":
                 renpy.sound.stop()
 
         def cb_hangup(self, event, interact=False, **kwargs):
             """Provide callback function for `phone_hangup`."""
             if event == "show_done":
-                ramu.sfx('phone-close', plugin('phonecall')['dir'])
+                ramu.sfx('phone-close', plugin('phonecall').dir)
             elif event == "end":
                 renpy.sound.stop()
 

@@ -1,7 +1,10 @@
 init -10 python:
 
-    def action_shortcut(shortcuts):
-        renpy.show_screen('action_shortcut', shortcuts=shortcuts)
+    def action_shortcut(shortcuts=False):
+        if not shortcuts:
+            renpy.hide_screen('action_shortcut')
+        else:
+            renpy.show_screen('action_shortcut', shortcuts=shortcuts)
 
 screen action_shortcut(shortcuts):
 

@@ -13,6 +13,9 @@ init python:
 
     build.name = ramu.safestr(config.name)
 
+    # False will force disable ramen episodes menu
+    # ramen.episodes_menu = False
+
     # starting stats
 
     mc.money = ramu.random_int(120, 190)

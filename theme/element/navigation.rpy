@@ -28,11 +28,15 @@ screen navigation():
             if main_menu:
                 use navigation_hbox("New Game", Start('ramen_newgame'))
 
+                if ramen.episode_menu:
+                    use navigation_hbox("Episodes", ShowMenu("ramen_episodes_menu"), "menu1")
+
+
             else:
                 use navigation_hbox("History", ShowMenu("history"))
                 if _in_replay:
                     use navigation_hbox("End Replay", EndReplay(confirm=True))
-
+            
             use navigation_hbox("Load", ShowMenu("load"), "folder")
 
             if not main_menu:
