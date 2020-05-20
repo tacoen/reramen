@@ -1,4 +1,4 @@
-init offset=-10
+init offset = -10
 
 image white = Solid('#eee')
 image black = Solid('#111')

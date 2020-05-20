@@ -1,6 +1,6 @@
 screen confirm1(message, yes_action, no_action):
 
-    ## Ensure other screens do not get input while this screen is displayed.
+    # Ensure other screens do not get input while this screen is displayed.
     modal True
 
     zorder 200
@@ -27,6 +27,5 @@ screen confirm1(message, yes_action, no_action):
                 textbutton _("Yes") action yes_action
                 textbutton _("No") action no_action
 
-    ## Right-click and escape answer "no".
+    # Right-click and escape answer "no".
     key "game_menu" action no_action
-

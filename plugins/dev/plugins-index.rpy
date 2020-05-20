@@ -6,17 +6,17 @@ screen rdsa_tools_plugins():
         spacing 16
         for p in ramen.plugins.__dict__.keys():
             $ pl = ramen.plugins.__dict__[p]
-            
+
             vbox:
                 spacing 2
-                use hbox_line('Plugins',pl.title.title())
-                use hbox_line('',p+"("+pl.version+")")
-                use hbox_line("",pl.desc)
-                use hbox_line('Author',pl.author)
+                use hbox_line('Plugins', pl.title.title())
+                use hbox_line('', p + "(" + pl.version + ")")
+                use hbox_line("", pl.desc)
+                use hbox_line('Author', pl.author)
                 if pl.url is not None:
-                    use hbox_line('Author',"{a="+pl.author+"}"+pl.url+"{/a}")
+                    use hbox_line('Author', "{a=" + pl.author + "}" + pl.url + "{/a}")
 
-screen hbox_line(field,value):
+screen hbox_line(field, value):
     hbox:
         if field is not None:
             text field bold True min_width 150

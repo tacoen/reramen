@@ -8,17 +8,17 @@ image test white = Solid("#fff")
 image test black = Solid("#000")
 
 define e = Character("Eileen")
-define d = Character("Demi",who_color="#39C")
-define s = Character("Semi",who_color="#090")
+define d = Character("Demi", who_color="#39C")
+define s = Character("Semi", who_color="#090")
 
 # The game starts here.
 
 label start:
 
     "Hi! this is a [config.name] unit-test routines."
-    
+
     label .menus:
-    
+
         menu:
             "Dialog":
                 "For a first-timer, I'am a narrator."
@@ -33,31 +33,31 @@ label start:
                 e "Bye Demi!"
                 hide semi
                 e "So long Semi!"
-            
+
             "Input":
                 "Let's try Input with modal screen"
-                $ res = modal_input(prompt="Your name",default=mc.name,size=(380,150),padding=(16,16,16,32))
+                $ res = modal_input(prompt="Your name", default=mc.name, size=(380, 150), padding=(16, 16, 16, 32))
                 "Hi [res]!"
-            
+
             "Notify":
                 $ renpy.notify("You see gui.about")
                 "[gui.about]"
                 $ notify_ico("renpy license")
                 "[renpy.license]"
-            
+
             "Next":
                 jump .after
-    
+
     jump .menus
 
     label .after:
-    
+
         scene test
         e "Let's create some Ren'Py game."
         scene test black
         e "We are doing it in black scene, aren't we?"
         scene test white
-        $ notify_ico("White scene. and how well the notification deal with long text like this.",'logo-ramen')
+        $ notify_ico("White scene. and how well the notification deal with long text like this.", 'logo-ramen')
         e "We also doing it in white scene."
         scene test
         e 'Lets test the dialogue with a long text.'
@@ -70,5 +70,5 @@ label start:
     "end!"
 
     jump start
-    
+
     return

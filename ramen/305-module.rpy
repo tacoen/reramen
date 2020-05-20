@@ -6,5 +6,3 @@ init -305 python:
     import pygame
     import math
     import json
-    
-    

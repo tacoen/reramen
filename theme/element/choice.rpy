@@ -13,7 +13,7 @@ screen choice(items):
     style_prefix "choice"
 
     vbox:
-        if ramen.phone_ui:
+        if ramen.smphone:
             xalign 0.8
         else:
             xalign 0.5

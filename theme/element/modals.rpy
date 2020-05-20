@@ -28,9 +28,9 @@ init python:
     style['modal_button_text'].size = 24
     style['modal_button_text'].color = '#26C'
     style['modal_button_text'].hover_color = Color(
-    style['modal_button_text'].color).tint(.7)
+        style['modal_button_text'].color).tint(.7)
     style['modal_button_text'].selected_color = Color(
-    style['modal_button_text'].color).shade(.7)
+        style['modal_button_text'].color).shade(.7)
 
     style['modal_closebutton'] = Style('ramen_icon')
     style['modal_closebutton'].xalign = 1.0
@@ -51,14 +51,13 @@ init python:
     style['modal_label_text'] = Style('ramen_label_text')
     style['modal_label_text'].color = ramu.invertColor(pt.modal_background)
 
+    style['modal_vscrollbar'].xsize = 8
+    style['modal_vscrollbar'].thumb = Color('#999').opacity(.2)
+    style['modal_vscrollbar'].base_bar = Color('#ccc').opacity(.9)
 
-    style['modal_vscrollbar'].xsize=8
-    style['modal_vscrollbar'].thumb=Color('#999').opacity(.2)
-    style['modal_vscrollbar'].base_bar=Color('#ccc').opacity(.9)
+    style['modal_vbar'] = Style('modal_vscrollbar')
+    style['modal_vbar'].xsize = 3
 
-    style['modal_vbar']=Style('modal_vscrollbar')
-    style['modal_vbar'].xsize=3
-    
     def modal_display(**kwargs):
         """
         show `modal_display` screen with keyword arguments.
@@ -133,7 +132,6 @@ screen modal(screenname, **kwargs):
     layer "dialog_layer"
     style_prefix "modal"
     modal True
-    
 
     frame:
         if padding:
@@ -149,7 +147,7 @@ screen modal(screenname, **kwargs):
 
         if showtitle:
             label title.title()
-            
+
             hbox yoffset 32:
                 transclude
         else:
@@ -212,7 +210,7 @@ screen confirm(message, yes_action, no_action, timeout=None):
     # Ensure other screens do not get input while this screen is displayed.
     layer 'dialog_layer'
     zorder 200
-    
+
     use modal('confirm',
               closebutton=False, showtitle=False, size=(560, 200), padding=(24, 24, 24, 24), align=(0.5, 0.75)):
 
@@ -234,7 +232,7 @@ screen confirm(message, yes_action, no_action, timeout=None):
 
     # Right-click and escape answer "no".
     key "game_menu" action no_action
-    
+
     if timeout is not None:
-    
+
         timer timeout action[Hide('confirm'), no_action]

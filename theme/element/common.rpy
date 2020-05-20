@@ -43,4 +43,3 @@ style skip_text is ramen_gui:
 
 style skip_triangle is ramen_icon_text:
     size 20
-

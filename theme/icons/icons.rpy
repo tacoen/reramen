@@ -3,7 +3,7 @@ init -202 python:
     pt.about.append('Feather Icon (C) Cole Bemis. License MIT')
 
     # Delete persistent if you made a change!
-    
+
     if persistent.icon is None:
 
         persistent.icon = {
@@ -95,29 +95,31 @@ init -202 python:
             'volume-on': u'\x60',
             'volume-x': u'\x7e',
         }
-    
+
     def ico(what=None, say=False):
-        """ Translate Ramen Icon Webfont, see demo.html in the 'theme\icons' for the list"""
+        r""" Translate Ramen Icon Webfont, see demo.html in the 'theme\icons' for the list"""
 
         if what is None:
             return sorted(persistent.icon)
         else:
             try:
                 if say:
-                    return "{font=" +  pt.font_ui_ico +"}"+persistent.icon[what]+"{/font}"
+                    return "{font=" + pt.font_ui_ico + "}" + \
+                        persistent.icon[what] + "{/font}"
                 else:
                     return persistent.icon[what]
             except BaseException:
                 return " "
 
-    def icon_tag(tag,icon='logo-ramen'):
+    def icon_tag(tag, icon='logo-ramen'):
         """
         put icons as renpy text_tag
-        
+
         ``` python
         e " {icon=alert} Warning "
         ```
         """
-        return [ ( renpy.TEXT_TAG, "font="+pt.font_ui_ico), (renpy.TEXT_TEXT, ico(icon)), (renpy.TEXT_TAG, "/font") ]
+        return [(renpy.TEXT_TAG, "font=" + pt.font_ui_ico),
+                (renpy.TEXT_TEXT, ico(icon)), (renpy.TEXT_TAG, "/font")]
 
     config.self_closing_custom_text_tags["icon"] = icon_tag

@@ -15,11 +15,13 @@ init -301 python:
 
         def __getattr__(self, key):
             res = getattr(self.time, key)
-            if isinstance(res,(int,str,unicode)):
+            if isinstance(res, (int, str, unicode)):
                 return res
             else:
-                try: return res()
-                except: return res
+                try:
+                    return res()
+                except BaseException:
+                    return res
 
         def adv(self, a=1, block=False):
             self.time = self.time + datetime.timedelta(hours=a)
@@ -30,7 +32,8 @@ init -301 python:
 
         def nextday(self, a=8, block=False):
             b = 24 - self.time.hour
-            self.time = self.time + datetime.timedelta(hours=b) + datetime.timedelta(hours=a)
+            self.time = self.time + \
+                datetime.timedelta(hours=b) + datetime.timedelta(hours=a)
             self.populate()
             if block:
                 renpy.block_rollback()
@@ -43,22 +46,22 @@ init -301 python:
         def clock(self):
             return self.time.strftime('%H:%M')
 
-        def ico(self,word=True):
-            sun = int( float(self.time.hour)/24*len(pe.time_ico) )
+        def ico(self, word=True):
+            sun = int(float(self.time.hour) / 24 * len(pe.time_ico))
             if word:
                 return pe.time_ico[int(sun)]
             else:
                 return sun
 
-        def cond(self,word=True):
-            sun = int( float(self.time.hour)/24*len(pe.time_cond))
+        def cond(self, word=True):
+            sun = int(float(self.time.hour) / 24 * len(pe.time_cond))
             if word:
                 return pe.time_cond[int(sun)]
             else:
                 return sun
 
-        def word(self,word=True):
-            sun = int( float(self.time.hour)/24*len(pe.time_word) )
+        def word(self, word=True):
+            sun = int(float(self.time.hour) / 24 * len(pe.time_word))
             if word:
                 return pe.time_word[int(sun)]
             else:
@@ -66,31 +69,32 @@ init -301 python:
 
     class ramen_util():
 
-        def pay(self,m,src,ret=False):
+        def pay(self, m, src, ret=False):
             if src > m:
                 src -= m
-                res= True
+                res = True
             else:
-                res= False
-                
+                res = False
+
             if ret:
                 return res
 
-        def gain(self,m,src,ret=False):
+        def gain(self, m, src, ret=False):
             src += m
             res = True
-            
+
             if ret:
-                return res                
-                
+                return res
+
         def npc(self, npc_id, what):
             if type(globals()[npc_id]) is not ramen_npc:
                 return False
-            
-            try: return globals()[npc_id]._get(what)
-            except: return None
-                
-                
+
+            try:
+                return globals()[npc_id]._get(what)
+            except BaseException:
+                return None
+
         def limits(self, value):
             if value < pe.limit[0]:
                 value = pe.limit[0]
@@ -103,18 +107,17 @@ init -301 python:
             return pygame.mouse.get_pos()
 
         def uid(self):
-            
             """Return Next Unique id for object creations."""
-            
+
             ramen.uidnumber += 1
             return "{:03d}".format(ramen.uidnumber)
 
         def makeobj(self, args, **kwargs):
             obj = object()
-            obj.__dict__= kwargs
-            if isinstance(args,(type(self.__dict__),type({}))):
+            obj.__dict__ = kwargs
+            if isinstance(args, (type(self.__dict__), type({}))):
                 for a in args:
-                    obj.__dict__[str(a)]=args[a]
+                    obj.__dict__[str(a)] = args[a]
             return obj
 
         def labelcallback(self, name, abnormal):
@@ -127,8 +130,8 @@ init -301 python:
                 current = 0
             return int(current)
 
-        def safestr(self,name):
-            return re.sub(r'\W+|\s+','',name).lower().strip()
+        def safestr(self, name):
+            return re.sub(r'\W+|\s+', '', name).lower().strip()
 
         def random_int(self, min=0, max=100):
             return int(renpy.random.randint(min, max))
@@ -136,32 +139,32 @@ init -301 python:
         def random_of(self, array):
             return array[int(renpy.random.randint(0, len(array) - 1))]
 
-        def nice_cash(self,n):
-            if n <1000:
+        def nice_cash(self, n):
+            if n < 1000:
                 return ("{:03d}".format(n))
-            elif n>1000:
-                return ("{:0.1f}".format(n/1000))+"K"
+            elif n > 1000:
+                return ("{:0.1f}".format(n / 1000)) + "K"
 
-        def nicenaming(self,name,prefix='',suffix=''):
-            pre=[]
-            suf=[]
+        def nicenaming(self, name, prefix='', suffix=''):
+            pre = []
+            suf = []
 
             ori = name
 
-            if not isinstance(prefix,tuple):
+            if not isinstance(prefix, tuple):
                 pre.append(prefix)
             else:
                 pre = prefix
 
-            if not isinstance(suffix,tuple):
+            if not isinstance(suffix, tuple):
                 suf.append(suffix)
             else:
                 suf = suffix
 
             for p in pre:
-                name = name.replace(p,'')
+                name = name.replace(p, '')
             for s in suf:
-                name = name.replace(s,'')
+                name = name.replace(s, '')
 
             return name.replace('_', ' ').strip().title()
 
@@ -175,28 +178,28 @@ init -301 python:
             def r(): return self.random_int(lo, hi)
             return ('#%02X%02X%02X' % (r(), r(), r()))
 
-        def invertColor(self,hexColor):
+        def invertColor(self, hexColor):
             def invertHex(hexNumber):
                 inverse = hex(abs(int(hexNumber, 16) - 255))[2:]
                 if len(inverse) == 1:
-                    inverse = '0'+inverse
+                    inverse = '0' + inverse
                 return inverse
 
             inverse = ""
             hexCode = Color(hexColor).hexcode[1:]
 
-            A=""
+            A = ""
 
             if len(hexCode) == 3:
-                R = hexCode[0]+hexCode[0]
-                G = hexCode[1]+hexCode[1]
-                B = hexCode[2]+hexCode[2]
+                R = hexCode[0] + hexCode[0]
+                G = hexCode[1] + hexCode[1]
+                B = hexCode[2] + hexCode[2]
 
             elif len(hexCode) == 4:
-                R = hexCode[0]+hexCode[0]
-                G = hexCode[1]+hexCode[1]
-                B = hexCode[2]+hexCode[2]
-                A = hexCode[3]+hexCode[3]
+                R = hexCode[0] + hexCode[0]
+                G = hexCode[1] + hexCode[1]
+                B = hexCode[2] + hexCode[2]
+                A = hexCode[3] + hexCode[3]
 
             elif len(hexCode) == 6:
                 R = hexCode[:2]
@@ -209,23 +212,23 @@ init -301 python:
                 B = hexCode[4:6]
                 A = hexCode[6:]
 
-            inverse = "#"+ invertHex(R) + invertHex(G) + invertHex(B)
+            inverse = "#" + invertHex(R) + invertHex(G) + invertHex(B)
 
             return inverse
 
-        def hline(self,(size),color='#fff'):
-            return Composite((size), (0,0),Solid(color))
+        def hline(self, (size), color='#fff'):
+            return Composite((size), (0, 0), Solid(color))
 
-        def img_hover(self, img, hover_color=None, size=(100,100)):
+        def img_hover(self, img, hover_color=None, size=(100, 100)):
 
             if hover_color is None:
-                hover_color = gui.hover_color;
+                hover_color = gui.hover_color
 
             return Composite(
                 size,
                 (0, 0), Solid(Color(hover_color).opacity(.5)),
                 (0, 0), img
-                )
+            )
 
         # files
 
@@ -250,7 +253,7 @@ init -301 python:
             dirs = []
 
             if dir:
-                if isinstance(dir,(str,unicode)):
+                if isinstance(dir, (str, unicode)):
                     dirs.append(dir)
                 else:
                     dirs = dir
@@ -264,24 +267,24 @@ init -301 python:
             if ext:
                 F = filter(lambda w: w.endswith(ext), F)
 
-            return  list(dict.fromkeys(F))
+            return list(dict.fromkeys(F))
 
         def random_files(self, dir=False, key=False, ext=pe.ext_img):
-            files = self.files(dir,key,ext)
+            files = self.files(dir, key, ext)
             return self.random_of(files)
-        
+
         def sfx(self, file, path=None, ext=pe.ext_snd, **kwargs):
 
             res = False
             if path is not None:
-                search_in = [ path, pe.theme_path, 'audio' ]
+                search_in = [path, pe.theme_path, 'audio']
             else:
-                search_in = [ pe.theme_path, 'audio' ]
+                search_in = [pe.theme_path, 'audio']
 
             for e in ext:
                 for p in search_in:
-                    if renpy.loadable(p+"/"+file+e):
-                        res = p+"/"+file+e
+                    if renpy.loadable(p + "/" + file + e):
+                        res = p + "/" + file + e
                         break
                 if res:
                     break
@@ -349,7 +352,8 @@ init -301 python:
             chaattr = {}
             p = []
             for k in kwargs:
-                if k.startswith(('dynamic', 'window_', 'who_','what_', 'show_', 'cb_', 'ctc_')):
+                if k.startswith(('dynamic', 'window_', 'who_',
+                                 'what_', 'show_', 'cb_', 'ctc_')):
                     chaattr[k] = kwargs[k]
                     p.append(k)
 
@@ -365,84 +369,92 @@ init -301 python:
 
             return p
 
-
         def talk(self, **kwargs):
             """
             Let npc and mc do a chat.
-            
+
             ### Keyword arguments:
-            
+
             | # | Key | Description |
             | --- | --- | --- |
             | 0 | npc_id | npc.id to talk with |
             | 1 | what | json topic / label |
             | 2 | type | json or label |
             | 3 | prefix | topic id / label prefix |
-            
+
             #### Using Label
-            
+
             ``` python
             $ ramu.talk('rita','chat','label','phone')
             ```
-            
+
             Make a phone talk using label (fallback):
-            
+
             * `if exist` rita.phone_chat
             * `if exist` rita_chat
             * `if exist` chat
-            
+
             ``` python
-            
+
             label rita:
                 ...
                 label .onphone_chat:
                     rita "Let's chat!"
                     mc "Ok!"
                     return
-                    
+
             ```
-            
+
             #### Using Json file
 
             ``` python
             $ ramu.talk('rita','chat','json')
             ```
-            
-            * file chat.json must on rita npc's path, 
+
+            * file chat.json must on rita npc's path,
             * `rita.json` must return that file
             * if no prefix suplied, the line will be randomize
             * In pairing. First Sayer is NPC, followed by MC. '' are muted.
-            
+
             ``` chat.json
-            
+
             {
                 "1": ["[mc_name]? Hello", "Yes, [rita.name].",	"See ya!", "Ok." ],
                 "2": ["What?", "Uh Nothing!" ],
                 "3": ["Hello","", "Say something...","","No?" ],
             }
-            
+
             ```
-            
+
             """
-            
-            try: kwargs['npc_id']
-            except: kwargs['npc_id']=False
 
-            try: kwargs['what']
-            except: kwargs['what']=None
+            try:
+                kwargs['npc_id']
+            except BaseException:
+                kwargs['npc_id'] = False
 
-            try: kwargs['type']
-            except: kwargs['type']='label'
+            try:
+                kwargs['what']
+            except BaseException:
+                kwargs['what'] = None
 
-            try: kwargs['prefix']
-            except: kwargs['prefix']=False
+            try:
+                kwargs['type']
+            except BaseException:
+                kwargs['type'] = 'label'
+
+            try:
+                kwargs['prefix']
+            except BaseException:
+                kwargs['prefix'] = False
 
             if kwargs['type'] == 'label':
 
                 if kwargs['npc_id']:
 
                     if kwargs['prefix']:
-                        label = kwargs['npc_id'] + '.'+kwargs['prefix']+'_' + kwargs['what']
+                        label = kwargs['npc_id'] + '.' + \
+                            kwargs['prefix'] + '_' + kwargs['what']
                         if renpy.has_label(label):
                             renpy.call_in_new_context(label)
                             return True
@@ -465,8 +477,10 @@ init -301 python:
                         return True
             else:
 
-                try: jfile = ramu.npc(kwargs['npc_id'],'json')[kwargs['what']]
-                except: jfile=None
+                try:
+                    jfile = ramu.npc(kwargs['npc_id'], 'json')[kwargs['what']]
+                except BaseException:
+                    jfile = None
 
                 if jfile:
                     dialogue = ramu.json_file(jfile)
@@ -477,7 +491,7 @@ init -301 python:
                         d = kwargs['prefix']
 
                     npc = True
-                    who = character.__dict__[ kwargs['npc_id'] ]
+                    who = character.__dict__[kwargs['npc_id']]
 
                     for line in dialogue[d]:
                         if not npc:

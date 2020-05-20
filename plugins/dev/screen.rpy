@@ -17,15 +17,15 @@ screen ramen_dev_screen():
             use rds_topbar(title)
             use rds_side(obj_type)
             if obj is not None:
-                use rds_win(obj,obj_type)
+                use rds_win(obj, obj_type)
     else:
         modal False
         textbutton ':rds:' action ToggleScreenVariable('show')
 
-screen rds_win(obj,obj_type):
+screen rds_win(obj, obj_type):
 
     viewport id 'vp':
-        xoffset style['rds_side'].xmaximum+8
+        xoffset style['rds_side'].xmaximum + 8
         xsize config.screen_width - style['rds_side'].xmaximum - 8
         scrollbars "vertical"
         mousewheel True
@@ -33,15 +33,15 @@ screen rds_win(obj,obj_type):
         pagekeys True
 
         style_prefix 'rds'
-        
-        if renpy.has_screen('rdsa_'+obj_type+'_'+obj):
-            $ renpy.use_screen('rdsa_'+obj_type+'_'+obj)
-        elif renpy.has_screen('rdsa_'+obj_type):
-            $ renpy.use_screen('rdsa_'+obj_type, obj=obj)
-        else:
-            use rds_getasset(obj_type=obj_type,obj=obj)
 
-screen rds_getasset(obj_type,obj):
+        if renpy.has_screen('rdsa_' + obj_type + '_' + obj):
+            $ renpy.use_screen('rdsa_' + obj_type + '_' + obj)
+        elif renpy.has_screen('rdsa_' + obj_type):
+            $ renpy.use_screen('rdsa_' + obj_type, obj=obj)
+        else:
+            use rds_getasset(obj_type=obj_type, obj=obj)
+
+screen rds_getasset(obj_type, obj):
 
     if obj_type == 'ramen_item':
         $ asset = item(obj)()
@@ -55,15 +55,15 @@ screen rds_getasset(obj_type,obj):
         use rds_dictparam(asset)
 
         if obj_type == 'npc':
-            add ramu.hline((style['rds_win'].xminimum,2),"#999")
+            add ramu.hline((style['rds_win'].xminimum, 2), "#999")
             use rds_dictparam(character.__dict__[obj].__dict__)
 
         null height 32
-        
+
 screen rds_dictparam(asset):
     for k in sorted(asset.keys()):
         python:
-            res = re.sub(r'(^\s+|\+$)','',rtextformat(asset[k]))
+            res = re.sub(r'(^\s+|\+$)', '', rtextformat(asset[k]))
             res = res.strip()
 
         hbox:
@@ -75,22 +75,22 @@ screen rds_side(obj_type):
 
     frame style 'rds_side':
         style_prefix 'rds'
-        
+
         vbox:
 
-            use rds_side_menuitem('tools',obj_type)
+            use rds_side_menuitem('tools', obj_type)
 
             for t in rds.menu:
-            
-                if not t == 'tools':
-                    use rds_side_menuitem(t,obj_type)
 
-screen rds_side_menuitem(t,obj_type):
+                if not t == 'tools':
+                    use rds_side_menuitem(t, obj_type)
+
+screen rds_side_menuitem(t, obj_type):
 
     python:
 
         if t.startswith('ramen_'):
-            st = t.replace('ramen_','')
+            st = t.replace('ramen_', '')
         else:
             if t == 'tools':
                 st = 'Ramen Dev Tools'
@@ -99,10 +99,16 @@ screen rds_side_menuitem(t,obj_type):
 
         if obj_type == t:
             this_icon = 'square-minus'
-            this_action = [ SetScreenVariable('obj_type',None),SetScreenVariable('obj',None) ]
+            this_action = [
+                SetScreenVariable(
+                    'obj_type', None), SetScreenVariable(
+                    'obj', None)]
         else:
             this_icon = 'square-plus'
-            this_action =  [ SetScreenVariable('obj_type',t), SetScreenVariable('obj',None) ]
+            this_action = [
+                SetScreenVariable(
+                    'obj_type', t), SetScreenVariable(
+                    'obj', None)]
 
     hbox xfill True:
         style_prefix 'rds'
@@ -121,13 +127,13 @@ screen rds_obj_child(obj_type):
 
         vbox xoffset 24:
             for t in ramen.objects[obj_type]:
-                textbutton t action SetScreenVariable('obj',t)
+                textbutton t action SetScreenVariable('obj', t)
 
 screen rds_topbar(title):
 
     frame style 'rds_topbar':
         style_prefix 'rds'
         hbox xfill True:
-            text 'Ramen Dev: '+title.title() style 'rds_label'
+            text 'Ramen Dev: ' + title.title() style 'rds_label'
             textbutton ico('square-x') style 'rds_icon' xalign 1.0:
                 action ToggleScreenVariable('show')

@@ -7,18 +7,18 @@
 
 init python:
 
-    def notify_ico(message,icon='alert'):
+    def notify_ico(message, icon='alert'):
         """
         Notify with icon
-        
+
         ``` python:
             $ notify_icon('You see notification with icon','logo-ramen')
             $ renpy.notify("You see renpy default notification.")
         ```
-        
+
         """
-        
-        renpy.show_screen('notify_ico',message=message,icon=icon)
+
+        renpy.show_screen('notify_ico', message=message, icon=icon)
 
 
 screen notify_ico(message, icon='alert'):
