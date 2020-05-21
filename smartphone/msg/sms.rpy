@@ -43,13 +43,7 @@ init -200 python:
 
             if value is not None and attr is not None:
 
-                print msg_id
-                print attr
-                print value
-
                 self._msg[msg_id].__dict__[attr] = value
-
-                print self._msg[msg_id].__dict__[attr]
 
             if attr is None:
                 try:
@@ -185,7 +179,6 @@ screen smphone_apps_sms_reply(app, var, page):
 
                 for i in msg.reply:
                     $ s = msg.reply.index(i)
-                    $ print s
                     textbutton i action[
                         Function(sms.post, content=i, ref=page, val=s),
                         SetScreenVariable('page', None),

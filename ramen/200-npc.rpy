@@ -160,4 +160,3 @@ init -200 python:
                 what = tag.replace(cut, '')
                 renpy.image("side " + self.id + " " + what, compo)
 
-                print self.id + " " + what

@@ -142,8 +142,6 @@ init -200 python:
         def transfer(self, item_id, dst_id):
 
             item = self.item(item_id)
-            print item
-
             dst = globals()[dst_id]
             dst.inventory[item_id] = item
             self.drop(item_id)
