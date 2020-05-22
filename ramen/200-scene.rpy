@@ -1,134 +1,195 @@
-init -200 python:
+init - 200 python:
 
     ramen.last_map = None
-    
+
     class ramen_map(object):
-    
-        def __init__(self, obj_id, scene, branch=[], *args, **kwargs):
-        
-            try: persistent.ramen['map']
-            except: persistent.ramen['map'] = {}
-            try: persistent.ramen['map'][obj_id]
-            except: persistent.ramen['map'][str(obj_id)] = {}
-            try: persistent.ramen['map'][obj_id][scene]
-            except: persistent.ramen['map'][obj_id][str(scene)] = {}
+
+        def __init__(self, obj_id, dir, scene, branch=[], *args, **kwargs):
+
+            try:
+                persistent.ramen['map']
+            except BaseException:
+                persistent.ramen['map'] = {}
+            try:
+                persistent.ramen['map'][obj_id]
+            except BaseException:
+                persistent.ramen['map'][str(obj_id)] = {}
+            try:
+                persistent.ramen['map'][obj_id][scene]
+            except BaseException:
+                persistent.ramen['map'][obj_id][str(scene)] = {}
 
             self.obj_id = obj_id
             self.scene = scene
+            self.dir = dir
 
             map = persistent.ramen['map'][obj_id][scene]
-            
-            branch =[str(i) for i in branch]
-            
-            try: map['branch']
-            except: map[str('branch')] = sorted(branch)
-            
-            for a in ['way','func','spot','img']:
-                try: map[a]
-                except: map[str(a)]={}
-            
+
+            branch = [str(i) for i in branch]
+
+            try:
+                map['branch']
+            except BaseException:
+                map[str('branch')] = sorted(branch)
+
+            for a in ['trans', 'way', 'func', 'pos', 'img']:
+                try:
+                    map[a]
+                except BaseException:
+                    map[str(a)] = {}
+
             self.map = map
-            
+
         def __call__(self):
             return self.map
-            
-        def add_branch(self,what):
+
+        def add_branch(self, what):
             self.map['branch'].append(str(what))
-            self.map['branch'] = sorted( list(dict.fromkeys(self.map['branch'])))
-        
-        def set(self,what,key,value):
-            try: self.map[what]
-            except: self.map[str(what)]={}
-            
+            self.map['branch'] = sorted(
+                list(dict.fromkeys(self.map['branch'])))
+
+        def branch(self):
+            return self.map['branch']
+
+        def set(self, what, key, value):
+            try:
+                self.map[what]
+            except BaseException:
+                self.map[str(what)] = {}
+
             if key in self.map['branch']:
-                self.map[what][str(key)]=str(value)
-            
-        def get(self,what,key=None):
+                self.map[what][str(key)] = value
+
+        def dict(self, what, **kwargs):
+            for k in kwargs:
+                self.set(what, k, kwargs[k])
+
+        def get(self, what, key=None):
             if key is None:
                 return self.map[what]
             else:
                 return self.map[what][key]
-        
-        def way(self,key,value=None):
-            if value is not None:
-                self.set('way',key,value)
-            try: return self.get('way',key)
-            except: return None
-            
-        def spot(self,key,value=None):
-            if value is not None:
-                self.set('spot',key,value)
-            try: return self.get('spot',key)
-            except: return None
 
-        def func(self,key,value=None):
+        def way(self, key, value=None):
+            if value is not None:
+                self.set('way', key, value)
+            try:
+                return self.get('way', key)
+            except BaseException:
+                return None
+
+        def pos(self, key, value=None):
+            if value is not None:
+                self.set('pos', key, value)
+            try:
+                return self.get('pos', key)
+            except BaseException:
+                return None
+
+        def func(self, key, value=None):
 
             if value is not None:
-                self.set('func',key,value)
+                self.set('func', key, value)
             else:
 
-                try: func = self.get('func',key)
-                except: func = False
-                
+                try:
+                    trans = self.get('trans', key)
+                except BaseException:
+                    trans = Dissolve(0.3)
+
+                print key + '=' + repr(trans)
+
+                try:
+                    func = self.get('func', key)
+                except BaseException:
+                    func = False
+
                 if not func:
-                    way = self.get('way',key)
-                    obj_str = self.obj_id+'_'
-                    ways = [
-                        obj_str+self.scene+'_'+way,
-                        obj_str+way,
-                        self.scene+"_"+way,
-                        way,
-                    ]
-                    
-                    for label in ways:
-                        if renpy.has_label(label):
-                            func = Jump(label)
-                            break
-                            
+                    way = self.get('way', key)
+                    obj_str = self.obj_id + '.'
+
+                    if way is not None:
+                        ways = [
+                            obj_str + self.scene + '.' + way,
+                            obj_str + way,
+                            self.scene + "_" + way,
+                            way,
+                        ]
+
+                        for label in ways:
+                            # print label
+                            if renpy.has_label(label):
+                                func = Jump(label)
+                                break
+
                     if not func:
-                        try: 
-                            persistent.ramen['map'][self.obj_id][way]
-                            map2map = True
-                        except:
-                            map2map = False
-                            
-                        if map2map:
-                            func = Function(scene_map,id=value)
-                        else:
-                            func = Null
-                            
-            return [
-                SetVariable('ramen.last_map',self.scene), func
-            ]
-        
-        def img(self,key,value=None):
+
+                        try:
+                            if not persistent.ramen['map'][self.obj_id][way]['way'] == {
+                            }:
+                                func = Show(
+                                    'scene_map', transition=trans, obj=self.obj_id, scene_img=way)
+                            else:
+                                func = None
+                        except BaseException:
+                            func = None
+
+            if func is not None:
+                return [
+                    SetVariable('ramen.last_map', self.scene),
+                    Hide('scene_map'),
+                    func
+                ]
+            else:
+                return None
+
+        def img(self, key, value=None):
+
+            def guess_img(dir, key):
+
+                img = None
+
+                img = ramu.ezfile(dir + 'hs/' + key)
+
+                if img is None:
+                    img = ramu.ezfile(dir + 'hs/' + key + '-hover')
+
+                if img is None:
+                    img = ramu.ezfile(dir + 'scene/hs/' + key)
+
+                if img is None:
+                    img = ramu.ezfile(dir + 'scene/hs/' + key + '-hover')
+
+                return img
 
             if value is not None:
-                self.set('img',key,value)
-                
+                self.set('img', key, value)
+
             else:
-                try: 
-                    img = self.get('img',key)
-                except:
-                    img = False
 
-                if img:
-                    rimg = ramu.ezfile2(self.dir+'hs/'+img)
-            
-                if not img or rimg is None:
-                    rimg = Composite((200,200),(0,0),Color('#f003'),(20,20),Text('N/A'))
+                try:
+                    img = self.get('img', key)
+                except BaseException:
+                    img = key
 
-                return rimg
+                for n in range(0, len(self.dir)):
+                    img = guess_img(self.dir[n], img)
+
+                if img is None:
+                    img = Composite(
+                        (200, 200), (0, 0), Color('#f003'), (20, 20), Text('N/A'))
+
+                return img
 
     class ramen_scene(ramen_extendable):
 
         def init(self, id=None, *args, **kwargs):
             self.define_byfile()
-            self.map={}
-            
-        def define_map(self,scene,branch=[]):
-            self.map[scene]=ramen_map(self.id,scene,branch)
-            
+            self.map = {}
+
+        def define_map(self, scene, branch=[]):
+            self.map[scene] = ramen_map(self.id, self.dir, scene, branch)
+
         def define_byfile(self):
 
             tdir = []
