@@ -29,6 +29,7 @@ init -290 python:
     rds.menu = ramen.objects
     rds.menu['tools'] = ['md']
     rds.menu['tools'].append('plugins')
+    rds.menu['tools'].append('icons')
 
     rds.md_path = "E:/pp-renpy/ramen/wiki/"
     rds.game_path = "E:/pp-renpy/ramen/game/"

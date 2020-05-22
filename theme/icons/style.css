@@ -1,9 +1,9 @@
 @font-face {
   font-family: 'feather-ramen2-icon';
   src:
-    url('fonts/feather-ramen2-icon.ttf?d1abx8') format('truetype'),
-    url('fonts/feather-ramen2-icon.woff?d1abx8') format('woff'),
-    url('fonts/feather-ramen2-icon.svg?d1abx8#feather-ramen2-icon') format('svg');
+    url('fonts/feather-ramen2-icon.ttf?xthhf7') format('truetype'),
+    url('fonts/feather-ramen2-icon.woff?xthhf7') format('woff'),
+    url('fonts/feather-ramen2-icon.svg?xthhf7#feather-ramen2-icon') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -24,8 +24,8 @@ i {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.alert:before {
-  content: "\71";
+.alert-triangle:before {
+  content: "\21";
 }
 .arrow-down:before {
   content: "\77";
@@ -115,7 +115,7 @@ i {
   content: "\57";
 }
 .ico-cash:before {
-  content: "\21";
+  content: "\24";
 }
 .ico-coins:before {
   content: "\45";
@@ -178,10 +178,13 @@ i {
   content: "\48";
 }
 .logo-python:before {
-  content: "\24";
+  content: "\3f";
 }
 .logo-ramen:before {
   content: "\4a";
+}
+.logo-renpy:before {
+  content: "\71";
 }
 .menu:before {
   content: "\4b";
@@ -262,7 +265,7 @@ i {
   content: "\37";
 }
 .terminal:before {
-  content: "\e901";
+  content: "\5c";
 }
 .toggle-left:before {
   content: "\38";
