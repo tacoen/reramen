@@ -1,4 +1,4 @@
-init - 200 python:
+init -200 python:
 
     ramen.last_map = None
 
@@ -125,8 +125,7 @@ init - 200 python:
                     if not func:
 
                         try:
-                            if not persistent.ramen['map'][self.obj_id][way]['way'] == {
-                            }:
+                            if not persistent.ramen['map'][self.obj_id][way]['way'] == {}:
                                 func = Show(
                                     'scene_map', transition=trans, obj=self.obj_id, scene_img=way)
                             else:
