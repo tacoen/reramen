@@ -13,7 +13,8 @@ It is renpy framework to help you creating of visual novell game.
 * apps container (smartphone, pc)
 * Multi-persistent main character stat
 
-Thins to convert from the old-version of ramen :
+Todo: Things from the old-version of ramen :
+
 * Episodes menu
 * minigames
 * npc expression
