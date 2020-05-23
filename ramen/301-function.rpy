@@ -112,7 +112,7 @@ init -301 python:
             ramen.uidnumber += 1
             return "{:03d}".format(ramen.uidnumber)
 
-        def makeobj(self, args, **kwargs):
+        def makeobj(self, *args, **kwargs):
             obj = object()
             obj.__dict__ = kwargs
             if isinstance(args, (type(self.__dict__), type({}))):

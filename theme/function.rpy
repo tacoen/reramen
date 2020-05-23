@@ -41,3 +41,27 @@ init -299 python:
             return (x * 2, x * 1, x * 3, x * 2)
 
     rui = ramen_ui_tool()
+
+    def font_uitag(tag, argument, contents):
+
+        return [
+                (renpy.TEXT_TAG, "font="+pt.font_ui_text),
+            ] + contents + [
+                (renpy.TEXT_TAG, "/font"),
+            ]
+
+    config.custom_text_tags["ui"] = font_uitag
+    
+    
+    def icon_tag(tag, icon='logo-ramen'):
+        """
+        put icons as renpy text_tag
+
+        ``` python
+        e " {icon=alert} Warning "
+        ```
+        """
+        return [(renpy.TEXT_TAG, "font=" + pt.font_ui_ico),
+                (renpy.TEXT_TEXT, ico(icon)), (renpy.TEXT_TAG, "/font")]
+
+    config.self_closing_custom_text_tags["icon"] = icon_tag    

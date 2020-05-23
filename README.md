@@ -12,9 +12,12 @@ It is renpy framework to help you creating of visual novell game.
 * Plugins (multipurpose) and 
 * apps container (smartphone, pc)
 * Multi-persistent main character stat
+* Items and Inventory
+* Shop and pawn
 
 Todo: Things from the old-version of ramen :
 
+* events
 * Episodes menu
 * minigames
 * npc expression

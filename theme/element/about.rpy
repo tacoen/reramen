@@ -37,7 +37,7 @@ screen about():
 
         vbox:
             null height 8
-            text _("Made with {a=https://www.renpy.org/}{size=20}Ren'Py{/size}{/a} [renpy.version_only].")
+            text _("Made with {icon=logo-renpy} {a=https://www.renpy.org/}{ui}Ren'Py{/ui}{/a} [renpy.version_only].")
             null height 16
             add ramu.hline((900, 1), "#fff6")
             null height 8

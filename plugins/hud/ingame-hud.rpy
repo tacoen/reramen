@@ -107,7 +107,7 @@ screen hud_time():
 
 screen hud_bar():
 
-    vbox ypos 64 xalign 1.0:
+    vbox ypos 72 xalign 1.0 at dba:
 
         for e in hud.icons:
             $ i = ramu.makeobj(hud.icons[e])
