@@ -1,16 +1,14 @@
 init -200 python:
 
-    ramen.last_map = None
-
     class ramen_scene(ramen_extendable):
 
         def init(self, id=None, *args, **kwargs):
             self.define_byfile()
             self.map = {}
         
-        def define_map(self, *args, **kwargs):
+        def define_map(self, map, **kwargs):
             self.kdict('pos',**kwargs) 
-            for a in args:
+            for a in map:
                 self.map[a] = ramen_map(self.id,self.pos,self.dir,a)
 
         def define_byfile(self):
@@ -98,7 +96,7 @@ init -200 python:
             for k in res:
                 self.__dict__[k] = res[k]
 
-    class ramen_map(ramen_scene):
+    class ramen_map(object):
     
         def __init__(self, obj_id, pos, dir, scene):
 
@@ -255,8 +253,12 @@ init -200 python:
 
                         try:
                             if not persistent.ramen['map'][self.obj_id][way]['way'] == {}:
-                                func = Show(
-                                    'scene_map', transition=trans, obj=self.obj_id, scene_img=way)
+                                func = [
+                                    SetVariable('ramen.map_obj',self.obj_id),
+                                    SetVariable(self.obj_id+'.last_scene',way),
+                                    Show(
+                                    'scene_map', transition=trans)
+                                    ]
                             else:
                                 func = None
                         except BaseException:
@@ -264,7 +266,7 @@ init -200 python:
 
             if func is not None:
                 return [
-                    SetVariable('ramen.last_map', self.scene),
+                    SetVariable(self.obj_id+'.last_scene', self.scene),
                     Hide('scene_map'),
                     func
                 ]

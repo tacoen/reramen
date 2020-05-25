@@ -77,6 +77,8 @@ init -300 python:
     config.layers = [
         'master',
         'transient',
+        'scenes',
+        'ambients',
         'screens',
         'overlay',
         'overlay2',

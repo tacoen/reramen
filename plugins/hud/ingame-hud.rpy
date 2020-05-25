@@ -110,7 +110,8 @@ screen hud_bar():
     vbox ypos 72 xalign 1.0 at dba:
 
         for e in hud.icons:
-            $ i = ramu.makeobj(hud.icons[e])
+            $ i = object()
+            $ i.__dict__ = hud.icons[e]
             if i.enable:
                 textbutton ico(i.icon) style 'hud_icon':
                     action i.action
