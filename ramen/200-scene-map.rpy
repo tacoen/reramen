@@ -25,10 +25,19 @@ screen scene_baseimg(obj,scene_img):
                     base_img = bz[n][1]
         else:
             base_img = base
+
                     
+        offline = False
+        
+        try: 
+            if scene_img in obj.offline: 
+                offline = True
+        except:
+            pass
+            
     add base_img
 
-    if scene_img in obj.offline:
+    if offline:
         use scene_overlay(flat.find('ambient/offline2'))
 
 screen scene_map():
