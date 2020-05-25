@@ -20,7 +20,8 @@ screen ramen_dev_screen():
                 use rds_win(obj, obj_type)
     else:
         modal False
-        textbutton ':rds:' action ToggleScreenVariable('show')
+        textbutton '{icon=logo-ramen}' text_size 24  padding (8,8,8,8):
+            action ToggleScreenVariable('show')
 
 screen rds_win(obj, obj_type):
 

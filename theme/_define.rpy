@@ -102,12 +102,12 @@ init -199 python:
     style['vbar'].bottom_bar = Color("#666").tint(0.5)
 
     style['scrollbar'].ysize = 8
-    style['scrollbar'].thumb = Color('#eee').opacity(.9)
-    style['scrollbar'].base_bar = Color('#eee').opacity(.3)
+    style['scrollbar'].thumb = Color('#eee').opacity(.3)
+    style['scrollbar'].base_bar = Color('#eee').opacity(.1)
 
     style['vscrollbar'].xsize = 8
-    style['vscrollbar'].thumb = Color('#eee').opacity(.9)
-    style['vscrollbar'].base_bar = Color('#eee').opacity(.3)
+    style['vscrollbar'].thumb = Color('#eee').opacity(.3)
+    style['vscrollbar'].base_bar = Color('#eee').opacity(.1)
 
     style['ramen_icon'] = Style('button')
 

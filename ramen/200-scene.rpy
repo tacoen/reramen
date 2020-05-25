@@ -271,4 +271,5 @@ init -200 python:
                     func
                 ]
             else:
-                return None                
+                return None
+

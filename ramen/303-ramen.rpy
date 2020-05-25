@@ -67,10 +67,10 @@ init -303 python:
 
             self.__dict__[str('dir')].append(path)
 
-        def find(self,file):
+        def find(self, file, ext=('.webp', '.png', '.jpg')):
            
             for d in range(0,len(self.dir)):
-                f = ramu.ezfile(self.dir[d]+file)
+                f = ramu.ezfile(self.dir[d]+file, ext)
                 if f is not None:
                     return f
                     break

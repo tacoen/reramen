@@ -31,22 +31,15 @@ screen scene_baseimg(obj,scene_img):
     if scene_img in obj.offline:
         use scene_overlay(flat.find('ambient/offline2'))
 
-screen scene_map(obj=None,scene_img=None):
+screen scene_map():
 
     python:
-        if obj is None:
-            obj = ramen.map_obj
-        else:
-            ramen.map_obj = obj.id
+        obj = ramen.map_obj
             
         if not isinstance(obj,ramen_scene):
             obj = globals()[obj]
 
-        if scene_img is None:
-            scene_img = obj.last_scene
-        else:
-            obj.last_scene = scene_img
-            
+        scene_img = obj.last_scene
 
         map = obj.map
     
