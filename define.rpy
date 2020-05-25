@@ -11,11 +11,11 @@ init -300 python:
     config.autoreload = False
     config.has_autosave = False
     
-    #uncomment to release
-    #config.developer = False
+    # uncomment to release
+    # config.developer = False
 
-    if not config.developer:
-        ramen.dev = True
+    ramen.dev = True
+
 
 init python:
 
