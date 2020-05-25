@@ -81,7 +81,6 @@ screen _console:
     #    A list of command, result, is_error tuples.
     zorder 1500
     modal True
-
     layer 'console'
     
     if not _console.console.can_renpy():
