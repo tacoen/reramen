@@ -67,13 +67,16 @@ init -300 python:
     ramen.items = object()
     ramen.seed = datetime.timedelta(0, 0)
 
+    ramen.label_trace = ['start']
+
     ramen.smphone = False
     ramen.episode_menu = False
 
     if persistent.files is None or ramen.dev:
         persistent.files = sorted(renpy.list_files(False))
 
-    config.label_callback = ramu.labelcallback
+    config.label_callback = ramu.label_callback
+    
     config.layers = [
         'master',
         'transient',
@@ -81,7 +84,6 @@ init -300 python:
         'ambients',
         'screens',
         'overlay',
-        'overlay2',
         'console',
         'dialog_layer']
 

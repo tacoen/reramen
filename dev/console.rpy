@@ -1,4 +1,4 @@
-﻿init -500:
+﻿init -400:
 
     style _console is _default:
         xpadding gui._scale(20)
@@ -10,7 +10,7 @@
     style _console_backdrop:
         background "#111c"
 
-    style _console_vscrollbar is vscrollbar
+    style _console_vscrollbar is _vscrollbar
 
     style _console_text is _default:
         size gui._scale(16)

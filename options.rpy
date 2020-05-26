@@ -7,7 +7,7 @@
 # This generally should not be changed, and if it is, should always be a
 # literal string, not an expression.
 
-define config.save_directory = "ramen"
+define config.save_directory = "ramendir"
 
 ## Icon ##################################################################
 ##

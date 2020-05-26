@@ -26,7 +26,7 @@ init -101 python:
             ```
             """
 
-            ramen.backto = ramen.last_label
+            ramen.backto = ramen.label_last
             ramu.sfx(
                 'phone-ring',
                 plugin('phonecall').dir,
@@ -73,7 +73,7 @@ init -101 python:
             ```
             """
 
-            ramen.backto = ramen.last_label
+            ramen.backto = ramen.label_last
 
             npc_name = ramu.npc(npc_id, 'name')
             npc_phonenum = ramu.npc(npc_id, 'phonenum')

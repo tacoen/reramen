@@ -14,7 +14,7 @@ init python:
         build.classify('game/ramen/**', 'ramen-framework-'+config.version )
 
         # exclude all developer script from the packages
-        build.classify('game/developer-option.*', None)
+        #build.classify('game/developer-option.*', None)
         build.classify('game/plugins/dev/**', None)
     
     if 'ramen_plugins_build' in dir():

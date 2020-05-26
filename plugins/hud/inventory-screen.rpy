@@ -31,7 +31,7 @@ init -12 python:
 
     def labeloc(what):
         try:
-            if ramen.last_label in ramen.labeloc[what]:
+            if ramen.label_last in ramen.labeloc[what]:
                 return True
             else:
                 return False

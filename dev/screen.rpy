@@ -5,8 +5,6 @@ screen ramen_dev_screen():
     default obj = None
     default show = False
 
-    layer 'overlay2'
-
     if show:
 
         modal True
@@ -138,3 +136,7 @@ screen rds_topbar(title):
             text 'Ramen Dev: ' + title.title() style 'rds_label'
             textbutton ico('square-x') style 'rds_icon' xalign 1.0:
                 action ToggleScreenVariable('show')
+
+
+init python:
+    config.overlay_screens.append("ramen_dev_screen")

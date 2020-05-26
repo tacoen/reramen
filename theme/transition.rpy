@@ -8,7 +8,7 @@ init offset = -10
 
 # Entering or exiting the game menu.
 
-define config.enter_transition = Pixellate(0.5,8)
+define config.enter_transition = Pixellate(0.5,4)
 define config.exit_transition = Pixellate(0.5,8)
 
 # Between screens of the game menu.

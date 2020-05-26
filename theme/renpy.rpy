@@ -1,4 +1,4 @@
-init -290 python:
+init -305 python:
 
     # avoid rebuild, gui.init must in early init level
     # this supply config.screen_width and config.screen_height, etc

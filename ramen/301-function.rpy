@@ -120,9 +120,22 @@ init -301 python:
                     obj.__dict__[str(a)] = args[a]
             return obj
 
-        def labelcallback(self, name, abnormal):
-            if not name.startswith('ramen_') or not name.startswith("_"):
-                ramen.last_label = name
+        def label_callback(self, name, abnormal):
+        
+            if not name.startswith('ramen_') and \
+                not name.startswith("_") and \
+                not name.endswith('_screen') and \
+                not name=='after_load':
+                
+                if not name == ramen.label_trace[-1]:
+                    ramen.label_trace.append(name)
+                
+                if len(ramen.label_trace)>10:
+                    ramen.label_trace=ramen.label_trace[-9:]
+
+                ramen.label_last = name
+                
+                #if name in ramen.events.keys()
 
         def cycle(self, current, array):
             current = int(current) + 1
