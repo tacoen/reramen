@@ -81,7 +81,6 @@ screen game_menu(title, scroll=None, yinitial=0.0):
     if main_menu:
         key "game_menu" action ShowMenu("main_menu")
 
-
 style game_menu_frame:
     background "#0006"
     bottom_padding 32

@@ -6,7 +6,6 @@ init -305 python:
 
     gui.init(1280, 720)
 
-
 init -5 python:
 
     # needed

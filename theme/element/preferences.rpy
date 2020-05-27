@@ -89,7 +89,6 @@ style pref_label is ramen_label:
 style pref_label_text is ramen_label_text:
     yalign 0.5
 
-
 style radio_label is pref_label
 style radio_label_text is pref_label_text
 

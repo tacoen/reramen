@@ -9,7 +9,6 @@ screen navigation_hbox(text, action, icon=None):
 
         textbutton _(text) action action
 
-
 screen navigation():
 
     style_prefix "navigation"
@@ -31,12 +30,11 @@ screen navigation():
                 if ramen.episode_menu:
                     use navigation_hbox("Episodes", ShowMenu("ramen_episodes_menu"), "menu1")
 
-
             else:
                 use navigation_hbox("History", ShowMenu("history"))
                 if _in_replay:
                     use navigation_hbox("End Replay", EndReplay(confirm=True))
-            
+
             use navigation_hbox("Load", ShowMenu("load"), "folder")
 
             if not main_menu:
@@ -61,7 +59,6 @@ screen navigation():
                 # The quit button is banned on iOS and unnecessary on Android and
                 # Web.
                 use navigation_hbox("Quit", Quit(confirm=not main_menu), 'log-out2')
-
 
 style navigation_frame is frame:
     background "#002c"

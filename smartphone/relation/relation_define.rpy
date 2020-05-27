@@ -21,7 +21,6 @@ init -20 python:
         style['smphone_bar_' + s].base_bar = Color(color).tint(0.4)
         style['smphone_bar_' + s].left_bar = color
 
-
 screen smphone_apps_relation(var, page):
 
     python:
@@ -58,7 +57,6 @@ screen smphone_apps_relation(var, page):
                             vbox:
                                 text s.title() size 14
                                 bar range 20 value val style 'smphone_bar_' + s xsize app.minibar_width
-
 
 # screen smp_app_relationme():
 

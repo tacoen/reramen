@@ -234,7 +234,7 @@ init -200 python:
         def function_proxy(self,func):
             res = globals()[func]()
             if res: return res
-        
+
         def func(self, key, value=None):
 
             if value is not None:
@@ -287,7 +287,6 @@ init -200 python:
                                 func = None
                         except BaseException:
                             func = None
-
 
                     if func is not None:
                         return func

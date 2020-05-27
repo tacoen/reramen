@@ -197,7 +197,6 @@ screen inventory_grid(inv, size, align):
         vbar value YScrollValue("inventory_vp"):
             ysize vp_height - 8
 
-
 style inventory_detail_text:
     size 20
     color "#999"

@@ -24,5 +24,5 @@ screen choice(items):
 
         for i in items:
             textbutton i.caption action i.action
-            
+
         null height 180

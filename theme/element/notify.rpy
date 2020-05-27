@@ -20,7 +20,6 @@ init python:
 
         renpy.show_screen('notify_ico', message=message, icon=icon)
 
-
 screen notify_ico(message, icon='alert'):
 
     zorder 100
@@ -48,7 +47,6 @@ transform notify_appear:
         linear .25 alpha 1.0
     on hide:
         linear .5 alpha 0.0
-
 
 style notify_frame is frame:
     xpos pt.dialogue_xpos

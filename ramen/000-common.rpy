@@ -32,7 +32,7 @@ transform ramen_lb:
 transform dba:
     on show:
         xalign 1.3
-        linear 0.5 xalign 1.0 
+        linear 0.5 xalign 1.0
     on hide:
-        xalign 1.0 
+        xalign 1.0
         linear 0.5 xalign 1.3

@@ -69,7 +69,6 @@
 
     style _console_trace_value is _console_trace_text
 
-
 screen _console:
     # This screen takes as arguments:
     #
@@ -82,7 +81,7 @@ screen _console:
     zorder 1500
     modal True
     layer 'console'
-    
+
     if not _console.console.can_renpy():
         frame:
             style "_console_backdrop"
@@ -148,7 +147,6 @@ screen _console:
                     text "... " style "_console_prompt"
 
                 input default default style "_console_input_text" exclude "" copypaste True
-
 
     key "game_menu" action Jump("_console_return")
     key "console_older" action _console.console.older

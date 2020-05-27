@@ -5,7 +5,6 @@ define config.thumbnail_height = 144
 
 # The number of columns and rows in the grid of save slots.
 
-
 ## Load and Save screens #################################################
 ##
 # These screens are responsible for letting the player save the game and load
@@ -21,13 +20,11 @@ screen save():
 
     use file_slots(_("Save"))
 
-
 screen load():
 
     tag menu
 
     use file_slots(_("Load"))
-
 
 screen file_slots(title):
 

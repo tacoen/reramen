@@ -6,7 +6,6 @@
 # to run before init statements in any other file.
 init offset = -2
 
-
 ## Frames ################################################################
 ##
 # These variables control the look of frames that can contain user interface
@@ -27,7 +26,6 @@ init offset = -2
 # Should frame backgrounds be tiled?
 # define gui.frame_tile=False
 
-
 ## Bars, Scrollbars, and Sliders #########################################
 ##
 # These control the look and size of bars, scrollbars, and sliders.
@@ -44,7 +42,6 @@ init offset = -2
 
 # True if bar images should be tiled. False if they should be linearly scaled.
 
-
 # Horizontal borders.
 # define gui.bar_borders=Borders(4, 4, 4, 4)
 # define gui.scrollbar_borders=Borders(4, 4, 4, 4)
@@ -57,7 +54,6 @@ init offset = -2
 
 # What to do with unscrollable scrollbars in the gui. "hide" hides them, while
 # None shows them.
-
 
 ## NVL-Mode ##############################################################
 ##

@@ -21,7 +21,6 @@ screen action_shortcut(shortcuts):
             $ s = shortcuts[i]
             use shortcut(s['text'], s['action'], s['icon'])
 
-
 screen shortcut(text, action, icon):
 
     hbox:
@@ -32,7 +31,6 @@ screen shortcut(text, action, icon):
             action action
             hovered[SetScreenVariable('shade', True)]
             unhovered[SetScreenVariable('shade', False)]
-
 
 style shortcut_icon is ramen_icon
 style shortcut_icon_text is ramen_icon_text:

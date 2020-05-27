@@ -153,7 +153,6 @@ screen modal(screenname, **kwargs):
         else:
             transclude
 
-
 screen modal_display(**kwargs):
 
     $ text_display = kwargs['text']
@@ -161,7 +160,6 @@ screen modal_display(**kwargs):
     use modal('modal_display', **kwargs):
         style_prefix "modal"
         text text_display
-
 
 screen modal_input(**kwargs):
 

@@ -12,7 +12,6 @@ screen input(prompt):
             text prompt style "input_prompt"
             input id "input"
 
-
 style input_prompt:
     xalign pt.dialogue_text_xalign
     color "#111"

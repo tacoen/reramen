@@ -10,7 +10,6 @@ screen tooltip(msg, adjust=(0, 0)):
         padding(4, 4, 4, 4)
         text msg size 12 color '#fff9'
 
-
 # Additional screens
 # https://www.renpy.org/doc/html/screen_special.html
 
@@ -31,7 +30,6 @@ screen skip_indicator():
             text ico('chevron-right') at delayed_blink(0.0, 1.0) style "skip_triangle"
             text ico('chevrons-right') at delayed_blink(0.2, 1.0) style "skip_triangle"
             text ico('chevrons-right') at delayed_blink(0.4, 1.0) style "skip_triangle"
-
 
 style skip_frame is empty:
     ypos 0

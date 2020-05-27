@@ -13,21 +13,20 @@ init python:
     build.classify('**/.**', None)
     build.classify('**/#**', None)
     build.classify('**/thumbs.db', None)
-    
+
     build.documentation('*.md')
     build.documentation('*.html')
     build.documentation('*.txt')
 
     if not ramen.dev:
-    
+
         build.archive('ramen-framework-'+config.version, "all")
         build.classify('game/ramen/**', 'ramen-framework-'+config.version )
 
         # exclude all developer script from the packages
         #build.classify('game/developer-option.*', None)
         build.classify('game/dev/**', None)
-    
+
     if 'ramen_plugins_build' in dir():
         ramen_plugins_build()
-        
-        
+

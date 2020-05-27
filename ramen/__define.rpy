@@ -57,7 +57,6 @@ init -302 python:
 
     mc = ramen_multipersistent('mc')
 
-
 init -300 python:
 
     ramentime = ramen_time()
@@ -76,7 +75,7 @@ init -300 python:
         persistent.files = sorted(renpy.list_files(False))
 
     config.label_callback = ramu.label_callback
-    
+
     config.layers = [
         'master',
         'transient',

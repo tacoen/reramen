@@ -1,22 +1,20 @@
 init -300 python:
 
     # Set True to enable developer options
-    
+
     # Game Title
     config.name = _("ramen")
     config.version = "1.0"
     gui.about = _p("a game made using ramen renpy framework.")
-    gui.show_name = True    
+    gui.show_name = True
 
     config.autoreload = False
     config.has_autosave = False
-    
+
     # uncomment to release
     # config.developer = False
 
     ramen.dev = True
-
-
 
 init python:
 

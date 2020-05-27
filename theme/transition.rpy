@@ -15,11 +15,9 @@ define config.exit_transition = Pixellate(0.5,8)
 
 define config.intra_transition =  Dissolve(.2)
 
-
 # A transition that is used after a game has been loaded.
 
 define config.after_load_transition = Dissolve(.2)
-
 
 # Used when entering the main menu after the game has ended.
 

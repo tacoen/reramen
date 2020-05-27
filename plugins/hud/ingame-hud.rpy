@@ -119,7 +119,6 @@ screen hud_bar():
                 textbutton ico(i.icon) style 'hud_icon':
                     action Null
 
-
 init python:
     if renpy.has_screen('hud'):
         config.overlay_screens.append("hud")

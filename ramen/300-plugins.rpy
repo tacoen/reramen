@@ -1,7 +1,7 @@
 init -299 python:
 
     pp = ramen_persistent('extend')
-    
+
     pp.plugins = {}
     pp.episodes = {}
     pp.asset = {}
@@ -24,9 +24,9 @@ init -299 python:
         """
         Ramen plugins can be screen, function, class, or assets.
         Registered plugins can be included into your distributions as archive `.rpa`
-        
+
         **If you not registered the plugin, it will works just like a normal ren'py scripts.**
-        
+
         ``` python
         register_plugins(
             title="App Container",
@@ -36,12 +36,11 @@ init -299 python:
             desc="small apps in screen",
             build=True
         )
-        
+
         ```
         """
-        
-        def __new__(self, id=None, type='plugins', *args, **kwargs):
 
+        def __new__(self, id=None, type='plugins', *args, **kwargs):
 
             try:
                 kwargs['dir']
@@ -55,7 +54,7 @@ init -299 python:
                         '',
                         os.path.dirname(
                             renpy.get_filename_line()[0])))
-                            
+
             try:
                 kwargs['version']
             except BaseException:
@@ -101,13 +100,13 @@ init -299 python:
 
             for k in kwargs:
                 persistent.ramen['extend'][type][id][k]=kwargs[k]
-                
+
 
     def ramen_plugins_build():
-    
+
         for p in pp.plugins.keys():
             if plugin(p).build:
-            
+
                 build.archive('plugin_'+ramu.safestr(p), "all")
                 build.classify('game/'+plugin(p).dir+'**', 'plugin_'+ramu.safestr(p) )
 
@@ -117,7 +116,6 @@ init -1 python:
         ramen.episode_menu = True
     else:
         ramen.episode_menu = False
-
 
 screen ramen_episodes_menu():
 

@@ -57,7 +57,7 @@ init -101 python:
                     prefix,
                     side='oncall',
                     transform=ramen_lb)
-                    
+
             else:
                 renpy.sound.stop()
                 narrator('You ignore the call')
@@ -142,7 +142,7 @@ init -101 python:
             renpy.hide('side',layer='above_screens')
 
             return res
-        
+
         def cb_dialing(self, event, interact=False, **kwargs):
             """Provide callback function for `phone_dialing`."""
             if event == "show_done":

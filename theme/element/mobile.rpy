@@ -26,7 +26,6 @@ screen quick_menu():
             textbutton _("Auto") action Preference("auto-forward", "toggle")
             textbutton _("Menu") action ShowMenu()
 
-
 style window:
     variant "small"
     background "gui/phone/textbox.png"

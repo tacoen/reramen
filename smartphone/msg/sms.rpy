@@ -139,7 +139,6 @@ screen smphone_apps_sms(var, page):
         else:
             use smphone_apps_sms_reply(app, var, page)
 
-
 screen smphone_apps_sms_list(app, var, page):
 
     use smphone_viewport(app.title, app.hcolor):

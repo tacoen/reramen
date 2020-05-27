@@ -32,7 +32,6 @@ screen help():
             elif device == "gamepad":
                 use gamepad_help
 
-
 screen keyboard_help():
 
     hbox:
@@ -79,7 +78,6 @@ screen keyboard_help():
         label "V"
         text _("Toggles assistive {a=https://www.renpy.org/l/voicing}self-voicing{/a}.")
 
-
 screen mouse_help():
 
     hbox:
@@ -101,7 +99,6 @@ screen mouse_help():
     hbox:
         label _("Mouse Wheel Down")
         text _("Rolls forward to later dialogue.")
-
 
 screen gamepad_help():
 

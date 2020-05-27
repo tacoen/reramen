@@ -15,7 +15,6 @@ define config.save_directory = "ramendir"
 
 define config.window_icon = "gui/window_icon.png"
 
-
 ## Build configuration ###################################################
 ##
 # This section controls how Ren'Py turns your project into distribution files.
@@ -41,7 +40,6 @@ define config.window_icon = "gui/window_icon.png"
 
     # Classify files as None to exclude them from the built distributions.
 
-
     # To archive files, classify them as 'archive'.
 
     # build.classify('game/**.png', 'archive')
@@ -50,21 +48,14 @@ define config.window_icon = "gui/window_icon.png"
     # Files matching documentation patterns are duplicated in a mac app build,
     # so they appear in both the app and the zip file.
 
-
-
-
 # A Google Play license key is required to download expansion files and perform
 # in-app purchases. It can be found on the "Services & APIs" page of the Google
 # Play developer console.
 
 # define build.google_play_key = "..."
 
-
 # The username and project name associated with an itch.io project, separated
 # by a slash.
 
 # define build.itch_project = "renpytom/test-project"
 
-
-
-    

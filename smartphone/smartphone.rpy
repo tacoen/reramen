@@ -1,6 +1,6 @@
 init -190 python:
 
-    ramen.smphone = False 
+    ramen.smphone = False
 
     smphone = ramen_apps('smphone',
                          background=ramu.ezfile2(ramu.getdir() + "body"),
@@ -73,7 +73,6 @@ init -190 python:
     style['smphone_default_button_text'].color = "#333"
     style['smphone_default_button_text'].hover_color = "#fff"
 
-
 init -9:
 
     screen smphone_window():
@@ -109,9 +108,9 @@ init -9:
                     text '404'
 
         $ smphone_exit_action = [ Hide('smphone_ui'), SetVariable('ramen.smphone',False)]
-        
+
         key "game_menu" action smphone_exit_action
-        
+
         imagebutton xpos 203 ypos 636 action smphone_exit_action:
             idle smphone.exit_btn
             hover smphone.exit_hover_btn

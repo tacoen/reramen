@@ -5,7 +5,6 @@
 ##
 # https://www.renpy.org/doc/html/screen_special.html#nvl
 
-
 screen nvl(dialogue, items=None):
 
     window:
@@ -37,7 +36,6 @@ screen nvl(dialogue, items=None):
 
     add SideImage() xalign 0.0 yalign 1.0
 
-
 screen nvl_dialogue(dialogue):
 
     for d in dialogue:
@@ -55,7 +53,6 @@ screen nvl_dialogue(dialogue):
 
                 text d.what:
                     id d.what_id
-
 
 # This controls the maximum number of NVL-mode entries that can be displayed at
 # once.

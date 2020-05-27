@@ -52,7 +52,6 @@ style quickmenu is default
 style quickmenu_button is button:
     padding(8, 8, 8, 8)
 
-
 style quickmenu_button_text is ramen_icon_text:
     font pt.font_ui_ico
     size 20
@@ -63,7 +62,6 @@ style quickmenu_button_text is ramen_icon_text:
     outlines pt.idle_outlines
     hover_outlines pt.hover_outlines
     insensitive_outlines pt.insensitive_outlines
-
 
 # This code ensures that the quick_menu screen is displayed in-game, whenever
 # the player has not explicitly hidden the interface.
