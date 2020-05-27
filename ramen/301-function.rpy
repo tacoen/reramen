@@ -195,7 +195,7 @@ init -301 python:
 
             """
 
-            F = persistent.files
+            FL = persistent.files
             dirs = []
 
             if dir:
@@ -204,8 +204,11 @@ init -301 python:
                 else:
                     dirs = dir
 
+                F=[]
+                
                 for dir in dirs:
-                    F = filter(lambda w: dir in w, sorted(F))
+                    fl = filter(lambda w: dir in w, sorted(FL))
+                    F += fl
 
             if key:
                 F = filter(lambda w: key in w, F)

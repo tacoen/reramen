@@ -1,0 +1,5 @@
+{
+"0":[ "Hello?", "Hello!", "This phone call is from chat.json", "Ok, I got it." ],
+"1":[ "[wo.greet]", "[wo.daytime].", "text tagging is working in chat like this.","That why, I know you. [mc_name]" ],
+"2":[ "Hello, [mc_name]", "What cha doing?", "Recieveing your calls?", "I'am trying chat's demo.","Good for you." ]
+}

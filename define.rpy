@@ -16,7 +16,7 @@ init -300 python:
 
     ramen.dev = True
 
-init python:
+init -2 python:
 
     build.name = ramu.safestr(config.name)
 

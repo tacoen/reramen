@@ -22,6 +22,9 @@ init -200 python:
 
             self.define_byfile()
 
+        def reinit(self):
+            self.define_byfile()
+            
         def set_phonenum(self, fordig=None):
 
             if fordig is None:
@@ -137,11 +140,17 @@ init -200 python:
                 l = sorted(pose.keys())
 
                 for k in pose.keys():
+                    
+                    if self.exist('pose',k):
+                        continue
+                    
                     if k == 'main':
                         renpy.image(self.id, pose[k])
                         main = True
                     else:
                         renpy.image(self.id + " " + k, pose[k])
+                        
+                    #self.__dict__[str('pose')].append(k)
 
                 if not main:
                     renpy.image(self.id, pose[l[0]])

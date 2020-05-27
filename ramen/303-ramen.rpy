@@ -66,7 +66,7 @@ init -303 python:
                 self.__dict__[str('dir')] = []
 
             self.__dict__[str('dir')].append(path)
-
+            
         def find(self, file, ext=('.webp', '.png', '.jpg')):
 
             for d in range(0,len(self.dir)):
@@ -187,6 +187,15 @@ init -303 python:
             self.kdict(**kwargs)
             self.init(id, *args, **kwargs)
 
+        def exist(self,what,key):
+            try: 
+                self.__dict__[what][k]
+                res=True
+            except: 
+                res=False
+                
+            return res
+                    
         def ro_register(self):
             """ all ramen_extendable object are registered on `ramen.object`"""
             try:
@@ -195,6 +204,10 @@ init -303 python:
                 ramen.objects[self.__class__.__name__] = []
             ramen.objects[self.__class__.__name__].append(self.id)
 
+        def reinit(self):
+            pass
+            
         def extend(self):
             """extend the ramen_object to the directory"""
             self.setdir(ramu.getdir())
+            self.reinit()

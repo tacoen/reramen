@@ -89,6 +89,20 @@ init -299 python:
                 type = 'plugins'
 
             try:
+                kwargs['type']
+            except BaseException:
+                if type is not None:
+                    kwargs['type'] = type
+
+            if kwargs['type'] == 'episodes':
+            
+                try:
+                    kwargs['label']
+                except BaseException:
+                    kwargs['label'] = id
+
+
+            try:
                 persistent.ramen['extend'][type]
             except BaseException:
                 persistent.ramen['extend'][type]={}
@@ -101,14 +115,13 @@ init -299 python:
             for k in kwargs:
                 persistent.ramen['extend'][type][id][k]=kwargs[k]
 
-
     def ramen_plugins_build():
 
         for p in pp.plugins.keys():
             if plugin(p).build:
-
-                build.archive('plugin_'+ramu.safestr(p), "all")
-                build.classify('game/'+plugin(p).dir+'**', 'plugin_'+ramu.safestr(p) )
+                type = plugin(p).type
+                build.archive(type+'_'+ramu.safestr(p), "all")
+                build.classify('game/'+plugin(p).dir+'**', type+'_'+ramu.safestr(p) )
 
 init -1 python:
 
@@ -121,4 +134,46 @@ screen ramen_episodes_menu():
 
     tag menu
 
-    use file_slots(_("Load"))
+    use game_menu(_("Episodes")):
+
+        vpgrid:
+            cols 2
+            yinitial 0.0
+            spacing 24
+            scrollbars "vertical"
+            mousewheel True
+            draggable True
+            pagekeys True
+            side_yfill True            
+
+            style_prefix 'episodes'
+            
+            
+            for p in pp.episodes:
+            
+                python:
+                    e = plugin(p,'episodes') 
+                    sty = True
+                    if renpy.loadable(e.dir+'thumb.png'):
+                        thumb = im.Scale(e.dir+'thumb.png',200,112)
+                    else:
+                        thumb = Composite((200,112), (0,0),Solid('#456'), (8,8),Text(e.title.title()))
+                    if renpy.has_label(e.label):
+                        action = Jump(e.label)
+                    else:
+                        action = Null
+                        sty = False
+                    
+                button xsize 465:
+                    if sty:
+                        action action
+                    has hbox
+                    add thumb
+                    null width 24
+                    vbox:
+                        spacing 2
+                        text e.title.title()
+                        text e.desc size 16
+
+
+    

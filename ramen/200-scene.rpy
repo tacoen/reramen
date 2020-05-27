@@ -11,9 +11,14 @@ init -200 python:
             for a in map:
                 self.map[a] = ramen_map(self.id,self.pos,self.dir,a)
 
+        def reinit(self):
+            self.define_byfile()
+
+
         def define_byfile(self):
 
             tdir = []
+            
             for d in self.dir:
                 tdir.append(d + 'scene')
 
@@ -24,10 +29,12 @@ init -200 python:
                         pe.time_word +
                         pe.time_ico)))
             cond = ()
+            
             files = ramu.files(tdir, False, pe.ext_img + pe.ext_txt)
 
             res = {}
-
+            res['scene']={}
+            
             def est(where, what=None):
                 try:
                     res[where]
@@ -39,14 +46,23 @@ init -200 python:
                     except BaseException:
                         res[where][what] = {}
 
+
             for f in files:
 
                 fn = ramu.file_info(f)
 
                 est(fn.path)
-
+                
                 if fn.path == 'scene':
-
+                
+                    if ' ' in fn.name:
+                        fnn = fn.name.split(' ')
+                        if self.exist('scene',fnn[0]):
+                            continue
+                    else:
+                        if self.exist('scene',fn.name):
+                            continue
+                    
                     if ' ' in fn.name:
 
                         for c in condition:
@@ -79,13 +95,17 @@ init -200 python:
                     res[fn.path][fn.name] = f
 
             for k in res['scene']:
+            
+                if self.exist('scene',k):
+                    continue
+            
                 try:
                     res['scene'][k]['cond']
                     res['scene'][k]['cond'] += (True, res['scene'][k]['main'])
                     renpy.image(
                         self.id + " " + k,
                         ConditionSwitch(
-                            *res['scene'][k]['cond']))
+                        *res['scene'][k]['cond']))
                     del res['scene'][k]['main']
                     res['scene'][k] = res['scene'][k]['cond']
 
@@ -94,7 +114,11 @@ init -200 python:
                     res['scene'][k] = res['scene'][k]['main']
 
             for k in res:
-                self.__dict__[k] = res[k]
+
+                try: self.__dict__[k]
+                except: self.__dict__[k] = {}
+                
+                self.__dict__[k].update(res[k])
 
     class ramen_map(object):
 
