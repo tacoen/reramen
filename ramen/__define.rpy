@@ -87,6 +87,7 @@ init -300 python:
         'console',
         'dialog_layer']
 
+    config.transient_layers = [ 'transient' ]
 
 init -100 python:
 

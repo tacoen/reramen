@@ -57,6 +57,7 @@ init -101 python:
                     prefix,
                     side='oncall',
                     transform=ramen_lb)
+                    
             else:
                 renpy.sound.stop()
                 narrator('You ignore the call')
@@ -135,9 +136,13 @@ init -101 python:
                 layer='above_screens'
             )
 
-            return ramu.talk(npc_id=npc_id, what=what,
+            res = ramu.talk(npc_id=npc_id, what=what,
                              type=type, prefix=prefix)
 
+            renpy.hide('side',layer='above_screens')
+
+            return res
+        
         def cb_dialing(self, event, interact=False, **kwargs):
             """Provide callback function for `phone_dialing`."""
             if event == "show_done":
