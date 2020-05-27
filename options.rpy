@@ -20,7 +20,7 @@ define config.window_icon = "gui/window_icon.png"
 ##
 # This section controls how Ren'Py turns your project into distribution files.
 
-init python:
+#init python:
 
     # The following functions take file patterns. File patterns are case-
     # insensitive, and matched against the path relative to the base directory,
@@ -41,11 +41,6 @@ init python:
 
     # Classify files as None to exclude them from the built distributions.
 
-    build.classify('**~', None)
-    build.classify('**.bak', None)
-    build.classify('**/.**', None)
-    build.classify('**/#**', None)
-    build.classify('**/thumbs.db', None)
 
     # To archive files, classify them as 'archive'.
 
@@ -54,10 +49,6 @@ init python:
 
     # Files matching documentation patterns are duplicated in a mac app build,
     # so they appear in both the app and the zip file.
-
-    build.documentation('*.html')
-    build.documentation('*.txt')
-
 
 
 
@@ -73,3 +64,7 @@ init python:
 # by a slash.
 
 # define build.itch_project = "renpytom/test-project"
+
+
+
+    

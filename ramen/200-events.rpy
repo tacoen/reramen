@@ -9,7 +9,7 @@ init -201 python:
             for k in kwargs:
                 self.__dict__[str(k)] = kwargs[k]
 
-            self.__dict__['id'] = id
+            self.__dict__[str('id')] = str(id)
             
         def __call__(self):
             return self.__dict__
@@ -26,39 +26,52 @@ init -201 python:
             
         def __getattr__(self,key):
             return self.get(key)
-            
         
-        def occur(self):
-            n = -1
+        def occur(self,inv=None):
+
             occur=[]
             
-            if self.label is not None: n +=1
-            if self.time_cond is not None: n +=1
-            if self.has is not None: n +=1
-            if self.after is not None: n +=1
+            if self.label is not None: 
             
-            if n==-1: return False
-                
-            for x in range(0,n):
-                occur.append(False)
-                
-            if ramen.label_last == self.label:
-                    occur[0] = True
+                if ramen.label_last == self.label:
+                    occur.append(True) 
+                else:
+                    occur.append(False) 
+           
+            if self.time_cond is not None: 
+
+                if ramentime.cond() == self.time_cond or \
+                    ramentime.ico() == self.time_cond or \
+                    ramentime.word() == self.time_cond:
+                    occur.append(True)
+                else:
+                    occur.append(False) 
             
-            if ramentime.cond() == self.time_cond or \
-               ramentime.ico() == self.time_cond or \
-               ramentime.word() == self.time_cond:
-                    occur[1] = True
+            if self.after is not None:
 
+                if ramentime.hour() > self.after:
+                    occur.append(True)
+                else:
+                    occur.append(False) 
+            
+            if inv is not None:
 
+                if self.has is not None: 
+                    if inv.has(self.has):
+                        occur.append(True)
+                    else:
+                        occur.append(False)
+
+            if occur == []:
+                return False
+            
             if False in occur:
                 return False
             else:
                 return True
-            
 
     def Event(id):
-        """Return item from `ramen.items` by their id."""
+        """Return event from `ramen.events` by their id."""
         return ramen.events.__dict__[id]
     
     class define_event(object):
@@ -71,5 +84,5 @@ init -201 python:
             id = ramu.safestr(id)
             ramen.events.__dict__[id] = ramen_event(id, **kwargs)    
             
-    define_event('coba',label='red',time_cond='night')
+  
     
