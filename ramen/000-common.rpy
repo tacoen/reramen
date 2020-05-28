@@ -3,6 +3,8 @@ init offset = -299
 image white = Solid('#eee')
 image black = Solid('#111')
 image bg room = Solid('#338')
+image mimic = Solid("#0000")
+image blank = Solid("#0000")
 
 define qpixellate = Pixellate(0.5,2)
 
@@ -28,6 +30,11 @@ transform ramen_lb:
     xalign 0.0
     yalign 1.0
     yoffset 24
+
+transform ramen_center:
+    xalign 0.5
+    yalign 1.0
+
 
 transform dba:
     on show:

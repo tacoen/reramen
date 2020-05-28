@@ -24,7 +24,7 @@ init -200 python:
 
         def reinit(self):
             self.define_byfile()
-            
+
         def set_phonenum(self, fordig=None):
 
             if fordig is None:
@@ -140,16 +140,16 @@ init -200 python:
                 l = sorted(pose.keys())
 
                 for k in pose.keys():
-                    
+
                     if self.exist('pose',k):
                         continue
-                    
+
                     if k == 'main':
                         renpy.image(self.id, pose[k])
                         main = True
                     else:
                         renpy.image(self.id + " " + k, pose[k])
-                        
+
                     #self.__dict__[str('pose')].append(k)
 
                 if not main:
@@ -169,3 +169,9 @@ init -200 python:
                 what = tag.replace(cut, '')
                 renpy.image("side " + self.id + " " + what, compo)
 
+
+
+transform Expression(who, npc_expression, pos=(0,0)):
+    xpos int(ramu.imgexpo(who,'bound')[0])+ int(ramu.npc(who,'expression_pos')[0])
+    ypos int(ramu.imgexpo(who,'bound')[1])+ int(ramu.npc(who,'expression_pos')[1])
+    ramu.npc(who,'expression')[npc_expression]

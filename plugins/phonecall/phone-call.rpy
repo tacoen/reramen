@@ -59,6 +59,7 @@ init -101 python:
                     transform=ramen_lb)
 
             else:
+                result = False
                 renpy.sound.stop()
                 narrator('You ignore the call')
 

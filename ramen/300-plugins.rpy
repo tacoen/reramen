@@ -66,9 +66,9 @@ init -299 python:
                 kwargs['author'] = None
 
             try:
-                kwargs['url']
+                kwargs['author_url']
             except BaseException:
-                kwargs['url'] = None
+                kwargs['author_url'] = 'http://'
 
             try:
                 kwargs['title']
@@ -95,7 +95,7 @@ init -299 python:
                     kwargs['type'] = type
 
             if kwargs['type'] == 'episodes':
-            
+
                 try:
                     kwargs['label']
                 except BaseException:
@@ -134,46 +134,110 @@ screen ramen_episodes_menu():
 
     tag menu
 
+    default episode = None
+
     use game_menu(_("Episodes")):
 
-        vpgrid:
-            cols 2
-            yinitial 0.0
-            spacing 24
-            scrollbars "vertical"
-            mousewheel True
-            draggable True
-            pagekeys True
-            side_yfill True            
 
-            style_prefix 'episodes'
-            
-            
-            for p in pp.episodes:
-            
-                python:
-                    e = plugin(p,'episodes') 
-                    sty = True
-                    if renpy.loadable(e.dir+'thumb.png'):
-                        thumb = im.Scale(e.dir+'thumb.png',200,112)
-                    else:
-                        thumb = Composite((200,112), (0,0),Solid('#456'), (8,8),Text(e.title.title()))
-                    if renpy.has_label(e.label):
-                        action = Jump(e.label)
-                    else:
-                        action = Null
-                        sty = False
-                    
-                button xsize 465:
-                    if sty:
-                        action action
-                    has hbox
-                    add thumb
-                    null width 24
-                    vbox:
-                        spacing 2
-                        text e.title.title()
-                        text e.desc size 16
+        if episode is not None:
+
+            use ramen_episodes_detail(episode)
+
+        else:
+
+            vpgrid:
+                cols 2
+                yinitial 0.0
+                spacing 20
+                scrollbars "vertical"
+                mousewheel True
+                draggable True
+                pagekeys True
+                side_yfill True
+
+                style_prefix 'episodes'
+
+                for episode in pp.episodes:
+
+                    python:
+                        e = plugin(episode,'episodes')
+                        if renpy.loadable(e.dir+'thumb.png'):
+                            thumb = im.Scale(e.dir+'thumb.png',200,110)
+                        else:
+                            thumb = Composite((200,110), (0,0),Solid('#456'), \
+                                (0.45,0.3),Text(ramu.capcap(e.title),size=36,font=pt.font_ui_label))
+
+                    button xsize 465:
+                        action SetScreenVariable('episode',episode)
+                        has hbox
+                        add thumb
+                        null width 10
+                        vbox:
+                            spacing 2
+                            label e.title.title()
+                            text e.desc size 14
+
+screen ramen_episodes_detail(episode):
+
+    python:
+
+        e = plugin(episode,'episodes')
+
+        if renpy.loadable(e.dir+'banner.png'):
+            banner = Composite((900,150), (0,0), im.Scale(e.dir+'banner.png',900,150), \
+                (0,0),Solid("#0009"),
+                (20,0.6),Text(e.title.title(),size=32,font=pt.font_ui_label))
+
+        else:
+            banner = Composite((900,150), (0,0),Solid('#456'), \
+                (0,0),Solid("#0009"),
+                (20,0.6),Text(e.title.title(),size=32,font=pt.font_ui_label))
+
+    viewport:
+        yinitial 0.0
+        spacing 24
+        scrollbars "vertical"
+        mousewheel True
+        draggable True
+        pagekeys True
+        side_yfill True
+
+        has hbox
+
+        textbutton ico('arrow-left') style 'ramen_icon' action SetScreenVariable('episode',None)
+
+        vbox xoffset 10:
+            spacing 10
+
+            add banner
+
+            vbox xoffset 20 xsize 840:
+                spacing 10
+
+                text e.desc
+
+                if renpy.has_label(e.label):
+
+                    null height 20
+
+                    textbutton _("Start Episodes") style 'menu_start_button':
+                        xalign 1.0
+                        action Start(e.label)
+
+                null height 20
+
+                add ramu.hline((840, 1), "#666")
+
+                vbox:
+                    spacing 5
+                    style_prefix 'episode_detail'
+                    use hbox_line('Version',e.version)
+                    use hbox_line('Author', "{a="+ e.author_url+"}"+ e.author +"{/a}")
+
+                add ramu.hline((840, 1), "#666")
+
+style episode_detail_text:
+    size 16
+    color "#ccc"
 
 
-    

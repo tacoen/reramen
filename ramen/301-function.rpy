@@ -28,6 +28,29 @@ init -301 python:
             except BaseException:
                 return None
 
+        def imgexpo(self,tag=None,what='size'):
+
+            tags = list(renpy.get_showing_tags())
+
+            if tag is None:
+                tag = tags[-1]
+            else:
+                tag = tags[tags.index(tag)]
+
+            try:
+                attr = renpy.get_attributes(tag)[0]
+                im = renpy.get_registered_image(tag+' '+attr).filename
+            except:
+                im = renpy.get_registered_image(tag).filename
+
+            if what=='size':
+                return renpy.image_size(im)
+            if what=='bound':
+                return renpy.get_image_bounds(tag)
+
+            else:
+                return im
+
         def limits(self, value):
             if value < pe.limit[0]:
                 value = pe.limit[0]
@@ -78,6 +101,13 @@ init -301 python:
 
         def safestr(self, name):
             return re.sub(r'\W+|\s+', '', name).lower().strip()
+
+        def capcap(self,title):
+            res = ''
+            tt = title.split(' ')
+            for t in tt:
+                res += t[0]
+            return res.title()
 
         def random_int(self, min=0, max=100):
             return int(renpy.random.randint(min, max))
@@ -205,7 +235,7 @@ init -301 python:
                     dirs = dir
 
                 F=[]
-                
+
                 for dir in dirs:
                     fl = filter(lambda w: dir in w, sorted(FL))
                     F += fl

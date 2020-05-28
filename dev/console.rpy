@@ -48,7 +48,7 @@
         color "#ccc"
 
     style _console_error_text is _console_text:
-        color "#911"
+        color "#ccd"
         # color "#ff8080"
 
     style _console_trace is _default:
