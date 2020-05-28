@@ -77,6 +77,7 @@ screen hud():
             key k action a
 
     key "K_F10" action ToggleVariable('hud.enable')
+    key "K_F7" action ToggleScreen('hud_stats',stats=['vital','energy','hygiene'])
 
     if hud.enable:
         key "game_menu" action SetVariable('hud.enable', False)
@@ -119,6 +120,42 @@ screen hud_bar():
                 textbutton ico(i.icon) style 'hud_icon':
                     action Null
 
+screen hud_stats(stats=[]):
+
+    vbox xsize 142 xalign 1.0 xoffset -80 yalign 0.1 yoffset 16:
+        spacing 16
+        for s in stats:
+            vbox:
+                style_prefix 'hud_stat'
+                spacing 4
+                hbox xfill True:
+                    text s.title()
+                    text str(mc.stat[s])+"/20" xalign 1.0
+                bar value mc.stat[s] range 20 style 'hud_stat_bar_'+s.lower()
+
+
+style hud_stat_text is ramen_gui:
+    size 16
+    outlines pt.hover_outlines
+
+style hud_stat_bar is bar:
+    ysize 8
+    base_bar "#6666"
+
+style hud_stat_bar_vital is hud_stat_bar:
+    thumb "#e2d"
+    left_bar "#e2dd"
+
+style hud_stat_bar_energy is hud_stat_bar:
+    thumb "#ff2"
+    left_bar "#ff2d"
+
+style hud_stat_bar_hygiene is hud_stat_bar:
+    thumb "#2e2"
+    left_bar "#2e2d"
+
 init python:
     if renpy.has_screen('hud'):
         config.overlay_screens.append("hud")
+
+

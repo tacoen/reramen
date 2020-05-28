@@ -160,10 +160,18 @@ init -80 python:
                     c = ''
                     for line in open(rds.game_path + f, "r"):
                         line = line.strip()
+                        
+                        if "=" in line:
+                            continue
+                            
                         if line.startswith(what):
                             rn = line.split(what + ' ')
-                            rn[1] = rn[1].replace(":", '')
-                            c += "\n * " + rn[1]
+                            try:
+                                rn[1] = rn[1].replace(":", '')
+                                c += "\n * " + rn[1]
+                            except:
+                                c += "\n * (!)" + line
+                                
                     if not c == '':
                         st += line_fileinfo + c + "\n"
 
@@ -362,7 +370,7 @@ init -80 python:
 
             self.getfunc()
             self.collect('screen')
-            self.collect('label')
+            #self.collect('label')
             self.collect('transform')
             self.collect_style()
 
