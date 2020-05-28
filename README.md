@@ -25,5 +25,7 @@ Todo: Things from the old-version of ramen :
 * life simulations = cost of all
 
 ## Why re?
+
 https://tacoen.itch.io/ramen/devlog/147830/ramen-rewrite-for-persistent
+
 Old version: https://github.com/tacoen/ramen
