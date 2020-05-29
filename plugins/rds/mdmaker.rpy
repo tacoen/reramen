@@ -24,7 +24,6 @@ init -80 python:
 
             return sts
 
-
         def setting(self, **kwagrs):
 
             self.footer = "<small>Note This files created using ramen-dev makedoc() from working ramen ren'py project, same references may become a non existent.</small>" +\

@@ -296,24 +296,6 @@ init -301 python:
             files = self.files(dir, key, ext)
             return self.random_of(files)
 
-        def sfx(self, file, path=None, ext=pe.ext_snd, **kwargs):
-
-            res = False
-            if path is not None:
-                search_in = [path, pe.theme_path, 'audio']
-            else:
-                search_in = [pe.theme_path, 'audio']
-
-            for e in ext:
-                for p in search_in:
-                    if renpy.loadable(p + "/" + file + e):
-                        res = p + "/" + file + e
-                        break
-                if res:
-                    break
-            if res:
-                renpy.sound.play(res, channel='sound', **kwargs)
-
         def ezfile2(self, file, default=Color("#0019"), ext=pe.ext_img):
 
             for e in ext:
@@ -344,6 +326,37 @@ init -301 python:
 
             return res
 
+        def ezfind_sound(self, file, path=None, ext=pe.ext_snd):
+        
+            find=[]
+            res = None
+            
+            if path is not None:
+                find.append(path)
+
+            try: find.append(pe.title_path)
+            except: pass
+            try: find.append(pe.theme_path+'audio/')
+            except: pass
+            try: find.append(pe.audio_path)
+            except: pass
+
+            for f in find:
+                res = self.ezfile(f+file,ext)
+                if res is not None:
+                    break
+                    
+            return res
+            
+        def sfx(self, file, path=None, ext=pe.ext_snd, **kwargs):
+
+            res = ezfind_sound(self, file, path, ext)
+
+            if res is not None:
+                renpy.sound.play(res, channel='sound', **kwargs)
+            else:
+                return False
+        
         def ezfile(self, file, ext=pe.ext_img):
             for e in ext:
                 if renpy.loadable(file + e):

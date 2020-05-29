@@ -51,13 +51,9 @@ style main_menu_vbox is vbox
 style main_menu_text is ramen_gui
 style main_menu_version is main_menu_text
 
-
-
 style main_menu_frame:
     xsize 280
     yfill True
-
-    background "gui/overlay/main_menu.png"
 
 style main_menu_title:
     font pt.font_ui_title

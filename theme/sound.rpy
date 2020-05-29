@@ -6,9 +6,20 @@ init -200 python:
 
     ## Sounds and music ######################################################
 
-    # config.main_menu_music = pe.audio_path+"main-theme.ogg"
-    # config.sample_sound=pe.audio_path+"sample/sound.ogg"
-    # config.sample_voice=pe.audio_path+"sample/voice.ogg"
+    snd = ramu.ezfind_sound("main_music")
+
+    if snd is not None:
+        config.main_menu_music = snd
+
+    snd = ramu.ezfind_sound("sample/sound")
+    
+    if snd is not None:
+        config.sample_sound= snd
+
+    snd = ramu.ezfind_sound("sample/voice")
+    
+    if snd is not None:
+        config.sample_voice=snd
 
     config.has_sound = True
     config.has_music = True
