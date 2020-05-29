@@ -14,13 +14,13 @@ It is renpy framework to help you creating of visual novell game.
 * Multi-persistent main character stat
 * Items and Inventory
 * Shop and pawn
+* Events with condition
+* Episodes (DLC or standalone)
+* npc expression (use transform not screen not renpy.image)
 
 Todo: Things from the old-version of ramen :
 
-* events
-* Episodes menu
 * minigames
-* npc expression
 * sprites
 * life simulations = cost of all
 
