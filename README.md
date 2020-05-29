@@ -4,6 +4,11 @@ Renpy According Me, a modular approach.
 
 It is renpy framework to help you creating of visual novell game.
 
+## Wiki 
+
+mdfiles were generated from inside the project (life documentaion).
+https://github.com/tacoen/reramen/wiki/index
+
 ## Features
 
 * Extendable NPC
@@ -23,6 +28,7 @@ Todo: Things from the old-version of ramen :
 * minigames
 * sprites
 * life simulations = cost of all
+* asset viewer/debug
 
 ## Why re?
 
