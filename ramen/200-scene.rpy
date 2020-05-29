@@ -246,8 +246,10 @@ init -200 python:
                     img = key
 
                 if img is not None:
-                    for n in range(0, len(self.dir)):
-                        img = guess_img(self.dir[n], img)
+                    for d in self.dir:
+                        img = guess_img(d, img)
+                        if img is not None:
+                            break
 
                 if img is None:
                     img = Composite(

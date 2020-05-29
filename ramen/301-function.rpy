@@ -130,8 +130,12 @@ init -301 python:
                     ramen.label_trace=ramen.label_trace[-9:]
 
                 ramen.label_last = name
-
-                #if name in ramen.events.keys()
+                
+                if ramu.safestr(name) in ramen.events.__dict__.keys():
+                    e = Event(ramu.safestr(name))
+                    print e.occur()
+                    if e.occur():
+                        renpy.call(e.label)
 
         def cycle(self, current, array):
             current = int(current) + 1
