@@ -9,6 +9,11 @@ It is renpy framework to help you creating of visual novell game.
 mdfiles were generated from inside the project (life documentaion).
 https://github.com/tacoen/reramen/wiki/index
 
+## Demo source code
+
+* Core avaliable nightly on https://github.com/tacoen/reramen
+* Demo/test working project on https://tacoen.itch.io/ramen
+
 ## Features
 
 * Extendable NPC
