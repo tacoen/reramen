@@ -160,10 +160,10 @@ init -80 python:
                     c = ''
                     for line in open(rds.game_path + f, "r"):
                         line = line.strip()
-                        
+
                         if "=" in line:
                             continue
-                            
+
                         if line.startswith(what):
                             rn = line.split(what + ' ')
                             try:
@@ -171,7 +171,7 @@ init -80 python:
                                 c += "\n * " + rn[1]
                             except:
                                 c += "\n * (!)" + line
-                                
+
                     if not c == '':
                         st += line_fileinfo + c + "\n"
 

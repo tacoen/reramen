@@ -4,7 +4,7 @@ screen ramen_dev_screen():
     default obj_type = None
     default obj = None
     default show = False
-    
+
     layer 'console'
 
     if show:

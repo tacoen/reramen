@@ -2,6 +2,46 @@ init -301 python:
 
     class ramen_util():
 
+        def menuof(self, label, screen='choice', exitword='Done', void=None, **condition):
+
+            choices=[]
+            last =''
+            n = 1
+
+            if void is None:
+                void = ramen.label_last
+
+            labels = filter(lambda w: w.startswith(label+'.'), list(renpy.get_all_labels()))
+
+            for l in sorted(labels):
+                print l
+                caption = l.replace(label+'.','')
+
+                if caption in void or l in void:
+                    continue
+
+                if caption == last:
+                    caption += str(n)
+                    n += 1
+                else:
+                    last = caption
+
+                if caption in condition.keys():
+                    cond = condition[caption]
+                else:
+                    cond = True
+
+                if cond:
+                    caption = caption.replace('_',' ')
+                    choices.append((caption.title(),l))
+
+            if exitword is not None:
+                choices.append((exitword,False))
+
+            res = renpy.display_menu(choices,interact=True,screen=screen)
+
+            return res
+
         def pay(self, m, src, ret=False):
             if src > m:
                 src -= m

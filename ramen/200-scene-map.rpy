@@ -57,7 +57,6 @@ screen scene_map():
 
     use scene_baseimg(obj,scene_img)
 
-
     for b in map[scene_img].branch():
 
         python:

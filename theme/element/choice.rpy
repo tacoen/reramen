@@ -19,10 +19,25 @@ screen choice(items):
             xalign 0.5
 
         yalign 0.7
-        yanchor 0.5
+        yanchor 1.0
         spacing 24
 
         for i in items:
             textbutton i.caption action i.action
 
-        null height 180
+
+screen vchoice(items):
+
+    hbox xalign 0.5 yalign 0.85:
+        spacing 4
+        style_prefix 'vchoice'
+        for i in items:
+            textbutton i.caption action i.action
+
+style vchoice_button is ramen_button_medium:
+    background "#222c"
+    hover_background "#111c"
+
+style vchoice_button_text is ramen_button_medium_text:
+    outlines pt.hover_outlines
+    size 20
