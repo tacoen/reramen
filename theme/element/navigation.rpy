@@ -16,9 +16,9 @@ screen navigation():
     frame:
 
         if main_menu:
-            background ramu.ezfile2(pt.main_side_background, pt.nav_background)
+            background pt.main_side_background
         else:
-            background ramu.ezfile2(pt.game_side_background, pt.nav_background)
+            background pt.game_side_background
 
         vbox:
             yalign 1.0
@@ -27,7 +27,7 @@ screen navigation():
             if main_menu:
                 use navigation_hbox("New Game", Start('ramen_newgame'))
 
-                if ramen.episode_menu:
+                if ramen.episode_menu and len(pp.episodes)>0:
                     use navigation_hbox("Episodes", ShowMenu("ramen_episodes_menu"), "menu1")
 
             else:

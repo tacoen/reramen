@@ -1,8 +1,8 @@
 init -12 python:
 
-    pocket = inventory('pocket', max=16)
+    pocket = ramen_inventory('pocket', max=16)
 
-    storage = inventory('storage', max=96)
+    storage = ramen_inventory('storage', max=96)
 
     ramen.res = [None, False, False, False]
 

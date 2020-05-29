@@ -27,7 +27,7 @@ init -301 python:
             delta = h - self.hour
             self.adv(h)
             return self.time
-            
+
         def adv(self, a=1, block=False):
             self.time = self.time + datetime.timedelta(hours=a)
             self.populate()

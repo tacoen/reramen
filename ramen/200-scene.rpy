@@ -14,7 +14,6 @@ init -200 python:
         def reinit(self):
             self.define_byfile()
 
-
         def define_byfile(self):
 
             tdir = []
@@ -45,7 +44,6 @@ init -200 python:
                         res[where][what]
                     except BaseException:
                         res[where][what] = {}
-
 
             for f in files:
 

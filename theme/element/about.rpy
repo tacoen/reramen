@@ -12,36 +12,54 @@ screen about():
     # This use statement includes the game_menu screen inside this one. The
     # vbox child is then included inside the viewport inside the game_menu
     # screen.
+
     use game_menu(_("About"), scroll="viewport"):
 
         style_prefix "about"
 
-        label "[config.name!t]"
         vbox:
-            spacing 2
-            text _("Version [config.version!t] - [build.name!t]")
+            spacing 12
+
+            hbox:
+                null width 216
+                text config.name.title() text_align 0.0 style 'about_title'
+
             python:
                 if gui.about:
                     gui.about.strip()
 
-            text "[gui.about!t]"
+            hbox:
+                null width 216
+                text "[gui.about!t]" text_align 0.0
 
-        if pt.about:
+            null height 12
 
-            label _("Ramen Theme")
-            vbox:
-                spacing 2
-                style 'theme_credit'
-                for credit in pt.about:
-                    text credit
+            use hbox_label("Version ",_("[config.version!t]"),200,1.0,0.0)
 
-        vbox:
-            null height 8
-            text _("Made with {icon=logo-renpy} {a=https://www.renpy.org/}{ui}Ren'Py{/ui}{/a} [renpy.version_only].")
-            null height 16
-            add ramu.hline((900, 1), "#fff6")
-            null height 8
-            text _("[renpy.license!t]")
+            null height 12
+
+            use hbox_label("Framework","Ramen - " + str(ramen_version_name),200,1.0,0.0)
+
+            if pt.about:
+                python:
+                    credit = ''
+                    for a in pt.about:
+                        credit += a+"\n"
+
+                    credit = credit.rstrip('\n')
+
+                use hbox_label("Theme",credit,200,1.0,0.0)
+
+            null height 24
+
+            use hbox_label("License","[renpy.license!t]",200,1.0,0.0)
+
+            hbox:
+                null width 216
+                text _("Made with {icon=logo-renpy} {a=https://www.renpy.org/}{ui}Ren'Py{/ui}{/a} [renpy.version_only].")
+
+
+
 
 style theme_credit is default
 style theme_credit_text:
@@ -49,6 +67,10 @@ style theme_credit_text:
 
 style about_text is ramen_gui:
     size 20
+
+style about_title:
+    size 32
+    font pt.font_ui_title
 
 style about_label is ramen_label
 style about_label_text is ramen_label_text:

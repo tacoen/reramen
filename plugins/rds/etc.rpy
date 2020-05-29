@@ -9,7 +9,6 @@ init python:
 screen showimg(img):
     add img xalign 0.5 yalign 0.5
 
-
 screen rdsa_tools_icons():
 
     vpgrid:

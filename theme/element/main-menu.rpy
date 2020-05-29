@@ -11,7 +11,15 @@ screen main_menu():
 
     style_prefix "main_menu"
 
-    add ramu.ezfile2(pt.main_menu_background)
+    python:
+        sf = ramu.ezfind(ramu.safestr('main'))
+        if sf is None:
+            sf = ramu.ezfind('game')
+
+    if sf is not None:
+        add sf
+    else:
+        add pt.game_menu_background
 
     # The use statement includes another screen inside this one. The actual
     # contents of the main menu are in the navigation screen.
@@ -42,6 +50,8 @@ style main_menu_frame is empty
 style main_menu_vbox is vbox
 style main_menu_text is ramen_gui
 style main_menu_version is main_menu_text
+
+
 
 style main_menu_frame:
     xsize 280

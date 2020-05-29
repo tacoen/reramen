@@ -61,11 +61,11 @@ init -200 python:
     pt.textbox_height = config.screen_width / 7
     pt.textbox_yalign = 1.0
 
-    pt.main_menu_background = pe.theme_path + "gui/main_background"
-    pt.game_menu_background = pe.theme_path + "gui/game_background"
+    pt.main_menu_background = Solid("#0129")
+    pt.game_menu_background = Solid("#0129")
 
-    pt.main_side_background = pe.theme_path + "gui/main_side"
-    pt.game_side_background = pe.theme_path + "gui/game_side"
+    pt.main_side_background = Solid("#0003")
+    pt.game_side_background = Solid("#000c")
 
     pt.file_slot_cols = 3
     pt.file_slot_rows = 2

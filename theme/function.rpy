@@ -52,7 +52,6 @@ init -299 python:
 
     config.custom_text_tags["ui"] = font_uitag
 
-
     def icon_tag(tag, icon='logo-ramen'):
         """
         put icons as renpy text_tag

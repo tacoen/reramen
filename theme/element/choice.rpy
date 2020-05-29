@@ -25,7 +25,6 @@ screen choice(items):
         for i in items:
             textbutton i.caption action i.action
 
-
 screen vchoice(items):
 
     hbox xalign 0.5 yalign 0.85:

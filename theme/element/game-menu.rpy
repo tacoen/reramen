@@ -11,16 +11,18 @@ screen game_menu(title, scroll=None, yinitial=0.0):
 
     style_prefix "game_menu"
 
+    python:
+        sf = ramu.ezfind(ramu.safestr(title))
+        if sf is None:
+            sf = ramu.ezfind('game')
+
+    if sf is not None:
+        add sf
+
     if main_menu:
-        add ramu.ezfile2(pt.main_menu_background)
+        add pt.main_menu_background
     else:
-
-        $ sf = ramu.ezfile(pe.theme_path + "gui/" + ramu.safestr(title))
-
-        if sf:
-            add sf
-        else:
-            add ramu.ezfile2(pt.game_menu_background)
+        add pt.game_menu_background
 
     frame:
 

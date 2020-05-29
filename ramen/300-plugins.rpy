@@ -101,7 +101,6 @@ init -299 python:
                 except BaseException:
                     kwargs['label'] = id
 
-
             try:
                 persistent.ramen['extend'][type]
             except BaseException:
@@ -138,12 +137,12 @@ screen ramen_episodes_menu():
 
     use game_menu(_("Episodes")):
 
-
         if episode is not None:
 
             use ramen_episodes_detail(episode)
 
         else:
+            text 'me'
 
             vpgrid:
                 cols 2
@@ -239,5 +238,4 @@ screen ramen_episodes_detail(episode):
 style episode_detail_text:
     size 16
     color "#ccc"
-
 

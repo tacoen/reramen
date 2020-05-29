@@ -169,8 +169,6 @@ init -200 python:
                 what = tag.replace(cut, '')
                 renpy.image("side " + self.id + " " + what, compo)
 
-
-
 transform Expression(who, npc_expression, pos=(0,0)):
     xpos int(ramu.imgexpo(who,'bound')[0])+ int(ramu.npc(who,'expression_pos')[0])
     ypos int(ramu.imgexpo(who,'bound')[1])+ int(ramu.npc(who,'expression_pos')[1])

@@ -78,7 +78,6 @@ init -303 python:
             if f is None:
                 return False
 
-
         def init(self, id=None, *args, **kwargs):
             pass
 

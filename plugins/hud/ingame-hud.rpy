@@ -133,7 +133,6 @@ screen hud_stats(stats=[]):
                     text str(mc.stat[s])+"/20" xalign 1.0
                 bar value mc.stat[s] range 20 style 'hud_stat_bar_'+s.lower()
 
-
 style hud_stat_text is ramen_gui:
     size 16
     outlines pt.hover_outlines
@@ -157,5 +156,4 @@ style hud_stat_bar_hygiene is hud_stat_bar:
 init python:
     if renpy.has_screen('hud'):
         config.overlay_screens.append("hud")
-
 

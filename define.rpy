@@ -60,3 +60,7 @@ init -2 python:
         'Kisa',
         'Pidhi',
         'Kef']
+
+init offset = -1
+
+define config.window_icon = "gui/window_icon.png"

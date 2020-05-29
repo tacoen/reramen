@@ -1,6 +1,6 @@
 init -200 python:
 
-    class inventory(ramen_object):
+    class ramen_inventory(ramen_object):
 
         def __init__(self, id=None, *agrs, **kwargs):
             self.makeid(id)

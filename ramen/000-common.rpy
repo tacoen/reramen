@@ -35,7 +35,6 @@ transform ramen_center:
     xalign 0.5
     yalign 1.0
 
-
 transform dba:
     on show:
         xalign 1.3

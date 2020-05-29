@@ -130,7 +130,7 @@ init -301 python:
                     ramen.label_trace=ramen.label_trace[-9:]
 
                 ramen.label_last = name
-                
+
                 if ramu.safestr(name) in ramen.events.__dict__.keys():
                     e = Event(ramu.safestr(name))
                     print e.occur()
@@ -321,6 +321,28 @@ init -301 python:
                     return file + e
             else:
                 return default
+
+        def ezfind(self, file, path=None, ext=pe.ext_img):
+
+            find=[]
+            res = None
+
+            if path is not None:
+                find.append(path)
+
+            try: find.append(pe.title_path)
+            except: pass
+            try: find.append(pe.theme_path+'gui/')
+            except: pass
+            try: find.append(pe.image_path)
+            except: pass
+
+            for f in find:
+                res = self.ezfile(f+file,ext)
+                if res is not None:
+                    break
+
+            return res
 
         def ezfile(self, file, ext=pe.ext_img):
             for e in ext:
