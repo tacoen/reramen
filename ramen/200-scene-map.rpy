@@ -81,6 +81,3 @@ screen scene_map():
                 imagebutton pos wp.pos(b) action wp.func(b):
                     idle img
                     hover img_hover
-
-screen scene_overlay(img):
-    add img xpos 0 ypos 0

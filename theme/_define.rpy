@@ -153,9 +153,9 @@ init -199 python:
 
     style['menu_start_button'] = Style('button')
     style['menu_start_button'].padding = (32, 12, 32, 12)
-    style['menu_start_button'].background = Color(pt.nav_background)
+    style['menu_start_button'].background = Color(pt.nav_background).tint(0.9)
     style['menu_start_button'].hover_background = Color(
-        pt.nav_background).tint(.9)
+        pt.nav_background).tint(.8)
     style['menu_start_button_text'] = Style('ramen_gui')
     style['menu_start_button_text'].size = 32
 
