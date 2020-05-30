@@ -360,7 +360,7 @@ init -301 python:
             res = None
 
             for f in find:
-                res = self.ezfile(f+file,ext)
+                res = self.ezfile(f+file,None,ext)
                 if res is not None:
                     break
 
