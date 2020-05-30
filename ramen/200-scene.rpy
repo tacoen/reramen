@@ -7,9 +7,9 @@ init -200 python:
             self.map = {}
 
         def define_map(self, map, **kwargs):
-            self.kdict('pos',**kwargs)
+            self.kdict('pos', **kwargs)
             for a in map:
-                self.map[a] = ramen_map(self.id,self.pos,self.dir,a)
+                self.map[a] = ramen_map(self.id, self.pos, self.dir, a)
 
         def reinit(self):
             self.define_byfile()
@@ -55,10 +55,10 @@ init -200 python:
 
                     if ' ' in fn.name:
                         fnn = fn.name.split(' ')
-                        if self.exist('scene',fnn[0]):
+                        if self.exist('scene', fnn[0]):
                             continue
                     else:
-                        if self.exist('scene',fn.name):
+                        if self.exist('scene', fn.name):
                             continue
 
                     if ' ' in fn.name:
@@ -94,7 +94,7 @@ init -200 python:
 
             for k in res['scene']:
 
-                if self.exist('scene',k):
+                if self.exist('scene', k):
                     continue
 
                 try:
@@ -103,7 +103,7 @@ init -200 python:
                     renpy.image(
                         self.id + " " + k,
                         ConditionSwitch(
-                        *res['scene'][k]['cond']))
+                            *res['scene'][k]['cond']))
                     del res['scene'][k]['main']
                     res['scene'][k] = res['scene'][k]['cond']
 
@@ -113,8 +113,10 @@ init -200 python:
 
             for k in res:
 
-                try: self.__dict__[k]
-                except: self.__dict__[k] = {}
+                try:
+                    self.__dict__[k]
+                except BaseException:
+                    self.__dict__[k] = {}
 
                 self.__dict__[k].update(res[k])
 
@@ -141,74 +143,80 @@ init -200 python:
             self.obj_id = obj_id
             self.scene = scene
 
-            try: globals()[obj_id].last_scene
-            except: globals()[obj_id].last_scene=''
+            try:
+                globals()[obj_id].last_scene
+            except BaseException:
+                globals()[obj_id].last_scene=''
 
-            try: globals()[obj_id].last_key
-            except: globals()[obj_id].last_key=''
+            try:
+                globals()[obj_id].last_key
+            except BaseException:
+                globals()[obj_id].last_key=''
 
         def __call__(self):
             return self.map
 
-        def set(self,what,key,value):
+        def set(self, what, key, value):
 
             try:
                 self.map[what]
-            except:
+            except BaseException:
                 self.map[str(what)]={}
 
             self.map[what][str(key)] = value
 
-        def get(self,what,key):
+        def get(self, what, key):
 
             try:
                 return self.map[what][key]
-            except:
+            except BaseException:
                 return None
 
-        def kdict(self,what,**kwargs):
+        def kdict(self, what, **kwargs):
             for k in kwargs:
-                self.set(what,k,kwargs[k])
+                self.set(what, k, kwargs[k])
 
-        def point(self,key,**kwargs):
+        def point(self, key, **kwargs):
             for k in kwargs:
-                self.set(k,key,kwargs[k])
+                self.set(k, key, kwargs[k])
 
         def branch(self):
-            try: branch = self.map['pos'].keys()
-            except: branch =[]
+            try:
+                branch = self.map['pos'].keys()
+            except BaseException:
+                branch =[]
 
             branch +=self.base_pos.keys()
 
             return sorted(list(dict.fromkeys(branch)))
 
-        def trans(self,key,value=None):
+        def trans(self, key, value=None):
             if value is not None:
-                self.set('trans',key,value)
+                self.set('trans', key, value)
             else:
-                return self.get('trans',key)
+                return self.get('trans', key)
 
-        def pos(self,key,value=None):
+        def pos(self, key, value=None):
             if value is not None:
-                self.set('pos',key,value)
+                self.set('pos', key, value)
             else:
 
-                if self.get('pos',key) is None:
+                if self.get('pos', key) is None:
 
                     try:
                         return self.base_pos[key]
-                    except:
+                    except BaseException:
                         return None
                 else:
-                    return self.get('pos',key)
+                    return self.get('pos', key)
 
-        def way(self,key,value=None):
+        def way(self, key, value=None):
             if value is not None:
-                self.set('way',key,value)
+                self.set('way', key, value)
             else:
-                way = self.get('way',key)
+                way = self.get('way', key)
                 if way is None:
-                    hasfunc = self.get('func',key)
+                    hasfunc = self.get('func', key)
                     if hasfunc is not None:
                         return True
                 else:
@@ -255,9 +263,10 @@ init -200 python:
 
                 return img
 
-        def function_proxy(self,func):
+        def function_proxy(self, func):
             res = globals()[func]()
-            if res: return res
+            if res:
+                return res
 
         def func(self, key, value=None):
 
@@ -266,8 +275,8 @@ init -200 python:
             else:
 
                 setvars = [
-                    SetVariable(self.obj_id+'.last_scene',self.scene),
-                    SetVariable(self.obj_id+'.last_key',key),
+                    SetVariable(self.obj_id+'.last_scene', self.scene),
+                    SetVariable(self.obj_id+'.last_key', key),
                     Hide('scene_map')
                 ]
 
@@ -294,7 +303,7 @@ init -200 python:
 
                                 if renpy.has_label(label):
                                     func=[]
-                                    func.insert(0,setvars)
+                                    func.insert(0, setvars)
                                     func.append(Jump(label))
                                     break
 
@@ -303,9 +312,9 @@ init -200 python:
                         try:
                             if not persistent.ramen['map'][self.obj_id][way]['way'] == {}:
                                 func=[]
-                                func.append(SetVariable('ramen.map_obj',self.obj_id))
-                                func.append(SetVariable(self.obj_id+'.last_key',key))
-                                func.append(SetVariable(self.obj_id+'.last_scene',way))
+                                func.append(SetVariable('ramen.map_obj', self.obj_id))
+                                func.append(SetVariable(self.obj_id+'.last_key', key))
+                                func.append(SetVariable(self.obj_id+'.last_scene', way))
                                 func.append(Show('scene_map', transition=trans))
                             else:
                                 func = None
@@ -320,8 +329,7 @@ init -200 python:
                 else:
 
                     func=[]
-                    func.insert(0,setvars)
-                    func.append(SetVariable('ramen.map_obj',self.obj_id))
-                    func.append(Function(self.function_proxy,func=self.get('func',key)))
+                    func.insert(0, setvars)
+                    func.append(SetVariable('ramen.map_obj', self.obj_id))
+                    func.append(Function(self.function_proxy, func=self.get('func', key)))
                     return func
-

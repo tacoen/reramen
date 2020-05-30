@@ -14,35 +14,37 @@ init -201 python:
         def __call__(self):
             return self.__dict__
 
-        def set(self,key,value):
+        def set(self, key, value):
             self.__dict__[key] = value
 
-        def get(self,key):
-            try: return self.__dict__[key]
-            except: return None
+        def get(self, key):
+            try:
+                return self.__dict__[key]
+            except BaseException:
+                return None
 
-        def __setattr__(self,key,value):
-            self.set(key,value)
+        def __setattr__(self, key, value):
+            self.set(key, value)
 
-        def __getattr__(self,key):
+        def __getattr__(self, key):
             return self.get(key)
 
-        def occur(self,inv=None):
+        def occur(self, inv=None):
 
             occur=[]
 
             # if self.label is not None:
 
-                # if ramu.safestr(ramen.label_last) == ramu.safestr(self.label):
-                    # occur.append(True)
-                # else:
-                    # occur.append(False)
+            # if ramu.safestr(ramen.label_last) == ramu.safestr(self.label):
+            # occur.append(True)
+            # else:
+            # occur.append(False)
 
             if self.time_cond is not None:
 
                 if ramentime.cond().lower() == self.time_cond.lower() or \
-                    ramentime.ico().lower() == self.time_cond.lower() or \
-                    ramentime.word().lower() == self.time_cond.lower() :
+                        ramentime.ico().lower() == self.time_cond.lower() or \
+                        ramentime.word().lower() == self.time_cond.lower() :
 
                     occur.append(True)
                 else:

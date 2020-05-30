@@ -45,7 +45,7 @@ init -299 python:
     def font_uitag(tag, argument, contents):
 
         return [
-                (renpy.TEXT_TAG, "font="+pt.font_ui_text),
+            (renpy.TEXT_TAG, "font="+pt.font_ui_text),
             ] + contents + [
                 (renpy.TEXT_TAG, "/font"),
             ]

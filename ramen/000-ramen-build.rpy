@@ -29,4 +29,3 @@ init python:
 
     if 'ramen_plugins_build' in dir():
         ramen_plugins_build()
-

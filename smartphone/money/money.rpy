@@ -23,7 +23,7 @@ screen smphone_apps_money(var, page):
         vbox:
             spacing 16
 
-            add ramu.ezfile(app.dir + "qrcode",Color("#fff")) xalign 0.5
+            add ramu.ezfile(app.dir + "qrcode", Color("#fff")) xalign 0.5
 
             hbox:
                 label 'Bank'

@@ -12,9 +12,9 @@ screen main_menu():
     style_prefix "main_menu"
 
     python:
-        
+
         sf = ramu.ezfind(ramu.safestr('main'))
-        
+
         if sf is None:
             sf = ramu.ezfind('game')
 

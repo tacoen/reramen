@@ -23,7 +23,7 @@ init -301 python:
                 except BaseException:
                     return res
 
-        def sethour(self,h):
+        def sethour(self, h):
             delta = h - self.hour
             self.adv(h)
             return self.time

@@ -69,8 +69,8 @@ init -303 python:
 
         def find(self, file, ext=('.webp', '.png', '.jpg')):
 
-            for d in range(0,len(self.dir)):
-                f = ramu.ezfile(self.dir[d]+file,None,ext)
+            for d in range(0, len(self.dir)):
+                f = ramu.ezfile(self.dir[d]+file, None, ext)
                 if f is not None:
                     return f
                     break
@@ -186,11 +186,11 @@ init -303 python:
             self.kdict(**kwargs)
             self.init(id, *args, **kwargs)
 
-        def exist(self,what,key):
+        def exist(self, what, key):
             try:
                 self.__dict__[what][k]
                 res=True
-            except:
+            except BaseException:
                 res=False
 
             return res

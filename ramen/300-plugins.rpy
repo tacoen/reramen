@@ -6,7 +6,7 @@ init -299 python:
     pp.episodes = {}
     pp.asset = {}
 
-    def plugin(what,type='plugins'):
+    def plugin(what, type='plugins'):
         """Load plugins-information"""
         try:
             obj = object()
@@ -85,7 +85,7 @@ init -299 python:
             except BaseException:
                 kwargs['build'] = False
 
-            if not type in ['plugins','episodes','asset']:
+            if not type in ['plugins', 'episodes', 'asset']:
                 type = 'plugins'
 
             try:
@@ -159,15 +159,15 @@ screen ramen_episodes_menu():
                 for episode in pp.episodes:
 
                     python:
-                        e = plugin(episode,'episodes')
+                        e = plugin(episode, 'episodes')
                         if renpy.loadable(e.dir+'thumb.png'):
-                            thumb = im.Scale(e.dir+'thumb.png',200,110)
+                            thumb = im.Scale(e.dir+'thumb.png', 200, 110)
                         else:
-                            thumb = Composite((200,110), (0,0),Solid('#456'), \
-                                (0.45,0.3),Text(ramu.capcap(e.title),size=36,font=pt.font_ui_label))
+                            thumb = Composite((200, 110), (0, 0), Solid('#456'),
+                                              (0.45, 0.3), Text(ramu.capcap(e.title), size=36, font=pt.font_ui_label))
 
                     button xsize 465:
-                        action SetScreenVariable('episode',episode)
+                        action SetScreenVariable('episode', episode)
                         has hbox
                         add thumb
                         null width 10
@@ -180,17 +180,17 @@ screen ramen_episodes_detail(episode):
 
     python:
 
-        e = plugin(episode,'episodes')
+        e = plugin(episode, 'episodes')
 
         if renpy.loadable(e.dir+'banner.png'):
-            banner = Composite((900,150), (0,0), im.Scale(e.dir+'banner.png',900,150), \
-                (0,0),Solid("#0009"),
-                (20,0.6),Text(e.title.title(),size=32,font=pt.font_ui_label))
+            banner = Composite((900, 150), (0, 0), im.Scale(e.dir+'banner.png', 900, 150),
+                               (0, 0), Solid("#0009"),
+                               (20, 0.6), Text(e.title.title(), size=32, font=pt.font_ui_label))
 
         else:
-            banner = Composite((900,150), (0,0),Solid('#456'), \
-                (0,0),Solid("#0009"),
-                (20,0.6),Text(e.title.title(),size=32,font=pt.font_ui_label))
+            banner = Composite((900, 150), (0, 0), Solid('#456'),
+                               (0, 0), Solid("#0009"),
+                               (20, 0.6), Text(e.title.title(), size=32, font=pt.font_ui_label))
 
     viewport:
         yinitial 0.0
@@ -203,7 +203,7 @@ screen ramen_episodes_detail(episode):
 
         has hbox
 
-        textbutton ico('arrow-left') style 'ramen_icon' action SetScreenVariable('episode',None)
+        textbutton ico('arrow-left') style 'ramen_icon' action SetScreenVariable('episode', None)
 
         vbox xoffset 10:
             spacing 10
@@ -230,7 +230,7 @@ screen ramen_episodes_detail(episode):
                 vbox:
                     spacing 5
                     style_prefix 'episode_detail'
-                    use hbox_line('Version',e.version)
+                    use hbox_line('Version', e.version)
                     use hbox_line('Author', "{a="+ e.author_url+"}"+ e.author +"{/a}")
 
                 add ramu.hline((840, 1), "#666")
@@ -238,4 +238,3 @@ screen ramen_episodes_detail(episode):
 style episode_detail_text:
     size 16
     color "#ccc"
-

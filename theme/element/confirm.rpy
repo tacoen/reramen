@@ -7,7 +7,7 @@ screen confirm1(message, yes_action, no_action):
 
     style_prefix "confirm"
 
-    add ramu.ezfile(pt.overlays,Color("#0019"))
+    add ramu.ezfile(pt.overlays, Color("#0019"))
 
     frame:
 

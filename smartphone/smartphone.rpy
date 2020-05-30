@@ -3,8 +3,8 @@ init -190 python:
     ramen.smphone = False
 
     smphone = ramen_apps('smphone',
-                         background=ramu.ezfile(ramu.getdir() + "body",Color("#999")),
-                         exit_btn=ramu.ezfile(ramu.getdir() + "btn",Color("#999")),
+                         background=ramu.ezfile(ramu.getdir() + "body", Color("#999")),
+                         exit_btn=ramu.ezfile(ramu.getdir() + "btn", Color("#999")),
                          exit_hover_btn=ramu.ezfile(
                              ramu.getdir() + "btn-hover"),
                          wallpaper=ramu.random_files(
@@ -107,7 +107,7 @@ init -9:
 
                     text '404'
 
-        $ smphone_exit_action = [ Hide('smphone_ui'), SetVariable('ramen.smphone',False)]
+        $ smphone_exit_action = [ Hide('smphone_ui'), SetVariable('ramen.smphone', False)]
 
         key "game_menu" action smphone_exit_action
 

@@ -15,7 +15,7 @@ init -301 python:
 
             for l in sorted(labels):
                 print l
-                caption = l.replace(label+'.','')
+                caption = l.replace(label+'.', '')
 
                 if caption in void or l in void:
                     continue
@@ -32,13 +32,13 @@ init -301 python:
                     cond = True
 
                 if cond:
-                    caption = caption.replace('_',' ')
-                    choices.append((caption.title(),l))
+                    caption = caption.replace('_', ' ')
+                    choices.append((caption.title(), l))
 
             if exitword is not None:
-                choices.append((exitword,False))
+                choices.append((exitword, False))
 
-            res = renpy.display_menu(choices,interact=True,screen=screen)
+            res = renpy.display_menu(choices, interact=True, screen=screen)
 
             return res
 
@@ -68,7 +68,7 @@ init -301 python:
             except BaseException:
                 return None
 
-        def imgexpo(self,tag=None,what='size'):
+        def imgexpo(self, tag=None, what='size'):
 
             tags = list(renpy.get_showing_tags())
 
@@ -80,7 +80,7 @@ init -301 python:
             try:
                 attr = renpy.get_attributes(tag)[0]
                 im = renpy.get_registered_image(tag+' '+attr).filename
-            except:
+            except BaseException:
                 im = renpy.get_registered_image(tag).filename
 
             if what=='size':
@@ -119,9 +119,9 @@ init -301 python:
         def label_callback(self, name, abnormal):
 
             if not name.startswith('ramen_') and \
-                not name.startswith("_") and \
-                not name.endswith('_screen') and \
-                not name=='after_load':
+                    not name.startswith("_") and \
+                    not name.endswith('_screen') and \
+                    not name=='after_load':
 
                 if not name == ramen.label_trace[-1]:
                     ramen.label_trace.append(name)
@@ -146,7 +146,7 @@ init -301 python:
         def safestr(self, name):
             return re.sub(r'\W+|\s+', '', name).lower().strip()
 
-        def capcap(self,title):
+        def capcap(self, title):
             res = ''
             tt = title.split(' ')
             for t in tt:
@@ -355,12 +355,12 @@ init -301 python:
                 find = [ pe.title_path, pe.theme_path+'gui/', pe.image_path ]
 
             if path is not None:
-                find.insert(0,path)
+                find.insert(0, path)
 
             res = None
 
             for f in find:
-                res = self.ezfile(f+file,None,ext)
+                res = self.ezfile(f+file, None, ext)
                 if res is not None:
                     break
 
@@ -374,7 +374,6 @@ init -301 python:
                 renpy.sound.play(res, channel=channel, **kwargs)
             else:
                 return False
-
 
         def file_info(self, file):
             """
@@ -585,8 +584,8 @@ init -301 python:
             try:
                 with open(renpy.loader.transfn(file), 'r') as json_file:
                     return json.load(json_file)
-            except:
-                return {'0':['Hi, please tell the developer, that his JSON file was invalid.']}
+            except BaseException:
+                return {'0': ['Hi, please tell the developer, that his JSON file was invalid.']}
 
         def json_write(self, file, data):
             with open(renpy.loader.transfn(file), 'w') as outfile:

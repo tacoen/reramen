@@ -6,7 +6,7 @@ image bg room = Solid('#338')
 image mimic = Solid("#0000")
 image blank = Solid("#0000")
 
-define qpixellate = Pixellate(0.5,2)
+define qpixellate = Pixellate(0.5, 2)
 
 transform FadeInterval(ms=1.0):
     on show:

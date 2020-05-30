@@ -34,11 +34,11 @@ screen about():
 
             null height 12
 
-            use hbox_label("Version ",_("[config.version!t]"),200,1.0,0.0)
+            use hbox_label("Version ", _("[config.version!t]"), 200, 1.0, 0.0)
 
             null height 12
 
-            use hbox_label("Framework","Ramen - " + str(ramen_version_name),200,1.0,0.0)
+            use hbox_label("Framework", "Ramen - " + str(ramen_version_name), 200, 1.0, 0.0)
 
             if pt.about:
                 python:
@@ -48,11 +48,11 @@ screen about():
 
                     credit = credit.rstrip('\n')
 
-                use hbox_label("Theme",credit,200,1.0,0.0)
+                use hbox_label("Theme", credit, 200, 1.0, 0.0)
 
             null height 24
 
-            use hbox_label("License","[renpy.license!t]",200,1.0,0.0)
+            use hbox_label("License", "[renpy.license!t]", 200, 1.0, 0.0)
 
             hbox:
                 null width 216

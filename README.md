@@ -6,7 +6,7 @@ It is renpy framework to help you creating of visual novell game.
 
 ## Wiki 
 
-mdfiles were generated from inside the project (life documentaion).
+All markdown files were generated from inside the project (semi-live documentaion).
 https://github.com/tacoen/reramen/wiki/index
 
 ## Demo source code
@@ -27,6 +27,7 @@ https://github.com/tacoen/reramen/wiki/index
 * Events with condition
 * Episodes (DLC or standalone)
 * npc expression (use transform not screen not renpy.image)
+* files search using path and pattern
 
 Todo: Things from the old-version of ramen :
 

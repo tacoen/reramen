@@ -6,9 +6,9 @@ init -200 python:
 
     ## Sounds and music ######################################################
 
-    config.main_menu_music = ramu.ezfind("main_music",'sound')
-    config.sample_sound= ramu.ezfind("sample/sound",'sound')
-    config.sample_voice=ramu.ezfind("sample/voice",'sound')
+    config.main_menu_music = ramu.ezfind("main_music", 'sound')
+    config.sample_sound= ramu.ezfind("sample/sound", 'sound')
+    config.sample_voice=ramu.ezfind("sample/voice", 'sound')
 
     config.has_sound = True
     config.has_music = True
