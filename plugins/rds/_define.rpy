@@ -33,6 +33,8 @@ init -290 python:
 
     rds.md_path = "E:/pp-renpy/ramen/wiki/"
     rds.game_path = "E:/pp-renpy/ramen/game/"
+    
+    rds.report = True
 
 init -79 python:
 

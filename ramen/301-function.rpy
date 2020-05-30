@@ -282,6 +282,8 @@ init -301 python:
                 for dir in dirs:
                     fl = filter(lambda w: dir in w, sorted(FL))
                     F += fl
+            else:
+                F = persistent.files
 
             if key:
                 F = filter(lambda w: key in w, F)

@@ -31,6 +31,8 @@ init -80 python:
 
             self.title = 'Ramen'
             self.home_info = "Renpy according me, a modular approach. It is renpy framework to help you creating of visual novell game."
+            
+            self.report = ''
 
             try:
                 for k in kwagrs(k):
@@ -45,7 +47,7 @@ init -80 python:
             self.rs += self.dir + mdfile + ".md -- created\n"
 
         def wrapper(self, sts=''):
-            sts += "\n\nGenerated Time: " + datetime.datetime.now().strftime('%c')
+            sts += "\n\n---\n\nGenerated Time: " + datetime.datetime.now().strftime('%c')
             sts += "\n\n" + self.footer
             sts = sts.replace('\n\n\n', '\n\n')
             return sts
@@ -54,6 +56,7 @@ init -80 python:
 
             what = 'init'
             it = {}
+            rep = ''
 
             for f in self.files:
                 fn = ramu.file_info(f)
@@ -80,7 +83,7 @@ init -80 python:
                             v = rn[1].replace('python', '')
                             vs = str(v.strip())
                             if vs == "":
-                                vs = 0
+                                vs = '0'
 
                             try:
                                 it[vs]
@@ -100,7 +103,7 @@ init -80 python:
                                 v = v.replace('offset=', '')
                             vs = str(v.strip())
                             if vs == "":
-                                vs = 0
+                                vs = '0'
 
                             try:
                                 it[vs]
@@ -113,24 +116,30 @@ init -80 python:
 
                             it[vs]['renpy'].append(line_fileinfo.strip())
 
-            st += "# Init level\n\nRamen init level inspection\n\n\n| level | code | file |\n| ---- | ---- | ---- |"
-
             list = it.keys()
             last = -10000
             list.sort(key=int)
+
+            st = "# Init level\n\nRamen init level inspection\n\n"
+            st += self.get_txtfile(rds.md_path+'txt/head-init.txt')
+            st += "\n\n| level | code | file |\n| ---- | ---- | ---- |"
+            
+            rep = "\n\nInit Level:\n\n"
+            
             for i in list:
-                wh = ['python', 'renpy']
-
-                for w in wh:
+                    
+                for w in ['python','renpy']:
                     try:
-                        v = '<br>'.join(it[i][w]).replace("//", "")
-                        if not v == '':
-                            ix = str(i)
-                            st += "\n| " + ix + " | " + w + " | " + v + " |"
-                    except BaseException:
-                        pass
-
-            self.write('init_level', st + "\n\n")
+                        st += "\n|" + str(i) + "|" + w + "|"+ "<br>".join(it[str(i)][w]) +"|"
+                        rep += "\n"+str(i) + "\t" + w + "\n\t\t"+ "\n\t\t". join(it[str(i)][w]) +"\n"
+                        
+                    except: pass
+            
+            self.write('ref_init_level', st + "\n\n")
+            
+            if rds.report:
+                
+                self.report += rep.replace("<br>","\n\t\t\t") 
 
         def collect_style(self):
 
@@ -154,7 +163,7 @@ init -80 python:
                     sts += "\n| " + line_fileinfo + \
                         " | " + "<br>".join(c) + " |"
 
-            self.write('style', sts + "\n\n")
+            self.write('ref_style', sts + "\n\n")
 
         def collect(self, what, st=''):
 
@@ -191,9 +200,58 @@ init -80 python:
                     if not c == '':
                         st += line_fileinfo + c + "\n"
 
-            self.write(what.lower(), st)
+            self.write("ref_"+what.lower(), st)
 
-        def getfunc(self):
+        def get_label(self):
+
+            labels = sorted(list(renpy.get_all_labels()))
+            files = ramu.files(False,False,'.rpy')
+            last_file = ''
+            st = ''
+
+            for label in labels:
+                
+                if label.startswith('_'):
+                    continue
+
+                if "." in label:
+                    s = label.split('.')
+                    search_label = s[1]
+                    word_label = "+--- "+ s[1] +" ("+label+")"
+                else:
+                    search_label = label
+                    word_label = label
+
+                for f in files:
+                    if str(search_label)+":" in self.get_txtfile(rds.game_path+f):
+                        if not f == last_file:
+                            st +="\n\n"+f + " \n    "+ word_label+'\n'
+                        else:
+                            st +="    " + word_label+'\n'
+                        break
+
+                last_file = f
+
+            
+            ndx_st = self.get_txtfile(rds.md_path+'txt/head-label.txt')
+            ndx_st += '# Labels\n\n'
+            ndx_st += '```' + st + '\n```'
+            self.write('ref_label', ndx_st)
+            
+            if rds.report:
+                self.report += st
+
+                
+        def makereport(self):
+            file = open( rds.game_path+"report.txt", "w" )
+            rep = "Generated at : "+datetime.datetime.now().strftime('%c')+"\n"
+            rep += self.report
+            
+            rep = re.sub(r'\n\n\n','\n\n',rep)
+            file.writelines(rep)
+            file.close()
+            
+        def get_func(self):
 
             import sys
             import inspect
@@ -225,7 +283,7 @@ init -80 python:
                 except BaseException:
                     pass
 
-            self.write('function', ndx_st)
+            self.write('ref_nonclassfunction', ndx_st)
 
         def getclass(self):
 
@@ -387,9 +445,10 @@ init -80 python:
             ndx = self.getclass()
             self.class_index('class_index', ndx, "# Class Index\n\n")
 
-            self.getfunc()
+            self.get_func()
+            self.get_label()
+
             self.collect('screen')
-            #self.collect('label')
             self.collect('transform')
             self.collect_style()
 
@@ -402,13 +461,12 @@ init -80 python:
 
             home += "## Reference:\n\n"
             home += " * [[Class Index|class_index]]\n"
-            home += " * [[Functions|function]]\n"
-
-            home += " * [[Screens|screen]]\n"
-            home += " * [[Styles|style]]\n"
-            home += " * [[Labels|label]]\n"
-            home += " * [[Transform|transform]]\n"
-            home += " * [[Init level|init_level]]\n"
+            home += " * [[Non Class Functions|ref_nonclassfunction]]\n"
+            home += " * [[Screens|ref_screen]]\n"
+            home += " * [[Styles|ref_style]]\n"
+            home += " * [[Labels|ref_label]]\n"
+            home += " * [[Transform|ref_transform]]\n"
+            home += " * [[Init level|ref_init_level]]\n"
 
             for t in ['tips', 'howto', 'snip', 'info']:
 
@@ -422,6 +480,9 @@ init -80 python:
 
             self.write('index', home)
 
+            if rds.report:
+                self.makereport()
+        
             if rprint:
                 print self.rs
             else:
