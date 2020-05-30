@@ -296,28 +296,68 @@ init -301 python:
             files = self.files(dir, key, ext)
             return self.random_of(files)
 
-        def ezfile2(self, file, default=Color("#0019"), ext=pe.ext_img):
+        def ezfile(self, file, nonevalue=None, ext=pe.ext_img):
+            """
+            Get [file] within [ext] selection or return nonevalue
 
+            ``` python
+            obj.ezfile( "some/body", Color("#999"))
+            ```
+
+            * Search for `some/body` ('.webp', '.png', '.jpg')
+            * if `some/body` not loadable, return Color("#999")
+            * by default extension to search is `pe.ext_img`
+
+            #### File Extension:
+
+            * pe.ext_img = ('.webp', '.png', '.jpg')
+            * pe.ext_txt = ('.json', '.txt')
+            * pe.ext_snd = ('.ogg', '.mp3', '.wav')
+
+            """
             for e in ext:
                 if renpy.loadable(file + e):
                     return file + e
+                    break
             else:
-                return default
+                return nonevalue
 
-        def ezfind(self, file, path=None, ext=pe.ext_img):
+        def ezfind(self, file, ext='image', path=None):
+            """
 
-            find=[]
-            res = None
+            ``` python
+            ramu.ezfind('theme_song','sound')
+            ```
+
+            Search for 'theme_song' ('.ogg', '.mp3', '.wav') in sortorder:
+            * path
+            * pe.title_path
+            * pe.theme_path+'audio/'
+            * pe.audio_path
+
+            ``` python
+            ramu.ezfind('game','image')
+            ```
+
+            Search for 'game' ('.webp', '.png', '.jpg') in sortorder:
+            * path
+            * pe.title_path
+            * pe.theme_path+'gui/'
+            * pe.image_path
+
+            """
+
+            if ext == 'sound':
+                find = [ pe.title_path, pe.theme_path+'audio/', pe.audio_path ]
+                ext = pe.ext_snd
+            else:
+                ext = pe.ext_img
+                find = [ pe.title_path, pe.theme_path+'gui/', pe.image_path ]
 
             if path is not None:
-                find.append(path)
+                find.insert(0,path)
 
-            try: find.append(pe.title_path)
-            except: pass
-            try: find.append(pe.theme_path+'gui/')
-            except: pass
-            try: find.append(pe.image_path)
-            except: pass
+            res = None
 
             for f in find:
                 res = self.ezfile(f+file,ext)
@@ -326,43 +366,15 @@ init -301 python:
 
             return res
 
-        def ezfind_sound(self, file, path=None, ext=pe.ext_snd):
-        
-            find=[]
-            res = None
-            
-            if path is not None:
-                find.append(path)
+        def sfx(self, file, path=None, channel='sound', **kwargs):
 
-            try: find.append(pe.title_path)
-            except: pass
-            try: find.append(pe.theme_path+'audio/')
-            except: pass
-            try: find.append(pe.audio_path)
-            except: pass
-
-            for f in find:
-                res = self.ezfile(f+file,ext)
-                if res is not None:
-                    break
-                    
-            return res
-            
-        def sfx(self, file, path=None, ext=pe.ext_snd, **kwargs):
-
-            res = ezfind_sound(self, file, path, ext)
+            res = ezfind(self, file, path, 'sound')
 
             if res is not None:
-                renpy.sound.play(res, channel='sound', **kwargs)
+                renpy.sound.play(res, channel=channel, **kwargs)
             else:
                 return False
-        
-        def ezfile(self, file, ext=pe.ext_img):
-            for e in ext:
-                if renpy.loadable(file + e):
-                    return file + e
-            else:
-                return None
+
 
         def file_info(self, file):
             """

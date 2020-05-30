@@ -127,7 +127,7 @@ screen modal(screenname, **kwargs):
         except BaseException:
             align = False
 
-    add ramu.ezfile2(pt.overlays)
+    add ramu.ezfile(pt.overlays, Color("#0019"))
 
     layer "dialog_layer"
     style_prefix "modal"

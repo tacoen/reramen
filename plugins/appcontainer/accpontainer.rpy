@@ -38,10 +38,9 @@ init -290 python:
                 kwargs['icon']
             except BaseException:
                 icon = ramu.ezfile(ramu.getdir() + what)
-                if icon is not None:
-                    kwargs['icon'] = icon
-                else:
-                    kwargs['icon'] = ramu.ezfile2(ramu.getdir() + "icon")
+                if icon is None:
+                    icon = ramu.ezfile( ramu.getdir() + "icon", Color("#999") )
+                kwargs['icon'] = icon
 
             try:
                 kwargs['order'] = "{:03d}".format(kwargs['order'])

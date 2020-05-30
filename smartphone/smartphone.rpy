@@ -3,9 +3,9 @@ init -190 python:
     ramen.smphone = False
 
     smphone = ramen_apps('smphone',
-                         background=ramu.ezfile2(ramu.getdir() + "body"),
-                         exit_btn=ramu.ezfile2(ramu.getdir() + "btn"),
-                         exit_hover_btn=ramu.ezfile2(
+                         background=ramu.ezfile(ramu.getdir() + "body",Color("#999")),
+                         exit_btn=ramu.ezfile(ramu.getdir() + "btn",Color("#999")),
+                         exit_hover_btn=ramu.ezfile(
                              ramu.getdir() + "btn-hover"),
                          wallpaper=ramu.random_files(
                              ramu.getdir() + "wp/", False)

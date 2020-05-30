@@ -70,7 +70,7 @@ init -303 python:
         def find(self, file, ext=('.webp', '.png', '.jpg')):
 
             for d in range(0,len(self.dir)):
-                f = ramu.ezfile(self.dir[d]+file, ext)
+                f = ramu.ezfile(self.dir[d]+file,None,ext)
                 if f is not None:
                     return f
                     break

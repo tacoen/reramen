@@ -12,9 +12,9 @@ init -302 python:
     pe.title_path = 'title/'
     pe.plugins_path = 'plugins/'
     pe.image_path = 'images/'
-    
+
     pe.audio_path = 'audio/'
-    
+
     pe.time_ico = [
         'moon2',
         'moon3',
