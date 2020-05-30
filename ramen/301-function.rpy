@@ -14,7 +14,6 @@ init -301 python:
             labels = filter(lambda w: w.startswith(label+'.'), list(renpy.get_all_labels()))
 
             for l in sorted(labels):
-                print l
                 caption = l.replace(label+'.', '')
 
                 if caption in void or l in void:

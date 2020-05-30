@@ -11,7 +11,7 @@ screen action_shortcut(shortcuts):
     default shade = False
 
     if shade:
-        add ramu.ezfile(pt.overlays,Color("#0019"))
+        add ramu.ezfile(pt.overlays, Color("#0019"))
 
     vbox:
         yalign 0.7

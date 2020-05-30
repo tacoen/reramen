@@ -138,9 +138,9 @@ init -101 python:
             )
 
             res = ramu.talk(npc_id=npc_id, what=what,
-                             type=type, prefix=prefix)
+                            type=type, prefix=prefix)
 
-            renpy.hide('side',layer='above_screens')
+            renpy.hide('side', layer='above_screens')
 
             return res
 

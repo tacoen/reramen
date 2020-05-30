@@ -26,7 +26,7 @@
     style _console_input_text is _console_text:
         color "#fff"
         adjust_spacing False
-        caret Text("|",color="#fc3",size=16,bold=True)
+        caret Text("|", color="#fc3", size=16, bold=True)
 
     style _console_history is _default:
         xfill True
@@ -151,4 +151,3 @@ screen _console:
     key "game_menu" action Jump("_console_return")
     key "console_older" action _console.console.older
     key "console_newer" action _console.console.newer
-

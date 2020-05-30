@@ -2,7 +2,7 @@ init python:
 
     def showimg(img=False):
         if img:
-            renpy.show_screen('showimg',img=img)
+            renpy.show_screen('showimg', img=img)
         else:
             renpy.hide_screen('showimg')
 
@@ -19,4 +19,3 @@ screen rdsa_tools_icons():
             vbox xsize 80 ysize 80:
                 text ico(i) style 'ramen_icon_text' color "#fff"  xalign 0.5
                 text i color "#ccc" size 12  xalign 0.5
-

@@ -14,7 +14,7 @@ init -80 python:
                 lambda w: w.endswith(".rpy"), sorted(
                     renpy.list_files(False)))
 
-        def get_txtfile(self,file):
+        def get_txtfile(self, file):
 
             sts = ''
 
@@ -27,7 +27,7 @@ init -80 python:
         def setting(self, **kwagrs):
 
             self.footer = "<small>Note This files created using ramen-dev makedoc() from working ramen ren'py project, same references may become a non existent.</small>" +\
-            "\n\nMade with [[Ren'Py "+ renpy.version_only+ "|https://www.renpy.org/]]"
+                "\n\nMade with [[Ren'Py "+ renpy.version_only+ "|https://www.renpy.org/]]"
 
             self.title = 'Ramen'
             self.home_info = "Renpy according me, a modular approach. It is renpy framework to help you creating of visual novell game."
@@ -185,7 +185,7 @@ init -80 python:
                             try:
                                 rn[1] = rn[1].replace(":", '')
                                 c += "\n * " + rn[1]
-                            except:
+                            except BaseException:
                                 c += "\n * (!)" + line
 
                     if not c == '':
@@ -359,7 +359,7 @@ init -80 python:
 
             for f in files:
                 fn = ramu.file_info(f)
-                fn.md = fn.file.replace('.txt', '.md').replace('/txt','')
+                fn.md = fn.file.replace('.txt', '.md').replace('/txt', '')
                 #mdfile = fn.name+ suffix
                 title = self.geth1(f)
                 st += " * [[" + str(title[0]) + "|" + fn.name + "]]\n"

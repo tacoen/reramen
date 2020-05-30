@@ -30,7 +30,7 @@ init -11 python:
               phone={
                   'icon': 'ico-phone',
                   'key': "K_F9",
-                  'action': [ ToggleScreen('smphone_ui'), ToggleVariable('ramen.smphone',False,True) ],
+                  'action': [ ToggleScreen('smphone_ui'), ToggleVariable('ramen.smphone', False, True) ],
                   'enable': True
               },
 

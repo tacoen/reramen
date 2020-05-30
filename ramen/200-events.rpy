@@ -42,15 +42,10 @@ init -201 python:
 
             if self.time_cond is not None:
 
-                if ramentime.cond().lower() == self.time_cond.lower() or \
-                        ramentime.ico().lower() == self.time_cond.lower() or \
-                        ramentime.word().lower() == self.time_cond.lower() :
-
+                if ramentime.cond().lower() == self.time_cond.lower() or ramentime.ico().lower() == self.time_cond.lower() or ramentime.word().lower() == self.time_cond.lower() :
                     occur.append(True)
                 else:
                     occur.append(False)
-
-            print occur
 
             if self.after is not None:
 
@@ -59,8 +54,6 @@ init -201 python:
                 else:
                     occur.append(False)
 
-            print occur
-
             if inv is not None:
 
                 if self.has is not None:
@@ -68,8 +61,6 @@ init -201 python:
                         occur.append(True)
                     else:
                         occur.append(False)
-
-            print occur
 
             if occur == []:
                 return False

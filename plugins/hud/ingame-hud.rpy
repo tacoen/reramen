@@ -77,7 +77,7 @@ screen hud():
             key k action a
 
     key "K_F10" action ToggleVariable('hud.enable')
-    key "K_F7" action ToggleScreen('hud_stats',stats=['vital','energy','hygiene'])
+    key "K_F7" action ToggleScreen('hud_stats', stats=['vital', 'energy', 'hygiene'])
 
     if hud.enable:
         key "game_menu" action SetVariable('hud.enable', False)
@@ -156,4 +156,3 @@ style hud_stat_bar_hygiene is hud_stat_bar:
 init python:
     if renpy.has_screen('hud'):
         config.overlay_screens.append("hud")
-

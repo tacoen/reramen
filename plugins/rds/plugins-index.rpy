@@ -9,9 +9,8 @@ screen rdsa_tools_plugins():
 
             vbox:
                 spacing 2
-                use hbox_line('Plugins', pl.title.title(),200,0.0,0.1)
-                use hbox_line('', p + "(" + pl.version + ")",200,0.0,0.1)
-                use hbox_line("", pl.desc,200,0.0,0.1)
+                use hbox_line('Plugins', pl.title.title(), 200, 0.0, 0.1)
+                use hbox_line('', p + "(" + pl.version + ")", 200, 0.0, 0.1)
+                use hbox_line("", pl.desc, 200, 0.0, 0.1)
                 if pl.author_url is not None:
-                    use hbox_line('Author', "{a=" + pl.author_url + "}" + pl.author + "{/a}",200,0.0,0.1)
-
+                    use hbox_line('Author', "{a=" + pl.author_url + "}" + pl.author + "{/a}", 200, 0.0, 0.1)
