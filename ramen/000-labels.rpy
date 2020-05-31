@@ -1,4 +1,4 @@
-define character.sysnote = Character('', window_background="#0000", what_xalign=0.5,what_size=18)
+define character.sysnote = Character('', window_background="#0000", what_xalign=0.5, what_size=18)
 
 label ramen_newgame:
 
@@ -15,7 +15,6 @@ label ramen_newgame:
             character.sysnote("Using {icon=logo-ramen} Ramen framework.")
             # jump the test
             renpy.jump('ramen_test')
-
 
     $ _skipping = True
 

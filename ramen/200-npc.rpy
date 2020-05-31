@@ -158,7 +158,7 @@ init -200 python:
 
             renpy.image("side " + self.id + " " + what, compo)
 
-        def setup_phone(self, fordig=None,sideimg_dir=None):
+        def setup_phone(self, fordig=None, sideimg_dir=None):
 
             if fordig is None:
                 fordig = "{:04d}".format(ramu.random_int(650, 9998))
