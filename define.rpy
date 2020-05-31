@@ -26,6 +26,7 @@ init -300 python:
 init -2 python:
 
     build.name = ramu.safestr(config.name)
+    config.window_icon = "window_icon.png"
 
     # False will force disable ramen episodes menu
     # ramen.episodes_menu = False
@@ -46,28 +47,5 @@ init -2 python:
 
     mc_name = mc.name
 
-    # lastname
+    pe.native_name = ['Easton','Westly','Northgate','Southvile' ]
 
-    pe.native_name = [
-        'Hilla',
-        'Bona',
-        'Ilary',
-        'Rumvurt',
-        'Onaria',
-        'Kani',
-        'Delani',
-        'Yonee',
-        'Muhbil',
-        'Picsa',
-        'Shinga',
-        'Pizda',
-        'Cikano',
-        'Olio',
-        'Siknius',
-        'Kisa',
-        'Pidhi',
-        'Kef']
-
-init offset = -1
-
-define config.window_icon = "gui/window_icon.png"
