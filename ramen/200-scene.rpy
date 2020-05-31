@@ -51,7 +51,7 @@ init -200 python:
 
                 fn = ramu.file_info(f)
                 est(fn.path)
-                
+
                 if fn.path == 'scene':
 
                     if ' ' in fn.name:
@@ -63,7 +63,7 @@ init -200 python:
                             continue
 
                     if ' ' in fn.name:
-                        
+
                         withcondition=False
 
                         for c in condition:
@@ -88,20 +88,19 @@ init -200 python:
                                     res[fn.path][fnn[0]
                                                  ]['cond'] += ("ramentime.cond()=='" + c + "'", f)
                                 withcondition=True
-                        
+
                         if withcondition:
                             try:
                                 res[fn.path][fnn[0]]['main']
                                 continue
-                            except:
+                            except BaseException:
                                 fnn = fn.name.split(' ')
                                 est(fn.path, fnn[0])
                                 res[fn.path][fnn[0]]['main'] = f
                         else:
                             est(fn.path, fn.name)
                             res[fn.path][fn.name]['main'] = f
-                        
-                        
+
                     #---
                     else:
 
@@ -110,7 +109,7 @@ init -200 python:
 
                 elif fn.path=='overlay':
                     res[fn.path][fn.name] = f
-                
+
                 else:
                     print "----"
                     print fn.path
@@ -133,14 +132,14 @@ init -200 python:
                     res['scene'][k] = res['scene'][k]['cond']
 
                 except BaseException:
-                    try: 
+                    try:
                         renpy.image(self.id + " " + k, res['scene'][k]['main'])
                         res['scene'][k] = res['scene'][k]['main']
-                    except:
+                    except BaseException:
                         pass
 
             print res
-            
+
             for k in res:
 
                 try:

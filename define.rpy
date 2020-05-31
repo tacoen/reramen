@@ -49,5 +49,4 @@ init -2 python:
 
     # for npc creation
 
-    pe.native_name = ['Easton','Westly','Northgate','Southvile' ]
-
+    pe.native_name = ['Easton', 'Westly', 'Northgate', 'Southvile' ]

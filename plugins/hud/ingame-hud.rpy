@@ -40,7 +40,7 @@ screen hud():
             icon = 'menu-small'
 
     zorder 99
-    
+
     if hud.active:
         if hud.enable or shade:
             add(ramu.ezfind('top-shade.png')) xalign 1.0 yalign 0.0 at FadeInterval(0.5)

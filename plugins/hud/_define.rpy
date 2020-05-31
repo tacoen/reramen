@@ -41,5 +41,5 @@ init -11 python:
                   'enable': False
               }
               )
-    
+
     hud.active = True
