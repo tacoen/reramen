@@ -47,5 +47,7 @@ init -2 python:
 
     mc_name = mc.name
 
+    # for npc creation
+
     pe.native_name = ['Easton','Westly','Northgate','Southvile' ]
 
