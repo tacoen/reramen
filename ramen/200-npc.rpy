@@ -25,15 +25,6 @@ init -200 python:
         def reinit(self):
             self.define_byfile()
 
-        def set_phonenum(self, fordig=None):
-
-            if fordig is None:
-                fordig = "{:04d}".format(ramu.random_int(650, 9998))
-
-            self.phonenum = "5555-" + fordig
-
-            return self.phonenum
-
         def relation(self, what=None, point=None):
             """
             Set/get npc relation stat to main character
@@ -106,11 +97,6 @@ init -200 python:
                 self.__dict__[str('profile_pic')] = f
                 renpy.image(self.id + ' profile_pic', f)
 
-                for i in ['phone-incall', 'phone-outcall', 'phone-oncall']:
-                    temp_img = ramu.ezfile(pe.image_path + 'side/' + i)
-                    if temp_img is not None:
-                        self.create_sideimage(f, temp_img, i, cut='phone-')
-
             for f in files:
                 fn = ramu.file_info(f)
 
@@ -157,17 +143,36 @@ init -200 python:
 
                 self.__dict__[str('pose')] = l
 
-        def create_sideimage(self, img, temp_img, tag, cut='phone-'):
+        def create_sideimage(self, img, temp_img, tag, cut=None):
 
-            if temp_img:
-                compo = Composite(
-                    (340, 340),
-                    (0, 0), temp_img,
-                    (105, 112), At(im.Scale(img, 96, 96, bilinear=True))
-                )
+            compo = Composite(
+                (340, 340),
+                (0, 0), temp_img,
+                (105, 112), At(im.Scale(img, 96, 96, bilinear=True))
+            )
 
+            if cut is not None:
                 what = tag.replace(cut, '')
-                renpy.image("side " + self.id + " " + what, compo)
+            else:
+                what = tag
+
+            renpy.image("side " + self.id + " " + what, compo)
+
+        def setup_phone(self, fordig=None,sideimg_dir=None):
+
+            if fordig is None:
+                fordig = "{:04d}".format(ramu.random_int(650, 9998))
+
+            self.phonenum = "5555-" + fordig
+
+            if sideimg_dir is not None:
+
+                for i in ['phone-incall', 'phone-outcall', 'phone-oncall']:
+                    temp_img = ramu.ezfind(i, 'image', sideimg_dir )
+                    if temp_img is not None:
+                        self.create_sideimage(self.profile_pic, temp_img, i)
+
+            return self.phonenum
 
 transform Expression(who, npc_expression, pos=(0, 0)):
     xpos int(ramu.imgexpo(who, 'bound')[0])+ int(ramu.npc(who, 'expression_pos')[0])

@@ -31,7 +31,7 @@ init -80 python:
 
             self.title = 'Ramen'
             self.home_info = "Renpy according me, a modular approach. It is renpy framework to help you creating of visual novell game."
-            
+
             self.report = ''
 
             try:
@@ -123,23 +123,23 @@ init -80 python:
             st = "# Init level\n\nRamen init level inspection\n\n"
             st += self.get_txtfile(rds.md_path+'txt/head-init.txt')
             st += "\n\n| level | code | file |\n| ---- | ---- | ---- |"
-            
+
             rep = "\n\nInit Level:\n\n"
-            
+
             for i in list:
-                    
+
                 for w in ['python','renpy']:
                     try:
                         st += "\n|" + str(i) + "|" + w + "|"+ "<br>".join(it[str(i)][w]) +"|"
                         rep += "\n"+str(i) + "\t" + w + "\n\t\t"+ "\n\t\t". join(it[str(i)][w]) +"\n"
-                        
+
                     except: pass
-            
+
             self.write('ref_init_level', st + "\n\n")
-            
+
             if rds.report:
-                
-                self.report += rep.replace("<br>","\n\t\t\t") 
+
+                self.report += rep.replace("<br>","\n\t\t\t")
 
         def collect_style(self):
 
@@ -210,7 +210,7 @@ init -80 python:
             st = ''
 
             for label in labels:
-                
+
                 if label.startswith('_'):
                     continue
 
@@ -232,25 +232,25 @@ init -80 python:
 
                 last_file = f
 
-            
+
             ndx_st = self.get_txtfile(rds.md_path+'txt/head-label.txt')
             ndx_st += '# Labels\n\n'
             ndx_st += '```' + st + '\n```'
             self.write('ref_label', ndx_st)
-            
+
             if rds.report:
                 self.report += st
 
-                
+
         def makereport(self):
             file = open( rds.game_path+"report.txt", "w" )
             rep = "Generated at : "+datetime.datetime.now().strftime('%c')+"\n"
             rep += self.report
-            
+
             rep = re.sub(r'\n\n\n','\n\n',rep)
             file.writelines(rep)
             file.close()
-            
+
         def get_func(self):
 
             import sys
@@ -482,7 +482,7 @@ init -80 python:
 
             if rds.report:
                 self.makereport()
-        
+
             if rprint:
                 print self.rs
             else:

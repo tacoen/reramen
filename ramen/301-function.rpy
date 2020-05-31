@@ -369,7 +369,7 @@ init -301 python:
 
         def sfx(self, file, path=None, channel='sound', **kwargs):
 
-            res = ezfind(self, file, path, 'sound')
+            res = self.ezfind(file, 'sound', path)
 
             if res is not None:
                 renpy.sound.play(res, channel=channel, **kwargs)

@@ -6,7 +6,7 @@ init -299 python:
     pp.episodes = {}
     pp.asset = {}
 
-    def plugin(what, type='plugins'):
+    def Plugin(what, type='plugins'):
         """Load plugins-information"""
         try:
             obj = object()
@@ -117,10 +117,10 @@ init -299 python:
     def ramen_plugins_build():
 
         for p in pp.plugins.keys():
-            if plugin(p).build:
-                type = plugin(p).type
+            if Plugin(p).build:
+                type = Plugin(p).type
                 build.archive(type+'_'+ramu.safestr(p), "all")
-                build.classify('game/'+plugin(p).dir+'**', type+'_'+ramu.safestr(p) )
+                build.classify('game/'+Plugin(p).dir+'**', type+'_'+ramu.safestr(p) )
 
 init -1 python:
 
@@ -159,7 +159,7 @@ screen ramen_episodes_menu():
                 for episode in pp.episodes:
 
                     python:
-                        e = plugin(episode, 'episodes')
+                        e = Plugin(episode, 'episodes')
                         if renpy.loadable(e.dir+'thumb.png'):
                             thumb = im.Scale(e.dir+'thumb.png', 200, 110)
                         else:
@@ -180,7 +180,7 @@ screen ramen_episodes_detail(episode):
 
     python:
 
-        e = plugin(episode, 'episodes')
+        e = Plugin(episode, 'episodes')
 
         if renpy.loadable(e.dir+'banner.png'):
             banner = Composite((900, 150), (0, 0), im.Scale(e.dir+'banner.png', 900, 150),

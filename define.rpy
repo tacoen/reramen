@@ -1,10 +1,16 @@
+init -304 python:
+
+    multipersistent = MultiPersistent('tacoen.itch.io')
+    config.save_directory = "ramendir"
+
 init -300 python:
 
     # Set True to enable developer options
 
     # Game Title
     config.name = _("ramen")
-    config.version = "1.0"
+    config.version = str(1)+"."+datetime.datetime.now().strftime('%m%d')
+
     gui.about = _p("a game made using ramen renpy framework.")
     gui.show_name = True
 
@@ -14,6 +20,7 @@ init -300 python:
     # uncomment to release
     # config.developer = False
 
+    # Set False to disable developer options.
     ramen.dev = True
 
 init -2 python:

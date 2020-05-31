@@ -1,4 +1,4 @@
-Generated at : 05/30/20 17:58:57
+Generated at : 05/30/20 18:16:34
 
 test/e1/menuof.rpy 
     act
@@ -24,9 +24,6 @@ test/e3/hoshi.rpy
 test/e1/test.rpy 
     joan_somechat
 
-script.rpy 
-    nesting_test
-
 test/e1/test.rpy 
     night_only
 
@@ -39,13 +36,12 @@ test/e2/test2.rpy
 
 script.rpy 
     start
+
+ramen/200-scene-map.rpy 
     +--- over (start.over)
-    +--- step1 (start.step1)
-    +--- step_a (start.step_a)
-    +--- step_b (start.step_b)
-    test
 
 test/e1/test.rpy 
+    test
     +--- exit (test.exit)
     +--- floor2 (test.floor2)
     +--- red (test.red)

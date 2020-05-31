@@ -3,6 +3,6 @@
 
 label start:
 
-    "Hi! this is a [config.name] unit-test routines."
-    
+    "Hello world"
+
     jump testmenu

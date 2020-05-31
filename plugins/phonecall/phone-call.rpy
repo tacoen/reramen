@@ -16,7 +16,7 @@ init -101 python:
     class ramen_phonecall():
 
         def incoming(self, npc_id, what=None, type='label',
-                     prefix=False, side='oncall', transform=ramen_lb):
+                     prefix=False, side='phone-oncall', transform=ramen_lb):
             """
 
             See: phonecall.talk
@@ -29,7 +29,7 @@ init -101 python:
             ramen.backto = ramen.label_last
             ramu.sfx(
                 'phone-ring',
-                plugin('phonecall').dir,
+                Plugin('phonecall').dir,
                 loop=3,
                 fadeout=1,
                 fadein=0)
@@ -55,7 +55,7 @@ init -101 python:
                     what,
                     type,
                     prefix,
-                    side='oncall',
+                    side='phone-incall',
                     transform=ramen_lb)
 
             else:
@@ -81,7 +81,7 @@ init -101 python:
             npc_phonenum = ramu.npc(npc_id, 'phonenum')
 
             renpy.show(
-                "side " + npc_id + " outcall",
+                "side " + npc_id + " phone-outcall",
                 [ramen_lb],
                 layer='above_screens'
             )
@@ -97,7 +97,7 @@ init -101 python:
                 what,
                 type,
                 prefix,
-                side='oncall',
+                side='phone-outcall',
                 transform=ramen_lb)
 
             if not result:
@@ -107,11 +107,11 @@ init -101 python:
                 return result
 
         def talk(self, npc_id, what=None, type='label',
-                 prefix=False, side='oncall', transform=ramen_lb):
+                 prefix=False, side='phone-oncall', transform=ramen_lb):
             """
 
             ``` python
-            $ phonecall.talk('rita','chat','json','01','oncall',ramen_lb)
+            $ phonecall.talk('rita','chat','json','01','phone-oncall',ramen_lb)
             ```
 
             ### Keyword arguments:
@@ -147,14 +147,14 @@ init -101 python:
         def cb_dialing(self, event, interact=False, **kwargs):
             """Provide callback function for `phone_dialing`."""
             if event == "show_done":
-                ramu.sfx('phone-dial', plugin('phonecall').dir)
+                ramu.sfx('phone-dial', Plugin('phonecall').dir)
             elif event == "end":
                 renpy.sound.stop()
 
         def cb_hangup(self, event, interact=False, **kwargs):
             """Provide callback function for `phone_hangup`."""
             if event == "show_done":
-                ramu.sfx('phone-close', plugin('phonecall').dir)
+                ramu.sfx('phone-close', Plugin('phonecall').dir)
             elif event == "end":
                 renpy.sound.stop()
 

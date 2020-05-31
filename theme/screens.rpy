@@ -2,7 +2,7 @@
 
 screen scene_overlay(img):
     add img xpos 0 ypos 0
-    
+
 screen hbox_line(what, value, field_width=180, fa=0.0, va=1.0):
 
     hbox:

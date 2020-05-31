@@ -5,7 +5,7 @@ screen rdsa_tools_plugins():
     vbox:
         spacing 16
         for p in pp.plugins.keys():
-            $ pl = plugin(p)
+            $ pl = Plugin(p)
 
             vbox:
                 spacing 2

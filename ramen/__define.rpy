@@ -1,11 +1,6 @@
-init -304 python:
-
-    multipersistent = MultiPersistent('tacoen.itch.io')
-    config.save_directory = "ramendir"
+init -302 python:
 
     ramen_version_name = 'RE-01'
-
-init -302 python:
 
     pe = ramen_persistent('env')
     pe.theme_path = 'theme/'
