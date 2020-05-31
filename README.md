@@ -2,12 +2,14 @@
 
 Renpy According Me, a modular approach.
 
-It is renpy framework to help you creating of visual novell game.
+It is renpy framework to help you creating of visual novel game.
 
 ## Wiki 
 
 All markdown files were generated from inside the project (semi-live documentaion).
 https://github.com/tacoen/reramen/wiki/index
+
+Devlog: https://tacoen.itch.io/ramen/devlog
 
 ## Demo source code
 
@@ -36,8 +38,7 @@ Todo: Things from the old-version of ramen :
 * life simulations = cost of all
 * asset viewer/debug
 
-## Why re?
+## More answer at
 
-https://tacoen.itch.io/ramen/devlog/147830/ramen-rewrite-for-persistent
-
-Old version: https://github.com/tacoen/ramen
+* https://tacoen.itch.io/ramen/devlog/147830/ramen-rewrite-for-persistent
+* Old version: https://github.com/tacoen/ramen
