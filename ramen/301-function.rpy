@@ -2,6 +2,25 @@ init -301 python:
 
     class ramen_util():
 
+        def arrayize(self,array,length,default=None):
+            
+            if isinstance(array,(unicode, str, int)):
+                print '((((conver'
+                sarray=[]
+                sarray.append(array)
+            else:
+                sarray = array
+            
+            if len(sarray) == length:
+                return sarray
+            else:
+                for n in range(0,length):
+                    try: sarray[n]
+                    except: 
+                        sarray.insert(n,default)
+                    
+            return sarray
+        
         def menuof(self, label, screen='choice', exitword='Done', void=None, **condition):
 
             choices=[]

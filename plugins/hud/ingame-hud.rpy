@@ -40,52 +40,52 @@ screen hud():
             icon = 'menu-small'
 
     zorder 99
-    layer 'hud'
-
-    if hud.enable or shade:
-        add(pe.theme_path + 'gui/top-shade.png') xalign 1.0 yalign 0.0 at FadeInterval(0.5)
-
-    hbox xalign 1.0 yalign 0.0:
-
-        spacing 8
-        style_prefix 'hud'
-
+    
+    if hud.active:
         if hud.enable or shade:
+            add(ramu.ezfind('top-shade.png')) xalign 1.0 yalign 0.0 at FadeInterval(0.5)
 
-            use hud_time()
-            use hud_cash()
+        hbox xalign 1.0 yalign 0.0:
 
-        text "{:03d}".format(mc.score) style 'hud_score' yoffset 14 xalign 1.0
+            spacing 8
+            style_prefix 'hud'
 
-        textbutton ico(icon) style 'hud_icon' action ToggleVariable('hud.enable'):
-            padding(16, 16, 16, 16)
-            text_size 32
-            hovered[SetScreenVariable('shade', True)]
-            unhovered[SetScreenVariable('shade', False)]
+            if hud.enable or shade:
 
-    for m in hud.icons.keys():
+                use hud_time()
+                use hud_cash()
 
-        python:
-            try:
-                if hud.icons[m]['enable']:
-                    k = hud.icons[m]['key']
-                    a = hud.icons[m]['action']
-            except BaseException:
-                k = False
+                text "{:03d}".format(mc.score) style 'hud_score' yoffset 14 xalign 1.0
 
-        if k:
-            key k action a
+            textbutton ico(icon) style 'hud_icon' action ToggleVariable('hud.enable'):
+                padding(16, 16, 16, 16)
+                text_size 32
+                hovered[SetScreenVariable('shade', True)]
+                unhovered[SetScreenVariable('shade', False)]
 
-    key "K_F10" action ToggleVariable('hud.enable')
-    key "K_F7" action ToggleScreen('hud_stats', stats=['vital', 'energy', 'hygiene'])
+        for m in hud.icons.keys():
 
-    if hud.enable:
-        key "game_menu" action SetVariable('hud.enable', False)
+            python:
+                try:
+                    if hud.icons[m]['enable']:
+                        k = hud.icons[m]['key']
+                        a = hud.icons[m]['action']
+                except BaseException:
+                    k = False
 
-    if hud.enable:
-        timer 0.2 action Show('hud_bar')
-    else:
-        timer 0.2 action Hide('hud_bar')
+            if k:
+                key k action a
+
+        key "K_F10" action ToggleVariable('hud.enable')
+        key "K_F7" action ToggleScreen('hud_stats', stats=['vital', 'energy', 'hygiene'])
+
+        if hud.enable:
+            key "game_menu" action SetVariable('hud.enable', False)
+
+        if hud.enable:
+            timer 0.2 action Show('hud_bar')
+        else:
+            timer 0.2 action Hide('hud_bar')
 
 screen hud_cash():
     hbox xalign 1.0 ysize 72 yfill True:

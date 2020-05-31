@@ -17,9 +17,11 @@ init -200 python:
         def define_byfile(self):
 
             tdir = []
+            prop = [ 'scene', 'overlay' ]
 
             for d in self.dir:
-                tdir.append(d + 'scene')
+                for p in prop:
+                    tdir.append(d + p)
 
             condition = sorted(
                 list(
@@ -48,9 +50,8 @@ init -200 python:
             for f in files:
 
                 fn = ramu.file_info(f)
-
                 est(fn.path)
-
+                
                 if fn.path == 'scene':
 
                     if ' ' in fn.name:
@@ -62,6 +63,8 @@ init -200 python:
                             continue
 
                     if ' ' in fn.name:
+                        
+                        withcondition=False
 
                         for c in condition:
 
@@ -84,14 +87,36 @@ init -200 python:
                                 elif c in pe.time_cond:
                                     res[fn.path][fnn[0]
                                                  ]['cond'] += ("ramentime.cond()=='" + c + "'", f)
+                                withcondition=True
+                        
+                        if withcondition:
+                            try:
+                                res[fn.path][fnn[0]]['main']
+                                continue
+                            except:
+                                fnn = fn.name.split(' ')
+                                est(fn.path, fnn[0])
+                                res[fn.path][fnn[0]]['main'] = f
+                        else:
+                            est(fn.path, fn.name)
+                            res[fn.path][fn.name]['main'] = f
+                        
+                        
+                    #---
                     else:
 
                         est(fn.path, fn.name)
                         res[fn.path][fn.name]['main'] = f
 
-                else:
+                elif fn.path=='overlay':
                     res[fn.path][fn.name] = f
+                
+                else:
+                    print "----"
+                    print fn.path
+                    #res[fn.path][fn.name] = f
 
+            #111
             for k in res['scene']:
 
                 if self.exist('scene', k):
@@ -108,9 +133,14 @@ init -200 python:
                     res['scene'][k] = res['scene'][k]['cond']
 
                 except BaseException:
-                    renpy.image(self.id + " " + k, res['scene'][k]['main'])
-                    res['scene'][k] = res['scene'][k]['main']
+                    try: 
+                        renpy.image(self.id + " " + k, res['scene'][k]['main'])
+                        res['scene'][k] = res['scene'][k]['main']
+                    except:
+                        pass
 
+            print res
+            
             for k in res:
 
                 try:
