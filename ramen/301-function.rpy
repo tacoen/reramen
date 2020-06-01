@@ -4,7 +4,7 @@ init -301 python:
 
         def arrayize(self, array, length, default=None):
 
-            if isinstance(array, (unicode, str, int,  type(Composite((0,0))))):
+            if isinstance(array, (unicode, str, int, type(Composite((0, 0))))):
                 sarray=[]
                 sarray.append(array)
             else:
