@@ -196,10 +196,13 @@ screen modal_input(**kwargs):
                 xalign 0.0
 
             null height 8
-            input default default_value:
+            input default default_value style 'modal_input':
                 xminimum xin
 
             add ramu.hline((xin, 1), "#666")
+
+style modal_input:
+    color "#129"
 
 # Confirm
 

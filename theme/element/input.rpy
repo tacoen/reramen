@@ -14,8 +14,9 @@ screen input(prompt):
 
 style input_prompt:
     xalign pt.dialogue_text_xalign
-    color "#111"
+    color "#ddd"
 
 style input:
     xalign pt.dialogue_text_xalign
     xmaximum pt.dialogue_width
+    color "#ccc"

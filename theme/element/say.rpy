@@ -4,6 +4,7 @@ screen say(who, what):
     style_prefix "say"
 
     window:
+
         id "window"
 
         if who is not None:

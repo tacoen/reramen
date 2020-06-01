@@ -4,8 +4,7 @@ init -301 python:
 
         def arrayize(self, array, length, default=None):
 
-            if isinstance(array, (unicode, str, int)):
-                print '((((conver'
+            if isinstance(array, (unicode, str, int,  type(Composite((0,0))))):
                 sarray=[]
                 sarray.append(array)
             else:
@@ -152,7 +151,7 @@ init -301 python:
 
                 if ramu.safestr(name) in ramen.events.__dict__.keys():
                     e = Event(ramu.safestr(name))
-                    print e.occur()
+                    #print e.occur()
                     if e.occur():
                         renpy.call(e.label)
 

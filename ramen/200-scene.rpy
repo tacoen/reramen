@@ -111,9 +111,8 @@ init -200 python:
                     res[fn.path][fn.name] = f
 
                 else:
-                    print "----"
-                    print fn.path
-                    #res[fn.path][fn.name] = f
+                    pass
+                    #print fn.path
 
             #111
             for k in res['scene']:
@@ -137,8 +136,6 @@ init -200 python:
                         res['scene'][k] = res['scene'][k]['main']
                     except BaseException:
                         pass
-
-            print res
 
             for k in res:
 

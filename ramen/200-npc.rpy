@@ -25,13 +25,14 @@ init -200 python:
         def reinit(self):
             self.define_byfile()
 
-        def relation(self, what=None, point=None):
+        def relation(self, point=None, what='relation'):
             """
             Set/get npc relation stat to main character
 
             ``` python
-            mia.relation('love',10)
-            mia.relation('obedience',3)
+            mia.relation(5)
+            mia.relation(10,'love')
+            mia.relation(3,'obedience')
 
             >mia.relation()
             {'love':10,'obedience':3}
