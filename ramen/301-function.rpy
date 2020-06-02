@@ -126,6 +126,12 @@ init -301 python:
             ramen.uidnumber += 1
             return "{:03d}".format(ramen.uidnumber)
 
+        def kdict(self,**kwargs):
+            dict={}
+            for k in kwargs:
+                dict[k] = kwargs[k]
+            return dict
+            
         def makeobj(self, args, **kwargs):
             obj = object()
             obj.__dict__ = kwargs

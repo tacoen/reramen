@@ -102,7 +102,7 @@ init -100 python:
                          )
 
     chapter = Character(None,
-                        window_xalign=0.9,
+                        window_xalign=0.8,
                         window_yalign=0.9,
                         window_xsize=0.9,
                         window_ysize=None,

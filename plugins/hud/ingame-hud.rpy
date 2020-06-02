@@ -77,7 +77,9 @@ screen hud():
                 key k action a
 
         key "K_F10" action ToggleVariable('hud.enable')
+        key "shift_K_F6" action ToggleScreen('show_image', img=ramu.ezfile(Plugin('hud').dir+'legend'))
         key "K_F7" action ToggleScreen('hud_stats', stats=['vital', 'energy', 'hygiene'])
+        key "shift_K_F7" action ToggleVariable('quick_menu')
 
         if hud.enable:
             key "game_menu" action SetVariable('hud.enable', False)
