@@ -2,12 +2,21 @@ init offset = -299
 
 image white = Solid('#eee')
 image black = Solid('#111')
-image bg room = Solid('#338')
 image mimic = Solid("#0000")
 image blank = Solid("#0000")
 
 define qpixellate = Pixellate(0.5, 2)
 
+transform basic_anim:
+    pass
+
+transform hit_anim:
+    alpha 0.95
+    easeout .1 zoom 1.005, alpha 1.0, yoffset 1
+    pause 0.8
+    easein .1 zoom 1.0, alpha 0.95, yoffset 0
+    repeat
+        
 transform FadeInterval(ms=1.0):
     on show:
         alpha 0
