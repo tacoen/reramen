@@ -36,9 +36,9 @@ screen smphone_apps_relation(var, page):
         vbox:
             spacing 16
             style_prefix "smphone_default"
-            
+
             for p in mc.rel:
-            
+
                 if ramu.globalcheck(p):
                     hbox:
                         spacing 8

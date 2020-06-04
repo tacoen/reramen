@@ -112,9 +112,7 @@ init -200 python:
 
                 else:
                     pass
-                    #print fn.path
 
-            #111
             for k in res['scene']:
 
                 if self.exist('scene', k):

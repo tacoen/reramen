@@ -71,3 +71,10 @@ init -301 python:
                 return pe.time_word[int(sun)]
             else:
                 return sun
+                
+        def seed(self,what):
+            if what == 'day':
+                return self.time.strftime('%y%m%d')
+            else:
+                 return self.time.strftime('%U%j%H')
+        

@@ -78,7 +78,7 @@ init -200 python:
             """
 
             for k in kwargs:
-                self.relation(kwargs[k],k)
+                self.relation(kwargs[k], k)
 
         def define_byfile(self):
 
@@ -146,8 +146,8 @@ init -200 python:
             try:
                 if len(self.__dict__['sprite']) > 0:
                     for s in self.sprite.keys():
-                       renpy.image(self.id+" sprite "+s, self.sprite[s])
-            except:
+                        renpy.image(self.id+" sprite "+s, self.sprite[s])
+            except BaseException:
                 pass
 
         def create_sideimage(self, img, temp_img, tag, cut=None):
@@ -181,27 +181,20 @@ init -200 python:
 
             return self.phonenum
 
-
         def spriteanim(self, name, seq, tick=1.0, transform=basic_anim):
             anim =()
 
-            if isinstance(seq,(str,unicode)):
+            if isinstance(seq, (str, unicode)):
                 seq = filter(lambda w: seq in w, self.sprite.keys())
 
             for s in seq:
-                print seq
-                print "+++"
-                if isinstance(s,tuple):
-                    print 'tuple'
-                    print s
+                if isinstance(s, tuple):
                     if s[0] in self.sprite:
                         tick = float(s[1])
-                        anim = anim + ( At(self.sprite[s[0]],transform), tick )
+                        anim = anim + ( At(self.sprite[s[0]], transform), tick )
                 else:
                     if s in self.sprite:
-                        print "auto"
-                        print s
-                        anim = anim + ( At(self.sprite[s],transform), tick )
+                        anim = anim + ( At(self.sprite[s], transform), tick )
 
             renpy.image((self.id, name), Animation(*anim))
 

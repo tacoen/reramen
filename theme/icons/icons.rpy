@@ -95,16 +95,16 @@ init -202 python:
             'volume-off': u'\x30',
             'volume-on': u'\x60',
             'volume-x': u'\x7e',
-            
+
             'map-pin1': u'\x7d',
             'map-pin2': u'\x3a',
             'map-pin3': u'\x7b',
-            
+
             'ico-building0': u'\xae',
             'ico-building1': u'\xa9',
             'ico-building2': u'\x22',
             'ico-building3': '>',
-#            'ico-building3': u'\x3e',
+            #            'ico-building3': u'\x3e',
             'ico-home': u'\x3c'
         }
 

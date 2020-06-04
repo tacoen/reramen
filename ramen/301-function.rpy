@@ -77,22 +77,22 @@ init -301 python:
             if ret:
                 return res
 
-        def globalcheck(self,what):
+        def globalcheck(self, what):
             """
             Check where if [what] is in globals. Sometimes [what] retrieve from multipersistent, this to check whenever [what] came from this game or not.
             """
             try:
                 globals()[what]
                 return True
-            except:
+            except BaseException:
                 return False
-                
+
         def npc(self, npc_id, what):
-            
-            try: 
+
+            try:
                 if type(globals()[npc_id]) is not ramen_npc:
                     return False
-            except:
+            except BaseException:
                 pass
 
             try:
@@ -140,7 +140,7 @@ init -301 python:
             ramen.uidnumber += 1
             return "{:03d}".format(ramen.uidnumber)
 
-        def kdict(self,**kwargs):
+        def kdict(self, **kwargs):
             dict={}
             for k in kwargs:
                 dict[k] = kwargs[k]
@@ -171,7 +171,6 @@ init -301 python:
 
                 if ramu.safestr(name) in ramen.events.__dict__.keys():
                     e = Event(ramu.safestr(name))
-                    #print e.occur()
                     if e.occur():
                         renpy.call(e.label)
 
