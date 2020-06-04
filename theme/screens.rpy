@@ -27,7 +27,7 @@ screen story_skipbutton(label, text='Skip'):
         action[Hide('story_skipbutton'), Jump(label) ]
 
 screen show_image(img):
-    
+
     add img xpos 0 ypos 0
 
 screen scene_overlay(imgs):

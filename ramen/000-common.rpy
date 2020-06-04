@@ -16,7 +16,7 @@ transform hit_anim:
     pause 0.8
     easein .1 zoom 1.0, alpha 0.95, yoffset 0
     repeat
-        
+
 transform FadeInterval(ms=1.0):
     on show:
         alpha 0

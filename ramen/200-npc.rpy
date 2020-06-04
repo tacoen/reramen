@@ -143,7 +143,7 @@ init -200 python:
                     renpy.image(self.id, pose[l[0]])
 
                 self.__dict__[str('pose')] = l
-                
+
             try:
                 if len(self.__dict__['sprite']) > 0:
                     for s in self.sprite.keys():
@@ -185,10 +185,10 @@ init -200 python:
 
         def spriteanim(self, name, seq, tick=1.0, transform=basic_anim):
             anim =()
-        
+
             if isinstance(seq,(str,unicode)):
                 seq = filter(lambda w: seq in w, self.sprite.keys())
-        
+
             for s in seq:
                 print seq
                 print "+++"
@@ -205,8 +205,8 @@ init -200 python:
                         anim = anim + ( At(self.sprite[s],transform), tick )
 
             renpy.image((self.id, name), Animation(*anim))
-            
-            
+
+
 transform Expression(who, npc_expression, pos=(0, 0)):
     xpos int(ramu.imgexpo(who, 'bound')[0])+ int(ramu.npc(who, 'expression_pos')[0])
     ypos int(ramu.imgexpo(who, 'bound')[1])+ int(ramu.npc(who, 'expression_pos')[1])

@@ -131,7 +131,7 @@ init -301 python:
             for k in kwargs:
                 dict[k] = kwargs[k]
             return dict
-            
+
         def makeobj(self, args, **kwargs):
             obj = object()
             obj.__dict__ = kwargs

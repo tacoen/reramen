@@ -1,6 +1,18 @@
 init -10 python:
 
     def action_shortcut(shortcuts=False):
+        """
+        Forget imagemap, use shortcut!
+
+        ``` python
+        $ action_shortcut ({
+            'Enter Motel':{'icon':'log-in','action':Jump('lovemotel.inside')},
+            'Town Map':{'icon':'ico-map','action':Call('townmap')}
+        })
+        ```
+
+        """
+
         if not shortcuts:
             renpy.hide_screen('action_shortcut')
         else:
@@ -16,14 +28,19 @@ screen action_shortcut(shortcuts):
     vbox:
         yalign 0.7
         xalign 0.025
+        spacing 24
 
         for i in shortcuts:
-            $ s = shortcuts[i]
+            python:
+                s = shortcuts[i]
+                s['text']=i
+
             use shortcut(s['text'], s['action'], s['icon'])
 
 screen shortcut(text, action, icon):
 
     hbox:
+        spacing 8
         style_prefix 'shortcut'
         textbutton ico(icon) style 'shortcut_icon':
             action action
@@ -41,4 +58,5 @@ style shortcut_icon_text is ramen_icon_text:
 style shortcut_button is button
 style shortcut_button_text is ramen_gui:
     outlines pt.insensitive_outlines
+    hover_color "#ff0"
     hover_outlines pt.hover_outlines
