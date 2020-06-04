@@ -1,9 +1,9 @@
 @font-face {
   font-family: 'feather-ramen2-icon';
   src:
-    url('fonts/feather-ramen2-icon.ttf?9lymih') format('truetype'),
-    url('fonts/feather-ramen2-icon.woff?9lymih') format('woff'),
-    url('fonts/feather-ramen2-icon.svg?9lymih#feather-ramen2-icon') format('svg');
+    url('fonts/feather-ramen2-icon.ttf?g8y0x6') format('truetype'),
+    url('fonts/feather-ramen2-icon.woff?g8y0x6') format('woff'),
+    url('fonts/feather-ramen2-icon.svg?g8y0x6#feather-ramen2-icon') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -302,6 +302,18 @@ i {
 }
 .trash-1:before {
   content: "\2d";
+}
+.user:before {
+  content: "\fb";
+}
+.user-min:before {
+  content: "\ff";
+}
+.user-plus:before {
+  content: "\d6";
+}
+.user-rel:before {
+  content: "\a2";
 }
 .volume-off:before {
   content: "\30";

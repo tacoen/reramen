@@ -104,8 +104,14 @@ init -202 python:
             'ico-building1': u'\xa9',
             'ico-building2': u'\x22',
             'ico-building3': '>',
-            #            'ico-building3': u'\x3e',
-            'ico-home': u'\x3c'
+            #'ico-building3': u'\x3e',
+            'ico-home': u'\x3c',
+
+            'user': u'\xfb',
+            'user-min': u'\xff',
+            'user-plus': u'\xd6',
+            'user-rel': u'\xa2',
+
         }
 
     def ico(what=None, say=False):
