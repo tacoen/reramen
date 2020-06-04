@@ -56,13 +56,12 @@ init -200 python:
                 try:
                     mc.rel[self.id][what]
                 except BaseException:
-                    mc.rel[self.id][what] = 0
+                    mc.rel[self.id][what] = int(0)
 
                 if point is None:
                     return mc.rel[self.id][what]
                 else:
-                    mc.rel[self.id][what] = ramu.limits(
-                        mc.rel[self.id][what] + point)
+                    mc.rel[self.id][what] = ramu.limits( mc.rel[self.id][what] + int(point) )
                     return mc.rel[self.id][what]
 
         def relation_dict(self, **kwargs):
@@ -79,7 +78,7 @@ init -200 python:
             """
 
             for k in kwargs:
-                self.relation(k, kwargs[k])
+                self.relation(kwargs[k],k)
 
         def define_byfile(self):
 

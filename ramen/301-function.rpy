@@ -77,9 +77,20 @@ init -301 python:
             if ret:
                 return res
 
-        def npc(self, npc_id, what):
-            if type(globals()[npc_id]) is not ramen_npc:
+        def globalcheck(self,what):
+            try:
+                globals()[what]
+                return True
+            except:
                 return False
+                
+        def npc(self, npc_id, what):
+            
+            try: 
+                if type(globals()[npc_id]) is not ramen_npc:
+                    return False
+            except:
+                pass
 
             try:
                 return globals()[npc_id]._get(what)
@@ -114,7 +125,7 @@ init -301 python:
                 value = pe.limit[0]
             if value > pe.limit[1]:
                 value = pe.limit[1]
-            return value
+            return int(value)
 
         def mouse(self):
             """Get Mouse pos, return (x,y)"""

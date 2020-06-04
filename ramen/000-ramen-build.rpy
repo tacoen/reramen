@@ -6,7 +6,9 @@ init python:
     build.include_old_themes  = False
 
     build.classify('**.rpy', None)
+
     build.classify('wiki/**', None)
+    build.classify('game/doc/**', None)
 
     build.classify('**~', None)
     build.classify('**.bak', None)
