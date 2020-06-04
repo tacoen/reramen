@@ -22,19 +22,21 @@ Devlog: https://tacoen.itch.io/ramen/devlog
 * Extendable Scene Map
 * Feather light GUI (Themeable)
 * Plugins (multipurpose) and 
-* apps container (smartphone, pc)
+* Apps-container (smartphone, pc)
 * Multi-persistent main character stat
 * Items and Inventory
 * Shop and pawn
 * Events with condition
 * Episodes (DLC or standalone)
-* npc expression (use transform not screen not renpy.image)
-* files search using path and pattern
+* NPC expression (use transform not screen not renpy.image)
+* NPC sprites
+* Files search using path and pattern
+* Scene overlays
+* Action shortcut
 
 Todo: Things from the old-version of ramen :
 
 * minigames
-* sprites
 * life simulations = cost of all
 * asset viewer/debug
 
