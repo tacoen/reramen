@@ -78,6 +78,9 @@ init -301 python:
                 return res
 
         def globalcheck(self,what):
+            """
+            Check where if [what] is in globals. Sometimes [what] retrieve from multipersistent, this to check whenever [what] came from this game or not.
+            """
             try:
                 globals()[what]
                 return True
