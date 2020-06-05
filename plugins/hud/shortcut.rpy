@@ -18,12 +18,16 @@ init -10 python:
         else:
             renpy.show_screen('action_shortcut', shortcuts=shortcuts)
 
+transform leftshade:
+    alpha 0.3
+    linear 0.5 alpha 1
+
 screen action_shortcut(shortcuts):
 
     default shade = False
 
     if shade:
-        add ramu.ezfile(pt.overlays, Color("#0019"))
+        add ramu.ezfile('theme/gui/left-shade', Color("#0019")) at leftshade
 
     vbox:
         yalign 0.7

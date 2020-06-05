@@ -1,6 +1,5 @@
 init -301 python:
-    
-    
+
     class ramen_time():
         """
         See: https://docs.python.org/2/library/datetime.html
@@ -8,7 +7,7 @@ init -301 python:
         """
 
         def __init__(self, y=2020, m=1, d=18, h=13, min=0):
-            
+
             ramen.time =  datetime.datetime(y, m, d, h, min)
             self.time = ramen.time
             self.start = datetime.datetime(y, m, d, h, min)
@@ -18,7 +17,7 @@ init -301 python:
 
         def sync(self):
             self.time = ramen.time
-            
+
         def __getattr__(self, key):
             res = getattr(self.time, key)
             if isinstance(res, (int, str, unicode)):
@@ -35,37 +34,37 @@ init -301 python:
             return self.time
 
         def adv(self, a=1, block=False):
-            
+
             if renpy.in_rollback():
                 a = -a
-                
+
             self.time = ramen.time + datetime.timedelta(hours=a)
-            
+
             if self.time < self.start:
                 self.time = self.start
-                
+
             self.populate()
 
             if block:
                 renpy.block_rollback()
-            
+
             return self.time
 
         def nextday(self, a=8, block=True):
             b = 24 - self.time.hour
-            
+
             if renpy.in_rollback():
                 a = -a
                 b = -b
 
             self.time = self.time + \
                 datetime.timedelta(hours=b) + datetime.timedelta(hours=a)
-            
+
             self.populate()
-            
+
             if block:
                 renpy.block_rollback()
-                
+
             return self.time
 
         def populate(self):
@@ -98,10 +97,9 @@ init -301 python:
                 return pe.time_word[int(sun)]
             else:
                 return sun
-                
-        def seed(self,what):
+
+        def seed(self, what):
             if what == 'day':
                 return self.time.strftime('%y%m%d')
             else:
-                 return self.time.strftime('%U%j%H')
-        
+                return self.time.strftime('%U%j%H')

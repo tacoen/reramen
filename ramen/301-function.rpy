@@ -196,6 +196,10 @@ init -301 python:
         def random_of(self, array):
             return array[int(renpy.random.randint(0, len(array) - 1))]
 
+        def shuffle(self, array):
+            renpy.random.shuffle(array)
+            return array
+
         def nice_cash(self, n):
             if n < 1000:
                 return ("{:03d}".format(n))

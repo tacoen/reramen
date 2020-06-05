@@ -5,7 +5,7 @@
 ##
 # https://www.renpy.org/doc/html/screen_special.html#notify-screen
 
-init python:
+init -10 python:
 
     def notify_ico(message, icon='alert'):
         """
