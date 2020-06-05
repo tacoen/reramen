@@ -21,5 +21,7 @@ label ramen_newgame:
     jump start
 
 label after_load:
-
+    $ renpy.retain_after_load()
+    $ ramentime.sync()
+    $ print 'after_load'
     return
