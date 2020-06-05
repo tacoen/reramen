@@ -29,8 +29,9 @@ init -301 python:
             return self.time
 
         def adv(self, a=1, block=False):
+
             if renpy.in_rollback():
-                a = -a    
+                a = -a
 
             self.time = self.time + datetime.timedelta(hours=a)
             self.populate()
