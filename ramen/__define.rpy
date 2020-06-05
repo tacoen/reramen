@@ -61,12 +61,12 @@ init -302 python:
 
 init -300 python:
 
-    ramentime = ramen_time()
     ramu = ramen_util()
     ramen.uidnumber = 0
     ramen.objects = {}
     ramen.items = object()
-    ramen.seed = datetime.timedelta(0, 0)
+    
+    ramentime = ramen_time(2018,1,18,12,0)
 
     ramen.label_trace = ['start']
 
@@ -132,3 +132,5 @@ init -100 python:
                         what_prefix="{vspace=24}{size=-1}{cps=80}",
                         what_suffix="{/cps}{/size}{vspace=0}",
                         )
+
+

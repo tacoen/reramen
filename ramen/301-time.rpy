@@ -1,5 +1,6 @@
 init -301 python:
-
+    
+    
     class ramen_time():
         """
         See: https://docs.python.org/2/library/datetime.html
@@ -7,12 +8,17 @@ init -301 python:
         """
 
         def __init__(self, y=2020, m=1, d=18, h=13, min=0):
-            self.time = datetime.datetime(y, m, d, h, min)
-            self.start = self.time
+            
+            ramen.time =  datetime.datetime(y, m, d, h, min)
+            self.time = ramen.time
+            self.start = datetime.datetime(y, m, d, h, min)
 
         def __call__(self):
             return self.time
 
+        def sync(self):
+            self.time = ramen.time
+            
         def __getattr__(self, key):
             res = getattr(self.time, key)
             if isinstance(res, (int, str, unicode)):
@@ -29,30 +35,45 @@ init -301 python:
             return self.time
 
         def adv(self, a=1, block=False):
-
+            
             if renpy.in_rollback():
                 a = -a
-
-            self.time = self.time + datetime.timedelta(hours=a)
-            self.populate()
+                
+            self.time = ramen.time + datetime.timedelta(hours=a)
             
+            if self.time < self.start:
+                self.time = self.start
+                
+            self.populate()
+
             if block:
                 renpy.block_rollback()
             
             return self.time
 
-        def nextday(self, a=8, block=False):
+        def nextday(self, a=8, block=True):
             b = 24 - self.time.hour
+            
+            if renpy.in_rollback():
+                a = -a
+                b = -b
+
             self.time = self.time + \
                 datetime.timedelta(hours=b) + datetime.timedelta(hours=a)
+            
             self.populate()
+            
             if block:
                 renpy.block_rollback()
+                
             return self.time
 
         def populate(self):
-            global seed
-            seed = self.time - self.start
+            print "B"
+            print ramen.time
+            ramen.time = self.time
+            print "S"
+            print ramen.time
 
         def clock(self):
             return self.time.strftime('%H:%M')
