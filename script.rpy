@@ -2,28 +2,14 @@
 # The game starts here.
 
 init python:
-
-    def coba(h=None):
-        import datetime
-        if h is None:
-            return ramentime.time()
-        else:
-            return ramentime.adv(h)
-
-default cari=22
-
+    ramen.coba = 1
 
 label start:
 
-    "[wotime]"
+    'Hello World'
+    
+    "The game has nothing, so its end now."
+    
+    return
 
-    "Hello world"
-    #$ co.add(2)
-
-    "Hello world [wotime]"
-
-    "Hello world [wotime]"
-
-    "fine?"
-
-    jump testmenu
+    

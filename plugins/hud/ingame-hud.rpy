@@ -104,7 +104,7 @@ screen hud_time():
             spacing 0
             yalign 0.5
             text ramentime.clock() xalign 1.0
-            text ramentime.strftime('%A') xalign 1.0
+            text ramen.time.strftime('%A') xalign 1.0
         text ico(ramentime.ico()) style 'hud_icon_text' size 40 yalign 0.5 color "#fff"
         null width 16
 

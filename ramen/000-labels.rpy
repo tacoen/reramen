@@ -1,5 +1,7 @@
 define character.sysnote = Character('', window_background="#0000", what_xalign=0.5, what_size=18)
 
+default ramen = ramen
+
 label ramen_newgame:
 
     $ _skipping = False
@@ -22,6 +24,5 @@ label ramen_newgame:
 
 label after_load:
     $ renpy.retain_after_load()
-    $ ramentime.sync()
     $ print 'after_load'
     return

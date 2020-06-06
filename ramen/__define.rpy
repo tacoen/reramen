@@ -67,6 +67,7 @@ init -300 python:
     ramen.items = object()
 
     ramentime = ramen_time(2018, 1, 18, 12, 0)
+    pe.time_block_rollback = False
 
     ramen.label_trace = ['start']
 

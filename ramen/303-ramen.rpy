@@ -2,6 +2,7 @@ init -303 python in character:
     pass
 
 init -303 python in ramen:
+    """Use 'ramen' as storemodule, so creator can use default."""
     pass
 
 init -303 python:
