@@ -33,6 +33,7 @@ Devlog: https://tacoen.itch.io/ramen/devlog
 * Files search using path and pattern
 * Scene overlays
 * Action shortcut
+* Time(world/game time) rollback and reload proof.
 
 Todo: Things from the old-version of ramen :
 
