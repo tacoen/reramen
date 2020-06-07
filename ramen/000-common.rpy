@@ -7,6 +7,12 @@ image blank = Solid("#0000")
 
 define qpixellate = Pixellate(0.5, 2)
 
+
+transform shower_motel:
+    xpos 680
+    yalign 1.0
+    
+    
 transform basic_anim:
     pass
 

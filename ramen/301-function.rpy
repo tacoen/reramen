@@ -496,12 +496,11 @@ init -301 python:
             #### Using Label
 
             ``` python
-            $ ramu.talk('rita','chat','label','phone')
+            $ ramu.talk(npc_id='rita',what='chat',type='label')  
             ```
 
             Make a phone talk using label (fallback):
 
-            * `if exist` rita.phone_chat
             * `if exist` rita_chat
             * `if exist` chat
 
@@ -519,7 +518,7 @@ init -301 python:
             #### Using Json file
 
             ``` python
-            $ ramu.talk('rita','chat','json')
+            $ ramu.talk(npc_id='rita',what='conversation1',type='json')  
             ```
 
             * file chat.json must on rita npc's path,
@@ -536,6 +535,8 @@ init -301 python:
             }
 
             ```
+            
+            you can validate the JSON on : https://jsonlint.com/
 
             """
 
@@ -628,7 +629,7 @@ init -301 python:
                 with open(renpy.loader.transfn(file), 'r') as json_file:
                     return json.load(json_file)
             except BaseException:
-                return {'0': ['Hi, please tell the developer, that his JSON file was invalid.']}
+                return {'0': ['Hi, please tell the developer, that his JSON file was not valid.']}
 
         def json_write(self, file, data):
             with open(renpy.loader.transfn(file), 'w') as outfile:

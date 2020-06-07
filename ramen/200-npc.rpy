@@ -25,6 +25,14 @@ init -200 python:
         def reinit(self):
             self.define_byfile()
 
+        def setname(self,newname):
+            """
+            Set npc/character new name. Great when creating a supporting/cameo. Same behaviour/personality but different name.
+            """
+            
+            self.name=newname.title()
+            character.__dict__[self.id].name = newname.title()
+            
         def relation(self, point=None, what='relation'):
             """
             Set/get npc relation stat to main character
@@ -66,7 +74,7 @@ init -200 python:
 
         def relation_dict(self, **kwargs):
             """
-            Set npc relation to main character using keyword arguments
+            Set npc relation to main character using keyword arguments. great for mass creations.
 
             ```python
             mia.relation_dict(like=8,hate=3)
