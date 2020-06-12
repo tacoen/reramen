@@ -55,11 +55,12 @@ screen scene_map():
 
     use scene_baseimg(obj, scene_img)
 
-    for b in map[scene_img].branch():
+    for b in sorted(map[scene_img].branch()):
 
         python:
             wp = map[scene_img]
             img_hover = False
+            img_pass = True
             img = False
 
         if wp.way(b) is not None:
@@ -67,17 +68,21 @@ screen scene_map():
             python:
 
                 if isinstance(wp.img(b), (str, unicode)):
+                
                     if '-hover' in wp.img(b):
                         img_hover = wp.img(b)
                     else:
                         img = wp.img(b)
-
-                if img:
-                    img_hover = im.MatrixColor(img, im.matrix.brightness(0.3))
-                if img_hover:
+                
+                if img_hover and not img:
                     img = im.MatrixColor(img_hover, im.matrix.opacity(0.0))
+                if img and not img_hover:
+                    img_hover = im.MatrixColor(img, im.matrix.brightness(0.3))
 
-            if wp.func(b) is not None:
+                if not img and not img_hover:
+                    img_pass = False
+
+            if wp.func(b) is not None and img_pass:
                 imagebutton pos wp.pos(b) action wp.func(b):
-                    idle img
-                    hover img_hover
+                   idle img
+                   hover img_hover
