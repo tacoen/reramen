@@ -68,12 +68,12 @@ screen scene_map():
             python:
 
                 if isinstance(wp.img(b), (str, unicode)):
-                
+
                     if '-hover' in wp.img(b):
                         img_hover = wp.img(b)
                     else:
                         img = wp.img(b)
-                
+
                 if img_hover and not img:
                     img = im.MatrixColor(img_hover, im.matrix.opacity(0.0))
                 if img and not img_hover:
@@ -84,5 +84,5 @@ screen scene_map():
 
             if wp.func(b) is not None and img_pass:
                 imagebutton pos wp.pos(b) action wp.func(b):
-                   idle img
-                   hover img_hover
+                    idle img
+                    hover img_hover

@@ -17,15 +17,15 @@ init -301 python:
         # def __getattr__(self, key):
             # res = getattr(self.time, key)
             # if isinstance(res, (int, str, unicode)):
-                # return res
+            # return res
             # else:
-                # try:
-                    # return res()
-                # except BaseException:
-                    # return res
+            # try:
+            # return res()
+            # except BaseException:
+            # return res
 
         def sethour(self, h):
-            delta = h - ramen.time.hour 
+            delta = h - ramen.time.hour
             return self.adv(delta)
 
         def adv(self, a=1, block=False):

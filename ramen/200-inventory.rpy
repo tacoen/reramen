@@ -145,3 +145,50 @@ init -200 python:
             dst = globals()[dst_id]
             dst.inventory[item_id] = item
             self.drop(item_id)
+
+    class ramen_cart:
+
+        def __init__(self):
+            self.cart = {}
+
+        def reset(self):
+            self.__init__()
+
+        def __call___(self):
+            return self.cart
+
+        def count(self):
+            return len(self.cart.keys())
+
+        def total(self):
+            total = 0
+
+            if self.count() > 0:
+                for i in self.cart:
+                    total += self.cart[i][0] * self.cart[i][1]
+
+            return total
+
+        def purchase(self):
+
+            total = self.total()
+
+            mc.money -= total
+
+            for i in self.cart:
+                for n in range(0, self.cart[i][0]):
+                    pocket.add(item(i))
+
+            self.reset()
+
+        def add(self, item_id, item_price):
+
+            try:
+                self.cart[item_id]
+                self.cart[item_id][0] += 1
+
+            except BaseException:
+                self.cart[item_id]=[1, item_price]
+
+        def delete(item_id):
+            del self.cart[item_id]

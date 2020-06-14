@@ -22,11 +22,11 @@ init -302 python:
     pe.time_cond = [
         'dark',
         'dark',
-        'sun1',
-        'sun2',
-        'sun2',
-        'sun3',
-        'dark',
+        'sun',
+        'sun',
+        'sun',
+        'sun',
+        'night',
         'dark']
     pe.time_word = [
         'Midnight',

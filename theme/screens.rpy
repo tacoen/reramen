@@ -52,6 +52,20 @@ init -11 python:
     class ramen_screentools:
 
         def overlay(self, imgs):
+            """
+            add overlays image to layer 'master'
+
+            ``` python
+                rascr.overlay([
+                    [rstreet.overlay['vadd'],(0.0,0.0),(120,220)],
+                    [rstreet.overlay['car'],(0.0,1.0),(20,20)],
+                    ['flat/overlay/car.png',(0.0,1.0),(60,620)],
+
+                ])
+            ```
+
+            """
+
             renpy.show_screen('scene_overlay', imgs=imgs)
 
         def story_skiper(self, label, text='Skip'):

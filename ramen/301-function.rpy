@@ -2,6 +2,53 @@ init -301 python:
 
     class ramen_util():
 
+        def create_items(self, key, **kwargs):
+
+            res=[]
+
+            for f in sorted( self.files(self.getdir(), key, pe.ext_img) ):
+
+                fn = self.file_info(f)
+
+                count = 1
+
+                r = fn.name.strip().lower()
+
+                try:
+                    kwargs['count']
+                except BaseException:
+                    kwargs['count']=1
+
+                try:
+                    kwargs['require']
+                except BaseException:
+                    kwargs['require']=None
+
+                try:
+                    kwargs['effect']
+                except BaseException:
+                    kwargs['effect']=None
+
+                try:
+                    kwargs['eatable']
+                except BaseException:
+                    kwargs['eatable']=False
+
+                define_item(
+                    r,
+                    #name=self.nicenaming(r, ('ve2', 've', 'zm', 'vm', 'zp', 'zd', 'vd')),
+                    name=self.nicenaming(r, (key, 'item-')),
+                    price=kwargs['price'],
+                    count=kwargs['count'],
+                    require=kwargs['require'],
+                    effect=kwargs['effect'],
+                    eatable=kwargs['eatable']
+                )
+
+                res.append(r)
+
+            return res
+
         def arrayize(self, array, length, default=None):
 
             if isinstance(array, (unicode, str, int, type(Composite((0, 0))))):
@@ -496,7 +543,7 @@ init -301 python:
             #### Using Label
 
             ``` python
-            $ ramu.talk(npc_id='rita',what='chat',type='label')  
+            $ ramu.talk(npc_id='rita',what='chat',type='label')
             ```
 
             Make a phone talk using label (fallback):
@@ -518,7 +565,7 @@ init -301 python:
             #### Using Json file
 
             ``` python
-            $ ramu.talk(npc_id='rita',what='conversation1',type='json')  
+            $ ramu.talk(npc_id='rita',what='conversation1',type='json')
             ```
 
             * file chat.json must on rita npc's path,
@@ -535,7 +582,7 @@ init -301 python:
             }
 
             ```
-            
+
             you can validate the JSON on : https://jsonlint.com/
 
             """

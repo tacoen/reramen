@@ -58,7 +58,6 @@ screen about():
                 null width 216
                 text _("Made with {icon=logo-renpy} {a=https://www.renpy.org/}{ui}Ren'Py{/ui}{/a} [renpy.version_only].")
 
-
 style theme_credit is default
 style theme_credit_text:
     size 18

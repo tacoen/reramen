@@ -7,9 +7,7 @@ init python:
 label start:
 
     'Hello World'
-    
-    "The game has nothing, so its end now."
-    
-    return
 
-    
+    "The game has nothing, so its end now."
+
+    return

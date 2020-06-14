@@ -25,6 +25,7 @@ init -200 python:
 
             except BaseException:
                 ramen.objects[self.__class__.__name__] = []
+
             ramen.objects[self.__class__.__name__].append(self.id)
 
         def __call__(self):

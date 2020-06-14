@@ -25,14 +25,17 @@ init -200 python:
         def reinit(self):
             self.define_byfile()
 
-        def setname(self,newname):
+        def setname(self, newname):
             """
             Set npc/character new name. Great when creating a supporting/cameo. Same behaviour/personality but different name.
             """
-            
-            self.name=newname.title()
-            character.__dict__[self.id].name = newname.title()
-            
+            if "_" in newname:
+                self.name=newname
+            else:
+                self.name=newname.title()
+
+            character.__dict__[self.id].name = newname.lower()
+
         def relation(self, point=None, what='relation'):
             """
             Set/get npc relation stat to main character
@@ -205,7 +208,6 @@ init -200 python:
                         anim = anim + ( At(self.sprite[s], transform), tick )
 
             renpy.image((self.id, name), Animation(*anim))
-
 
 transform Expression(who, npc_expression, pos=(0, 0)):
     xpos int(ramu.imgexpo(who, 'bound')[0])+ int(ramu.npc(who, 'expression_pos')[0])

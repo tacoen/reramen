@@ -24,5 +24,4 @@ label ramen_newgame:
 
 label after_load:
     $ renpy.retain_after_load()
-    $ print 'after_load'
     return

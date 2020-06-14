@@ -5,7 +5,7 @@ init -11 python:
         version="1.0",
         author="tacoen",
         author_url='https://github.com/tacoen/reramen',
-        desc="Provide some HUD",
+        desc="Provide HUD, Inventory and Shop Screens",
         build=True
     )
 
