@@ -1,85 +1,134 @@
-screen shop_ui(inv, size=(380, 480), align=(0.5, 0.5), name='shop_ui', counting=True):
+screen shop_ui(inv, size=(300, 480), align=(0.5, 0.5), counting=True, background='#fff', name='shop_ui'):
+
+    # the icon size 100, 300 means 3 cols
 
     default item = None
     default cart_count = 0
     default cart_price = 0
 
-    use shop_face(name, inv=inv, size=(size[0] + 324, size[1]), align=align, counting=counting):
+    use shop_face(name, inv=inv, size=size, align=align, background=background, counting=counting):
 
         style_prefix "modal"
 
         if item is None:
             use inventory_grid(inv, size, align)
         else:
-            use shop_detail(inv, item, size, align)
+            use shop_detail(inv, item, size, align, counting)
 
 
-screen shop_face(name, inv, size, align, counting):
+screen shop_face(name, inv, size, align, background, counting):
 
-    frame xsize size[0] ysize size[1] xalign align[0] yalign align[1]:
+    python:
+
+        if counting:
+            width = size[0]+340+32
+        else:
+            width = size[0]+32
+
+    frame xsize width ysize size[1] xalign align[0] yalign align[1]:
         padding(10, 10, 10, 10)
-        background "#fff"
+        background background
 
-        hbox:
+        if not counting:
 
-            transclude
+            hbox xsize width-24 xfill True:
+                transclude
 
-            vbox xoffset 20 xsize 200:
-                spacing 16
-                style_prefix 'shop'
+        if counting:
 
-                if counting:
+            hbox xsize width-24 xfill True:
 
-                    text 'Item(s) :' + str(vending.cart.count())
+                transclude
 
-                    for i in vending.cart.cart:
-                        hbox xsize 240:
-                            style_prefix "shop_detail"
-                            text str(vending.cart.cart[i][0]) min_width 30
-                            text i min_width 150
-                            text str(vending.cart.cart[i][1])+ " $" min_width 60
+                vbox xsize 300 xalign 1.0:
 
-                    text 'Price : ' + str(vending.cart.total())
+                    use shop_cartview(inv, name, size)
 
-                else:
+screen shop_cartview(inv, name, size):
 
-                    text 'Item(s) :' + str(vending.cart.count())
-                    text 'Price : ' + str(vending.cart.total())
+    vbox xsize 300 yfill True ysize size[1]:
 
-                if vending.cart.count() > 0:
+        vbox xsize 280 xoffset 10:
+            spacing 2
+            yfill False
+            style_prefix 'shop'
 
-                    textbutton "Pay" style "inventory_action_button" action[
-                        Function(vending.cart.purchase),
+            hbox xsize 280:
+                text 'Item(s) :'  size 18 color "#ccc"
+                text str(inv.cart.count())  size 18 xalign 1.0
+
+            add ramu.hline((280, 1), "#ccc")
+
+            for i in inv.cart.cart:
+                null height 4
+                hbox xsize 280:
+                    style_prefix "shop_detail"
+                    text str(inv.cart.cart[i][0]) min_width 20 text_align 0.5
+                    text inv.item(i).name min_width 200
+                    text str(inv.cart.cart[i][1]) min_width 60 text_align 1.0 xalign 1.0
+
+            null height 12
+
+            add ramu.hline((280, 1), "#ccc")
+
+            hbox xsize 280:
+                text 'Total :'  size 18 color "#ccc"
+                text str(inv.cart.total())  size 18 xalign 1.0
+
+        hbox yalign 1.0 ysize 52 xfill True:
+
+            if inv.cart.count() > 0:
+
+                textbutton "Pay" style "inventory_action_button":
+                    action[
+                        Function(inv.cart.purchase),
                         SetScreenVariable('item', None),
-                        Hide(name)
+                        Hide(name),
+                        Return(True)
                     ]
 
-                textbutton "Exit" style "inventory_action_button" action[
-                    Function(vending.cart.reset),
+            textbutton "Exit" style "inventory_action_button" xalign 1.0:
+                action[
+                    Function(inv.cart.reset),
                     SetScreenVariable('item', None),
-                    Hide(name)
+                    Hide(name),
+                    Return(False)
+
                 ]
 
-screen shop_detail(inv, item, size, align):
+
+transform item_detail:
+    zoom 1.5
+
+screen shop_detail(inv, item, size, align, counting):
 
     python:
         i = inv.item(item)
 
-    hbox:
-        vbox xsize size[0] - 118:
+    vbox xsize size[0]-24 ysize size[1] yfill True:
 
-            hbox:
-                textbutton ico('arrow-left') style 'ramen_icon':
-                    text_size 20 text_color "#333" text_hover_color "#111"
-                    action SetScreenVariable('item', None)
+        hbox:
+            textbutton ico('arrow-left') style 'ramen_icon':
+                text_size 20 text_color "#333" text_hover_color "#111"
+                action SetScreenVariable('item', None)
+
+            vbox ysize size[1]-52:
 
                 vbox:
-                    spacing 8
+
                     if i.name is not None:
                         text i.name
 
+                    add i.icon xalign 0.5 at item_detail
+
                     if not i.desc == "":
                         text i.desc
+
+                    null height 8
+                    add ramu.hline(((size[0] - 24), 1), "#ccc")
+                    null height 8
+
+                    use inventory_hbox('Price', i.price)
 
                     if i.count > 1:
                         use inventory_hbox('Count', i.count)
@@ -87,29 +136,33 @@ screen shop_detail(inv, item, size, align):
                     if i.require is not None:
                         use inventory_hbox('Require', i.require)
 
-                    if i.tradable and labeloc('pawn'):
-                        use inventory_hbox('Sell Price', i.price)
-
                     if i.effect:
-                        null height 6
-                        add ramu.hline(((size[0] - 148 - 24), 1), "#ccc")
+                        null height 16
+                        add ramu.hline(((size[0] - 24), 1), "#ccc")
                         text 'Effect' bold True size 18 color "#ccc"
 
-                        for e in effect:
+                        for e in i.effect:
                             use inventory_hbox(e.title(), i.effect[e])
 
-        vbox xsize 120 yfill True ysize size[1] - 64:
+        hbox xoffset 32 ysize 52 xalign 1.0:
+
             style_prefix "inventory_action"
 
-            add i.icon xalign 0.5
-
-            vbox yalign 1.0 xalign 0.5:
-                spacing 10
-
+            if counting:
                 textbutton "Add" action[
-                    Function(vending.cart.add, item_id=i.id, item_price=i.price),
+                    Function(inv.cart.add, item_id=i.id, item_price=i.price),
                     SetScreenVariable('item', None)
                 ]
+
+            else:
+
+                textbutton "Buy" action[
+                    Function(inv.cart.add, item_id=i.id, item_price=i.price),
+                    Function(inv.cart.purchase),
+                    SetScreenVariable('item', None)
+                ]
+
+            null width 32
 
 style shop_text:
     color "#000"

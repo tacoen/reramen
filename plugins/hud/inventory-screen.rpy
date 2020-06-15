@@ -97,7 +97,7 @@ screen inventory_detail(inv, item, size, align):
                         add ramu.hline(((size[0] - 148 - 24), 1), "#ccc")
                         text 'Effect' bold True size 18 color "#ccc"
 
-                        for e in effect:
+                        for e in i.effect:
                             use inventory_hbox(e.title(), i.effect[e])
 
         vbox xsize 120 yfill True ysize size[1] - 64:
@@ -158,14 +158,15 @@ screen inventory_grid(inv, size, align):
     python:
         vp_height = size[1] - 40
         vp_width = size[0]
-        cols = int(math.floor(vp_width / 110))
+        cols = int(math.floor(vp_width / 100))
         rows = int(inv.max / cols)
+        vp_width_withspacing = vp_width + 8
 
     if len(inv.inventory.keys()) < 1:
 
         vbox:
             ysize vp_height
-            xsize vp_width
+            xsize vp_width_withspacing
 
             text "Empty" color "#333" xalign 0.5 yalign 0.5
 
@@ -178,7 +179,7 @@ screen inventory_grid(inv, size, align):
             draggable True
             mousewheel True
             ysize vp_height
-            xsize vp_width
+            xsize vp_width_withspacing
 
             for item in sorted(inv()):
 
@@ -195,7 +196,8 @@ screen inventory_grid(inv, size, align):
                     hover Composite((100, 100), (0, 0), Solid(pt.accent_color), (0, 0), icon_count)
 
         vbar value YScrollValue("inventory_vp"):
-            ysize vp_height - 8
+            xoffset 8
+            ysize vp_height
 
 style inventory_detail_text:
     size 20

@@ -2,6 +2,17 @@ init -301 python:
 
     class ramen_util():
 
+        def select(self, key, list):
+            return filter(lambda w: key in w, list)
+
+        def value_transfer(self, ammount, ofrom, odest):
+            if ofrom > ammount:
+                ofrom -= ammount
+                odest += ammount
+                return True
+            else:
+                return False
+
         def create_items(self, key, **kwargs):
 
             res=[]

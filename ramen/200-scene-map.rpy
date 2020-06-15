@@ -9,6 +9,17 @@ init -201 python:
 
     renpy.add_layer('hud', below='screens', menu_clear=True)
 
+
+screen scene_ezmap(buttons):
+    for b in buttons:
+        python:
+            b0_hover = img_hover = im.MatrixColor(b[0], im.matrix.brightness(0.1))
+
+        imagebutton pos b[1]:
+            idle b[0]
+            hover b0_hover
+            action b[2]
+
 screen scene_baseimg(obj, scene_img):
 
     python:
