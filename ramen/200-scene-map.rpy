@@ -48,7 +48,7 @@ screen scene_baseimg(obj, scene_img):
     add base_img
 
     if offline:
-        use scene_overlay(flat.overlay['offline2'])
+        use scene_overlay(obj.overlay['offline'])
 
 screen scene_map():
 

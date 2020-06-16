@@ -74,8 +74,8 @@ init -301 python:
             else:
                 return sun
 
-        def seed(self, what):
+        def seed(self, what=None):
             if what == 'day':
                 return ramen.time.strftime('%y%m%d')
             else:
-                return ramen.time.strftime('%U%j%H')
+                return ramen.time

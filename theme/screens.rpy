@@ -71,4 +71,8 @@ init -11 python:
         def story_skiper(self, label, text='Skip'):
             renpy.show_screen('story_skipbutton', text=text, label=label)
 
+        def hide(self, whats):
+            for w in whats:
+                renpy.hide_screen(w)
+
     rascr = ramen_screentools()
