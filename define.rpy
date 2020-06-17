@@ -36,8 +36,9 @@ init -2 python:
     mc.money = ramu.random_int(120, 190)
     mc.bank = ramu.random_int(9000, 9999)
     mc.score = 0
-    mc.lastname = ramu.random_of(['East', 'West', 'North', 'South'])
+
     mc.name = 'Liam'
+    mc.lastname = ramu.random_of(['East', 'West', 'North', 'South'])
 
     mc.stat = {
         'hygiene': ramu.random_int(5, 11),
@@ -50,3 +51,35 @@ init -2 python:
     # for npc creation
 
     pe.native_name = ['Easton', 'Westly', 'Northgate', 'Southvile' ]
+
+    chapter = Character(None,
+                        window_xalign=0.8,
+                        window_yalign=0.9,
+                        window_xsize=0.9,
+                        window_ysize=None,
+                        window_padding=(0, 0, 0, 0),
+                        window_background="#0000",
+                        what_xalign=1.0,
+                        what_yalign=1.0,
+                        what_color="#fff",
+                        what_size=48,
+                        what_font=pt.font_ui_title,
+                        what_prefix="{cps=80}",
+                        what_suffix="{/cps}",
+                        )
+
+    caption = Character(None,
+                        window_xalign=0.05,
+                        window_yalign=0.85,
+                        window_xsize=config.screen_width / 2,
+                        window_ysize=None,
+                        window_padding=(0, 0, 0, 0),
+                        window_background="#FFCC33DD",
+                        what_xalign=0.0,
+                        what_yalign=1.0,
+                        what_xpos=24,
+                        what_xsize=(config.screen_width / 2) - 48,
+                        what_color="#000",
+                        what_prefix="{vspace=24}{size=-1}{cps=80}",
+                        what_suffix="{/cps}{/size}{vspace=0}",
+                        )

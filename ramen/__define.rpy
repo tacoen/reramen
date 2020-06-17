@@ -94,6 +94,7 @@ init -300 python:
 init -100 python:
 
     mc_name = 'You'
+
     character.mc = Character('mc_name', dynamic=True, who_color='#ff0')
 
     anon = Character('anon_name', dynamic=True, who_color=ramu.random_color(100, 200))
@@ -102,34 +103,14 @@ init -100 python:
                          what_xalign=0.5, what_color="#ddf", what_outlines=pt.bold_outlines
                          )
 
-    chapter = Character(None,
-                        window_xalign=0.8,
-                        window_yalign=0.9,
-                        window_xsize=0.9,
-                        window_ysize=None,
-                        window_padding=(0, 0, 0, 0),
+    sysnote = Character(None,
                         window_background="#0000",
-                        what_xalign=1.0,
-                        what_yalign=1.0,
-                        what_color="#fff",
-                        what_size=48,
-                        what_font=pt.font_ui_title,
-                        what_prefix="{cps=80}",
-                        what_suffix="{/cps}",
-                        )
-
-    caption = Character(None,
-                        window_xalign=0.05,
-                        window_yalign=0.85,
-                        window_xsize=config.screen_width / 2,
+                        window_xalign=0.5,
+                        window_yalign=0.5,
+                        window_xsize=config.screen_width,
                         window_ysize=None,
                         window_padding=(0, 0, 0, 0),
-                        window_background="#FFCC33DD",
-                        what_xalign=0.0,
-                        what_yalign=1.0,
-                        what_xpos=24,
-                        what_xsize=(config.screen_width / 2) - 48,
-                        what_color="#000",
-                        what_prefix="{vspace=24}{size=-1}{cps=80}",
-                        what_suffix="{/cps}{/size}{vspace=0}",
-                        )
+                        what_yalign=0.5,
+                        what_xalign=0.5,
+                        what_text_align=0.5,
+                        what_size=18)

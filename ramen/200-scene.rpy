@@ -177,6 +177,11 @@ init -200 python:
             except BaseException:
                 globals()[obj_id].last_key=''
 
+            try:
+                globals()[obj_id].last_dest
+            except BaseException:
+                globals()[obj_id].last_dest=''
+
         def __call__(self):
             return self.map
 
@@ -301,6 +306,7 @@ init -200 python:
                 setvars = [
                     SetVariable(self.obj_id+'.last_scene', self.scene),
                     SetVariable(self.obj_id+'.last_key', key),
+                    SetVariable(self.obj_id+'.last_dest', self.way(key)),
                     Hide('scene_map')
                 ]
 
@@ -339,6 +345,7 @@ init -200 python:
                                 func.append(SetVariable('ramen.map_obj', self.obj_id))
                                 func.append(SetVariable(self.obj_id+'.last_key', key))
                                 func.append(SetVariable(self.obj_id+'.last_scene', way))
+                                func.append(SetVariable(self.obj_id+'.last_dest', self.way(key)))
                                 func.append(Show('scene_map', transition=trans))
                             else:
                                 func = None

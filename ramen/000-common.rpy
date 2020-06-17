@@ -4,6 +4,7 @@ image white = Solid('#eee')
 image black = Solid('#111')
 image mimic = Solid("#0000")
 image blank = Solid("#0000")
+image dim = Solid('#000c')
 
 define qpixellate = Pixellate(0.5, 2)
 
