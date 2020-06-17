@@ -15,6 +15,9 @@ transform shower_motel:
 transform basic_anim:
     pass
 
+transform xflip:
+    xzoom -1
+
 transform hit_anim:
     alpha 0.95
     easeout .1 zoom 1.005, alpha 1.0, yoffset 1

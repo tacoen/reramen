@@ -81,7 +81,7 @@ screen inventory_detail(inv, item, size, align):
                         text i.name
 
                     if not i.desc == "":
-                        text i.desc
+                        text i.desc size 20 color '#999'
 
                     if i.count > 1:
                         use inventory_hbox('Count', i.count)
@@ -117,24 +117,26 @@ screen inventory_detail(inv, item, size, align):
                         SetScreenVariable('item', None)
                     ]
 
-                if i.eatable:
-                    $ action_text = "Consume"
-                else:
-                    $ action_text = "Use"
+                if not i.persistent:
 
-                if i.require is not None:
-                    if labeloc(i.require):
-                        $ action_text = i.require
+                    if i.eatable:
+                        $ action_text = "Consume"
                     else:
-                        $ action_text = False
+                        $ action_text = "Use"
 
-                if action_text:
+                    if i.require is not None:
+                        if labeloc(i.require):
+                            $ action_text = i.require
+                        else:
+                            $ action_text = False
 
-                    textbutton action_text action[
-                        Function(inv.use, item_id=i.id, use_ramen=True),
-                        Function(inv_resnotify),
-                        SetScreenVariable('item', None)
-                    ]
+                    if action_text:
+
+                        textbutton action_text action[
+                            Function(inv.use, item_id=i.id, use_ramen=True),
+                            Function(inv_resnotify),
+                            SetScreenVariable('item', None)
+                        ]
 
                 if labeloc('storage') and inv.id == "pocket":
 
