@@ -49,7 +49,7 @@ init -201 python:
 
             if self.after is not None:
 
-                if ramentime.hour() > self.after:
+                if ramen.time.hour > self.after:
                     occur.append(True)
                 else:
                     occur.append(False)

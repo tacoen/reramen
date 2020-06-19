@@ -18,6 +18,14 @@ transform basic_anim:
 transform xflip:
     xzoom -1
 
+transform xa(a):
+    yalign 1.0
+    xalign float(a)/float(10)
+
+transform xp(a):
+    yalign 1.0
+    xpos a
+
 transform hit_anim:
     alpha 0.95
     easeout .1 zoom 1.005, alpha 1.0, yoffset 1

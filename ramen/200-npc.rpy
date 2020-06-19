@@ -36,7 +36,7 @@ init -200 python:
 
             character.__dict__[self.id].name = newname.lower()
 
-        def relation(self, point=None, what='relation'):
+        def relation(self, point=None, what='relation', force=False):
             """
             Set/get npc relation stat to main character
 
@@ -72,7 +72,10 @@ init -200 python:
                 if point is None:
                     return mc.rel[self.id][what]
                 else:
-                    mc.rel[self.id][what] = ramu.limits( mc.rel[self.id][what] + int(point) )
+                    if not force:
+                        mc.rel[self.id][what] = ramu.limits( mc.rel[self.id][what] + int(point) )
+                    else:
+                        mc.rel[self.id][what] = ramu.limits( int(point) )
                     return mc.rel[self.id][what]
 
         def relation_dict(self, **kwargs):
@@ -89,7 +92,8 @@ init -200 python:
             """
 
             for k in kwargs:
-                self.relation(kwargs[k], k)
+                print k
+                self.relation(int(kwargs[k]), k, True)
 
         def define_byfile(self):
 

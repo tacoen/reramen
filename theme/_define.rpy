@@ -32,6 +32,8 @@ init -200 python:
 
     pt.overlays = pe.theme_path + 'gui/overlays'
 
+    pt.anonymous_pic = 'anonymous'
+
     pt.bold_outlines = [(absolute(3), '#000C', absolute(0), absolute(0))]
     pt.hover_outlines = [(absolute(2), '#0006', absolute(0), absolute(0))]
     pt.idle_outlines = [(absolute(2), '#0003', absolute(0), absolute(0))]

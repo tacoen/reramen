@@ -164,6 +164,9 @@ init -303 python:
 
             self.kdict(**kwargs)
 
+        def save(self):
+            multipersistent.save()
+
         def _set(self, key, value):
             multipersistent.__dict__[self.id][str(key)] = value
 

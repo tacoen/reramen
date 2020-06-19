@@ -37,12 +37,19 @@ screen smphone_apps_relation(var, page):
             spacing 16
             style_prefix "smphone_default"
 
-            for p in mc.rel:
+            for p in sorted(mc.rel.keys()):
+
+                python:
+
+                    profile_pic = ramu.npc(p, 'profile_pic')
+                    if profile_pic is None:
+
+                        profile_pic = ramu.ezfind(pt.anonymous_pic)
 
                 if ramu.globalcheck(p):
                     hbox:
                         spacing 8
-                        add im.Scale(ramu.npc(p, 'profile_pic'), 96, 96)
+                        add im.Scale(profile_pic, 96, 96)
 
                         vbox:
                             spacing 8
@@ -57,5 +64,9 @@ screen smphone_apps_relation(var, page):
                                         val = 0
 
                                 vbox:
-                                    text s.title() size 14
+                                    hbox xfill True xsize app.minibar_width :
+                                        text s.title() size 14
+                                        text str(val) size 14 xalign 1.0
                                     bar range 20 value val style 'smphone_bar_' + s xsize app.minibar_width
+
+            null height 32

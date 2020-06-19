@@ -50,12 +50,12 @@ screen smphone_apps_news(var, page):
         except BaseException:
             paper.ads = ramu.random_files( app.dir+'ads' )
 
-        if not int(paper.sh) == int(ramentime.hour):
+        if not int(paper.sh) == int(ramen.time.hour):
             paper.news=[]
             for i in range(0, 8):
                 paper.news.append( ramu.random_of(paper.subject)+' '+ramu.random_of(paper.noun)+' '+ramu.random_of(paper.object))
 
-            paper.sh  = ramentime.hour
+            paper.sh  = ramen.time.hour
 
             paper.ads = ramu.random_files( app.dir+'ads' )
 
