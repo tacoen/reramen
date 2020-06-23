@@ -67,7 +67,7 @@ init -200 python:
         def icon(self, size=(100, 100), color=None):
             """
             Return or generate the icon of your item.
-            Put your icon_img.png within the directory where the item being define or set the `dir`.
+            Put your icon_img.webp within the directory where the item being define or set the `dir`.
             """
 
             icon = self._get('img')

@@ -92,7 +92,6 @@ init -200 python:
             """
 
             for k in kwargs:
-                print k
                 self.relation(int(kwargs[k]), k, True)
 
         def define_byfile(self):

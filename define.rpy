@@ -26,7 +26,7 @@ init -300 python:
 init -2 python:
 
     build.name = ramu.safestr(config.name)
-    config.window_icon = "window_icon.png"
+    config.window_icon = "window_icon.webp"
 
     # False will force disable ramen episodes menu
     # ramen.episodes_menu = False

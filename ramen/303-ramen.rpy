@@ -68,7 +68,7 @@ init -303 python:
 
             self.__dict__[str('dir')].append(path)
 
-        def find(self, file, ext=('.webp', '.png', '.jpg')):
+        def find(self, file, ext=('.webp', '.webp', '.jpg')):
 
             for d in range(0, len(self.dir)):
                 f = ramu.ezfile(self.dir[d]+file, None, ext)

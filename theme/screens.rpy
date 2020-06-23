@@ -59,7 +59,7 @@ init -11 python:
                 rascr.overlay([
                     [rstreet.overlay['vadd'],(0.0,0.0),(120,220)],
                     [rstreet.overlay['car'],(0.0,1.0),(20,20)],
-                    ['flat/overlay/car.png',(0.0,1.0),(60,620)],
+                    ['flat/overlay/car.webp',(0.0,1.0),(60,620)],
 
                 ])
             ```

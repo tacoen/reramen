@@ -17,7 +17,7 @@ init -200 python:
         def define_byfile(self):
 
             tdir = []
-            prop = [ 'scene', 'overlay' ]
+            prop = [ 'scene', 'overlay', 'hs' ]
 
             for d in self.dir:
                 for p in prop:
@@ -109,6 +109,15 @@ init -200 python:
 
                 elif fn.path=='overlay':
                     res[fn.path][fn.name] = f
+
+                elif fn.path=='hs':
+                    
+                    if '-hover' in fn.name:
+                        name = fn.name.replace('-hover','')
+                    else:
+                        name = fn.name
+                        
+                    res[fn.path][name] = f
 
                 else:
                     pass

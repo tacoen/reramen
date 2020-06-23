@@ -13,10 +13,15 @@ init -201 python:
 screen scene_ezmap(buttons):
     for b in buttons:
         python:
-            b0_hover = img_hover = im.MatrixColor(b[0], im.matrix.brightness(0.1))
-
+            if '-hover' in b[0]:
+                b0_hover = b[0]
+                b0 = im.MatrixColor(b0_hover, im.matrix.opacity(0.001))
+            else:
+                b0 = b[0]
+                b0_hover =  im.MatrixColor(b[0], im.matrix.brightness(0.1))
+        
         imagebutton pos b[1]:
-            idle b[0]
+            idle b0
             hover b0_hover
             action b[2]
 

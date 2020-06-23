@@ -5,14 +5,6 @@ init -301 python:
         def select(self, key, list):
             return filter(lambda w: key in w, list)
 
-        def value_transfer(self, ammount, ofrom, odest):
-            if ofrom > ammount:
-                ofrom -= ammount
-                odest += ammount
-                return True
-            else:
-                return False
-
         def create_items(self, key, **kwargs):
 
             res=[]
@@ -128,6 +120,13 @@ init -301 python:
             if ret:
                 return res
 
+        def trait(self,which,value):
+        
+            # radio,it,managing,writing
+        
+            mc.job[which] = self.limits(mc.job[which]+value)
+            return mc.job[which] 
+            
         def gain(self, m, src, ret=False):
             src += m
             res = True
@@ -186,7 +185,7 @@ init -301 python:
                 value = pe.limit[0]
             if value > pe.limit[1]:
                 value = pe.limit[1]
-            return int(value)
+            return float(value)
 
         def mouse(self):
             """Get Mouse pos, return (x,y)"""
@@ -440,7 +439,7 @@ init -301 python:
             ramu.ezfind('game','image')
             ```
 
-            Search for 'game' ('.webp', '.png', '.jpg') in sortorder:
+            Search for 'game' ('.webp', '.webp', '.jpg') in sortorder:
             * path
             * pe.title_path
             * pe.theme_path+'gui/'
@@ -481,10 +480,10 @@ init -301 python:
             Get and extract the file information of the file as dict.
 
             ``` python:
-                info = ramu.file_info("e:/yourproject/game/npc/girls_of_90/alpha/lucy smile.png")
+                info = ramu.file_info("e:/yourproject/game/npc/girls_of_90/alpha/lucy smile.webp")
             ```
 
-            * info.file = lucy smile.png
+            * info.file = lucy smile.webp
             * info.name = lucy smile
             * info.ext = png
             * info.dir = npc/girl_of_90

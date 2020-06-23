@@ -30,16 +30,17 @@ init -302 python:
         'dark']
     pe.time_word = [
         'Midnight',
-        'Morning',
+        'Dusk',
         'Morning',
         'Noon',
         'Noon',
         'Evening',
-        'Evening',
+        'Night',
         'Night']
     pe.ext_img = ('.webp', '.png', '.jpg')
     pe.ext_txt = ('.json', '.txt')
     pe.ext_snd = ('.ogg', '.mp3', '.wav')
+    pe.ext_vid = ('.webm', '.ogv', '.mp4')
 
     pe.limit = (0, 20)
 

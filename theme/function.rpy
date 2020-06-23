@@ -4,9 +4,9 @@ init -299 python:
 
         def button(self, color, border=Borders(3, 1, 1, 3), black=False):
             if black:
-                res = pe.theme_path + 'gui/button-frame-black.png'
+                res = pe.theme_path + 'gui/button-frame-black.webp'
             else:
-                res = pe.theme_path + 'gui/button-frame-white.png'
+                res = pe.theme_path + 'gui/button-frame-white.webp'
 
             size = renpy.image_size(res)
             img = Composite(size, (0, 0), Solid(color), (0, 0), res)
@@ -14,12 +14,12 @@ init -299 python:
 
         def button_frame(self, color, border=Borders(3, 1, 1, 3), flip=False):
 
-            res = pe.theme_path + 'gui/button-frame.png'
+            res = pe.theme_path + 'gui/button-frame.webp'
             size = renpy.image_size(res)
             if flip:
                 res = im.Flip(
                     pe.theme_path +
-                    'gui/button-frame.png',
+                    'gui/button-frame.webp',
                     True,
                     True)
 

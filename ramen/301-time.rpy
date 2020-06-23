@@ -28,7 +28,7 @@ init -301 python:
             delta = h - ramen.time.hour
             return self.adv(delta)
 
-        def adv(self, a=1, block=False):
+        def adv(self, a=1, block=False,ret=True):
 
             ramen.time += datetime.timedelta(hours=a)
 
@@ -38,7 +38,8 @@ init -301 python:
             if block:
                 renpy.block_rollback()
 
-            return ramen.time
+            if ret:
+                return ramen.time
 
         def nextday(self, a=8, block=True):
             a = a+(24 - ramen.time.hour)
@@ -79,3 +80,7 @@ init -301 python:
                 return ramen.time.strftime('%y%m%d')
             else:
                 return ramen.time
+                
+        def dayplay(self):
+            dp = ramen.time - ramentime.start
+            return dp.days

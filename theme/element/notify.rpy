@@ -18,9 +18,9 @@ init -10 python:
 
         """
 
-        renpy.show_screen('notify_ico', message=message, icon=icon)
+        renpy.show_screen('notify_ico', message=message, icon=icon,sec=5)
 
-screen notify_ico(message, icon='alert'):
+screen notify_ico(message, icon='alert',sec=5):
 
     zorder 100
     style_prefix "notify"
@@ -30,7 +30,7 @@ screen notify_ico(message, icon='alert'):
             null width 8
             text "[message!tq]"
 
-    timer 3 action Hide('notify_ico')
+    timer(float(sec)) action Hide('notify_ico')
 
 screen notify(message):
 

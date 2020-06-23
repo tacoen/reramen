@@ -8,10 +8,6 @@ image dim = Solid('#000c')
 
 define qpixellate = Pixellate(0.5, 2)
 
-transform shower_motel:
-    xpos 680
-    yalign 1.0
-
 transform basic_anim:
     pass
 
@@ -22,9 +18,13 @@ transform xa(a):
     yalign 1.0
     xalign float(a)/float(10)
 
-transform xp(a):
+transform zoom(z=1.2):
+    zoom z
+    
+transform xp(x=0.5,y=0):
     yalign 1.0
-    xpos a
+    xpos x
+    yanchor y 
 
 transform hit_anim:
     alpha 0.95
