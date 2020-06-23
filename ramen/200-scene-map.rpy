@@ -19,7 +19,7 @@ screen scene_ezmap(buttons):
             else:
                 b0 = b[0]
                 b0_hover =  im.MatrixColor(b[0], im.matrix.brightness(0.1))
-        
+
         imagebutton pos b[1]:
             idle b0
             hover b0_hover

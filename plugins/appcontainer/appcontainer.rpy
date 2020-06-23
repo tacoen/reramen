@@ -20,7 +20,7 @@ init -290 python:
             except BaseException:
                 ramen.active_apps[self.id] = []
 
-        def channel(self,what=None,**kwargs):
+        def channel(self, what=None, **kwargs):
 
             if what is None:
                 what = os.path.basename(
@@ -56,25 +56,27 @@ init -290 python:
                 kwargs['title']
             except BaseException:
                 kwargs['title'] = what.title()
-                
+
             files = ramu.files( kwargs['dir'], None, pe.ext_img )
-            
+
             gal={}
-            
+
             for f in sorted(files):
-                
+
                 if 'icon.' in f:
                     continue
-                    
+
                 fn = ramu.file_info(f)
-                try: gal[fn.path]
-                except: gal[fn.path] = []
+                try:
+                    gal[fn.path]
+                except BaseException:
+                    gal[fn.path] = []
                 gal[fn.path].append(f)
-            
+
             kwargs['gallery'] = gal
-            
-            self.apps._set(what, kwargs)        
-        
+
+            self.apps._set(what, kwargs)
+
         def register(self, what=None, **kwargs):
 
             if what is None:

@@ -120,13 +120,13 @@ init -301 python:
             if ret:
                 return res
 
-        def trait(self,which,value):
-        
+        def trait(self, which, value):
+
             # radio,it,managing,writing
-        
+
             mc.job[which] = self.limits(mc.job[which]+value)
-            return mc.job[which] 
-            
+            return mc.job[which]
+
         def gain(self, m, src, ret=False):
             src += m
             res = True

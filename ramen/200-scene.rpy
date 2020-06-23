@@ -111,12 +111,12 @@ init -200 python:
                     res[fn.path][fn.name] = f
 
                 elif fn.path=='hs':
-                    
+
                     if '-hover' in fn.name:
-                        name = fn.name.replace('-hover','')
+                        name = fn.name.replace('-hover', '')
                     else:
                         name = fn.name
-                        
+
                     res[fn.path][name] = f
 
                 else:

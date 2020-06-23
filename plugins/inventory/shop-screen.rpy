@@ -80,7 +80,7 @@ screen shop_cartview(inv, name, size):
             if inv.cart.count() > 0:
 
                 if mc.money >= inv.cart.total():
-                
+
                     textbutton "Pay" style "inventory_action_button":
                         action[
                             Function(inv.cart.purchase),
@@ -88,9 +88,9 @@ screen shop_cartview(inv, name, size):
                             Hide(name),
                             Return(True)
                         ]
-                
+
                 else:
-                
+
                     textbutton "Pay" style "inventory_action_button":
                         background "#999"
                         action[
@@ -99,7 +99,6 @@ screen shop_cartview(inv, name, size):
                             Hide(name),
                             Return(True)
                         ]
-                
 
             textbutton "Exit" style "inventory_action_button" xalign 1.0:
                 action[

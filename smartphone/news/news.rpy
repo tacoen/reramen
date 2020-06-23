@@ -29,9 +29,9 @@ screen smphone_apps_news(var, page):
         if not int(paper.sh) == int(ramen.time.hour):
             paper.news=[]
             for i in range(0, 8):
-                paper.news.append( 
-                    ramu.random_of(wv.news_subject)+' ' + \
-                    ramu.random_of(wv.news_noun)+' '+ \
+                paper.news.append(
+                    ramu.random_of(wv.news_subject)+' ' +
+                    ramu.random_of(wv.news_noun)+' '+
                     ramu.random_of(wv.news_object)
                 )
 

@@ -15,16 +15,16 @@ screen atm_screen(dir):
     default withdrawn = 0
     default payment = 0
     default menu = None
-    
+
     default bannerads = ramu.random_files('sanhila/syndicate/'+'ads' )
 
     style_prefix "atm"
 
     use atm_face(dir):
-        
+
         if menu == 'withdrawn':
             use atm_withdrawn
-            
+
         elif menu == 'take':
             use atm_takeout
 
@@ -33,17 +33,16 @@ screen atm_screen(dir):
 
         elif menu == 'balance':
             use atm_balance
-            
+
         elif menu == 'close':
-            
-            vbox xalign 0.5 yalign 0.5:            
+
+            vbox xalign 0.5 yalign 0.5:
                 spacing 24
                 text 'Thank you for using us.' xalign 0.5
                 add bannerads xalign 0.5
-            
-            
-            timer(2.0) action [ SetScreenVariable('menu','main'),Hide('atm_screen'),Return(True) ]
-        
+
+            timer(2.0) action[ SetScreenVariable('menu', 'main'), Hide('atm_screen'), Return(True) ]
+
         elif menu == 'main':
             use atm_mainmenu
 
@@ -55,68 +54,68 @@ screen atm_screen(dir):
                 null height 80
                 add bannerads xalign 0.5
 
-            timer(2.0) action [ 
-                SetScreenVariable('menu','main') 
+            timer(2.0) action[
+                SetScreenVariable('menu', 'main')
                 ]
 
         else:
             vbox xalign 0.5 yalign 0.5:
-            
+
                 text 'Enter Your PIN Number'  xalign 0.5
                 null height 120
                 add bannerads xalign 0.5
-                
-            timer(0.5) action [ 
-                Function ( ramu.sfx,file='atm-start',path=Plugin('atm').dir ),
+
+            timer(0.5) action[
+                Function( ramu.sfx, file='atm-start', path=Plugin('atm').dir ),
             ]
 
-            timer(3.5) action [ 
-                SetScreenVariable('menu','pin_entered') 
+            timer(3.5) action[
+                SetScreenVariable('menu', 'pin_entered')
                 ]
 
-    
+
 screen atm_payment:
-    
+
     vbox xsize style['atm_frame'].xminimum:
-    
+
         text '-- Under Maintenance --'
-        
-    timer(2.0) action [ SetScreenVariable('menu','main') ]
-    
+
+    timer(2.0) action[ SetScreenVariable('menu', 'main') ]
+
 screen atm_withdrawn:
-    
+
     hbox xsize style['atm_frame'].xminimum:
-    
+
         vbox:
-            textbutton "{icon=chevron-left} 2000" action [
+            textbutton "{icon=chevron-left} 2000" action[
                 SetScreenVariable('withdrawn', 2000),
-                SetScreenVariable('menu','take')
-                ]           
-            textbutton "{icon=chevron-left} 1000" action [
-                SetScreenVariable('withdrawn', 1000),
-                SetScreenVariable('menu','take')
+                SetScreenVariable('menu', 'take')
                 ]
-            textbutton "{icon=chevron-left} 500" action [
+            textbutton "{icon=chevron-left} 1000" action[
+                SetScreenVariable('withdrawn', 1000),
+                SetScreenVariable('menu', 'take')
+                ]
+            textbutton "{icon=chevron-left} 500" action[
                 SetScreenVariable('withdrawn', 500),
-                SetScreenVariable('menu','take')
-                ]                
+                SetScreenVariable('menu', 'take')
+                ]
 
         vbox xalign 1.0 yfill True:
-            textbutton "300 {icon=chevron-right}" style 'atm_onright' action [
+            textbutton "300 {icon=chevron-right}" style 'atm_onright' action[
                 SetScreenVariable('withdrawn', 300),
-                SetScreenVariable('menu','take')
+                SetScreenVariable('menu', 'take')
                 ]
-            textbutton "100 {icon=chevron-right}" style 'atm_onright' action [
+            textbutton "100 {icon=chevron-right}" style 'atm_onright' action[
                 SetScreenVariable('withdrawn', 100),
-                SetScreenVariable('menu','take')
+                SetScreenVariable('menu', 'take')
                 ]
-            textbutton "50 {icon=chevron-right}" style 'atm_onright' action [
+            textbutton "50 {icon=chevron-right}" style 'atm_onright' action[
                 SetScreenVariable('withdrawn', 50),
-                SetScreenVariable('menu','take')
+                SetScreenVariable('menu', 'take')
                 ]
-            textbutton "EXIT {icon=chevron-right}" style 'atm_onright' action [
-                SetScreenVariable('withdrawn', 0), 
-                SetScreenVariable('menu','close') 
+            textbutton "EXIT {icon=chevron-right}" style 'atm_onright' action[
+                SetScreenVariable('withdrawn', 0),
+                SetScreenVariable('menu', 'close')
                 ]
 
 screen atm_balance(back=True):
@@ -129,21 +128,21 @@ screen atm_balance(back=True):
             text "Thank you for using SHBANK"  xalign 0.5
 
     if back:
-        timer(3.0) action [ SetScreenVariable('menu','main') ]        
+        timer(3.0) action[ SetScreenVariable('menu', 'main') ]
 
-            
+
 screen atm_takeout:
 
     python:
         mcfunc.withdrawn(withdrawn)
 
     use atm_balance(False)
-    
-    timer(1.0) action [ 
-        Function ( ramu.sfx,file='atm-over',path=Plugin('atm').dir ),
-        SetScreenVariable('menu','close'), 
+
+    timer(1.0) action[
+        Function( ramu.sfx, file='atm-over', path=Plugin('atm').dir ),
+        SetScreenVariable('menu', 'close'),
         ]
-    
+
 screen atm_mainmenu:
 
     hbox xsize style['atm_frame'].xminimum:
@@ -154,26 +153,25 @@ screen atm_mainmenu:
                 action SetScreenVariable('menu', 'balance')
         vbox xalign 1.0 yfill True:
             textbutton "Withdrawn {icon=chevron-right}" style 'atm_onright':
-                action SetScreenVariable('menu','withdrawn')
+                action SetScreenVariable('menu', 'withdrawn')
             textbutton "Exit {icon=chevron-right}" style 'atm_onright':
-                action Return(False)                
+                action Return(False)
 
 screen atm_face(dir):
-    
+
     python:
-        face = ramu.ezfind('atm-face','image', Plugin('atm').dir)
-        
+        face = ramu.ezfind('atm-face', 'image', Plugin('atm').dir)
+
     add face
 
     frame:
         has vbox
         hbox xsize style['atm_frame'].xminimum:
             text "SHBANK ATM" xalign 0.5 text_align 0.5 size 40
-        
-        transclude
-        
 
-        
+        transclude
+
+
 style atm is default
 
 style atm_frame:
@@ -199,10 +197,9 @@ style atm_button is gui_button:
 
 style atm_button_text is atm_text:
     hover_color "#000"
-    
+
 style atm_onright is atm_button:
     xalign 1.0
-    
+
 style atm_onright_text is atm_button_text:
     xalign 1.0
-    

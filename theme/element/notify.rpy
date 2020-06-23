@@ -18,9 +18,9 @@ init -10 python:
 
         """
 
-        renpy.show_screen('notify_ico', message=message, icon=icon,sec=5)
+        renpy.show_screen('notify_ico', message=message, icon=icon, sec=5)
 
-screen notify_ico(message, icon='alert',sec=5):
+screen notify_ico(message, icon='alert', sec=5):
 
     zorder 100
     style_prefix "notify"

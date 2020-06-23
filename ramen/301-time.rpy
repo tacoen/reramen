@@ -28,7 +28,7 @@ init -301 python:
             delta = h - ramen.time.hour
             return self.adv(delta)
 
-        def adv(self, a=1, block=False,ret=True):
+        def adv(self, a=1, block=False, ret=True):
 
             ramen.time += datetime.timedelta(hours=a)
 
@@ -80,7 +80,7 @@ init -301 python:
                 return ramen.time.strftime('%y%m%d')
             else:
                 return ramen.time
-                
+
         def dayplay(self):
             dp = ramen.time - ramentime.start
             return dp.days
