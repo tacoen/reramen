@@ -12,10 +12,10 @@ __pycache__/
 *.rpym
 *.bak
 
-gui/
+/gui/
 
-test/
-test/*
+/test/
+/test/*
 
 # Distribution / packaging
 .Python
