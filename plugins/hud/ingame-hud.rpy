@@ -43,7 +43,7 @@ screen hud():
 
     if hud.active:
         if hud.enable or shade:
-            add(ramu.ezfind('top-shade.webp')) xalign 1.0 yalign 0.0 at FadeInterval(0.5)
+            add(ramu.ezfind('top-shade')) xalign 1.0 yalign 0.0 at FadeInterval(0.5)
 
         hbox xalign 1.0 yalign 0.0:
 

@@ -439,7 +439,7 @@ init -301 python:
             ramu.ezfind('game','image')
             ```
 
-            Search for 'game' ('.webp', '.webp', '.jpg') in sortorder:
+            Search for 'game' ('.webp', '.png', '.jpg') in sortorder:
             * path
             * pe.title_path
             * pe.theme_path+'gui/'

@@ -160,8 +160,9 @@ screen ramen_episodes_menu():
 
                     python:
                         e = Plugin(episode, 'episodes')
-                        if renpy.loadable(e.dir+'thumb.webp'):
-                            thumb = im.Scale(e.dir+'thumb.webp', 200, 110)
+                        timg = ramu.ezfind('thumb','image',e.dir)
+                        if timg is not None:
+                            thumb = im.Scale(timg, 200, 110)
                         else:
                             thumb = Composite((200, 110), (0, 0), Solid('#456'),
                                               (0.45, 0.3), Text(ramu.capcap(e.title), size=36, font=pt.font_ui_label))
@@ -182,8 +183,10 @@ screen ramen_episodes_detail(episode):
 
         e = Plugin(episode, 'episodes')
 
-        if renpy.loadable(e.dir+'banner.webp'):
-            banner = Composite((900, 150), (0, 0), im.Scale(e.dir+'banner.webp', 900, 150),
+        bimg = ramu.ezfind('banner','image',e.dir)
+
+        if bimg is not None:
+            banner = Composite((900, 150), (0, 0), im.Scale(bimg, 900, 150),
                                (0, 0), Solid("#0009"),
                                (20, 0.6), Text(e.title.title(), size=32, font=pt.font_ui_label))
 
