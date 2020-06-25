@@ -80,6 +80,7 @@ init -11 python:
 
         def hide(self, whats):
             for w in whats:
+                renpy.hide(w)
                 renpy.hide_screen(w)
 
     rascr = ramen_screentools()

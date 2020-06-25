@@ -52,7 +52,7 @@ init -302 python:
         'eatable': False,
         'require': None,
         'effect': None,
-        'persist': False,
+        'persistent': False,
         'tradable': False,
     }
 

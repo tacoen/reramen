@@ -7,8 +7,8 @@ init -12 python:
     ramen.res = [None, False, False, False]
 
     ramen.labeloc = {}
-    ramen.labeloc['storage'] = ['ramen_test']
-    ramen.labeloc['microwave'] = ['mc_kitchen']
+    ramen.labeloc['storage'] = ['home.kitchen']
+    ramen.labeloc['microwave'] = ['home.kitchen']
     ramen.labeloc['pawn'] = ['pawn_shop']
 
     def inv_resnotify():
@@ -67,6 +67,11 @@ screen inventory_detail(inv, item, size, align):
     python:
         i = inv.item(item)
 
+        try:
+            i.persistent
+        except BaseException:
+            i.persistent = False
+
     hbox:
         vbox xsize size[0] - 118:
 
@@ -107,7 +112,15 @@ screen inventory_detail(inv, item, size, align):
 
             vbox yalign 1.0 xalign 0.5:
                 spacing 10
-                $ action_text = i.require
+
+                python:
+                    action_text = i.require
+
+                    the_action = [
+                        Function(inv.use, item_id=i.id, use_ramen=True),
+                        Function(inv_resnotify),
+                        SetScreenVariable('item', None)
+                    ]
 
                 if i.tradable and labeloc('pawn'):
 
@@ -126,17 +139,28 @@ screen inventory_detail(inv, item, size, align):
 
                     if i.require is not None:
                         if labeloc(i.require):
-                            $ action_text = i.require
+                            $ action_text = i.require.title()
+                            $ the_action = [
+                                Function(inv.use, item_id=i.id, use_ramen=True),
+                                SetScreenVariable('item', None),
+                                Jump('solo_'+i.require)
+                            ]
+
                         else:
                             $ action_text = False
 
                     if action_text:
 
-                        textbutton action_text action[
-                            Function(inv.use, item_id=i.id, use_ramen=True),
-                            Function(inv_resnotify),
-                            SetScreenVariable('item', None)
-                        ]
+                        textbutton action_text action the_action
+
+                if labeloc('storage') and inv.id == "storage":
+
+                    null height 8
+
+                    textbutton "Take" action[
+                        Function(inv.transfer, item_id=i.id, dst_id='pocket'),
+                        SetScreenVariable('item', None)
+                    ]
 
                 if labeloc('storage') and inv.id == "pocket":
 
@@ -183,19 +207,27 @@ screen inventory_grid(inv, size, align):
             ysize vp_height
             xsize vp_width_withspacing
 
-            for item in sorted(inv()):
+            $ r_inv = inv()
+            $ itemok = False
+            for item in sorted(r_inv):
 
                 python:
-                    i = inv.item(item)
-                    if i.count > 1:
-                        icon_count = Composite((100, 100), (0, 0), i.icon,
-                                               (75, 75), Text(str(i.count), size=16, color='#111', min_width=25, xalign=0.5, yalign=0.5))
-                    else:
-                        icon_count = i.icon
+                    try:
+                        i = inv.item(item)
+                        if i.count > 1:
+                            icon_count = Composite((100, 100), (0, 0), i.icon,
+                                                   (75, 75), Text(str(i.count), size=16, color='#111', min_width=25, xalign=0.5, yalign=0.5))
+                        else:
+                            icon_count = i.icon
 
-                imagebutton action SetScreenVariable('item', item):
-                    idle icon_count
-                    hover Composite((100, 100), (0, 0), Solid(pt.accent_color), (0, 0), icon_count)
+                        itemok = True
+                    except BaseException:
+                        itemok = False
+
+                if itemok:
+                    imagebutton action SetScreenVariable('item', item):
+                        idle icon_count
+                        hover Composite((100, 100), (0, 0), Solid(pt.accent_color), (0, 0), icon_count)
 
         vbar value YScrollValue("inventory_vp"):
             xoffset 8

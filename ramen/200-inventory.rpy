@@ -86,7 +86,7 @@ init -200 python:
                     else:
                         res[3] = res[3] + (what, mc.stat[what])
 
-            if not item.persist:
+            if not item.persistent:
                 item.count -= 1
                 res[1] = True
 

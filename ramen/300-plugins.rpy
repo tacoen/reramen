@@ -160,7 +160,7 @@ screen ramen_episodes_menu():
 
                     python:
                         e = Plugin(episode, 'episodes')
-                        timg = ramu.ezfind('thumb','image',e.dir)
+                        timg = ramu.ezfind('thumb', 'image', e.dir)
                         if timg is not None:
                             thumb = im.Scale(timg, 200, 110)
                         else:
@@ -183,7 +183,7 @@ screen ramen_episodes_detail(episode):
 
         e = Plugin(episode, 'episodes')
 
-        bimg = ramu.ezfind('banner','image',e.dir)
+        bimg = ramu.ezfind('banner', 'image', e.dir)
 
         if bimg is not None:
             banner = Composite((900, 150), (0, 0), im.Scale(bimg, 900, 150),

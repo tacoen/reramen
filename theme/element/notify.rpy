@@ -7,7 +7,7 @@
 
 init -10 python:
 
-    def notify_ico(message, icon='alert'):
+    def notify_ico(message, icon='alert', sec=5):
         """
         Notify with icon
 

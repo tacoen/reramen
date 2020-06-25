@@ -5,6 +5,8 @@ image black = Solid('#111')
 image mimic = Solid("#0000")
 image blank = Solid("#0000")
 image dim = Solid('#000c')
+image dim2 = Solid('#000d')
+image dim3 = Solid('#000e')
 
 define qpixellate = Pixellate(0.5, 2)
 
