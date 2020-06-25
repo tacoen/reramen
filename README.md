@@ -1,6 +1,6 @@
 # ramen
 
-Renpy According Me, a modular approach.
+Renpy According Me, a modular approach framework for Ren'Py visual novel game.
 
 It is renpy framework to help you creating of visual novel game.
 
@@ -34,11 +34,11 @@ Devlog: https://tacoen.itch.io/ramen/devlog
 * Scene overlays
 * Action shortcut
 * Time(world/game time) rollback and reload proof.
+* life simulations = cost of all
 
 Todo: Things from the old-version of ramen :
 
 * minigames
-* life simulations = cost of all
 * asset viewer/debug
 
 ## More answer at
