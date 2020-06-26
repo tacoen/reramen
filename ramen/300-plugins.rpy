@@ -28,15 +28,14 @@ init -299 python:
         **If you not registered the plugin, it will works just like a normal ren'py scripts.**
 
         ``` python
-        register_plugins(
-            title="App Container",
-            version="1.0",
-            author="tacoen",
-            author_url='https://github.com/tacoen/reramen',
-            desc="small apps in screen",
-            build=True
-        )
-
+            register_plugins(
+                title="App Container",
+                version="1.0",
+                author="tacoen",
+                author_url='https://github.com/tacoen/reramen',
+                desc="small apps in screen",
+                build=True
+            )
         ```
         """
 

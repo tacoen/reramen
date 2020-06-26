@@ -38,9 +38,6 @@ init -12 python:
         except BaseException:
             return False
 
-screen inventory_storage():
-    use inventory_ui(storage, (880, 480), (0.5, 0.5), name='inventory_storage')
-
 screen inventory_ui(inv, size=(880, 480), align=(0.5, 0.5), name='inventory_ui'):
 
     default item = None

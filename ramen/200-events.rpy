@@ -29,52 +29,173 @@ init -201 python:
         def __getattr__(self, key):
             return self.get(key)
 
-        def occur(self, inv=None):
+        def occur(self):
+
+            if self.done:
+                return False
+
+            def are_gt(c, v, r=False):
+                if c is None:
+                    return None
+                if float(v) >= float(c):
+                    r=True
+                return r
+
+            def are_lt(c, v, r=False):
+                if c is None:
+                    return None
+                if float(v) < float(c):
+                    r=True
+                return r
+
+            def are_eq(c, v, r=False):
+                if c is None:
+                    return None
+                if c == v:
+                    r=True
+                return r
 
             occur=[]
 
-            # if self.label is not None:
+            #print self.__dict__
 
-            # if ramu.safestr(ramen.label_last) == ramu.safestr(self.label):
-            # occur.append(True)
-            # else:
-            # occur.append(False)
+            if self.jump is None:
+                return False
 
-            if self.time_cond is not None:
+            else:
 
-                if ramentime.cond().lower() == self.time_cond.lower() or ramentime.ico().lower() == self.time_cond.lower() or ramentime.word().lower() == self.time_cond.lower() :
-                    occur.append(True)
-                else:
-                    occur.append(False)
+                t = are_gt(self.dayplay, ramentime.dayplay())
+                if t is not None:
+                    occur.append(t)
 
-            if self.after is not None:
+                t = are_eq(self.weekday, ramen.time.weekday())
+                if t is not None:
+                    occur.append(t)
 
-                if ramen.time.hour > self.after:
-                    occur.append(True)
-                else:
-                    occur.append(False)
+                t = are_gt(self.hour_after, ramen.time.hour)
+                if t is not None:
+                    occur.append(t)
 
-            if inv is not None:
+                t = are_lt(self.hour_before, ramen.time.hour)
+                if t is not None:
+                    occur.append(t)
 
-                if self.has is not None:
-                    if inv.has(self.has):
+                current_cond = []
+                current_cond.append(ramentime.cond().lower())
+                current_cond.append(ramentime.word().lower())
+                current_cond.append(ramentime.ico().lower())
+
+                if self.time_cond is not None:
+                    if self.time_cond.lower() in current_cond:
                         occur.append(True)
                     else:
                         occur.append(False)
 
-            if occur == []:
-                return False
+                t = are_gt(self.money_more, mc.money)
+                if t is not None:
+                    occur.append(t)
+
+                t = are_lt(self.money_less, mc.money)
+                if t is not None:
+                    occur.append(t)
+
+                t = are_gt(self.bank_more, mc.bank)
+                if t is not None:
+                    occur.append(t)
+
+                t = are_lt(self.bank_less, mc.bank)
+                if t is not None:
+                    occur.append(t)
+
+                if self.stat is not None:
+                    for s in self.stat:
+                        if mc.stat[s] >= self.stat[s]:
+                            occur.append(True)
+                        else:
+                            occur.append(False)
+
+                if self.skill is not None:
+                    for s in self.skill:
+                        if mc.job[s] >= self.skill[s]:
+                            occur.append(True)
+                        else:
+                            occur.append(False)
+
+                if renpy.has_label(self.jump):
+                    occur.append(True)
+                else:
+                    occur.append(False)
+
+            #print occur
 
             if False in occur:
                 return False
             else:
                 return True
 
-    def Event(id):
-        """Return event from `ramen.events` by their id."""
+    def Event(id, done=False):
+        """
+        Return event from `ramen.events` by their id.
+
+        if done is True: done attribute will added to the event
+
+        """
+
+        if done:
+            ramen.events.__dict__[id].__dict__['done'] = True
+
         return ramen.events.__dict__[id]
 
     class define_event(object):
+        """
+        ``` python:
+            define_event('joancall_0',
+                label='home',
+                dayplay=3,
+                jump='joan.call'
+                time_cond='night'
+                money_more=200,
+                stat={
+                    'vital':8,
+                    'hygiene':10
+                }
+                skill={
+                    'it':5
+                }
+            )
+        ```
+
+        * event id = 'joancall_0' will occur when player reach 'home' label and jump to 'joan.call' label.
+        * if meet this condition:
+            * when 'night' after 3 days playing.
+            * player has money >= 200
+            * player has stat; vital at least 8, hygiene at least 10
+            * player has skill; it at least 5
+
+        * Yes, put more condition will made you game harder.
+        * Note must put `Event('joancall_0',True)`, to made this event not repeating at 'joan.call' label
+        * all event's label are jumped
+
+        ### Keyword arguments
+
+        | | Keyword | opr | Notes |
+        | --- | --- | --- | --- |
+        | | label | == | event triger label, use `ramen.last_label` |
+        | Time | dayplay | > | after dayplay |
+        | | weekday | == | At this weekday (decimal,where 0 is Sunday and 6 is Saturday.) |
+        | | time_cond | == | see `pe.time_cond` |
+        | | hour_after | >= | after this hour (decimal, 24H) |
+        | | hour_before | < | before this hour (decimal, 24H) |
+        | Score | money_less | < | has money(cash) less than this |
+        | | money_more | >= | has money(cash) more than this |
+        | | bank_less | < | has money in bank less than this |
+        | | bank_more | >= | has money in bank more than this |
+        | Attribute | stat | >= | at least has [what,value] |
+        | | skill | >= | at least has [what,value] |
+        | | has | == | having this in inventory [inventory,item] |
+
+
+        """
 
         def __new__(cls, id=None, *args, **kwargs):
 

@@ -289,7 +289,7 @@ init -80 python:
             import sys
             import inspect
 
-            tag = ['container', 'ramen_time', 'event']
+            tag = ['event', 'define_event', 'mc_function', 'define_item', 'register_plugins']
             cm = inspect.getmembers(sys.modules[__name__], inspect.isclass)
             ndx = []
 

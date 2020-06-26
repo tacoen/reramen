@@ -226,10 +226,15 @@ init -301 python:
 
                 ramen.label_last = name
 
-                if ramu.safestr(name) in ramen.events.__dict__.keys():
-                    e = Event(ramu.safestr(name))
+                events = filter(lambda w: ramu.safestr(name) in ramen.events.__dict__[w].__dict__['label'], ramen.events.__dict__.keys())
+
+                for event in events:
+                    print event
+                    e = Event(event)
+
                     if e.occur():
-                        renpy.call(e.label)
+                        renpy.jump(e.jump)
+                        break
 
         def cycle(self, current, array):
             current = int(current) + 1
