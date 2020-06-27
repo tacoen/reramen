@@ -57,7 +57,8 @@ init -201 python:
 
             occur=[]
 
-            #print self.__dict__
+            print "masuk!"
+            print self.__dict__
 
             if self.jump is None:
                 return False
@@ -85,6 +86,10 @@ init -201 python:
                 current_cond.append(ramentime.word().lower())
                 current_cond.append(ramentime.ico().lower())
 
+                print "----"
+                print ramentime.word().lower()
+                print current_cond
+                
                 if self.time_cond is not None:
                     if self.time_cond.lower() in current_cond:
                         occur.append(True)
@@ -126,7 +131,7 @@ init -201 python:
                 else:
                     occur.append(False)
 
-            #print occur
+            print occur
 
             if False in occur:
                 return False
@@ -180,7 +185,7 @@ init -201 python:
 
         | | Keyword | opr | Notes |
         | --- | --- | --- | --- |
-        | | label | == | event triger label, use `ramen.last_label` |
+        | | label | == | event triger label, use `ramen.label_last` |
         | Time | dayplay | > | after dayplay |
         | | weekday | == | At this weekday (decimal,where 0 is Sunday and 6 is Saturday.) |
         | | time_cond | == | see `pe.time_cond` |
@@ -202,5 +207,5 @@ init -201 python:
             if id is None:
                 id = "event_" + str(ramu.uid())
 
-            id = ramu.safestr(id)
+            id = ramu.str_safe(id)
             ramen.events.__dict__[id] = ramen_event(id, **kwargs)

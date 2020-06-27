@@ -100,8 +100,8 @@ init -50 python:
 
                 if kwargs['adv']:
 
-                    if mc.stat[key] > measure:
-                        measure = mc.stat[key]
+                    if 20-mc.stat[key] > measure:
+                        measure = 20-mc.stat[key]
 
                 else:
                     if mc.stat[key] < measure:

@@ -47,7 +47,7 @@ init -299 python:
                 kwargs['dir'] = ramu.getdir()
 
             if id is None:
-                id = ramu.safestr(
+                id = ramu.str_safe(
                     re.sub(
                         r'.+/',
                         '',
@@ -118,8 +118,8 @@ init -299 python:
         for p in pp.plugins.keys():
             if Plugin(p).build:
                 type = Plugin(p).type
-                build.archive(type+'_'+ramu.safestr(p), "all")
-                build.classify('game/'+Plugin(p).dir+'**', type+'_'+ramu.safestr(p) )
+                build.archive(type+'_'+ramu.str_safe(p), "all")
+                build.classify('game/'+Plugin(p).dir+'**', type+'_'+ramu.str_safe(p) )
 
 init -1 python:
 
@@ -164,7 +164,7 @@ screen ramen_episodes_menu():
                             thumb = im.Scale(timg, 200, 110)
                         else:
                             thumb = Composite((200, 110), (0, 0), Solid('#456'),
-                                              (0.45, 0.3), Text(ramu.capcap(e.title), size=36, font=pt.font_ui_label))
+                                              (0.45, 0.3), Text(ramu.str_firstcap(e.title), size=36, font=pt.font_ui_label))
 
                     button xsize 465:
                         action SetScreenVariable('episode', episode)

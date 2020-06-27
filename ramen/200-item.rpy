@@ -120,6 +120,6 @@ init -200 python:
             if id is None:
                 id = "item_" + str(ramu.uid())
 
-            id = ramu.safestr(id)
+            id = ramu.str_safe(id)
 
             ramen.items.__dict__[id] = ramen_item(id, **kwargs)

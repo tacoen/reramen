@@ -30,9 +30,9 @@ screen smphone_apps_news(var, page):
             paper.news=[]
             for i in range(0, 8):
                 paper.news.append(
-                    ramu.random_of(wv.news_subject)+' ' +
-                    ramu.random_of(wv.news_noun)+' '+
-                    ramu.random_of(wv.news_object)
+                    ramu.random_of(wv.news['subject'])+' ' +
+                    ramu.random_of(wv.news['verb'])+' '+
+                    ramu.random_of(wv.news['object'])
                 )
 
             paper.sh  = ramen.time.hour

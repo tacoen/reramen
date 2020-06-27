@@ -13,7 +13,7 @@ screen main_menu():
 
     python:
 
-        sf = ramu.ezfind(ramu.safestr('main'))
+        sf = ramu.ezfind(ramu.str_safe('main'))
 
         if sf is None:
             sf = ramu.ezfind('game')

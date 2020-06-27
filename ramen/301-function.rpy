@@ -2,8 +2,364 @@ init -301 python:
 
     class ramen_util():
 
+        """
+        
+        ### doc:
+
+        uid
+        shuffle
+        select
+
+        str_proper
+        str_firstcap
+        str_safe
+        str_nicecash
+        str_nicenaming
+
+        random_color
+        random_files
+        random_int
+        random_of
+
+        ezfile
+        ezfind
+        file_info
+        file_write
+        files
+        getdir
+
+
+        ### may deprecated:
+
+        cycle
+
+
+        
+        
+        ### not check yet:
+        
+        arrayize
+        character
+        create_items
+
+        gain
+        globalcheck
+        hline
+        img_hover
+        imgexpo
+        invertColor
+        json_file
+        json_write
+        kdict
+        label_callback
+        limits
+        makeobj
+        menuof
+        mouse
+        npc
+        pay
+        persistent_sort
+        sfx
+        talk
+        trait
+        uniquedict
+        """
+        
+        def uid(self):
+            """Return Next Unique ID for creations. 3 Decimal format."""
+
+            ramen.uidnumber += 1
+            return "{:03d}".format(ramen.uidnumber)
+
+        def shuffle(self, array):
+            """Short of renpy.random.shuffle"""
+            
+            renpy.random.shuffle(array)
+            return array
+            
         def select(self, key, list):
+            """Return selected [key] from list"""
+            
             return filter(lambda w: key in w, list)
+
+        def cycle(self, current, array):
+            """Return n+1 or 0 if n>len(array)"""
+            
+            current = int(current) + 1
+            if current >= len(array) or current < 0:
+                current = 0
+            return int(current)
+            
+        def str_proper(self,text,title=True):
+            """Return IBM(less or 4 character), Ii Bb Mm if title=True"""
+            
+            if len(text)<=4:
+                return text.upper()
+            else:
+                if title:
+                    return text.title()
+                else:
+                    return text
+
+        def str_safe(self, text):
+            """Return 'safenamebonanza' from 'Safe Name Bonanza'"""
+            return re.sub(r'\W+|\s+', '', text).lower().strip()
+
+        def str_firstcap(self, text):
+            """Return 'Snb' from 'Safe Name Bonanza', used most in thumbnail/icon creation."""
+            
+            res = ''
+            tt = text.split(' ')
+            for t in tt:
+                res += t[0]
+            return res.title()
+
+        def str_nicecash(self, n):
+            """Return 009 from 9 and 8.2 K from 8200"""
+
+            if n < 1000:
+                return ("{:03d}".format(n))
+            elif n > 1000:
+                return ("{:0.1f}".format(n / 1000)) + "K"
+
+        def str_nicenaming(self, text, prefix='', suffix=''):
+            """Return 'Coca Cola' from '[prefix]coca_cola[suffix]. Used in item creations."""
+            
+            pre = []
+            suf = []
+
+            if not isinstance(prefix, tuple):
+                pre.append(prefix)
+            else:
+                pre = prefix
+
+            if not isinstance(suffix, tuple):
+                suf.append(suffix)
+            else:
+                suf = suffix
+
+            for p in pre:
+                text = text.replace(p, '')
+            for s in suf:
+                text = text.replace(s, '')
+
+            return text.replace('_', ' ').strip().title()
+
+        def getdir(self):
+            return re.sub(
+                r'^game/', '', os.path.dirname(renpy.get_filename_line()[0])) + "/"
+
+        def files(self, dir=False, key=False, ext=False):
+            """
+            Return file list from `persisten.files`
+
+            ``` python
+                file = ramu.files(['gui','img'],'bar','png')
+            ```
+
+            * return files inside 'gui/' and 'img/' which has 'bar' in filename(including his path), and end with 'png'
+            * ramen's framework work best with namespaces in mind.
+
+            """
+
+            FL = persistent.files
+            dirs = []
+
+            if dir:
+                if isinstance(dir, (str, unicode)):
+                    dirs.append(dir)
+                else:
+                    dirs = dir
+
+                F=[]
+
+                for dir in dirs:
+                    fl = filter(lambda w: dir in w, sorted(FL))
+                    F += fl
+            else:
+                F = persistent.files
+
+            if key:
+                F = filter(lambda w: key in w, F)
+
+            if ext:
+                F = filter(lambda w: w.endswith(ext), F)
+
+            return list(dict.fromkeys(F))
+
+        def file_info(self, file):
+            """
+            Get and extract the file information of the file as dict.
+
+            ``` python:
+                info = ramu.file_info("e:/yourproject/game/npc/girls_of_90/alpha/lucy smile.webp")
+            ```
+
+            * info.file = lucy smile.webp
+            * info.name = lucy smile
+            * info.ext = png
+            * info.dir = npc/girl_of_90
+            * info.path = alpha
+
+            Note: `dir` and `path` doesn't had trailing slash.
+
+            """
+
+            r = object()
+            r.__dict__[str('path')] = os.path.dirname(file)
+            r.__dict__[str('file')] = os.path.basename(file)
+            a = r.__dict__['file'].split('.')
+            r.__dict__[str('name')] = str(a[0])
+            r.__dict__[str('ext')] = str(a[1])
+            r.__dict__[str('dir')] = str(r.__dict__['path'])
+            r.__dict__[str('path')] = r.__dict__['path'].replace(
+                os.path.dirname(r.__dict__['path']) + "/", '')
+
+            return r
+
+        def ezfile(self, file, nonevalue=None, ext=pe.ext_img):
+            """
+            Get [file] within [ext] selection or return nonevalue
+
+            ``` python
+            obj.ezfile( "some/body", Color("#999"))
+            ```
+
+            * Search for `some/body` ('.webp', '.png', '.jpg')
+            * if `some/body` not loadable, return Color("#999")
+            * by default extension to search is `pe.ext_img`
+
+            #### File Extension:
+
+            * pe.ext_img = ('.webp', '.png', '.jpg')
+            * pe.ext_txt = ('.json', '.txt')
+            * pe.ext_snd = ('.ogg', '.mp3', '.wav')
+
+            """
+            for e in ext:
+                if renpy.loadable(file + e):
+                    return file + e
+                    break
+            else:
+                return nonevalue
+
+        def ezfind(self, file, ext='image', path=None):
+            """
+
+            ``` python
+            ramu.ezfind('theme_song','sound')
+            ```
+
+            Search for 'theme_song' ('.ogg', '.mp3', '.wav') in sortorder:
+            * path
+            * pe.title_path
+            * pe.theme_path+'audio/'
+            * pe.audio_path
+
+            ``` python
+            ramu.ezfind('game','image')
+            ```
+
+            Search for 'game' ('.webp', '.png', '.jpg') in sortorder:
+            * path
+            * pe.title_path
+            * pe.theme_path+'gui/'
+            * pe.image_path
+
+            """
+
+            if ext == 'sound':
+                find = [ pe.title_path, pe.theme_path+'audio/', pe.audio_path ]
+                ext = pe.ext_snd
+            else:
+                ext = pe.ext_img
+                find = [ pe.title_path, pe.theme_path+'gui/', pe.image_path ]
+
+            if path is not None:
+                find.insert(0, path)
+
+            res = None
+
+            for f in find:
+                res = self.ezfile(f+file, None, ext)
+                if res is not None:
+                    break
+
+            return res
+
+        def random_int(self, min=0, max=100):
+            """Return random from [min] till [max]"""
+            
+            return int(renpy.random.randint(min, max))
+
+        def random_of(self, data):
+            """Return randomize value from list """
+            
+            return data[int(renpy.random.randint(0, len(data) - 1))]
+
+        def random_color(self, lo=0, hi=255):
+            """Return random hex Color"""
+
+            if lo < 96:
+                lo = 96
+            if hi > 255:
+                hi = 255
+
+            def r(): return self.random_int(lo, hi)
+            return ('#%02X%02X%02X' % (r(), r(), r()))
+
+        def random_files(self, dir=False, key=False, ext=pe.ext_img):
+            """Return random files for [dir] with [key] as keyword"""
+            
+            files = self.files(dir, key, ext)
+            return self.random_of(files)
+
+
+
+
+
+
+
+
+
+
+
+
+    # ----------------------------------------------------- #
+
+        def uniquedict(self,data):
+        
+            if isinstance(data,list):
+                res = []
+                for x in range(0,len(data)):
+                    res.append(self.uniquedict(data[x]))
+
+            elif isinstance(data,tuple):
+                return data
+            
+            elif isinstance(data,dict):
+                res = {}
+                for k in sorted(data.keys()):
+                    res[k] = self.uniquedict(data[k])
+                
+                return res
+
+            elif isinstance(data,(str,int,float,unicode) ):
+                if isinstance(data,(unicode,str)):
+                    return data.lower().strip()
+                if isinstance(data,(float,int)):
+                    return data
+                else:
+                    return str(data)
+                
+            return sorted(list(res))
+
+        def persistent_sort(self,what):
+            L = persistent.ramen[what]
+            N = {}
+            for k in L:
+                N[k]=ramu.uniquedict(L[k])
+            persistent.ramen[what] = N
 
         def create_items(self, key, **kwargs):
 
@@ -39,8 +395,8 @@ init -301 python:
 
                 define_item(
                     r,
-                    #name=self.nicenaming(r, ('ve2', 've', 'zm', 'vm', 'zp', 'zd', 'vd')),
-                    name=self.nicenaming(r, (key, 'item-')),
+                    #name=self.str_nicenaming(r, ('ve2', 've', 'zm', 'vm', 'zp', 'zd', 'vd')),
+                    name=self.str_nicenaming(r, (key, 'item-')),
                     price=kwargs['price'],
                     count=kwargs['count'],
                     require=kwargs['require'],
@@ -191,11 +547,7 @@ init -301 python:
             """Get Mouse pos, return (x,y)"""
             return pygame.mouse.get_pos()
 
-        def uid(self):
-            """Return Next Unique id for object creations."""
 
-            ramen.uidnumber += 1
-            return "{:03d}".format(ramen.uidnumber)
 
         def kdict(self, **kwargs):
             dict={}
@@ -226,80 +578,20 @@ init -301 python:
 
                 ramen.label_last = name
 
-                events = filter(lambda w: ramu.safestr(name) in ramen.events.__dict__[w].__dict__['label'], ramen.events.__dict__.keys())
+                print 'callback '+ ramentime.word()+ " "+ramen.label_last
+                
+                events = filter(lambda w: ramen.label_last.lower() == ramen.events.__dict__[w].__dict__['label'], ramen.events.__dict__ )
 
+                print events
+                
                 for event in events:
-                    print event
                     e = Event(event)
-
+                    print event + " read"
                     if e.occur():
+                        print event + " -- occur!"
                         renpy.jump(e.jump)
                         break
 
-        def cycle(self, current, array):
-            current = int(current) + 1
-            if current >= len(array) or current < 0:
-                current = 0
-            return int(current)
-
-        def safestr(self, name):
-            return re.sub(r'\W+|\s+', '', name).lower().strip()
-
-        def capcap(self, title):
-            res = ''
-            tt = title.split(' ')
-            for t in tt:
-                res += t[0]
-            return res.title()
-
-        def random_int(self, min=0, max=100):
-            return int(renpy.random.randint(min, max))
-
-        def random_of(self, array):
-            return array[int(renpy.random.randint(0, len(array) - 1))]
-
-        def shuffle(self, array):
-            renpy.random.shuffle(array)
-            return array
-
-        def nice_cash(self, n):
-            if n < 1000:
-                return ("{:03d}".format(n))
-            elif n > 1000:
-                return ("{:0.1f}".format(n / 1000)) + "K"
-
-        def nicenaming(self, name, prefix='', suffix=''):
-            pre = []
-            suf = []
-
-            ori = name
-
-            if not isinstance(prefix, tuple):
-                pre.append(prefix)
-            else:
-                pre = prefix
-
-            if not isinstance(suffix, tuple):
-                suf.append(suffix)
-            else:
-                suf = suffix
-
-            for p in pre:
-                name = name.replace(p, '')
-            for s in suf:
-                name = name.replace(s, '')
-
-            return name.replace('_', ' ').strip().title()
-
-        def random_color(self, lo=0, hi=255):
-            """Return random hex Color"""
-            if lo < 96:
-                lo = 96
-            if hi > 255:
-                hi = 255
-
-            def r(): return self.random_int(lo, hi)
-            return ('#%02X%02X%02X' % (r(), r(), r()))
 
         def invertColor(self, hexColor):
             def invertHex(hexNumber):
@@ -355,121 +647,6 @@ init -301 python:
 
         # files
 
-        def getdir(self):
-            return re.sub(
-                r'^game/', '', os.path.dirname(renpy.get_filename_line()[0])) + "/"
-
-        def files(self, dir=False, key=False, ext=False):
-            """
-            Return file list from `persisten.files`
-
-            ``` python
-                file = ramu.files(['gui','img'],'bar','png')
-            ```
-
-            * return files inside 'gui/' and 'img/' which has 'bar' in filename(including his path), and end with 'png'
-            * ramen's framework work best with namespaces in mind.
-
-            """
-
-            FL = persistent.files
-            dirs = []
-
-            if dir:
-                if isinstance(dir, (str, unicode)):
-                    dirs.append(dir)
-                else:
-                    dirs = dir
-
-                F=[]
-
-                for dir in dirs:
-                    fl = filter(lambda w: dir in w, sorted(FL))
-                    F += fl
-            else:
-                F = persistent.files
-
-            if key:
-                F = filter(lambda w: key in w, F)
-
-            if ext:
-                F = filter(lambda w: w.endswith(ext), F)
-
-            return list(dict.fromkeys(F))
-
-        def random_files(self, dir=False, key=False, ext=pe.ext_img):
-            files = self.files(dir, key, ext)
-            return self.random_of(files)
-
-        def ezfile(self, file, nonevalue=None, ext=pe.ext_img):
-            """
-            Get [file] within [ext] selection or return nonevalue
-
-            ``` python
-            obj.ezfile( "some/body", Color("#999"))
-            ```
-
-            * Search for `some/body` ('.webp', '.png', '.jpg')
-            * if `some/body` not loadable, return Color("#999")
-            * by default extension to search is `pe.ext_img`
-
-            #### File Extension:
-
-            * pe.ext_img = ('.webp', '.png', '.jpg')
-            * pe.ext_txt = ('.json', '.txt')
-            * pe.ext_snd = ('.ogg', '.mp3', '.wav')
-
-            """
-            for e in ext:
-                if renpy.loadable(file + e):
-                    return file + e
-                    break
-            else:
-                return nonevalue
-
-        def ezfind(self, file, ext='image', path=None):
-            """
-
-            ``` python
-            ramu.ezfind('theme_song','sound')
-            ```
-
-            Search for 'theme_song' ('.ogg', '.mp3', '.wav') in sortorder:
-            * path
-            * pe.title_path
-            * pe.theme_path+'audio/'
-            * pe.audio_path
-
-            ``` python
-            ramu.ezfind('game','image')
-            ```
-
-            Search for 'game' ('.webp', '.png', '.jpg') in sortorder:
-            * path
-            * pe.title_path
-            * pe.theme_path+'gui/'
-            * pe.image_path
-
-            """
-
-            if ext == 'sound':
-                find = [ pe.title_path, pe.theme_path+'audio/', pe.audio_path ]
-                ext = pe.ext_snd
-            else:
-                ext = pe.ext_img
-                find = [ pe.title_path, pe.theme_path+'gui/', pe.image_path ]
-
-            if path is not None:
-                find.insert(0, path)
-
-            res = None
-
-            for f in find:
-                res = self.ezfile(f+file, None, ext)
-                if res is not None:
-                    break
-
-            return res
 
         def sfx(self, file, path=None, channel='sound', **kwargs):
 
@@ -480,35 +657,7 @@ init -301 python:
             else:
                 return False
 
-        def file_info(self, file):
-            """
-            Get and extract the file information of the file as dict.
 
-            ``` python:
-                info = ramu.file_info("e:/yourproject/game/npc/girls_of_90/alpha/lucy smile.webp")
-            ```
-
-            * info.file = lucy smile.webp
-            * info.name = lucy smile
-            * info.ext = png
-            * info.dir = npc/girl_of_90
-            * info.path = alpha
-
-            Note: `dir` and `path` doesn't had trailing slash.
-
-            """
-
-            r = object()
-            r.__dict__[str('path')] = os.path.dirname(file)
-            r.__dict__[str('file')] = os.path.basename(file)
-            a = r.__dict__['file'].split('.')
-            r.__dict__[str('name')] = str(a[0])
-            r.__dict__[str('ext')] = str(a[1])
-            r.__dict__[str('dir')] = str(r.__dict__['path'])
-            r.__dict__[str('path')] = r.__dict__['path'].replace(
-                os.path.dirname(r.__dict__['path']) + "/", '')
-
-            return r
 
         def file_write(self, file, sts):
             file = open(file, "w")
@@ -638,17 +787,19 @@ init -301 python:
                         renpy.call_in_new_context(label)
                         return True
 
+                    label = kwargs['npc_id'] + '.' + kwargs['what']
+                    if renpy.has_label(label):
+                        renpy.call_in_new_context(label)
+                        return True
+                        
                     label = kwargs['what']
                     if renpy.has_label(label):
                         renpy.call_in_new_context(label)
                         return True
 
                 else:
-
-                    label = kwargs['what']
-                    if renpy.has_label(label):
-                        renpy.call_in_new_context(label)
-                        return True
+                    sysnote('missing '+label)
+                    return None
             else:
 
                 try:

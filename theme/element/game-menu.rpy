@@ -12,7 +12,7 @@ screen game_menu(title, scroll=None, yinitial=0.0):
     style_prefix "game_menu"
 
     python:
-        sf = ramu.ezfind(ramu.safestr(title))
+        sf = ramu.ezfind(ramu.str_safe(title))
         if sf is None:
             sf = ramu.ezfind('game')
 

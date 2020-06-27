@@ -186,12 +186,14 @@ init -200 python:
 
             self.phonenum = "5555-" + fordig
 
-            if sideimg_dir is not None:
-
-                for i in ['phone-incall', 'phone-outcall', 'phone-oncall']:
+            for i in ['phone-incall', 'phone-outcall', 'phone-oncall']:
+                if sideimg_dir is not None:
                     temp_img = ramu.ezfind(i, 'image', sideimg_dir )
-                    if temp_img is not None:
-                        self.create_sideimage(self.profile_pic, temp_img, i)
+                else:
+                    temp_img = ramu.ezfind(i, 'image')
+
+                if temp_img is not None:
+                    self.create_sideimage(self.profile_pic, temp_img, i)
 
             return self.phonenum
 

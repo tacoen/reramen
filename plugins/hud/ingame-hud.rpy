@@ -93,7 +93,7 @@ screen hud_cash():
     hbox xalign 1.0 ysize 72 yfill True:
         text ico('ico-cash') style 'hud_icon_text' size 18 yalign 0.5 color "#fffc"
         null width 4
-        text ramu.nice_cash(mc.money) size 24  yalign 0.5
+        text ramu.str_nicecash(mc.money) size 24  yalign 0.5
         null width 16
 
 screen hud_time():
