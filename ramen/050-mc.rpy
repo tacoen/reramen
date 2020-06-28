@@ -20,6 +20,11 @@ init -50 python:
         * mc.stats
         """
 
+        def score(self, value, sfx=True):
+            ramu.sfx('beep')
+            mc.score += value
+            return
+
         def withdrawn(self, ammount):
             if mc.bank >= ammount:
                 mc.bank -= ammount
@@ -177,7 +182,7 @@ init -50 python:
             renpy.hide('mcp')
 
             if lapse >0:
-                notify_ico(book_title +" - Progress: "+ str(total) + " %", 'arrow-up-left')
+                rascr.notify(book_title +" - Progress: "+ str(total) + " %", 'arrow-up-left')
             else:
                 self.mumble('hungry')
 
@@ -211,7 +216,7 @@ init -50 python:
             renpy.hide('mcp')
 
             if lapse>0:
-                notify_ico('You gain '+ sum+' $ at Your Bank Account.')
+                rascr.notify('You gain '+ sum+' $ at Your Bank Account.')
             else:
                 self.mumble('hungry')
 
@@ -236,9 +241,9 @@ init -50 python:
             renpy.hide('mcp')
 
             if mc.stat['hygiene']>19:
-                notify_ico('You gain your hygiene back.', 'arrow-up-left')
+                rascr.notify('You gain your hygiene back.', 'arrow-up-left')
             else:
-                notify_ico('You feel refreshed.', 'arrow-up-left')
+                rascr.notify('You feel refreshed.', 'arrow-up-left')
 
             sysnote('')
 
@@ -302,11 +307,11 @@ init -50 python:
             renpy.hide('mcp')
 
             if mc.stat['vital']>18:
-                notify_ico('You gain your vitality back.', 'arrow-up-left')
+                rascr.notify('You gain your vitality back.', 'arrow-up-left')
             elif mc.stat['vital']<18 and mc.stat['vital']<10:
-                notify_ico('You gain some vitality back.', 'arrow-up-left')
+                rascr.notify('You gain some vitality back.', 'arrow-up-left')
             else:
-                notify_ico('You feel refreshed.', 'arrow-up-left')
+                rascr.notify('You feel refreshed.', 'arrow-up-left')
 
             sysnote('')
 

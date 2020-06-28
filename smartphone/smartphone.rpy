@@ -20,7 +20,7 @@ init -190 python:
     style['smphone_frame'].background = "#678"
     style['smphone_frame'].pos = (67, 85)
     style['smphone_frame'].size = (327, 550)
-    style['smphone_frame'].padding = (8, 8, 8, 8)
+    style['smphone_frame'].padding = (0, 0, 0, 0)
 
     style['smphone_ico_button'] = Style('button')
     style['smphone_ico_button'].xmaximum = 70

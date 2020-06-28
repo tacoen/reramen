@@ -28,10 +28,23 @@ init -200 python:
 
             self._msg[msg_id] = object()
 
+            try:
+                kwargs['notify']
+                notify=True
+                del kwargs['notify']
+            except BaseException:
+                notify=False
+
             self._msg[msg_id].__dict__ = kwargs
 
             if msg:
                 self._msg[msg_id].content = msg
+
+                if notify:
+                    rascr.notify('New Unread Messages:\nFrom:'+kwargs['sender'].title(), 'msg-mail', 'new_sms')
+
+        def __call__(self):
+            return self._msg
 
         def post(self, content, ref, val=None):
             msg_id = ramu.uid()

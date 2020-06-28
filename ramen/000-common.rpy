@@ -8,10 +8,16 @@ image dim = Solid('#000c')
 image dim2 = Solid('#000d')
 image dim3 = Solid('#000e')
 
+image overlays = ramu.ezfile(pt.overlays, Color("#0019"))
+
 define qpixellate = Pixellate(0.5, 2)
 
 transform basic_anim:
     pass
+
+transform rotate(deg):
+    # ged = 0-360
+    rotate deg
 
 transform xflip:
     xzoom -1
@@ -43,14 +49,14 @@ transform FadeInterval(ms=1.0):
         alpha 1
         linear ms alpha 0
 
-transform delayed_blink(delay, cycle):
+transform delayed_blink(delay, sec):
     alpha .5
     pause delay
     block:
         linear .2 alpha 1.0
         pause .2
         linear .2 alpha 0.5
-        pause(cycle - .4)
+        pause(float(sec) - .4)
         repeat
 
 transform ramen_lb:

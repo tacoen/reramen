@@ -11,7 +11,7 @@ init -12 python:
     ramen.labeloc['microwave'] = ['home.kitchen']
     ramen.labeloc['pawn'] = ['pawn_shop']
 
-    def inv_resnotify():
+    def inv_resnotify(sec=3.0, sfx=None):
         msg = []
         res = ramen.res
 
@@ -27,7 +27,7 @@ init -12 python:
         if res[3]:
             msg.append(res[3][0] + " = " + str(res[3][1]))
 
-        notify_ico("\n".join(msg), icon)
+        rascr.notify("\n".join(msg), icon, sec, sfx)
 
     def labeloc(what):
         try:

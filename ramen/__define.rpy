@@ -101,7 +101,7 @@ init -100 python:
     anon = Character('anon_name', dynamic=True, who_color=ramu.random_color(100, 200))
 
     narrator = Character(None, window_background="#0000",
-                         what_xalign=0.5, what_color="#ddf", what_outlines=pt.bold_outlines
+                         what_xalign=0.5, what_size=22, what_color="#fe9", what_outlines=pt.bold_outlines
                          )
 
     sysnote = Character(None,

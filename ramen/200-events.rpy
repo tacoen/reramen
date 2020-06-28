@@ -89,7 +89,7 @@ init -201 python:
                 print "----"
                 print ramentime.word().lower()
                 print current_cond
-                
+
                 if self.time_cond is not None:
                     if self.time_cond.lower() in current_cond:
                         occur.append(True)

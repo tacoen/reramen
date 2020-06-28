@@ -10,6 +10,9 @@ init -200 python:
             if self.lastname is None:
                 self.lastname = ramu.random_of(pe.native_name).title()
 
+            if self.callname is None:
+                self.callname = self.name
+
             try:
                 del kwargs['name']
             except BaseException:
@@ -35,6 +38,11 @@ init -200 python:
                 self.name=newname.title()
 
             character.__dict__[self.id].name = newname.lower()
+
+            try:
+                character.__dict__[self.id].callname
+            except BaseException:
+                character.__dict__[self.id].callname =  newname.lower()
 
         def relation(self, point=None, what='relation', force=False):
             """

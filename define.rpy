@@ -64,6 +64,7 @@ init -2 python:
                         what_color="#fff",
                         what_size=48,
                         what_font=pt.font_ui_title,
+                        what_outlines=pt.hover_outlines,
                         what_prefix="{cps=80}",
                         what_suffix="{/cps}",
                         )

@@ -3,12 +3,10 @@ init -301 python:
     class ramen_util():
 
         """
-        
+
         ### doc:
 
         uid
-        shuffle
-        select
 
         str_proper
         str_firstcap
@@ -16,6 +14,7 @@ init -301 python:
         str_nicecash
         str_nicenaming
 
+        shuffle
         random_color
         random_files
         random_int
@@ -27,44 +26,126 @@ init -301 python:
         file_write
         files
         getdir
+        json_file
+        json_write
 
+        persistent_sort
+
+        uniquedict
+        arrayize
+        select
+        kdict
+        makeobj
+
+        ### proposed
+
+        globalcheck
+        character
+        create_items
 
         ### may deprecated:
 
         cycle
 
 
-        
-        
         ### not check yet:
-        
-        arrayize
-        character
-        create_items
+
 
         gain
-        globalcheck
         hline
         img_hover
         imgexpo
         invertColor
-        json_file
-        json_write
-        kdict
         label_callback
         limits
-        makeobj
         menuof
         mouse
         npc
         pay
-        persistent_sort
         sfx
         talk
         trait
-        uniquedict
+
         """
-        
+
+        def create_items(self, key, **kwargs):
+            """
+            Return list of mass create items
+
+            ``` python
+                    items = ramu.create_items(
+                        'zd_',
+                        price=ramu.random_int(20, 29),
+                        eatable=True,
+                        effect={'energy': 3 }
+                        )
+            ```
+            """
+
+            res=[]
+            for f in sorted( self.files(self.getdir(), key, pe.ext_img) ):
+
+                fn = self.file_info(f)
+                count = 1
+                r = fn.name.strip().lower()
+
+                for m in pe.itemd:
+                    try:
+                        kwargs[m]
+                    except BaseException:
+                        kwargs[m] = pe.itemd[m]
+
+                define_item(
+                    r,
+                    name=self.str_nicenaming(r, (key, 'item-')),
+                    price=kwargs['price'],
+                    count=kwargs['count'],
+                    require=kwargs['require'],
+                    effect=kwargs['effect'],
+                    eatable=kwargs['eatable']
+                )
+
+                res.append(r)
+
+            return res
+
+        def character(self, id, name=None, **kwargs):
+            """Define character"""
+
+            if name is None:
+                name = id.title()
+
+            chaattr = {}
+            p = []
+            for k in kwargs:
+                if k.startswith(('dynamic', 'window_', 'who_',
+                                 'what_', 'show_', 'cb_', 'ctc_')):
+                    chaattr[k] = kwargs[k]
+                    p.append(k)
+
+            setattr(
+                character,
+                id,
+                Character(
+                    name,
+                    image=id,
+                    **chaattr
+                )
+            )
+
+            return p
+
+        def globalcheck(self, what):
+            """
+            Check where if [what] is in globals. Sometimes [what] retrieve from multipersistent, this to check whenever [what] came from this game or not.
+            """
+
+            try:
+                globals()[what]
+                return True
+            except BaseException:
+                return False
+
         def uid(self):
             """Return Next Unique ID for creations. 3 Decimal format."""
 
@@ -73,26 +154,58 @@ init -301 python:
 
         def shuffle(self, array):
             """Short of renpy.random.shuffle"""
-            
+
             renpy.random.shuffle(array)
             return array
-            
+
         def select(self, key, list):
             """Return selected [key] from list"""
-            
+
             return filter(lambda w: key in w, list)
+
+        def kdict(self, **kwargs):
+            """Return dict from keywords arguments."""
+
+            dict={}
+            for k in kwargs:
+                dict[k] = kwargs[k]
+            return dict
+
+        def makeobj(self, args, **kwargs):
+            """
+            Return object from {} or keywords arguments.
+
+            from a hash/list
+
+            ``` python:
+                obj = ramu.makeobj( {'id':1, 'name':'someting'})
+            ```
+
+            from keyword arguments:
+
+            ``` python:
+                obj = ramu.makeobj( id=1, name=someting )
+            ```
+            """
+
+            obj = object()
+            obj.__dict__ = kwargs
+            if isinstance(args, (type(self.__dict__), type({}))):
+                for a in args:
+                    obj.__dict__[str(a)] = args[a]
+            return obj
 
         def cycle(self, current, array):
             """Return n+1 or 0 if n>len(array)"""
-            
+
             current = int(current) + 1
             if current >= len(array) or current < 0:
                 current = 0
             return int(current)
-            
-        def str_proper(self,text,title=True):
+
+        def str_proper(self, text, title=True):
             """Return IBM(less or 4 character), Ii Bb Mm if title=True"""
-            
+
             if len(text)<=4:
                 return text.upper()
             else:
@@ -107,7 +220,7 @@ init -301 python:
 
         def str_firstcap(self, text):
             """Return 'Snb' from 'Safe Name Bonanza', used most in thumbnail/icon creation."""
-            
+
             res = ''
             tt = text.split(' ')
             for t in tt:
@@ -123,8 +236,8 @@ init -301 python:
                 return ("{:0.1f}".format(n / 1000)) + "K"
 
         def str_nicenaming(self, text, prefix='', suffix=''):
-            """Return 'Coca Cola' from '[prefix]coca_cola[suffix]. Used in item creations."""
-            
+            """Return 'Coca Cola' from '[prefix]coca_cola[suffix]. Used in item creations. Prefix and suffix can be tuple."""
+
             pre = []
             suf = []
 
@@ -197,7 +310,7 @@ init -301 python:
 
             * info.file = lucy smile.webp
             * info.name = lucy smile
-            * info.ext = png
+            * info.ext = webp
             * info.dir = npc/girl_of_90
             * info.path = alpha
 
@@ -276,7 +389,8 @@ init -301 python:
                 find = [ pe.title_path, pe.theme_path+'gui/', pe.image_path ]
 
             if path is not None:
-                find.insert(0, path)
+                #find.insert(0, path)
+                find.append(path)
 
             res = None
 
@@ -287,14 +401,37 @@ init -301 python:
 
             return res
 
+        def file_write(self, file, text, mod="w"):
+            """Write a [text] to [file]. mod='a' for appending, mod='w' for (re)write."""
+
+            file = open(file, mod)
+            file.writelines(text.strip())
+            file.close()
+            return file
+
+        def json_file(self, file):
+            """Return data from json file"""
+
+            try:
+                with open(renpy.loader.transfn(file), 'r') as json_file:
+                    return json.load(json_file)
+            except BaseException:
+                return {'0': ['Hi, please tell the developer, that his JSON file was not valid.']}
+
+        def json_write(self, file, data):
+            """Dump data to json file"""
+
+            with open(renpy.loader.transfn(file), 'w') as outfile:
+                json.dump(data, outfile)
+
         def random_int(self, min=0, max=100):
             """Return random from [min] till [max]"""
-            
+
             return int(renpy.random.randint(min, max))
 
         def random_of(self, data):
             """Return randomize value from list """
-            
+
             return data[int(renpy.random.randint(0, len(data) - 1))]
 
         def random_color(self, lo=0, hi=255):
@@ -310,105 +447,60 @@ init -301 python:
 
         def random_files(self, dir=False, key=False, ext=pe.ext_img):
             """Return random files for [dir] with [key] as keyword"""
-            
+
             files = self.files(dir, key, ext)
             return self.random_of(files)
 
+        def uniquedict(self, data):
+            """Return unique and sorted data from a dict"""
 
-
-
-
-
-
-
-
-
-
-
-    # ----------------------------------------------------- #
-
-        def uniquedict(self,data):
-        
-            if isinstance(data,list):
+            if isinstance(data, list):
                 res = []
-                for x in range(0,len(data)):
+                for x in range(0, len(data)):
                     res.append(self.uniquedict(data[x]))
 
-            elif isinstance(data,tuple):
+            elif isinstance(data, tuple):
                 return data
-            
-            elif isinstance(data,dict):
+
+            elif isinstance(data, dict):
                 res = {}
                 for k in sorted(data.keys()):
                     res[k] = self.uniquedict(data[k])
-                
+
                 return res
 
-            elif isinstance(data,(str,int,float,unicode) ):
-                if isinstance(data,(unicode,str)):
+            elif isinstance(data, (str, int, float, unicode) ):
+                if isinstance(data, (unicode, str)):
                     return data.lower().strip()
-                if isinstance(data,(float,int)):
+                if isinstance(data, (float, int)):
                     return data
                 else:
                     return str(data)
-                
+
             return sorted(list(res))
 
-        def persistent_sort(self,what):
+        def persistent_sort(self, what):
+            """Sort and remove duplicate in `persistent.ramen`"""
+
             L = persistent.ramen[what]
             N = {}
             for k in L:
                 N[k]=ramu.uniquedict(L[k])
             persistent.ramen[what] = N
 
-        def create_items(self, key, **kwargs):
-
-            res=[]
-
-            for f in sorted( self.files(self.getdir(), key, pe.ext_img) ):
-
-                fn = self.file_info(f)
-
-                count = 1
-
-                r = fn.name.strip().lower()
-
-                try:
-                    kwargs['count']
-                except BaseException:
-                    kwargs['count']=1
-
-                try:
-                    kwargs['require']
-                except BaseException:
-                    kwargs['require']=None
-
-                try:
-                    kwargs['effect']
-                except BaseException:
-                    kwargs['effect']=None
-
-                try:
-                    kwargs['eatable']
-                except BaseException:
-                    kwargs['eatable']=False
-
-                define_item(
-                    r,
-                    #name=self.str_nicenaming(r, ('ve2', 've', 'zm', 'vm', 'zp', 'zd', 'vd')),
-                    name=self.str_nicenaming(r, (key, 'item-')),
-                    price=kwargs['price'],
-                    count=kwargs['count'],
-                    require=kwargs['require'],
-                    effect=kwargs['effect'],
-                    eatable=kwargs['eatable']
-                )
-
-                res.append(r)
-
-            return res
-
         def arrayize(self, array, length, default=None):
+            """
+
+            Return/convert list from inputed list to be same length, when it not satified use default value
+
+            ``` python:
+                i = 20
+                i = ramu.arrayize(i, 3, (0.0, 0.0))
+                > print i
+                [20,4,4]
+            ```
+
+            """
 
             if isinstance(array, (unicode, str, int, type(Composite((0, 0))))):
                 sarray=[]
@@ -426,6 +518,21 @@ init -301 python:
                         sarray.insert(n, default)
 
             return sarray
+
+        def npc(self, npc_id, what):
+
+            try:
+                if type(globals()[npc_id]) is not ramen_npc:
+                    return False
+            except BaseException:
+                pass
+
+            try:
+                return globals()[npc_id]._get(what)
+            except BaseException:
+                return None
+
+    # ----------------------------------------------------- #
 
         def menuof(self, label, screen='choice', exitword='Done', void=None, **condition):
 
@@ -490,29 +597,6 @@ init -301 python:
             if ret:
                 return res
 
-        def globalcheck(self, what):
-            """
-            Check where if [what] is in globals. Sometimes [what] retrieve from multipersistent, this to check whenever [what] came from this game or not.
-            """
-            try:
-                globals()[what]
-                return True
-            except BaseException:
-                return False
-
-        def npc(self, npc_id, what):
-
-            try:
-                if type(globals()[npc_id]) is not ramen_npc:
-                    return False
-            except BaseException:
-                pass
-
-            try:
-                return globals()[npc_id]._get(what)
-            except BaseException:
-                return None
-
         def imgexpo(self, tag=None, what='size'):
 
             tags = list(renpy.get_showing_tags())
@@ -547,22 +631,6 @@ init -301 python:
             """Get Mouse pos, return (x,y)"""
             return pygame.mouse.get_pos()
 
-
-
-        def kdict(self, **kwargs):
-            dict={}
-            for k in kwargs:
-                dict[k] = kwargs[k]
-            return dict
-
-        def makeobj(self, args, **kwargs):
-            obj = object()
-            obj.__dict__ = kwargs
-            if isinstance(args, (type(self.__dict__), type({}))):
-                for a in args:
-                    obj.__dict__[str(a)] = args[a]
-            return obj
-
         def label_callback(self, name, abnormal):
 
             if not name.startswith('ramen_') and \
@@ -579,11 +647,11 @@ init -301 python:
                 ramen.label_last = name
 
                 print 'callback '+ ramentime.word()+ " "+ramen.label_last
-                
+
                 events = filter(lambda w: ramen.label_last.lower() == ramen.events.__dict__[w].__dict__['label'], ramen.events.__dict__ )
 
                 print events
-                
+
                 for event in events:
                     e = Event(event)
                     print event + " read"
@@ -591,7 +659,6 @@ init -301 python:
                         print event + " -- occur!"
                         renpy.jump(e.jump)
                         break
-
 
         def invertColor(self, hexColor):
             def invertHex(hexNumber):
@@ -647,7 +714,6 @@ init -301 python:
 
         # files
 
-
         def sfx(self, file, path=None, channel='sound', **kwargs):
 
             res = self.ezfind(file, 'sound', path)
@@ -656,40 +722,6 @@ init -301 python:
                 renpy.sound.play(res, channel=channel, **kwargs)
             else:
                 return False
-
-
-
-        def file_write(self, file, sts):
-            file = open(file, "w")
-            file.writelines(sts.strip())
-            file.close()
-            return file
-
-        def character(self, id, name=None, **kwargs):
-            """Define character"""
-
-            if name is None:
-                name = id.title()
-
-            chaattr = {}
-            p = []
-            for k in kwargs:
-                if k.startswith(('dynamic', 'window_', 'who_',
-                                 'what_', 'show_', 'cb_', 'ctc_')):
-                    chaattr[k] = kwargs[k]
-                    p.append(k)
-
-            setattr(
-                character,
-                id,
-                Character(
-                    name,
-                    image=id,
-                    **chaattr
-                )
-            )
-
-            return p
 
         def talk(self, **kwargs):
             """
@@ -791,7 +823,7 @@ init -301 python:
                     if renpy.has_label(label):
                         renpy.call_in_new_context(label)
                         return True
-                        
+
                     label = kwargs['what']
                     if renpy.has_label(label):
                         renpy.call_in_new_context(label)
@@ -836,14 +868,3 @@ init -301 python:
             return False
 
         # json
-
-        def json_file(self, file):
-            try:
-                with open(renpy.loader.transfn(file), 'r') as json_file:
-                    return json.load(json_file)
-            except BaseException:
-                return {'0': ['Hi, please tell the developer, that his JSON file was not valid.']}
-
-        def json_write(self, file, data):
-            with open(renpy.loader.transfn(file), 'w') as outfile:
-                json.dump(data, outfile)

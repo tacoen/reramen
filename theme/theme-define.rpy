@@ -13,6 +13,7 @@ init -200 python:
 
     pt.font_text = pe.theme_path + 'fonts/WorkSans-Regular.ttf'
     pt.font_label = pe.theme_path + 'fonts/WorkSans-SemiBold.ttf'
+
     pt.font_ui_title = pe.theme_path + 'fonts/WorkSans-ExtraLight.ttf'
     pt.font_ui_label = pe.theme_path + 'fonts/WorkSans-Light.ttf'
     pt.font_ui_text = pe.theme_path + 'fonts/Abel-Regular.ttf'
@@ -34,7 +35,7 @@ init -200 python:
 
     pt.anonymous_pic = 'anonymous'
 
-    pt.bold_outlines = [(absolute(3), '#000C', absolute(0), absolute(0))]
+    pt.bold_outlines = [(absolute(3), '#000D', absolute(0), absolute(0))]
     pt.hover_outlines = [(absolute(2), '#0006', absolute(0), absolute(0))]
     pt.idle_outlines = [(absolute(2), '#0003', absolute(0), absolute(0))]
     pt.insensitive_outlines = [

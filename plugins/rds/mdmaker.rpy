@@ -300,8 +300,8 @@ init -80 python:
                 if 'ramen' in t1 or c[0] in tag:
 
                     mdfile = 'class_' + str(c[0]).lower()
-                    sts = "# " + str(c[0]) + "\n"
-
+                    head = "# " + str(c[0]) + "\n"
+                    sts = "\n"
                     ndx.append('[[' + mdfile + ']]')
 
                     doc = inspect.getdoc(c[1])
@@ -319,6 +319,8 @@ init -80 python:
                     if doc is not None:
                         sts += "\n" + str(doc).strip() + "\n\n"
 
+                    toc=""
+
                     for m in inspect.getmembers(c[1]):
 
                         if not m[0].startswith('__') or m[0] == "__init__":
@@ -327,8 +329,7 @@ init -80 python:
                                 pr = inspect.getargspec(c[1].__dict__[m[0]])
 
                                 if not m[0] == '__init__':
-                                    # anchor = "(#"+c[0].lower()+"-"+
-                                    # m[0].lower()+")"
+                                    toc += "   * ["+m[0]+"](#"+m[0].lower()+")\n"
                                     sts += "\n\n### " + m[0] + "\n"
                                 else:
                                     sts += "### init\n"
@@ -391,8 +392,9 @@ init -80 python:
 
                             except BaseException:
                                 pass
+                    pa = "\n#### Table of Content:\n\n"+ toc
 
-                    self.write(mdfile, sts)
+                    self.write(mdfile, head + pa + sts)
 
             return ndx
 

@@ -1,10 +1,9 @@
 ﻿# The script of the game goes in this file.
 # The game starts here.
 
-init python:
-    ramen.coba = 1
-
 label start:
+
+    jump testmenu
 
     'Hello World'
 

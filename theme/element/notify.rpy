@@ -4,30 +4,18 @@
 # the game is quicksaved or a screenshot has been taken.)
 ##
 # https://www.renpy.org/doc/html/screen_special.html#notify-screen
-
-init -10 python:
-
-    def notify_ico(message, icon='alert', sec=5):
-        """
-        Notify with icon
-
-        ``` python:
-            $ notify_icon('You see notification with icon','logo-ramen')
-            $ renpy.notify("You see renpy default notification.")
-        ```
-
-        """
-
-        renpy.show_screen('notify_ico', message=message, icon=icon, sec=5)
-
-screen notify_ico(message, icon='alert', sec=5):
+screen notify_ico(message, icon='alert', sec=5, style='notice'):
 
     zorder 100
-    style_prefix "notify"
+    style_prefix style
+
     frame at notify_appear:
-        hbox:
-            text ico(icon) style 'ramen_icon_text' size 20 line_leading 2
-            null width 8
+        if icon is not None:
+            hbox:
+                text ico(icon) style 'notice_icon'
+                null width 8
+                text "[message!tq]"
+        else:
             text "[message!tq]"
 
     timer(float(sec)) action Hide('notify_ico')
@@ -47,6 +35,25 @@ transform notify_appear:
         linear .25 alpha 1.0
     on hide:
         linear .5 alpha 0.0
+
+
+style notice is default
+style notice_frame is frame:
+    xpos pt.dialogue_xpos
+    yalign 0.7
+    xsize pt.dialogue_width
+    background "#fffd"
+    padding(16, 16, 32, 16)
+
+style notice_icon is ramen_icon_text:
+    size 22
+    line_leading 2
+    outlines pt.idle_outlines
+    color "#000"
+
+style notice_text is ramen_gui:
+    size 24
+    color "#333"
 
 style notify_frame is frame:
     xpos pt.dialogue_xpos

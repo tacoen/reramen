@@ -19,7 +19,7 @@ screen quick_menubar():
 
     hbox:
         at FadeInterval(0.5)
-        add(pe.theme_path + 'gui/bottom-shade.webp')
+        add(ramu.ezfind('bottom-shade'))
         xalign 1.0
         yalign 1.0
 
