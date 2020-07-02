@@ -53,8 +53,8 @@ init -2 python:
     pe.native_name = ['Easton', 'Westly', 'Northgate', 'Southvile' ]
 
     chapter = Character(None,
-                        window_xalign=0.975,
-                        window_yalign=0.5,
+                        window_xalign=0.9,
+                        window_yalign=0.85,
                         window_xsize=0.9,
                         window_ysize=None,
                         window_padding=(0, 0, 0, 0),

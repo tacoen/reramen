@@ -4,8 +4,8 @@ screen input(prompt):
     window:
 
         vbox:
-            xalign pt.dialogue_text_xalign
-            xpos pt.dialogue_xpos
+            #xalign pt.dialogue_text_xalign
+            #xpos pt.dialogue_xpos
             xsize pt.dialogue_width
             ypos pt.dialogue_ypos
 
@@ -13,10 +13,10 @@ screen input(prompt):
             input id "input"
 
 style input_prompt:
-    xalign pt.dialogue_text_xalign
+    #xalign pt.dialogue_text_xalign
     color "#ddd"
 
 style input:
-    xalign pt.dialogue_text_xalign
+    #xalign pt.dialogue_text_xalign
     xmaximum pt.dialogue_width
     color "#ccc"

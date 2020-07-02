@@ -23,7 +23,7 @@ screen rdsa_tools_icons():
 screen rdsa_tools_screens():
 
     use story_skipbutton('start', 'Skip Button')
-    use notify_ico('You got notice!', 'ico-home', 3)
+    use notify_ico('You got notice!', 'ico-bulb', 3)
     use action_shortcut({
         'That way': {'icon': 'arrow-left', 'action': Null },
         'This way': {'icon': 'arrow-down', 'action': Null }
