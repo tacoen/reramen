@@ -12,6 +12,9 @@ init -12 python:
     ramen.labeloc['pawn'] = ['pawn_shop']
 
     def inv_resnotify(sec=3.0, sfx=None):
+
+        ### ---
+
         msg = []
         res = ramen.res
 
@@ -27,7 +30,10 @@ init -12 python:
         if res[3]:
             msg.append(res[3][0] + " = " + str(res[3][1]))
 
-        rascr.notify("\n".join(msg), icon, sec, sfx)
+        if sfx is None:
+            sfx = 'beep'
+
+        rascr.notify("\n".join(msg), icon, sfx, sec)
 
     def labeloc(what):
         try:

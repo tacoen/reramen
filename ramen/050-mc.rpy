@@ -11,7 +11,7 @@ init -50 python:
     class ramen_mcfunction():
 
         """
-        mc_function is a set of renpy/python script. It's require manything,
+        ramen_mcfunction is a set of renpy/python script. It's require manything,
         so it has to be set in higher init number.
 
         ### Require this object/parameter to be set earlier:
@@ -277,7 +277,7 @@ init -50 python:
         def sleep(self, pose='sleep0', hours=None, transform=None):
             """
             ``` python
-                mcfunc.sleep(False,'sleep0')
+                mcf.sleep(False,'sleep0')
             ```
             * Napping with 'sleep0' pose/attr (usually a sprite anim)
             """
@@ -315,8 +315,9 @@ init -50 python:
 
             sysnote('')
 
-    mcfunc = ramen_mcfunction()
+    mcf = ramen_mcfunction()
 
+    solo = mcf
 
 screen solo_stopbutton(text=["Working..."]):
 

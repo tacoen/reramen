@@ -31,18 +31,18 @@ screen action_shortcut(shortcuts, reverse=False):
     if shade:
 
         if not reverse:
-            add ramu.ezfile('theme/gui/left-shade', Color("#0019")) at shader
+            add ramu.ezfind('left-shade') at shader
         else:
-            add ramu.ezfile('theme/gui/right-shade', Color("#0019")) at shader
+            add ramu.ezfind('right-shade') at shader
 
     vbox:
-        spacing 8
+        spacing 0
         if not reverse:
             yalign 0.7
             xalign 0.025
         else:
             yalign 0.7
-            xalign 0.95
+            xalign 0.975
 
         for i in shortcuts:
             python:
@@ -54,46 +54,39 @@ screen action_shortcut(shortcuts, reverse=False):
 
 screen shortcut(text, action, icon, reverse):
 
-    hbox xsize 300:
-        spacing 4
-        box_wrap True
-        style_prefix 'shortcut'
+    button:
+        hbox xsize 300:
+            spacing 0
+            box_wrap True
+            style_prefix 'shortcut'
 
-        if reverse:
-            box_reverse True
+            if reverse:
+                box_reverse True
 
-        textbutton ico(icon) style 'shortcut_icon':
-            action action
-            xsize 30
+            text ico(icon) style 'shortcut_icon'
 
-        if reverse:
+            if reverse:
+                text text+"(R)" text_align 1.0 min_width 270
+            else:
+                text text min_width 270
 
-            textbutton text:
-                action action
-                xsize 260
-                text_xalign 1.0
-                hovered[SetScreenVariable('shade', True)]
-                unhovered[SetScreenVariable('shade', False)]
-
-        else:
-
-            textbutton text:
-                action action
-                xsize 260
-                hovered[SetScreenVariable('shade', True)]
-                unhovered[SetScreenVariable('shade', False)]
+        action action
+        hovered[SetScreenVariable('shade', True)]
+        unhovered[SetScreenVariable('shade', False)]
 
 
-style shortcut_icon is ramen_icon
+style shortcut_button is button:
+    padding(0, 0, 0, 0)
 
-style shortcut_icon_text is ramen_icon_text:
-    outlines pt.insensitive_outlines
-    hover_outlines pt.hover_outlines
-    size 24
-    line_leading 4
-
-style shortcut_button is button
-style shortcut_button_text is ramen_gui:
+style shortcut_text is ramen_gui:
     outlines pt.insensitive_outlines
     hover_color "#ff0"
     hover_outlines pt.hover_outlines
+    size 22
+
+style shortcut_icon is ramen_icon_text:
+    hover_color "#ff0"
+    outlines pt.insensitive_outlines
+    hover_outlines pt.hover_outlines
+    size 22
+    line_leading 2

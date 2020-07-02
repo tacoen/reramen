@@ -10,13 +10,16 @@ screen notify_ico(message, icon='alert', sec=5, style='notice'):
     style_prefix style
 
     frame at notify_appear:
-        if icon is not None:
-            hbox:
-                text ico(icon) style 'notice_icon'
-                null width 8
+        button:
+            if icon is not None:
+                hbox:
+                    text ico(icon) style 'notice_icon'
+                    null width 8
+                    text "[message!tq]"
+            else:
                 text "[message!tq]"
-        else:
-            text "[message!tq]"
+
+            action[ Hide('notify_ico') ]
 
     timer(float(sec)) action Hide('notify_ico')
 
@@ -39,9 +42,9 @@ transform notify_appear:
 
 style notice is default
 style notice_frame is frame:
-    xpos pt.dialogue_xpos
-    yalign 0.7
-    xsize pt.dialogue_width
+    xalign 0.02
+    yalign 0.025
+    xsize pt.dialogue_width * 3/4
     background "#fffd"
     padding(16, 16, 32, 16)
 

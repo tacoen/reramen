@@ -7,7 +7,6 @@ screen shop_ui(inv, size=(300, 480), align=(0.5, 0.5), counting=True, background
     default cart_price = 0
 
     use shop_face(name, inv=inv, size=size, align=align, background=background, counting=counting):
-
         style_prefix "modal"
 
         if item is None:
@@ -43,6 +42,17 @@ screen shop_face(name, inv, size, align, background, counting):
                 vbox xsize 300 xalign 1.0:
 
                     use shop_cartview(inv, name, size)
+
+        else:
+
+            hbox yalign 1.0 xalign 1.0 :
+                textbutton "Exit" style "inventory_action_button" xalign 1.0:
+                    action[
+                        Function(inv.cart.reset),
+                        SetScreenVariable('item', None),
+                        Hide(name),
+                        Return(False)
+                    ]
 
 screen shop_cartview(inv, name, size):
 

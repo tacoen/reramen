@@ -30,6 +30,7 @@ init -290 python:
     rds.menu['tools'] = ['md']
     rds.menu['tools'].append('plugins')
     rds.menu['tools'].append('icons')
+    rds.menu['tools'].append('screens')
 
     rds.md_path = "E:/pp-renpy/ramen/wiki/"
     rds.game_path = "E:/pp-renpy/ramen/game/"

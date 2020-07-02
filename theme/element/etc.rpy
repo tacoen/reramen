@@ -1,4 +1,5 @@
 # ramen multipurpose screen
+
 init offset= -20
 
 screen hbox_line(what, value, field_width=180, fa=0.0, va=1.0):
@@ -19,11 +20,13 @@ screen hbox_label(what, value, field_width=180, fa=0.0, va=1.0):
         text str(value) text_align va xalign va xoffset 16
 
 screen story_skipbutton(label, text='Skip'):
-
-    textbutton text style 'ramen_button_medium' xalign 0.025 yalign 0.05:
+    zorder 199
+    layer 'dialog_layer'
+    textbutton text style 'ramen_button_medium' xalign 0.975 yalign 0.95:
         background "#456"
+        text_size 20
         hover_background "#567"
-        action[Hide('story_skipbutton'), Jump(label) ]
+        action[ Hide('story_skipbutton'), Jump(label) ]
 
 screen show_image(img):
 

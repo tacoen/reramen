@@ -134,7 +134,7 @@ screen atm_balance(back=True):
 screen atm_takeout:
 
     python:
-        mcfunc.withdrawn(withdrawn)
+        mcf.withdrawn(withdrawn)
 
     use atm_balance(False)
 
