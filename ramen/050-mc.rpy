@@ -7,6 +7,7 @@ init -50 python:
     ramen.doing_solo = True
     ramen.solo_item = None
     ramen.solo_goto = None
+    ramen.solo_inv = 'storage'
 
     class ramen_mcfunction():
 
@@ -20,23 +21,51 @@ init -50 python:
         * mc.stats
         """
 
+        def pay(self, value, sfx=True):
+            if mc.money['cash'] > value:
+                mc.money['cash'] -=  value
+            if sfx:
+                ramu.sfx('money-pay')
+            return mc.money['cash']
+
+        def gain(self, value, sfx=True):
+            mc.money['cash'] += value
+            if sfx:
+                ramu.sfx('beep')
+            return mc.money['cash']
+
+        def bankgain(self, value, sfx=True):
+            mc.money['bank'] +=  value
+            if sfx:
+                ramu.sfx('tone1')
+            return mc.money['bank']
+
+        def bankpay(self, value, sfx=True):
+            if mc.money['bank'] >  value:
+                mc.money['bank'] -= value
+            if sfx:
+                ramu.sfx('tone0')
+            return mc.money['bank']
+
         def score(self, value, sfx=True):
-            ramu.sfx('beep')
-            mc.score += value
-            return
+            ramu.sfx('score')
+            mc.score['point'] += value
+
+            #renpy.block_rollback()
+            #return mc.score['point']
 
         def withdrawn(self, ammount):
-            if mc.bank >= ammount:
-                mc.bank -= ammount
-                mc.money += ammount
+            if mc.money['bank'] >= ammount:
+                mc.money['bank'] -= ammount
+                mc.money['cash'] += ammount
                 return True
             else:
                 return False
 
         def deposite(self, ammount):
-            if mc.money >= ammount:
-                mc.bank += ammount
-                mc.money -= ammount
+            if mc.money['cash'] >= ammount:
+                mc.money['bank'] += ammount
+                mc.money['cash'] -= ammount
                 return True
             else:
                 return False
@@ -47,13 +76,13 @@ init -50 python:
         def commenting(self, label):
 
             try:
-                return ramu.random_of(mcpersonality.comment[label])
+                return ramu.random_of(mcpersonality.comment[label]).capitalize()
             except BaseException:
                 return 'How randomize is random was.'
 
         def skill_preferer(self, what=None):
 
-            order=sorted(mc.job.items(), key=lambda x: x[1], reverse=True)
+            order=sorted(mc.skill.items(), key=lambda x: x[1], reverse=True)
             if len(order[0][0]) <= 3:
                 return order[0][0].upper()
             else:
@@ -169,14 +198,14 @@ init -50 python:
 
             anatomy = list(mc.bookcraft[book]['anatomy'])
 
-            anatomy[0] += round(lapse * (float(mc.job['writing']) /20), 1)
+            anatomy[0] += round(lapse * (float(mc.skill['writing']) /20), 1)
             anatomy[1] += round(lapse * (float(mc.stat['libido']) /20), 1)
             anatomy[2] += round(lapse * (float(mc.stat['intel']) /20), 1)
             anatomy[3] += round(lapse * (float(mc.stat['luck']) /20), 1)
 
             total = sum(anatomy)
 
-            mc.job['writing'] += total/6
+            mc.skill['writing'] += total/6
             mc.bookcraft[book]['anatomy']=tuple(anatomy)
 
             renpy.hide('mcp')
@@ -205,7 +234,7 @@ init -50 python:
                 )
 
             sum = lapse * 30
-            mc.bank += sum
+            mc.money['bank'] += sum
 
             sum = str(sum)
             ramu.trait( trait.lower(), lapse * float(0.25) )

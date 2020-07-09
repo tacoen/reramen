@@ -89,7 +89,7 @@ screen shop_cartview(inv, name, size):
 
             if inv.cart.count() > 0:
 
-                if mc.money >= inv.cart.total():
+                if mc.money['cash'] >= inv.cart.total():
 
                     textbutton "Pay" style "inventory_action_button":
                         action[

@@ -39,7 +39,13 @@ init -290 python:
 
 init -79 python:
 
-    def collector(what, obj_type_like):
+    def rds_screen():
+        renpy.show_screen('rdsa_tools_screens')
+
+    def rds_watch(what):
+        renpy.show_screen('rds_watch', what=what)
+
+    def rds_collector(what, obj_type_like):
         res = []
         for g in globals():
             if isinstance(globals()[g], type(globals()[obj_type_like])):
@@ -52,7 +58,7 @@ init -79 python:
 
         ramen.objects[what] = res
 
-    def rtextformat(var, step=-1, pre='\n', res=''):
+    def rds_rtextformat(var, step=-1, pre='\n', res=''):
 
         step += 1
         tes = object()
@@ -67,9 +73,9 @@ init -79 python:
         if isinstance(var, (type({}), type(tes.__dict__))):
             for v in var:
                 res += pre + v + ' {space=10}={space=10} ' + \
-                    rtextformat(var[v], step, '\n')
+                    rds_rtextformat(var[v], step, '\n')
 
-        elif isinstance(var, type(rtextformat)):
+        elif isinstance(var, type(rds_rtextformat)):
             res += "{color=#d0d}" + str(repr(var)) + "{/color}"
 
         elif isinstance(var, bool):

@@ -189,7 +189,7 @@ screen inventory_grid(inv, size, align):
         vp_width = size[0]
         cols = int(math.floor(vp_width / 100))
         rows = int(inv.max / cols)
-        vp_width_withspacing = vp_width + 8
+        vp_width_withspacing = vp_width + 16
 
     if len(inv.inventory.keys()) < 1:
 
@@ -219,7 +219,7 @@ screen inventory_grid(inv, size, align):
                         i = inv.item(item)
                         if i.count > 1:
                             icon_count = Composite((100, 100), (0, 0), i.icon,
-                                                   (75, 75), Text(str(i.count), size=16, color='#111', min_width=25, xalign=0.5, yalign=0.5))
+                                                   (75, 75), Text(str(i.count), size=14, color='#111', min_width=25, xalign=0.5, yalign=0.5))
                         else:
                             icon_count = i.icon
 

@@ -38,10 +38,10 @@ screen action_shortcut(shortcuts, reverse=False):
     vbox:
         spacing 0
         if not reverse:
-            yalign 0.7
+            yalign 0.85
             xalign 0.025
         else:
-            yalign 0.7
+            yalign 0.85
             xalign 0.975
 
         for i in shortcuts:
@@ -66,9 +66,9 @@ screen shortcut(text, action, icon, reverse):
             text ico(icon) style 'shortcut_icon'
 
             if reverse:
-                text text+"(R)" text_align 1.0 min_width 270
+                text text.title() text_align 1.0 min_width 270
             else:
-                text text min_width 270
+                text text.title() min_width 270
 
         action action
         hovered[SetScreenVariable('shade', True)]
@@ -79,14 +79,14 @@ style shortcut_button is button:
     padding(0, 0, 0, 0)
 
 style shortcut_text is ramen_gui:
-    outlines pt.insensitive_outlines
+    outlines pt.bold_outlines
     hover_color "#ff0"
-    hover_outlines pt.hover_outlines
+    hover_outlines pt.bolder_outlines
     size 22
 
 style shortcut_icon is ramen_icon_text:
     hover_color "#ff0"
-    outlines pt.insensitive_outlines
-    hover_outlines pt.hover_outlines
+    outlines pt.bold_outlines
+    hover_outlines pt.bolder_outlines
     size 22
     line_leading 2

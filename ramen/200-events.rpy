@@ -96,19 +96,19 @@ init -201 python:
                     else:
                         occur.append(False)
 
-                t = are_gt(self.money_more, mc.money)
+                t = are_gt(self.money_more, mc.money['cash'])
                 if t is not None:
                     occur.append(t)
 
-                t = are_lt(self.money_less, mc.money)
+                t = are_lt(self.money_less, mc.money['cash'])
                 if t is not None:
                     occur.append(t)
 
-                t = are_gt(self.bank_more, mc.bank)
+                t = are_gt(self.bank_more, mc.money['bank'])
                 if t is not None:
                     occur.append(t)
 
-                t = are_lt(self.bank_less, mc.bank)
+                t = are_lt(self.bank_less, mc.money['bank'])
                 if t is not None:
                     occur.append(t)
 
@@ -121,7 +121,7 @@ init -201 python:
 
                 if self.skill is not None:
                     for s in self.skill:
-                        if mc.job[s] >= self.skill[s]:
+                        if mc.skill[s] >= self.skill[s]:
                             occur.append(True)
                         else:
                             occur.append(False)

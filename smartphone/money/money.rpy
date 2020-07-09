@@ -27,11 +27,11 @@ screen smphone_apps_money(var, page):
 
             hbox:
                 label 'Bank'
-                text "{:07d} $".format(mc.bank) xalign 1.0
+                text "{:07d} $".format(mc.money['bank']) xalign 1.0
 
             hbox:
                 label 'Cash'
-                text "{:07d} $".format(mc.money) xalign 1.0
+                text "{:07d} $".format(mc.money['cash']) xalign 1.0
 
             add ramu.hline((app.width, 1), "#999")
 
@@ -41,11 +41,11 @@ screen smphone_apps_money(var, page):
                         SetScreenVariable('var', ramen.epay),
                     ]
             else:
-                if ramen.epay > 0 and mc.bank > ramen.epay:
+                if ramen.epay > 0 and mc.money['bank'] > ramen.epay:
                     textbutton "{icon=ico-cash} Payment: " + str(ramen.epay) + " $" xsize app.width:
                         action[
                             Function(
-                                ramu.pay, m=ramen.epay, src=mc.bank, ret=False),
+                                mcf.bankpay, m=ramen.epay, ret=False),
                             SetVariable('ramen.epay', 0),
                             SetScreenVariable('var', None)
                         ]

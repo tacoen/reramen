@@ -19,13 +19,13 @@ screen hbox_label(what, value, field_width=180, fa=0.0, va=1.0):
 
         text str(value) text_align va xalign va xoffset 16
 
-screen story_skipbutton(label, text='Skip'):
+screen story_skipbutton(label, text='Skip', align=(0.975, 0.95)):
     zorder 199
     layer 'dialog_layer'
-    textbutton text style 'ramen_button_medium' xalign 0.975 yalign 0.95:
-        background "#456"
+    textbutton text style 'ramen_button_medium' xalign align[0] yalign align[1]:
+        background rui.button(Color('#345'), True)
+        hover_background rui.button(Color('#456'), True)
         text_size 20
-        hover_background "#567"
         action[ Hide('story_skipbutton'), Jump(label) ]
 
 screen show_image(img):

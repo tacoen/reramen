@@ -6,12 +6,10 @@ screen ramen_dev_screen():
     default show = False
 
     layer 'console'
+    zorder 105
 
     if show:
-
         modal True
-        zorder 105
-
         frame style 'rds_panel':
             style_prefix 'rds'
             use rds_topbar(title)
@@ -19,12 +17,23 @@ screen ramen_dev_screen():
             if obj is not None:
                 use rds_win(obj, obj_type)
     else:
-        modal False
-        hbox:
-            textbutton '{icon=logo-ramen}' text_size 24  padding(8, 8, 8, 8):
-                action ToggleScreenVariable('show')
-            textbutton '{icon=square-check}' text_size 24  padding(8, 8, 8, 8):
-                action ToggleScreen('rdsa_tools_screens')
+
+        vbox xpos 0 ypos 0:
+            textbutton '{icon=logo-ramen}' text_size 24  padding(8, 8, 8, 8) action ToggleScreenVariable('show')
+            textbutton '{icon=monitor}' text_size 24  padding(8, 8, 8, 8) action ToggleScreen('rdsa_tools_screens')
+            textbutton '{icon=eye}' text_size 24  padding(8, 8, 8, 8) action ToggleScreen('rds_watch', what=ramen.progres)
+
+
+screen rds_watch(what):
+
+    python:
+        try:
+            watch = ramen.progres
+        except BaseException:
+            watch = None
+
+    frame ypos 78 xpos 32 background "#000D" padding(8, 12, 8, 8):
+        text repr(ramen.progres) size 16 color "#ff0"
 
 screen rds_win(obj, obj_type):
 
@@ -67,7 +76,7 @@ screen rds_getasset(obj_type, obj):
 screen rds_dictparam(asset):
     for k in sorted(asset.keys()):
         python:
-            res = re.sub(r'(^\s+|\+$)', '', rtextformat(asset[k]))
+            res = re.sub(r'(^\s+|\+$)', '', rds_rtextformat(asset[k]))
             res = res.strip()
 
         hbox:

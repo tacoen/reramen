@@ -21,6 +21,7 @@ init -300 python:
     # config.developer = False
 
     # Set False to disable developer options.
+
     ramen.dev = True
 
 init -2 python:
@@ -31,11 +32,42 @@ init -2 python:
     # False will force disable ramen episodes menu
     # ramen.episodes_menu = False
 
-    # starting stats
+    # starting stats ------------------------------------- #
 
-    mc.money = ramu.random_int(120, 190)
-    mc.bank = ramu.random_int(9000, 9999)
-    mc.score = 0
+    mc.money ={
+        'cash': ramu.random_int(120, 190),
+        'bank': ramu.random_int(9000, 9999)
+    }
+
+    mc.score ={
+        'cash': ramu.random_int(120, 190),
+        'bank': ramu.random_int(9000, 9999)
+    }
+
+    mc.score ={
+        'point': 0,
+        'level': 0
+    }
+
+    mc.skill = {
+        'radio': ramu.random_int(5, 9),
+        'it': ramu.random_int(5, 9),
+        'managing': ramu.random_int(5, 9),
+        'writing': ramu.random_int(5, 9)
+    }
+
+    mc.stat = {
+        'hygiene': ramu.random_int(5, 12),
+        'energy': ramu.random_int(5, 11),
+        'vital': ramu.random_int(5, 10),
+        'libido': ramu.random_int(5, 10),
+        'intel': ramu.random_int(5, 10),
+        'luck': ramu.random_int(0, 5),
+        'charm': 10,
+    }
+
+    mc.lastname = ramu.random_of(['East', 'West', 'North', 'South'])
+    mc.age = ramu.random_int(36, 51)
 
     mc.name = 'Liam'
     mc.lastname = ramu.random_of(['East', 'West', 'North', 'South'])

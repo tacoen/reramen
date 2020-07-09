@@ -11,12 +11,10 @@ init -9 python:
 
 screen atm_screen(dir):
 
-    default saving = mc.bank
+    default saving = mc.money['bank']
     default withdrawn = 0
     default payment = 0
     default menu = None
-
-    default bannerads = ramu.random_files('sanhila/syndicate/'+'ads' )
 
     style_prefix "atm"
 
@@ -39,7 +37,6 @@ screen atm_screen(dir):
             vbox xalign 0.5 yalign 0.5:
                 spacing 24
                 text 'Thank you for using us.' xalign 0.5
-                add bannerads xalign 0.5
 
             timer(2.0) action[ SetScreenVariable('menu', 'main'), Hide('atm_screen'), Return(True) ]
 
@@ -52,7 +49,8 @@ screen atm_screen(dir):
                 text 'Enter Your PIN Number' xalign 0.5
                 text '* * * *' bold True  xalign 0.5
                 null height 80
-                add bannerads xalign 0.5
+
+                # add bannerads xalign 0.5
 
             timer(2.0) action[
                 SetScreenVariable('menu', 'main')
@@ -72,7 +70,6 @@ screen atm_screen(dir):
             timer(3.5) action[
                 SetScreenVariable('menu', 'pin_entered')
                 ]
-
 
 screen atm_payment:
 
@@ -124,7 +121,7 @@ screen atm_balance(back=True):
         vbox yalign 0.5 xalign 0.5:
             spacing 20
             text "Your Balance is:" xalign 0.5
-            text str(float(mc.bank))+ " $"  xalign 0.5
+            text str(float(mc.money['bank']))+ " $"  xalign 0.5
             text "Thank you for using SHBANK"  xalign 0.5
 
     if back:

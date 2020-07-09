@@ -34,7 +34,7 @@ init -200 python:
 
         def sell(self, item_id, use_ramen=False):
             i = self.__dict__['inventory'][item_id]
-            mc.money += i.price
+            mc.money['cash'] += i.price
             del self.__dict__['inventory'][item_id]
             res = [False, False, False, None, i.name +
                    " sold for " + str(i.price) + " $"]
@@ -173,7 +173,7 @@ init -200 python:
 
             total = self.total()
 
-            mc.money -= total
+            mc.money['cash'] -= total
 
             for i in self.cart:
                 for n in range(0, self.cart[i][0]):

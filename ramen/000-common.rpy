@@ -29,10 +29,9 @@ transform xa(a):
 transform zoom(z=1.2):
     zoom z
 
-transform xp(x=0.5, y=0):
-    yalign 1.0
+transform xp(x=0.5, y=1.0):
+    yalign y
     xpos x
-    yanchor y
 
 transform hit_anim:
     alpha 0.95

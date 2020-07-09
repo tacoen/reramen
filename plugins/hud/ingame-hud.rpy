@@ -55,7 +55,7 @@ screen hud():
                 use hud_time()
                 use hud_cash()
 
-                text "{:03d}".format(mc.score) style 'hud_score' yoffset 14 xalign 1.0
+                text "{:03d}".format(mc.score['point']) style 'hud_score' yoffset 14 xalign 1.0
 
             textbutton ico(icon) style 'hud_icon' action ToggleVariable('hud.enable'):
                 padding(16, 16, 16, 16)
@@ -93,7 +93,7 @@ screen hud_cash():
     hbox xalign 1.0 ysize 72 yfill True:
         text ico('ico-cash') style 'hud_icon_text' size 18 yalign 0.5 color "#fffc"
         null width 4
-        text ramu.str_nicecash(mc.money) size 24  yalign 0.5
+        text ramu.str_nicecash(mc.money['cash']) size 24  yalign 0.5
         null width 16
 
 screen hud_time():

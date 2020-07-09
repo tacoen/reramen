@@ -35,6 +35,7 @@ init -200 python:
 
     pt.anonymous_pic = 'anonymous'
 
+    pt.bolder_outlines = [(absolute(3), '#000E', absolute(0), absolute(0))]
     pt.bold_outlines = [(absolute(3), '#000D', absolute(0), absolute(0))]
     pt.hover_outlines = [(absolute(2), '#0006', absolute(0), absolute(0))]
     pt.idle_outlines = [(absolute(2), '#0003', absolute(0), absolute(0))]
@@ -51,7 +52,7 @@ init -200 python:
     pt.dialogue_text_xalign = 0.0
     pt.dialogue_width = config.screen_width / 2
     pt.dialogue_xpos = config.screen_width / 4 + 24
-    pt.dialogue_ypos = 16
+    pt.dialogue_ypos = 24
 
     pt.name_xalign = 0.0
     pt.name_xpos = pt.dialogue_xpos - 16
@@ -61,7 +62,7 @@ init -200 python:
     pt.namebox_height = None
     pt.namebox_tile = False
     pt.namebox_width = None
-    pt.textbox_height = config.screen_width / 7
+    pt.textbox_height = 160
     pt.textbox_yalign = 1.0
 
     pt.main_menu_background = Solid("#0129")

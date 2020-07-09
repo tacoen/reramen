@@ -33,10 +33,10 @@ style namebox_label is say_label
 style window:
     background pt.dialoque_background
     xalign 0.5
-    yalign 0.9
-    xsize pt.dialogue_width + 120
+    yalign 0.95
+    xsize pt.dialogue_width+40
     ysize pt.textbox_height
-    padding(60, 0, 10, 0)
+    padding(24, 0, 24, 0)
 
 style namebox:
     #xpos pt.name_xpos
@@ -54,16 +54,15 @@ style say_label:
     outlines pt.who_outlines
 
 style say_dialogue:
-    #ypos pt.dialogue_ypos
+    ypos pt.dialogue_ypos
     #xpos pt.dialogue_xpos
-    ypos 30
-    #ysize pt.textbox_height
+    ymaximum pt.textbox_height
     yalign 0.1
+    line_leading 3
     xsize pt.dialogue_width
-
     background "#fff"
     yminimum 64
-    size 24
+    size 22
 
 style say_thought is say_dialogue:
     xalign 0.5

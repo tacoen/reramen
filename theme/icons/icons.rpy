@@ -11,6 +11,7 @@ init -202 python:
     if persistent.icon is None:
 
         persistent.icon = {
+
             'alert': u'\x21',
             'arrow-down': u'\x77',
             'arrow-down-left': u'\x65',
@@ -29,6 +30,7 @@ init -202 python:
             'click-left': u'\x68',
             'click-right': u'\x6a',
             'close': u'\x6b',
+            'eye': u'\xa1',
             'folder': u'\x6c',
             'folder-qload': u'\x7a',
             'folder-qsave': u'\x78',
@@ -48,6 +50,7 @@ init -202 python:
             'ico-cash': u'\x24',
             'ico-coins': u'\x45',
             'ico-disk': u'\x52',
+            'ico-gift': u'\xaa',
             'ico-home': u'\x3c',
             'ico-map': u'\x25',
             'ico-phone': u'\x40',
@@ -76,6 +79,7 @@ init -202 python:
             'menu': u'\x4b',
             'menu-small': u'\x4c',
             'menu1': u'\x5a',
+            'monitor': u'\xa3',
             'moon1': u'\x58',
             'moon2': u'\x43',
             'moon3': u'\x56',
@@ -113,7 +117,6 @@ init -202 python:
             'volume-off': u'\x60',
             'volume-on': u'\x7e',
             'volume-x': u'\x7f',
-            'ico-gift': u'\xaa',
             'map-pin3': "{{"
         }
 
@@ -127,16 +130,3 @@ init -202 python:
                 return persistent.icon[what]
             except BaseException:
                 return " "
-
-    def icon_tag(tag, icon='logo-ramen'):
-        """
-        put icons as renpy text_tag
-
-        ``` python
-        e " {icon=alert} Warning "
-        ```
-        """
-        return [(renpy.TEXT_TAG, "font=" + pt.font_ui_ico),
-                (renpy.TEXT_TEXT, ico(icon)), (renpy.TEXT_TAG, "/font")]
-
-    config.self_closing_custom_text_tags["icon"] = icon_tag

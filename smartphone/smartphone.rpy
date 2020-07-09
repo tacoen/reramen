@@ -16,6 +16,7 @@ init -190 python:
     style['smphone_window'].xalign = 0.0
     style['smphone_window'].yalign = 0.0
     style['smphone_window'].size = renpy.image_size(smphone.background)
+    style['smphone_window'].padding = (0, 0, 0, 0)
 
     style['smphone_frame'].background = "#678"
     style['smphone_frame'].pos = (67, 85)

@@ -1,9 +1,9 @@
 @font-face {
   font-family: 'feather-ramen2-icon';
   src:
-    url('fonts/feather-ramen2-icon.ttf?ayk7p9') format('truetype'),
-    url('fonts/feather-ramen2-icon.woff?ayk7p9') format('woff'),
-    url('fonts/feather-ramen2-icon.svg?ayk7p9#feather-ramen2-icon') format('svg');
+    url('fonts/feather-ramen2-icon.ttf?i00vuq') format('truetype'),
+    url('fonts/feather-ramen2-icon.woff?i00vuq') format('woff'),
+    url('fonts/feather-ramen2-icon.svg?i00vuq#feather-ramen2-icon') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -61,7 +61,7 @@ i {
   content: "\70";
 }
 .chevrons-left:before {
-  content: "\61";
+  content: "\62";
 }
 .chevrons-right:before {
   content: "\73";
@@ -77,6 +77,9 @@ i {
 }
 .close:before {
   content: "\6b";
+}
+.eye:before {
+  content: "\a1";
 }
 .folder:before {
   content: "\6c";
@@ -94,7 +97,7 @@ i {
   content: "\76";
 }
 .ico-box:before {
-  content: "\62";
+  content: "\66";
 }
 .ico-box2:before {
   content: "\6e";
@@ -225,6 +228,9 @@ i {
 .menu1:before {
   content: "\5a";
 }
+.monitor:before {
+  content: "\a3";
+}
 .moon1:before {
   content: "\58";
 }
@@ -265,10 +271,10 @@ i {
   content: "\2d";
 }
 .radio-off:before {
-  content: "\66";
+  content: "\67";
 }
 .radio-on:before {
-  content: "\67";
+  content: "\7e";
 }
 .sliders:before {
   content: "\3b";
@@ -331,8 +337,8 @@ i {
   content: "\60";
 }
 .volume-on:before {
-  content: "\7e";
+  content: "\7f";
 }
 .volume-x:before {
-  content: "\7f";
+  content: "\80";
 }

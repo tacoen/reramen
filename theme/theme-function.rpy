@@ -2,7 +2,7 @@ init -299 python:
 
     class ramen_ui_tool():
 
-        def button(self, color, border=Borders(3, 1, 1, 3), black=False):
+        def button(self, color, black=False, border=Borders(3, 3, 3, 3) ):
             if black:
                 res = ramu.ezfind('button-frame-black')
             else:
@@ -40,13 +40,20 @@ init -299 python:
 
     def font_uitag(tag, argument, contents):
 
+        if argument == 'label':
+            font = pt.font_ui_label
+        elif argument == 'title':
+            font = pt.font_ui_title
+        else:
+            font = pt.font_ui_text
+
         return [
-            (renpy.TEXT_TAG, "font="+pt.font_ui_text),
+            (renpy.TEXT_TAG, "font="+font),
             ] + contents + [
                 (renpy.TEXT_TAG, "/font"),
             ]
 
-    config.custom_text_tags["ui"] = font_uitag
+    config.custom_text_tags["f"] = font_uitag
 
     def icon_tag(tag, icon='logo-ramen'):
         """

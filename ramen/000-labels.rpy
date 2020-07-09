@@ -1,5 +1,3 @@
-default ramen = ramen
-
 label ramen_newgame:
 
     stop music fadeout 1.0
@@ -22,7 +20,7 @@ label ramen_newgame:
                 sysnote("Made with Ren'Py [renpy.version_only]")
                 sysnote("Using {icon=logo-ramen} Ramen framework.")
                 # jump the test
-                _skipping = False
+                _skipping = True
                 renpy.jump('ramen_test')
 
         _skipping = False

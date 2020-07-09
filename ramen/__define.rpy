@@ -26,7 +26,7 @@ init -302 python:
         'sun2',
         'sun2',
         'sun3',
-        'night',
+        'dark',
         'dark']
     pe.time_word = [
         'Midnight',
@@ -93,6 +93,8 @@ init -300 python:
     config.transient_layers = [ 'transient' ]
 
 init -100 python:
+
+    ramen.progres = 0
 
     mc_name = 'You'
 

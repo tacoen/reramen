@@ -419,7 +419,12 @@ init -301 python:
             L = persistent.ramen[what]
             N = {}
             for k in L:
+                if isinstance(L[k], type(_)):
+                    N[k]=L[k]
+                    continue
+
                 N[k]=ramu.uniquedict(L[k])
+
             persistent.ramen[what] = N
 
         def arrayize(self, array, length, default=None):
@@ -435,6 +440,9 @@ init -301 python:
             ```
 
             """
+
+            if isinstance(array, tuple):
+                array = list(array)
 
             if isinstance(array, (unicode, str, int, type(Composite((0, 0))))):
                 sarray=[]
@@ -507,29 +515,29 @@ init -301 python:
 
             return res
 
-        def pay(self, m, src, ret=False):
-            if src > m:
-                src -= m
-                res = True
-            else:
-                res = False
+        # def pay(self, m, src, ret=False):
+            # if src > m:
+            # src -= m
+            # res = True
+            # else:
+            # res = False
 
-            if ret:
-                return res
+            # if ret:
+            # return res
 
         def trait(self, which, value):
 
             # radio,it,managing,writing
 
-            mc.job[which] = self.limits(mc.job[which]+value)
-            return mc.job[which]
+            mc.skill[which] = self.limits(mc.skill[which]+value)
+            return mc.skill[which]
 
-        def gain(self, m, src, ret=False):
-            src += m
-            res = True
+        # def gain(self, m, src, ret=False):
+            # src += m
+            # res = True
 
-            if ret:
-                return res
+            # if ret:
+            # return res
 
         def imgexpo(self, tag=None, what='size'):
 
@@ -649,7 +657,12 @@ init -301 python:
         # files
 
         def sfx(self, file, path=None, channel='sound', **kwargs):
-
+            """
+            Find sound file then play it.
+            ``` python
+                ramu.sfx('score')
+            ```
+            """
             res = self.ezfind(file, 'sound', path)
 
             if res is not None:
