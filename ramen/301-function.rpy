@@ -161,6 +161,13 @@ init -301 python:
                 res += t[0]
             return res.title()
 
+        def maxscore(self,value):
+            """Return 009 from 9 and 8.2 K from 8200"""
+            if int(value) >= pe.maxscore:
+                return "{:04d}".format(pe.maxscore)
+            else:
+                return "{:04d}".format(value)
+                
         def str_nicecash(self, n):
             """Return 009 from 9 and 8.2 K from 8200"""
 

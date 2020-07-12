@@ -57,6 +57,11 @@ init -290 python:
             except BaseException:
                 kwargs['title'] = what.title()
 
+            try:
+                kwargs['label']
+            except BaseException:
+                kwargs['label'] = None
+
             files = ramu.files( kwargs['dir'], None, pe.ext_img )
 
             gal={}

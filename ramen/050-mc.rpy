@@ -32,6 +32,7 @@ init -50 python:
             mc.money['cash'] += value
             if sfx:
                 ramu.sfx('beep')
+                renpy.show_screen('hud_cash',notif=True)
             return mc.money['cash']
 
         def bankgain(self, value, sfx=True):
@@ -49,6 +50,7 @@ init -50 python:
 
         def score(self, value, sfx=True):
             ramu.sfx('score')
+            renpy.show_screen('hud_score',notif=True)
             mc.score['point'] += value
 
             #renpy.block_rollback()

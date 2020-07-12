@@ -43,7 +43,8 @@ init -302 python:
     pe.ext_vid = ('.webm', '.ogv', '.mp4')
 
     pe.limit = (0, 20)
-
+    pe.maxscore = 9999
+    
     pe.itemd = {
         'name': None,
         'price': int(0),

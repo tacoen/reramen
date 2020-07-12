@@ -48,7 +48,7 @@ transform FadeInterval(ms=1.0):
         alpha 1
         linear ms alpha 0
 
-transform delayed_blink(delay, sec):
+transform delayed_blink(delay=0.2, sec=1):
     alpha .5
     pause delay
     block:

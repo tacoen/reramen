@@ -61,7 +61,7 @@ screen atm_screen(dir):
 
                 text 'Enter Your PIN Number'  xalign 0.5
                 null height 120
-                add bannerads xalign 0.5
+                # add bannerads xalign 0.5
 
             timer(0.5) action[
                 Function( ramu.sfx, file='atm-start', path=Plugin('atm').dir ),

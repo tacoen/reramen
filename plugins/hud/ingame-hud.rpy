@@ -42,20 +42,22 @@ screen hud():
     zorder 99
 
     if hud.active:
+
+
         if hud.enable or shade:
-            add(ramu.ezfind('top-shade')) xalign 1.0 yalign 0.0 at FadeInterval(0.5)
+
+            use hud_time()
+            use hud_cash()
+            use hud_score()
+
+        # if hud.enable or shade:
+            # add(ramu.ezfind('top-shade')) xalign 1.0 yalign 0.0 at FadeInterval(0.5)
 
         hbox xalign 1.0 yalign 0.0:
 
             spacing 8
             style_prefix 'hud'
 
-            if hud.enable or shade:
-
-                use hud_time()
-                use hud_cash()
-
-                text "{:03d}".format(mc.score['point']) style 'hud_score' yoffset 14 xalign 1.0
 
             textbutton ico(icon) style 'hud_icon' action ToggleVariable('hud.enable'):
                 padding(16, 16, 16, 16)
@@ -89,16 +91,46 @@ screen hud():
         else:
             timer 0.2 action Hide('hud_bar')
 
-screen hud_cash():
-    hbox xalign 1.0 ysize 72 yfill True:
-        text ico('ico-cash') style 'hud_icon_text' size 18 yalign 0.5 color "#fffc"
+screen hud_score(notif=False):
+    
+    python:
+        if notif:
+            transforma = delayed_blink
+        else:
+            transforma = basic_anim
+    
+    hbox xpos 1140 xsize 120 yoffset 14 at transforma:
+        text ramu.maxscore(mc.score['point']) style 'hud_score' min_width 120
+
+    if notif:
+        timer (3.0) action [ Hide('hud_score') ]
+
+screen hud_cash(notif=False):
+    python:
+        if notif:
+            transforma = delayed_blink
+        else:
+            transforma = basic_anim
+
+    hbox xpos 1040 ysize 72 yfill True at transforma:
+        style_prefix 'hud'    
+        text ico('ico-cash') style 'hud_icon_text' size 18 yalign 0.5 color "#fffc" 
         null width 4
-        text ramu.str_nicecash(mc.money['cash']) size 24  yalign 0.5
-        null width 16
+        text ramu.str_nicecash(mc.money['cash']) size 24  yalign 0.5 
 
-screen hud_time():
+    if notif:
+        timer (3.0) action [ Hide('hud_cash') ]
 
-    hbox yoffset 10 xalign 1.0:
+screen hud_time(notif=False):
+
+    python:
+        if notif:
+            transforma = delayed_blink
+        else:
+            transforma = basic_anim
+
+    hbox yoffset 10 xpos 910 at transforma:
+        style_prefix 'hud'    
         spacing 8
         vbox:
             spacing 0
@@ -108,6 +140,9 @@ screen hud_time():
         text ico(ramentime.ico()) style 'hud_icon_text' size 40 yalign 0.5 color "#fff"
         null width 16
 
+    if notif:
+        timer (3.0) action [ Hide('hud_time') ]
+        
 screen hud_bar():
 
     vbox ypos 72 xalign 1.0 at dba:
