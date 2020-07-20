@@ -161,13 +161,13 @@ init -301 python:
                 res += t[0]
             return res.title()
 
-        def maxscore(self,value):
+        def maxscore(self, value):
             """Return 009 from 9 and 8.2 K from 8200"""
             if int(value) >= pe.maxscore:
                 return "{:04d}".format(pe.maxscore)
             else:
                 return "{:04d}".format(value)
-                
+
         def str_nicecash(self, n):
             """Return 009 from 9 and 8.2 K from 8200"""
 
@@ -595,11 +595,21 @@ init -301 python:
 
                 ramen.label_last = name
 
-                print 'callback '+ ramentime.word()+ " "+ramen.label_last
+#               print 'callback '+ ramentime.word()+ " "+ramen.label_last
 
                 events = filter(lambda w: ramen.label_last.lower() == ramen.events.__dict__[w].__dict__['label'], ramen.events.__dict__ )
 
-                print events
+                print ramen.time.day
+
+                if not ramen.time.day == ramen.seed['day']:
+                    try: ramen_daily_job()
+                    except: pass
+                        
+
+                if not ramen.time.hour == ramen.seed['hour']:
+                    try: ramen_hourly_job()
+                    except: pass
+
 
                 for event in events:
                     e = Event(event)

@@ -43,7 +43,6 @@ screen hud():
 
     if hud.active:
 
-
         if hud.enable or shade:
 
             use hud_time()
@@ -57,7 +56,6 @@ screen hud():
 
             spacing 8
             style_prefix 'hud'
-
 
             textbutton ico(icon) style 'hud_icon' action ToggleVariable('hud.enable'):
                 padding(16, 16, 16, 16)
@@ -92,18 +90,18 @@ screen hud():
             timer 0.2 action Hide('hud_bar')
 
 screen hud_score(notif=False):
-    
+
     python:
         if notif:
             transforma = delayed_blink
         else:
             transforma = basic_anim
-    
+
     hbox xpos 1140 xsize 120 yoffset 14 at transforma:
         text ramu.maxscore(mc.score['point']) style 'hud_score' min_width 120
 
     if notif:
-        timer (3.0) action [ Hide('hud_score') ]
+        timer(3.0) action[ Hide('hud_score') ]
 
 screen hud_cash(notif=False):
     python:
@@ -113,13 +111,13 @@ screen hud_cash(notif=False):
             transforma = basic_anim
 
     hbox xpos 1040 ysize 72 yfill True at transforma:
-        style_prefix 'hud'    
-        text ico('ico-cash') style 'hud_icon_text' size 18 yalign 0.5 color "#fffc" 
+        style_prefix 'hud'
+        text ico('ico-cash') style 'hud_icon_text' size 18 yalign 0.5 color "#fffc"
         null width 4
-        text ramu.str_nicecash(mc.money['cash']) size 24  yalign 0.5 
+        text ramu.str_nicecash(mc.money['cash']) size 24  yalign 0.5
 
     if notif:
-        timer (3.0) action [ Hide('hud_cash') ]
+        timer(3.0) action[ Hide('hud_cash') ]
 
 screen hud_time(notif=False):
 
@@ -130,7 +128,7 @@ screen hud_time(notif=False):
             transforma = basic_anim
 
     hbox yoffset 10 xpos 910 at transforma:
-        style_prefix 'hud'    
+        style_prefix 'hud'
         spacing 8
         vbox:
             spacing 0
@@ -141,8 +139,8 @@ screen hud_time(notif=False):
         null width 16
 
     if notif:
-        timer (3.0) action [ Hide('hud_time') ]
-        
+        timer(3.0) action[ Hide('hud_time') ]
+
 screen hud_bar():
 
     vbox ypos 72 xalign 1.0 at dba:

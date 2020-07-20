@@ -44,7 +44,7 @@ init -302 python:
 
     pe.limit = (0, 20)
     pe.maxscore = 9999
-    
+
     pe.itemd = {
         'name': None,
         'price': int(0),
