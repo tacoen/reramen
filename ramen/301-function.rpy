@@ -602,14 +602,16 @@ init -301 python:
                 print ramen.time.day
 
                 if not ramen.time.day == ramen.seed['day']:
-                    try: ramen_daily_job()
-                    except: pass
-                        
+                    try:
+                        ramen_daily_job()
+                    except BaseException:
+                        pass
 
                 if not ramen.time.hour == ramen.seed['hour']:
-                    try: ramen_hourly_job()
-                    except: pass
-
+                    try:
+                        ramen_hourly_job()
+                    except BaseException:
+                        pass
 
                 for event in events:
                     e = Event(event)

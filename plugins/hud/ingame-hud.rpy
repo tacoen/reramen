@@ -165,7 +165,7 @@ screen hud_stats(stats=[]):
                 spacing 4
                 hbox xfill True:
                     text s.title()
-                    text str(mc.stat[s])+"/20" xalign 1.0
+                    text str(int(mc.stat[s]))+"/20" xalign 1.0
                 bar value mc.stat[s] range 20 style 'hud_stat_bar_'+s.lower()
 
 style hud_stat_text is ramen_gui:

@@ -72,6 +72,15 @@ init -50 python:
             else:
                 return False
 
+        def stat(self,which,value=1):
+            mc.stat[which] = ramu.limits(mc.stat[which]+value)
+            return mc.stat[which]
+
+        def trait(self, which, value=1):
+            mc.skill[which] = ramu.limits(mc.skill[which]+value)
+            return mc.skill[which]
+
+            
         def mumble(self, topic='mumble'):
             thought(self.commenting(topic))
 
@@ -166,7 +175,7 @@ init -50 python:
                 renpy.pause(kwargs['pause'], True)
 
                 for k in kwargs['cost'].keys():
-                    mc.stat[k] -= kwargs['cost'][k]
+                    mcf.stat(k, -kwargs['cost'][k])
 
             renpy.hide_screen('hud_stats')
             renpy.hide_screen('solo_stopbutton')
