@@ -182,12 +182,12 @@ screen inventory_detail(inv, item, size, align):
                     SetScreenVariable('item', None)
                 ]
 
-screen inventory_grid(inv, size, align):
+screen inventory_grid(inv, size, align, iconsize=(100, 100)):
 
     python:
         vp_height = size[1] - 40
         vp_width = size[0]
-        cols = int(math.floor(vp_width / 100))
+        cols = int(math.floor(vp_width / iconsize[0]))
         rows = int(inv.max / cols)
         vp_width_withspacing = vp_width + 16
 
@@ -212,14 +212,22 @@ screen inventory_grid(inv, size, align):
 
             $ r_inv = inv()
             $ itemok = False
+
             for item in sorted(r_inv):
 
                 python:
                     try:
                         i = inv.item(item)
                         if i.count > 1:
-                            icon_count = Composite((100, 100), (0, 0), i.icon,
-                                                   (75, 75), Text(str(i.count), size=14, color='#111', min_width=25, xalign=0.5, yalign=0.5))
+                            icon_count = Composite(
+                                (iconsize[0], iconsize[1]),
+                                (0, 0), i.icon,
+                                (iconsize[0]*3/4, iconsize[0]*3/4), Text(str(i.count),
+                                                                         size=14, color='#111',
+                                                                         min_width=iconsize[0]/2,
+                                                                         xalign=0.5,
+                                                                         yalign=0.5)
+                                )
                         else:
                             icon_count = i.icon
 
@@ -227,10 +235,20 @@ screen inventory_grid(inv, size, align):
                     except BaseException:
                         itemok = False
 
+                default hover = False
+
                 if itemok:
-                    imagebutton action SetScreenVariable('item', item):
-                        idle icon_count
-                        hover Composite((100, 100), (0, 0), Solid(pt.accent_color), (0, 0), icon_count)
+
+                    button xsize iconsize[0] ysize iconsize[1]:
+                        if hover==item:
+                            add icon_count at scale((iconsize[0], iconsize[1]))
+                            add Solid('#ffc6') at scale((iconsize[0], iconsize[1]))
+                        else:
+                            add icon_count at scale((iconsize[0], iconsize[1]))
+
+                        action SetScreenVariable('item', item)
+                        hovered SetLocalVariable("hover", item)
+                        unhovered SetLocalVariable("hover", False)
 
         vbar value YScrollValue("inventory_vp"):
             xoffset 8

@@ -29,6 +29,9 @@ transform xa(a):
 transform zoom(z=1.2):
     zoom z
 
+transform scale(size=(100, 100)):
+    maxsize size
+
 transform xp(x=0.5, y=1.0):
     yalign 1.0
     xpos x

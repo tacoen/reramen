@@ -109,7 +109,10 @@ init -200 python:
                 except BaseException:
                     mitem.__dict__[m] = pe.itemd[m]
 
-            mitem.icon = item(item_id).icon()
+            if isinstance( item(item_id).icon, renpy.display.layout.MultiBox):
+                mitem.icon = item(item_id).icon
+            else:
+                mitem.icon = item(item_id).icon()
 
             if dict:
                 return mitem.__dict__

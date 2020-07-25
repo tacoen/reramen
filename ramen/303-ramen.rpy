@@ -132,6 +132,9 @@ init -303 python:
         def __delattr__(self, key):
             del persistent.ramen[self.id][key]
 
+        def reset(self):
+            persistent.ramen[self.id] = {}
+
     class ramen_multipersistent(ramen_object):
         """
         ramen_mutlipersistent is renpy multi persistent store for ramen's game progress.

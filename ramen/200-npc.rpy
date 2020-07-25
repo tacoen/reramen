@@ -172,6 +172,13 @@ init -200 python:
             except BaseException:
                 pass
 
+            try:
+                if len(self.__dict__['side']) > 0:
+                    for s in self.side.keys():
+                        renpy.image('side '+self.id+" "+s, self.side[s] )
+            except BaseException:
+                pass
+
         def create_sideimage(self, img, temp_img, tag, cut=None):
 
             compo = Composite(

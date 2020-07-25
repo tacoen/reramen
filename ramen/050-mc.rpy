@@ -72,7 +72,7 @@ init -50 python:
             else:
                 return False
 
-        def stat(self,which,value=1):
+        def stat(self, which, value=1):
             mc.stat[which] = ramu.limits(mc.stat[which]+value)
             return mc.stat[which]
 
@@ -80,7 +80,6 @@ init -50 python:
             mc.skill[which] = ramu.limits(mc.skill[which]+value)
             return mc.skill[which]
 
-            
         def mumble(self, topic='mumble'):
             thought(self.commenting(topic))
 

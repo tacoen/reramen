@@ -1,4 +1,4 @@
-screen shop_ui(inv, size=(300, 480), align=(0.5, 0.5), counting=True, background='#fff', name='shop_ui'):
+screen shop_ui(inv, size=(300, 480), align=(0.5, 0.5), counting=True, background='#fff', name='shop_ui', iconsize=(100, 100) ):
 
     # the icon size 100, 300 means 3 cols
 
@@ -10,7 +10,7 @@ screen shop_ui(inv, size=(300, 480), align=(0.5, 0.5), counting=True, background
         style_prefix "modal"
 
         if item is None:
-            use inventory_grid(inv, size, align)
+            use inventory_grid(inv, size, align, iconsize)
         else:
             use shop_detail(inv, item, size, align, counting)
 
@@ -74,7 +74,7 @@ screen shop_cartview(inv, name, size):
                 hbox xsize 280:
                     style_prefix "shop_detail"
                     text str(inv.cart.cart[i][0]) min_width 20 text_align 0.5
-                    text inv.item(i).name min_width 200
+                    text ramu.str_safelen(inv.item(i).name, 24) min_width 200
                     text str(inv.cart.cart[i][1]) min_width 60 text_align 1.0 xalign 1.0
 
             null height 12
@@ -120,13 +120,13 @@ screen shop_cartview(inv, name, size):
                 ]
 
 
-transform item_detail:
-    zoom 1.5
-
 screen shop_detail(inv, item, size, align, counting):
 
     python:
         i = inv.item(item)
+
+        if size[0] > 320:
+            wide = True
 
     vbox xsize size[0]-24 ysize size[1] yfill True:
 
@@ -140,12 +140,17 @@ screen shop_detail(inv, item, size, align, counting):
                 vbox:
 
                     if i.name is not None:
-                        text i.name
+                        text i.name.title()
 
-                    add i.icon xalign 0.5 at item_detail
-
-                    if not i.desc == "":
-                        text i.desc
+                    if not wide:
+                        add i.icon xalign 0.5
+                        if not i.desc == "":
+                            text i.desc size 16
+                    else:
+                        hbox:
+                            add i.icon xalign 0.5
+                            if not i.desc == "":
+                                text i.desc size 16 yoffset 32 xoffset 15
 
                     null height 8
                     add ramu.hline(((size[0] - 24), 1), "#ccc")

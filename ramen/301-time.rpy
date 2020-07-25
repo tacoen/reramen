@@ -1,4 +1,4 @@
-init -301 python:
+init -302 python:
 
     class ramen_time():
         """
@@ -50,6 +50,9 @@ init -301 python:
                 renpy.block_rollback()
 
             return ramen.time
+
+        def weekday(self):
+            return ramen.time.strftime('%A')
 
         def clock(self):
             return ramen.time.strftime('%H:%M')

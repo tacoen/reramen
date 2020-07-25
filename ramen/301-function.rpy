@@ -137,6 +137,17 @@ init -301 python:
                 current = 0
             return int(current)
 
+        def str_safelen(self, text, max=32):
+            stxt = text
+            words = text.split(" ")
+            if len(words) > 1:
+                if len(text) >= max:
+                    stxt = words[0] + " " + words[1] + "..."
+            else:
+                stxt = self.str_firstcap(text)
+
+            return stxt
+
         def str_proper(self, text, title=True):
             """Return IBM(less or 4 character), Ii Bb Mm if title=True"""
 
@@ -370,6 +381,13 @@ init -301 python:
 
             return int(renpy.random.randint(min, max))
 
+        def random_series(self, many=5, min=-5, max=5):
+            """Return random series of number from min to max for many."""
+            r = []
+            for n in range(0, many - 1):
+                r.append(self.random_int(min, max))
+            return r
+
         def random_of(self, data):
             """Return randomize value from list """
 
@@ -599,19 +617,22 @@ init -301 python:
 
                 events = filter(lambda w: ramen.label_last.lower() == ramen.events.__dict__[w].__dict__['label'], ramen.events.__dict__ )
 
-                print ramen.time.day
+                try:
 
-                if not ramen.time.day == ramen.seed['day']:
-                    try:
-                        ramen_daily_job()
-                    except BaseException:
-                        pass
+                    if not ramen.time.day == ramen.seed['day']:
+                        try:
+                            ramen_daily_job()
+                        except BaseException:
+                            pass
 
-                if not ramen.time.hour == ramen.seed['hour']:
-                    try:
-                        ramen_hourly_job()
-                    except BaseException:
-                        pass
+                    if not ramen.time.hour == ramen.seed['hour']:
+                        try:
+                            ramen_hourly_job()
+                        except BaseException:
+                            pass
+
+                except BaseException:
+                    pass
 
                 for event in events:
                     e = Event(event)

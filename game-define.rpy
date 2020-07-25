@@ -24,6 +24,13 @@ init -300 python:
 
     ramen.dev = True
 
+init -299 python:
+
+    ramen.seed = {}
+    ramen.seed['day'] = ramen.time.day
+    ramen.seed['hour'] = ramen.time.hour
+
+
 init -2 python:
 
     build.name = ramu.str_safe(config.name)
